@@ -5,10 +5,12 @@ import java.util.List;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-public abstract class MultiBrowserSuite extends TestSuite {
+public abstract class GenericSuite extends TestSuite {
 
+	
+	protected String browserId;
 
-	public MultiBrowserSuite() {
+	public GenericSuite() {
 		for (TestCase test : defineTests()) {
 			addTest(test);
 		}

@@ -2,14 +2,16 @@ package com.mkl.websuites;
 
 import junit.framework.TestSuite;
 
+import org.junit.runner.RunWith;
+
+import com.mkl.websuites.client.SampleCategoryTest;
 
 
-public class MultiBrowserTestRunner extends TestSuite {
+@RunWith(WebSuitesRunner.class)
+public class Runner2 {
 
-	
 	public static TestSuite suite() {
 
-		// TODO: read from suiteList file and instantiate suites: 
 		
 		TestSuite suite = new TestSuite();
 		suite.setName("Master multi-browser test");
@@ -17,4 +19,5 @@ public class MultiBrowserTestRunner extends TestSuite {
 		suite.addTest(new SampleCategoryTest());
 		return suite;
 	}
+	
 }

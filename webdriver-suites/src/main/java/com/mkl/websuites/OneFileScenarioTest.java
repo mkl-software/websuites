@@ -5,7 +5,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-public abstract class OneScenarioTest extends MultiBrowserSuite {
+public abstract class OneFileScenarioTest extends GenericSuite {
 
 	
 	protected abstract String getScenarioFileLocation();
@@ -20,7 +20,7 @@ public abstract class OneScenarioTest extends MultiBrowserSuite {
 			
 			@Override
 			public String getName() {
-				return fileLocation;
+				return fileLocation + " [" + browserId + "]";
 			}
 			
 			@Override
