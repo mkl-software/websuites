@@ -3,29 +3,33 @@ package com.mkl.websuites;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
-
-public abstract class OneFileScenarioTest extends GenericSuite {
+public abstract class OneFileScenarioTest extends BaseMultiBrowserSuite {
 
 	
+	public OneFileScenarioTest(String browserId) {
+		super(browserId);
+	}
+
+
 	protected abstract String getScenarioFileLocation();
 	
 	
 	@Override
-	protected List<TestCase> defineTests() {
+	protected List<MultiBrowserTestCase> defineTests() {
 		
 		final String fileLocation = getScenarioFileLocation();
 		
-		TestCase scenarioFileTestCase = new TestCase() {
+		MultiBrowserTestCase scenarioFileTestCase = new MultiBrowserTestCase(browserId) {
 			
-			@Override
-			public String getName() {
-				return fileLocation + " [" + browserId + "]";
-			}
 			
 			@Override
 			protected void runTest() throws Throwable {
 				assertTrue(true);
+			}
+
+			@Override
+			protected String getTestName() {
+				return fileLocation;
 			}
 		};
 		

@@ -1,5 +1,8 @@
 package com.mkl.websuites;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import org.junit.runner.RunWith;
 
 import junit.framework.Test;
@@ -20,7 +23,10 @@ public class WebSuites {
 	private static Class<?> runningClass;
 	
 	
-	public static TestSuite suite() throws InstantiationException, IllegalAccessException {
+	public static TestSuite suite() throws
+			InstantiationException,
+			IllegalAccessException, NoSuchMethodException, SecurityException,
+			IllegalArgumentException, InvocationTargetException {
 
 		log.debug("suite method");
 		
@@ -30,17 +36,18 @@ public class WebSuites {
 		suite.setName("Master multi-browser test");
 		WebdriverSuites config = runningClass.getAnnotation(WebdriverSuites.class);
 		
-		Class<? extends GenericSuite>[] suites = config.suite();
+		Class<? extends BaseMultiBrowserSuite>[] suites = config.suite();
 		String[] browsers = config.configurationClass().
 				getAnnotation(WebdriverSuitesConfiguration.class).browsers();
 		
 		for (String browser : browsers) {
 		
 			TestSuite browserSuite = new TestSuite("Running for [" + browser + "]");
-			for (Class<? extends GenericSuite> testClass : suites) {
+			for (Class<? extends BaseMultiBrowserSuite> testClass : suites) {
 				
-				GenericSuite dynamicTest = testClass.newInstance();
-				dynamicTest.browserId = browser;
+				BaseMultiBrowserSuite dynamicTest = testClass
+						.getConstructor(String.class)
+						.newInstance(browser);
 				
 				browserSuite.addTest(dynamicTest);
 			}

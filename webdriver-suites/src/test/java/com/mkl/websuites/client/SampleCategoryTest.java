@@ -4,6 +4,10 @@ import com.mkl.websuites.OneFileScenarioTest;
 
 public class SampleCategoryTest extends OneFileScenarioTest {
 
+	public SampleCategoryTest(String browserId) {
+		super(browserId);
+	}
+
 	@Override
 	protected String getScenarioFileLocation() {
 		
