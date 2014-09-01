@@ -4,20 +4,17 @@ import org.junit.runner.RunWith;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import lombok.extern.slf4j.Slf4j;
 
 import com.mkl.websuites.internal.annotation.WebdriverSuites;
 import com.mkl.websuites.internal.annotation.WebdriverSuitesConfiguration;
 
 
 
+@Slf4j
 @RunWith(WebSuitesRunner.class)
 public class WebSuites {
 
-//	public WebSuitesRunner() {
-//		setName("Master multi-browser test");
-//		addTest(new SampleCategoryTest());
-//		addTest(new SampleCategoryTest());
-//	}
 	
 	
 	private static Class<?> runningClass;
@@ -25,7 +22,7 @@ public class WebSuites {
 	
 	public static TestSuite suite() throws InstantiationException, IllegalAccessException {
 
-		System.out.println("suite method");
+		log.debug("suite method");
 		
 		// TODO: read from suiteList file and instantiate suites: 
 		
@@ -55,7 +52,7 @@ public class WebSuites {
 		return suite;
 	}
 
-	public static void runFor(Class<?> class1) {
+	public static void setRunFor(Class<?> class1) {
 		runningClass = class1;
 	}
 }

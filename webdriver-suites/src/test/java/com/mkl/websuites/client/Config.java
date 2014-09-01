@@ -9,7 +9,7 @@ import com.mkl.websuites.internal.annotation.WebdriverSuitesConfiguration;
 	host = "localhost",
 	port = 8080,
 	basePath = "/",
-	browsers = {"ie", "chrome"}
+	browsers = {"ie", "chrome", "safari"}
 )
 public class Config {
 

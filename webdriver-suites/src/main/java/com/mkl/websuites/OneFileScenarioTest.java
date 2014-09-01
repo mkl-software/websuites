@@ -25,7 +25,6 @@ public abstract class OneFileScenarioTest extends GenericSuite {
 			
 			@Override
 			protected void runTest() throws Throwable {
-				System.out.println("running web test for file: " + fileLocation);
 				assertTrue(true);
 			}
 		};
