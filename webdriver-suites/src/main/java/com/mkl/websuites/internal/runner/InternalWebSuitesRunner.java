@@ -38,9 +38,4 @@ public class InternalWebSuitesRunner extends JUnit38ClassRunner {
 		}
 		return suite;
 	}
-
-	
-	
-
-	
 }

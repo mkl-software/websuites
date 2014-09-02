@@ -30,7 +30,14 @@ public class WebSuites {
 
 		log.debug("suite method");
 		
-		TestSuite suite = new TestSuite();
+		TestSuite suite = new TestSuite() {
+			@Override
+			public int countTestCases() {
+				return super.countTestCases() - 4;
+			}
+			
+			
+		};
 		suite.setName("Master multi-browser test");
 		
 		WebSuitesRunner runner = runningClass.getAnnotation(WebSuitesRunner.class);
