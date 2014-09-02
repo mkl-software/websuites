@@ -1,13 +1,13 @@
 package com.mkl.websuites.client;
 
 import com.mkl.websuites.WebSuites;
-import com.mkl.websuites.internal.annotation.WebdriverSuites;
+import com.mkl.websuites.WebSuitesRunner;
 
 
 
 
-@WebdriverSuites(
+@WebSuitesRunner(
 		configurationClass = Config.class,
-		suite = {SampleCategoryTest.class, Test2.class})
+		suite = {SampleCategoryTest.class, MySuite.class})
 
 public class Runner extends WebSuites {}

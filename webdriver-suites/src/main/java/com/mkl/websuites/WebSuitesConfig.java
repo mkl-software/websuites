@@ -1,4 +1,4 @@
-package com.mkl.websuites.internal.annotation;
+package com.mkl.websuites;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface WebdriverSuitesConfiguration {
+public @interface WebSuitesConfig {
 
 	String host();
 

@@ -1,10 +1,10 @@
 package com.mkl.websuites.client;
 
-import com.mkl.websuites.internal.annotation.WebdriverSuitesConfiguration;
+import com.mkl.websuites.WebSuitesConfig;
 
 
 
-@WebdriverSuitesConfiguration(
+@WebSuitesConfig(
 		
 	host = "localhost",
 	port = 8080,

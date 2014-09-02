@@ -3,25 +3,39 @@ package com.mkl.websuites;
 import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;
 
+import org.openqa.selenium.WebDriver;
+
 
 @Slf4j
 public abstract class MultiBrowserTestCase extends TestCase {
 
 	
-	protected String browserId;
+	protected MultiBrowserSuite parentSuite;
+	
+	protected WebDriver webDriver;
+	
 
-	public MultiBrowserTestCase(String browserId) {
+	public MultiBrowserTestCase(MultiBrowserSuite parentSuite) {
 		super();
-		this.browserId = browserId;
+		this.parentSuite = parentSuite;
 	}
 	
 	
 	@Override
 	public String getName() {
-		return getTestName() + " [" + browserId + "]";
+		return getTestName() + " [" + parentSuite.browserId + "]";
 	}
 	
 	
+	@Override
+	protected void runTest() throws Throwable {
+		runLocally();
+	}
+	
+	protected abstract void runLocally();
+		
+
+
 	protected abstract String getTestName();
 
 

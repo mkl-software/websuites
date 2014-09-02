@@ -12,10 +12,16 @@ public abstract class MultiBrowserSuite extends TestSuite {
 
 	
 	protected String browserId;
+	
+	protected WebSuitesConfig configuration;
+	
+	
 
-	public MultiBrowserSuite(String browserId) {
+	public MultiBrowserSuite(String browserId, WebSuitesConfig config) {
 		
 		this.browserId = browserId;
+		
+		this.configuration = config;
 		
 		for (Test test : defineTests()) {
 			

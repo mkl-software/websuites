@@ -4,12 +4,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 
+
 @Retention(RetentionPolicy.RUNTIME)
-public @interface WebSuitesRunner {
+public @interface SuiteClasses {
 
-	Class<?> configurationClass();
 
-	Class<? extends MultiBrowserSuite>[] suite();
+	Class<? extends MultiBrowserSuite>[] suites() default {};
 
+	Class<? extends MultiBrowserTestCase>[] tests()  default {};
 
 }

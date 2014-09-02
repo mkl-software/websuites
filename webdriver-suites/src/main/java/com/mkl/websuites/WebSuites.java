@@ -1,21 +1,18 @@
 package com.mkl.websuites;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import org.junit.runner.RunWith;
-
-import junit.framework.Test;
 import junit.framework.TestSuite;
 import lombok.extern.slf4j.Slf4j;
 
-import com.mkl.websuites.internal.annotation.WebdriverSuites;
-import com.mkl.websuites.internal.annotation.WebdriverSuitesConfiguration;
+import org.junit.runner.RunWith;
+
+import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 
 
 
 @Slf4j
-@RunWith(WebSuitesRunner.class)
+@RunWith(InternalWebSuitesRunner.class)
 public class WebSuites {
 
 	
@@ -33,12 +30,14 @@ public class WebSuites {
 		TestSuite suite = new TestSuite();
 		suite.setName("Master multi-browser test");
 		
-		WebdriverSuites config = runningClass.getAnnotation(WebdriverSuites.class);
+		WebSuitesRunner runner = runningClass.getAnnotation(WebSuitesRunner.class);
 		
-		Class<? extends MultiBrowserSuite>[] suites = config.suite();
+		Class<? extends MultiBrowserSuite>[] suites = runner.suite();
 		
-		String[] browsers = config.configurationClass().
-				getAnnotation(WebdriverSuitesConfiguration.class).browsers();
+		WebSuitesConfig config = runner.configurationClass().
+				getAnnotation(WebSuitesConfig.class);
+		
+		String[] browsers = config.browsers();
 		
 		for (String browser : browsers) {
 		
@@ -47,8 +46,8 @@ public class WebSuites {
 			for (Class<? extends MultiBrowserSuite> testClass : suites) {
 				
 				MultiBrowserSuite dynamicTest = testClass
-						.getConstructor(String.class)
-						.newInstance(browser);
+						.getConstructor(String.class, WebSuitesConfig.class)
+						.newInstance(browser, config);
 				
 				browserSuite.addTest(dynamicTest);
 			}

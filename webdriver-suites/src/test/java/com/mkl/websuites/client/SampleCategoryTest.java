@@ -1,11 +1,13 @@
 package com.mkl.websuites.client;
 
-import com.mkl.websuites.OneFileScenarioTest;
+import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.tests.OneFileScenarioTest;
 
 public class SampleCategoryTest extends OneFileScenarioTest {
 
-	public SampleCategoryTest(String browserId) {
-		super(browserId);
+
+	public SampleCategoryTest(String browserId, WebSuitesConfig config) {
+		super(browserId, config);
 	}
 
 	@Override
