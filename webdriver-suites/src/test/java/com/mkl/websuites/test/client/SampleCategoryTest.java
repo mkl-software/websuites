@@ -1,4 +1,4 @@
-package com.mkl.websuites.client;
+package com.mkl.websuites.test.client;
 
 import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.tests.OneFileScenarioTest;

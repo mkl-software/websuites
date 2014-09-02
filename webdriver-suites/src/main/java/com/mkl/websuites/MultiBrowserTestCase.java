@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 
 @Slf4j
@@ -14,10 +15,20 @@ public abstract class MultiBrowserTestCase extends TestCase {
 	
 	protected WebDriver webDriver;
 	
+	protected String basePath;
+	
 
 	public MultiBrowserTestCase(MultiBrowserSuite parentSuite) {
 		super();
 		this.parentSuite = parentSuite;
+		WebSuitesConfig config = parentSuite.configuration;
+		this.basePath = config.host() + ":" + config.port() + config.basePath();
+	}
+	
+
+	protected WebSuitesConfig getConfig() {
+		
+		return parentSuite.configuration;
 	}
 	
 	
@@ -33,7 +44,6 @@ public abstract class MultiBrowserTestCase extends TestCase {
 	}
 	
 	protected abstract void runLocally();
-		
 
 
 	protected abstract String getTestName();
@@ -43,6 +53,8 @@ public abstract class MultiBrowserTestCase extends TestCase {
 	protected void setUp() throws Exception {
 		log.debug("setUp for test: " + this.getName());
 		super.setUp();
+		
+		webDriver = new FirefoxDriver();
 	}
 	
 	

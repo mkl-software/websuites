@@ -10,10 +10,12 @@ public @interface WebSuitesConfig {
 
 	String host();
 
-	int port();
+	int port() default 80;
 
 	String basePath();
 
 	String[] browsers();
+
+	int waitTimeout() default 30;
 
 }

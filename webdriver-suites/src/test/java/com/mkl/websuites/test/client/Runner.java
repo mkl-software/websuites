@@ -1,4 +1,4 @@
-package com.mkl.websuites.client;
+package com.mkl.websuites.test.client;
 
 import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;

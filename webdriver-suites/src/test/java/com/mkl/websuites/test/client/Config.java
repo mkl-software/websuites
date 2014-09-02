@@ -1,4 +1,4 @@
-package com.mkl.websuites.client;
+package com.mkl.websuites.test.client;
 
 import com.mkl.websuites.WebSuitesConfig;
 
@@ -9,8 +9,7 @@ import com.mkl.websuites.WebSuitesConfig;
 	host = "localhost",
 	port = 8080,
 	basePath = "/",
-	browsers = {"ie", "chrome", "safari"}
+	browsers = {"ie", "chrome", "safari"},
+	waitTimeout = 10
 )
-public class Config {
-
-}
+public class Config {}
