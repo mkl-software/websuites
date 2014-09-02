@@ -7,6 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.junit.runner.RunWith;
 
+import com.mkl.websuites.internal.BrowserController;
+import com.mkl.websuites.internal.CleanupBrowsersTest;
+import com.mkl.websuites.internal.SwitchBrowserTest;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 
 
@@ -40,8 +43,12 @@ public class WebSuites {
 		String[] browsers = config.browsers();
 		
 		for (String browser : browsers) {
+			
+			BrowserController.getInstance().addBrowser(browser);
 		
 			TestSuite browserSuite = new TestSuite("Running for [" + browser + "]");
+			
+			browserSuite.addTest(new SwitchBrowserTest(browser));
 			
 			for (Class<? extends MultiBrowserSuite> testClass : suites) {
 				
@@ -52,8 +59,13 @@ public class WebSuites {
 				browserSuite.addTest(dynamicTest);
 			}
 			
+//			BrowserController.getInstance().setFirstTestClass(suites[0]);
+//			BrowserController.getInstance().setLastTestClass(suites[suites.length - 1]);
+			
 			suite.addTest(browserSuite);
 		}
+		
+		suite.addTest(new CleanupBrowsersTest());
 		
 		return suite;
 	}
