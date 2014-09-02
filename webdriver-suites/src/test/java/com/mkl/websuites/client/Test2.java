@@ -1,14 +1,14 @@
 package com.mkl.websuites.client;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
+import junit.framework.Test;
 
-import com.mkl.websuites.BaseMultiBrowserSuite;
+import com.mkl.websuites.MultiBrowserSuite;
 import com.mkl.websuites.MultiBrowserTestCase;
 
-public class Test2 extends BaseMultiBrowserSuite {
+public class Test2 extends MultiBrowserSuite {
 
 	
 	public Test2(String browserId) {
@@ -16,8 +16,9 @@ public class Test2 extends BaseMultiBrowserSuite {
 	}
 
 	@Override
-	protected List<MultiBrowserTestCase> defineTests() {
-		return Arrays.asList(new MultiBrowserTestCase[] {new MultiBrowserTestCase(browserId) {
+	protected List<Test> defineTests() {
+		List<Test> result = new ArrayList<Test>();
+		result.add(new MultiBrowserTestCase(browserId) {
 			
 			
 			@Override
@@ -29,7 +30,8 @@ public class Test2 extends BaseMultiBrowserSuite {
 			protected String getTestName() {
 				return "user defined test";
 			}
-		}});
+		});
+		return result;
 	}
 
 }

@@ -30,22 +30,23 @@ public class WebSuites {
 
 		log.debug("suite method");
 		
-		// TODO: read from suiteList file and instantiate suites: 
-		
 		TestSuite suite = new TestSuite();
 		suite.setName("Master multi-browser test");
+		
 		WebdriverSuites config = runningClass.getAnnotation(WebdriverSuites.class);
 		
-		Class<? extends BaseMultiBrowserSuite>[] suites = config.suite();
+		Class<? extends MultiBrowserSuite>[] suites = config.suite();
+		
 		String[] browsers = config.configurationClass().
 				getAnnotation(WebdriverSuitesConfiguration.class).browsers();
 		
 		for (String browser : browsers) {
 		
 			TestSuite browserSuite = new TestSuite("Running for [" + browser + "]");
-			for (Class<? extends BaseMultiBrowserSuite> testClass : suites) {
+			
+			for (Class<? extends MultiBrowserSuite> testClass : suites) {
 				
-				BaseMultiBrowserSuite dynamicTest = testClass
+				MultiBrowserSuite dynamicTest = testClass
 						.getConstructor(String.class)
 						.newInstance(browser);
 				
@@ -54,8 +55,7 @@ public class WebSuites {
 			
 			suite.addTest(browserSuite);
 		}
-//		suite.addTest(new SampleCategoryTest());
-//		suite.addTest(new SampleCategoryTest());
+		
 		return suite;
 	}
 

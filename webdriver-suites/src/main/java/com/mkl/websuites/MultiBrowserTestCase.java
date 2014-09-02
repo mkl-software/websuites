@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 public abstract class MultiBrowserTestCase extends TestCase {
 
 	
-	private String browserId;
+	protected String browserId;
 
 	public MultiBrowserTestCase(String browserId) {
 		super();
