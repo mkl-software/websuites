@@ -9,4 +9,10 @@ public class SampleForJenkins {
 	public void emptyTestForJenkins() {
 		
 	}
+	
+	
+	@Test
+	public void emptyTestForJenkins2() {
+		
+	}
 }
