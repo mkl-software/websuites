@@ -20,7 +20,7 @@ public class SimplestSingleTestOneBrowser extends JettyBasedTest {
 		
 		Result result = new JUnitCore().run(new InternalWebSuitesRunner(LocalTestConfig.Runner.class));
 		
-		assertEquals(1, result.getRunCount());
+		assertEquals(3, result.getRunCount()); // 3 -> one browser + 1 switch test + 1 cleanup
 		
 		if (result.getFailureCount() > 0) {
 			

@@ -7,7 +7,7 @@ public class CleanupBrowsersTest extends TestCase {
 	
 	@Override
 	public String getName() {
-		return "Close remaining browser windows";
+		return "Close all browser windows";
 	}
 	
 	

@@ -25,7 +25,6 @@ public abstract class MultiBrowserTestCase extends TestCase {
 		WebSuitesConfig config = parentSuite.configuration;
 		this.basePath = config.host() + ":" + config.port() + config.basePath();
 		
-		this.webDriver = BrowserController.getInstance().getWebDriver();
 	}
 	
 
@@ -43,6 +42,9 @@ public abstract class MultiBrowserTestCase extends TestCase {
 	
 	@Override
 	protected void runTest() throws Throwable {
+		
+		this.webDriver = BrowserController.getInstance().getWebDriver();
+		
 		runLocally();
 	}
 	
