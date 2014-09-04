@@ -8,7 +8,18 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Browser {
 
-	String id();
+	public enum BrowserType {
+		
+		INTERNET_EXPLORER,
+		CHROME,
+		FIREFOX,
+		SAFARI,
+		OPERA
+	}
+
+	BrowserType browserType();
+	
+	String localId();
 	
 	String displayName();
 	

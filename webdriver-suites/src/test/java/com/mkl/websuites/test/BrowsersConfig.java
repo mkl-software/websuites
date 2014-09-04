@@ -1,23 +1,27 @@
 package com.mkl.websuites.test;
 
 import com.mkl.websuites.Browser;
+import com.mkl.websuites.Browser.BrowserType;
 import com.mkl.websuites.BrowsersConfiguration;
 
 
 @BrowsersConfiguration(browsers = {
 		@Browser(
-				id = "ie",
+				browserType = BrowserType.INTERNET_EXPLORER,
+				localId = "ie",
 				displayName = "Internet Explorer",
-				webDriverPath = ""
+				webDriverPath = "src/test/resources/drivers/IEDriverServer.exe"
 		),
 		@Browser(
-				id = "chrome",
+				browserType = BrowserType.CHROME,
+				localId = "chrome",
 				displayName = "Chrome",
-				webDriverPath = ""
+				webDriverPath = "src/test/resources/drivers/chromedriver.exe"
 		),
 		@Browser(
-				id = "chrome",
-				displayName = "Chrome",
+				browserType = BrowserType.FIREFOX,
+				localId = "ff",
+				displayName = "Firefox",
 				webDriverPath = ""
 			)
 })

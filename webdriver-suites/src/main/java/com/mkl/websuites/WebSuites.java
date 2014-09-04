@@ -44,6 +44,8 @@ public class WebSuites {
 		
 		ConfigurationManager.getInstance().setConfiguration(config);
 		
+		BrowserController.getInstance().initializeBrowsersEnvironment(config);
+		
 		String[] browsers = config.browsers();
 		
 		

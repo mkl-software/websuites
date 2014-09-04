@@ -1,10 +1,9 @@
 package com.mkl.websuites.internal;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
 import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;
+
+import org.openqa.selenium.WebDriver;
 
 
 @Slf4j
@@ -20,7 +19,7 @@ public class SwitchBrowserTest extends TestCase {
 	
 	@Override
 	public String getName() {
-		return "Switching to browser: " + browserName;
+		return "Switching to browser: " + BrowserController.getInstance().getBrowserName(browserName);
 	}
 	
 	
@@ -31,7 +30,7 @@ public class SwitchBrowserTest extends TestCase {
 		
 		WebDriver driver = browserController.getWebDriver();
 		
-		// check if first test, then nothing to close yet
+		// check if first test, then nothing to close yet, otherwise close:
 		if (driver != null) {
 			driver.quit();
 		}
@@ -40,7 +39,7 @@ public class SwitchBrowserTest extends TestCase {
 		
 		log.debug("removing browser [ " + closedBrowser + "] from list of browsers to run");
 		
-		browserController.setWebDriver(new FirefoxDriver());
+		browserController.setNextWebDriver();
 	}
 	
 }
