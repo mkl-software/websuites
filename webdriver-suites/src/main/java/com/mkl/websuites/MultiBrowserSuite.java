@@ -2,6 +2,8 @@ package com.mkl.websuites;
 
 import java.util.List;
 
+import com.mkl.websuites.internal.ConfigurationManager;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import lombok.extern.slf4j.Slf4j;
@@ -11,17 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 public abstract class MultiBrowserSuite extends TestSuite {
 
 	
-	protected String browserId;
-	
-	protected WebSuitesConfig configuration;
-	
-	
 
-	public MultiBrowserSuite(String browserId, WebSuitesConfig config) {
-		
-		this.browserId = browserId;
-		
-		this.configuration = config;
+	public MultiBrowserSuite() {
 		
 		for (Test test : defineTests()) {
 			

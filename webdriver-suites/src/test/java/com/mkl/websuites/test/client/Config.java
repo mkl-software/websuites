@@ -9,7 +9,7 @@ import com.mkl.websuites.WebSuitesConfig;
 	host = "localhost",
 	port = 8080,
 	basePath = "/",
-	browsers = {"ie", "chrome", "safari"},
+	browsers = {"ie", "chrome"},
 	waitTimeout = 10
 )
 public class Config {}

@@ -6,37 +6,32 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 
 import com.mkl.websuites.internal.BrowserController;
+import com.mkl.websuites.internal.ConfigurationManager;
 
 
 @Slf4j
 public abstract class MultiBrowserTestCase extends TestCase {
 
 	
-	protected MultiBrowserSuite parentSuite;
+	protected WebSuitesConfig configuration = ConfigurationManager.getInstance().getConfiguration();
+	
+	protected String currentBrowser;
 	
 	protected WebDriver webDriver;
 	
 	protected String basePath;
 	
 
-	public MultiBrowserTestCase(MultiBrowserSuite parentSuite) {
+	public MultiBrowserTestCase() {
 		super();
-		this.parentSuite = parentSuite;
-		WebSuitesConfig config = parentSuite.configuration;
-		this.basePath = config.host() + ":" + config.port() + config.basePath();
-		
-	}
-	
-
-	protected WebSuitesConfig getConfig() {
-		
-		return parentSuite.configuration;
+		this.basePath = configuration.host() + ":" + configuration.port() + configuration.basePath();
+		this.currentBrowser = BrowserController.getInstance().getLocalBrowserNameForTestInit();
 	}
 	
 	
 	@Override
 	public String getName() {
-		return getTestName() + " [" + parentSuite.browserId + "]";
+		return getTestName() + " [" + currentBrowser + "]";
 	}
 	
 	

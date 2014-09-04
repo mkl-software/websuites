@@ -4,7 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import junit.framework.TestCase;
+import lombok.extern.slf4j.Slf4j;
 
+
+@Slf4j
 public class SwitchBrowserTest extends TestCase {
 
 	private String browserName;
@@ -32,6 +35,10 @@ public class SwitchBrowserTest extends TestCase {
 		if (driver != null) {
 			driver.quit();
 		}
+		
+		String closedBrowser = browserController.removeCurrentBrowser();
+		
+		log.debug("removing browser [ " + closedBrowser + "] from list of browsers to run");
 		
 		browserController.setWebDriver(new FirefoxDriver());
 	}

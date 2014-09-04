@@ -2,6 +2,7 @@ package com.mkl.websuites;
 
 import java.lang.reflect.InvocationTargetException;
 
+import junit.framework.Test;
 import junit.framework.TestSuite;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,6 +10,7 @@ import org.junit.runner.RunWith;
 
 import com.mkl.websuites.internal.BrowserController;
 import com.mkl.websuites.internal.CleanupBrowsersTest;
+import com.mkl.websuites.internal.ConfigurationManager;
 import com.mkl.websuites.internal.SwitchBrowserTest;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 
@@ -30,24 +32,20 @@ public class WebSuites {
 
 		log.debug("suite method");
 		
-		TestSuite suite = new TestSuite() {
-			@Override
-			public int countTestCases() {
-				return super.countTestCases() - 4;
-			}
-			
-			
-		};
+		TestSuite suite = new TestSuite();
 		suite.setName("Master multi-browser test");
 		
 		WebSuitesRunner runner = runningClass.getAnnotation(WebSuitesRunner.class);
 		
-		Class<? extends MultiBrowserSuite>[] suites = runner.suite();
+		Class<? extends Test>[] suites = runner.suite();
 		
 		WebSuitesConfig config = runner.configurationClass().
 				getAnnotation(WebSuitesConfig.class);
 		
+		ConfigurationManager.getInstance().setConfiguration(config);
+		
 		String[] browsers = config.browsers();
+		
 		
 		for (String browser : browsers) {
 			
@@ -57,22 +55,19 @@ public class WebSuites {
 			
 			browserSuite.addTest(new SwitchBrowserTest(browser));
 			
-			for (Class<? extends MultiBrowserSuite> testClass : suites) {
+			for (Class<? extends Test> testClass : suites) {
 				
-				MultiBrowserSuite dynamicTest = testClass
-						.getConstructor(String.class, WebSuitesConfig.class)
-						.newInstance(browser, config);
+				Test dynamicTest = testClass.newInstance();
 				
 				browserSuite.addTest(dynamicTest);
 			}
 			
-//			BrowserController.getInstance().setFirstTestClass(suites[0]);
-//			BrowserController.getInstance().setLastTestClass(suites[suites.length - 1]);
-			
 			suite.addTest(browserSuite);
 		}
 		
+		
 		suite.addTest(new CleanupBrowsersTest());
+		
 		
 		return suite;
 	}

@@ -19,13 +19,8 @@ public class LocalTestConfig {
 
 	
 	
-	@SuiteClasses(tests = {OneBrowserTitleOnlyTest.class})
-	public static class LocalSuite extends AnnotatedSuite {
-
-		public LocalSuite(String browserId, WebSuitesConfig config) {
-			super(browserId, config);
-		}}
-
+	@SuiteClasses(suite = {OneBrowserTitleOnlyTest.class})
+	public static class LocalSuite extends AnnotatedSuite {}
 	
 	
 	@WebSuitesRunner(configurationClass = Config.class, suite = {LocalSuite.class})
