@@ -1,4 +1,4 @@
-package com.mkl.websuites.test.integration;
+package com.mkl.websuites.test.integration.simplest.onebrowser;
 
 import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesConfig;

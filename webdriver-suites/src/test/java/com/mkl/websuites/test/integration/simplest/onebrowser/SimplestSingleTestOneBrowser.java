@@ -1,4 +1,4 @@
-package com.mkl.websuites.test.integration;
+package com.mkl.websuites.test.integration.simplest.onebrowser;
 
 import org.junit.Test;
 import org.junit.runner.JUnitCore;

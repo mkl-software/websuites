@@ -1,4 +1,4 @@
-package com.mkl.websuites.test.integration;
+package com.mkl.websuites.test.integration.simplest.onebrowser;
 
 import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;

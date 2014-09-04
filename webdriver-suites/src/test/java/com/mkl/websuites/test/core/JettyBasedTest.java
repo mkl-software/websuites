@@ -1,20 +1,24 @@
 package com.mkl.websuites.test.core;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.webapp.WebAppContext;
 
+
+@Slf4j
 public class JettyBasedTest {
 
 	
 	private static Server server;
 
 
-	protected int calculateExpectedRunCount(int expectedTestRun, int browserCount) {
+	protected int calculateExpectedRunCount(int underlyingTestCount, int browserCount) {
 		
 		// each test for every browser, + one browser startup test per browser + one close-up test
-		return (expectedTestRun + 1) * browserCount  + 1;
+		return (underlyingTestCount + 1) * browserCount  + 1;
 	}
 	
 
@@ -32,6 +36,8 @@ public class JettyBasedTest {
         server.addHandler(bb);
         
 		try {
+			
+			log.debug("startig jetty server");
 			server.start();
 			
 		} catch (Exception e) {
@@ -47,7 +53,9 @@ public class JettyBasedTest {
 		
 		try {
 			
+			log.debug("stopping jetty server");
 			server.stop();
+			server.join();
 			
 		} catch (Exception e) {
 			
