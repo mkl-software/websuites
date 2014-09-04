@@ -1,6 +1,7 @@
 package com.mkl.websuites.test.client;
 
 import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.test.BrowsersConfig;
 
 
 
@@ -10,6 +11,8 @@ import com.mkl.websuites.WebSuitesConfig;
 	port = 8080,
 	basePath = "/",
 	browsers = {"ie", "chrome"},
-	waitTimeout = 10
+	waitTimeout = 10,
+	browsersConfiguration = BrowsersConfig.class
+	
 )
 public class Config {}

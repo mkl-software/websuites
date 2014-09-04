@@ -15,6 +15,8 @@ public @interface WebSuitesConfig {
 	String basePath();
 
 	String[] browsers();
+	
+	Class<?> browsersConfiguration();
 
 	int waitTimeout() default 30;
 	

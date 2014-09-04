@@ -3,6 +3,7 @@ package com.mkl.websuites.test.integration.simplest.twobrowser;
 import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.test.BrowsersConfig;
 
 public class LocalTestConfig {
 
@@ -10,7 +11,8 @@ public class LocalTestConfig {
 			basePath = "/integration/simple/titleOnly.html",
 			browsers = {"ff", "ff"},
 			host = "http://localhost",
-			port = 90
+			port = 90,
+			browsersConfiguration = BrowsersConfig.class
 			
 	)
 	public static class Config {}
