@@ -8,6 +8,9 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface WebSuitesConfig {
 
+	@BrowsersConfiguration
+	public static class DefaultBrowserConfig {}
+
 	String host();
 
 	int port() default 80;
@@ -16,7 +19,7 @@ public @interface WebSuitesConfig {
 
 	String[] browsers();
 	
-	Class<?> browsersConfiguration();
+	Class<?> browsersConfiguration() default DefaultBrowserConfig.class;
 
 	int waitTimeout() default 30;
 	

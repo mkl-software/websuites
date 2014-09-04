@@ -130,14 +130,24 @@ public class BrowserController {
 
 	public void setNextWebDriver() {
 		
-		Class<?> driverClass = driverClassMap.get(currentBrowser());
+		String currentBrowser = currentBrowser();
+		
+		if (!driverClassMap.containsKey(currentBrowser)) {
+			
+			log.error("no browser configured for ID: " + currentBrowser);
+			throw new WebSuitesException("No browser configured for the ID: '" + currentBrowser +
+					"', Please correct your BrowserConfiguration element and fill information for "
+					+ "this browser.");
+		}
+		
+		Class<?> driverClass = driverClassMap.get(currentBrowser);
 		
 		try {
 			webDriver = (WebDriver) driverClass.newInstance();
 			
 		} catch (InstantiationException | IllegalAccessException e) {
 			
-			log.error("cannot create an instance of Web Driver for [" + currentBrowser() +
+			log.error("cannot create an instance of Web Driver for [" + currentBrowser +
 					"] with class: " + driverClass);
 		}
 	}

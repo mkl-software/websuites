@@ -17,13 +17,7 @@ import com.mkl.websuites.BrowsersConfiguration;
 				localId = "chrome",
 				displayName = "Chrome",
 				webDriverPath = "src/test/resources/drivers/chromedriver.exe"
-		),
-		@Browser(
-				browserType = BrowserType.FIREFOX,
-				localId = "ff",
-				displayName = "Firefox",
-				webDriverPath = ""
-			)
+		)
 })
 public class BrowsersConfig {
 

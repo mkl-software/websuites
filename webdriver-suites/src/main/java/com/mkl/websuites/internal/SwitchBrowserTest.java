@@ -19,7 +19,15 @@ public class SwitchBrowserTest extends TestCase {
 	
 	@Override
 	public String getName() {
-		return "Switching to browser: " + BrowserController.getInstance().getBrowserName(browserName);
+		
+		String displayName = BrowserController.getInstance().getBrowserName(browserName);
+		
+		// no browser configured for this ID
+		if (displayName == null) {
+			displayName = "Not configured!";
+		}
+		
+		return "Switching to browser: " + displayName;
 	}
 	
 	
