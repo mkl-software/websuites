@@ -38,6 +38,8 @@ public abstract class MultiBrowserTestCase extends TestCase {
 	@Override
 	protected void runTest() throws Throwable {
 		
+		log.debug("running: " + this.getClass().getName() + " with test name: " + getName());
+		
 		this.webDriver = BrowserController.getInstance().getWebDriver();
 		
 		runLocally();

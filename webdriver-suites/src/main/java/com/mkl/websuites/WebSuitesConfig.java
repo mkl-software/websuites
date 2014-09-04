@@ -17,5 +17,7 @@ public @interface WebSuitesConfig {
 	String[] browsers();
 
 	int waitTimeout() default 30;
+	
+	String[] scenarioFileExtensions() default {"scn"};
 
 }

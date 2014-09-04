@@ -19,7 +19,7 @@ public class LocalTestConfig {
 
 	
 	
-	@SuiteClasses(suite = {OneBrowserTitleOnlyTest.class})
+	@SuiteClasses(suite = {OneBrowserTitleOnlyTest.class, NonWebSuiteTest.class})
 	public static class LocalSuite extends AnnotatedSuite {}
 	
 	
