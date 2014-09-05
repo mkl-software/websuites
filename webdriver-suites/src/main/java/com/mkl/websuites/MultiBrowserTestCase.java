@@ -7,12 +7,15 @@ import org.openqa.selenium.WebDriver;
 
 import com.mkl.websuites.internal.BrowserController;
 import com.mkl.websuites.internal.ConfigurationManager;
+import com.mkl.websuites.internal.impl.BrowserControllerImpl;
 
 
 @Slf4j
 public abstract class MultiBrowserTestCase extends TestCase {
 
 	
+	private  BrowserController browserController = BrowserControllerImpl.getInstance();
+
 	protected WebSuitesConfig configuration = ConfigurationManager.getInstance().getConfiguration();
 	
 	protected String currentBrowser;
@@ -25,7 +28,7 @@ public abstract class MultiBrowserTestCase extends TestCase {
 	public MultiBrowserTestCase() {
 		super();
 		this.basePath = configuration.host() + ":" + configuration.port() + configuration.basePath();
-		this.currentBrowser = BrowserController.getInstance().getLocalBrowserNameForTestInit();
+		this.currentBrowser = browserController.getLocalBrowserNameForTestInit();
 	}
 	
 	
@@ -40,7 +43,7 @@ public abstract class MultiBrowserTestCase extends TestCase {
 		
 		log.debug("running: " + this.getClass().getName() + " with test name: " + getName());
 		
-		this.webDriver = BrowserController.getInstance().getWebDriver();
+		this.webDriver = browserController.getWebDriver();
 		
 		runLocally();
 	}

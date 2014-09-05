@@ -64,6 +64,13 @@
 		<artifactId>jasper</artifactId>
 		<version>6.0.32</version>
 	</dependency>
+	
+	
+	<dependency>
+        <groupId>se.jbee</groupId>
+        <artifactId>silk-di</artifactId>
+        <version>0.6</version>
+    </dependency>
     
     
     

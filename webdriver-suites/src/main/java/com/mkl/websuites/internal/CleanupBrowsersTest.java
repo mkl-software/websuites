@@ -2,6 +2,8 @@ package com.mkl.websuites.internal;
 
 import junit.framework.TestCase;
 
+import com.mkl.websuites.internal.services.ServiceFactory;
+
 public class CleanupBrowsersTest extends TestCase {
 
 	
@@ -14,7 +16,7 @@ public class CleanupBrowsersTest extends TestCase {
 	@Override
 	protected void runTest() throws Throwable {
 		
-		BrowserController.getInstance().getWebDriver().quit();
+		ServiceFactory.get(BrowserController.class).getWebDriver().quit();
 	}
 	
 }

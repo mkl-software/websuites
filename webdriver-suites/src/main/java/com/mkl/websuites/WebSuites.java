@@ -13,6 +13,7 @@ import com.mkl.websuites.internal.CleanupBrowsersTest;
 import com.mkl.websuites.internal.ConfigurationManager;
 import com.mkl.websuites.internal.SwitchBrowserTest;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
+import com.mkl.websuites.internal.services.ServiceFactory;
 
 
 
@@ -21,11 +22,14 @@ import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 public class WebSuites {
 
 	
+	public WebSuites() {
+		
+		ServiceFactory.init(this.getClass());
+	}
 	
-	private static Class<?> runningClass;
 	
-	
-	public static TestSuite suite() throws
+
+	public TestSuite defineMasterSuite(Class<?> runningClass) throws
 			InstantiationException,
 			IllegalAccessException, NoSuchMethodException, SecurityException,
 			IllegalArgumentException, InvocationTargetException {
@@ -44,14 +48,16 @@ public class WebSuites {
 		
 		ConfigurationManager.getInstance().setConfiguration(config);
 		
-		BrowserController.getInstance().initializeBrowsersEnvironment(config);
+		BrowserController browserController = ServiceFactory.get(BrowserController.class);
+		
+		browserController.initializeBrowsersEnvironment(config);
 		
 		String[] browsers = config.browsers();
 		
 		
 		for (String browser : browsers) {
 			
-			BrowserController.getInstance().addBrowser(browser);
+			browserController.addBrowser(browser);
 		
 			TestSuite browserSuite = new TestSuite("Running for [" + browser + "]");
 			
@@ -72,9 +78,5 @@ public class WebSuites {
 		
 		
 		return suite;
-	}
-
-	public static void setRunFor(Class<?> class1) {
-		runningClass = class1;
 	}
 }

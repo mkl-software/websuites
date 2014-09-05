@@ -5,10 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.openqa.selenium.WebDriver;
 
+import com.mkl.websuites.internal.services.ServiceFactory;
+
 
 @Slf4j
 public class SwitchBrowserTest extends TestCase {
 
+	private BrowserController browserController = ServiceFactory.get(BrowserController.class);
+	
 	private String browserName;
 	
 	public SwitchBrowserTest(String browser) {
@@ -20,7 +24,7 @@ public class SwitchBrowserTest extends TestCase {
 	@Override
 	public String getName() {
 		
-		String displayName = BrowserController.getInstance().getBrowserName(browserName);
+		String displayName = browserController.getBrowserName(browserName);
 		
 		// no browser configured for this ID
 		if (displayName == null) {
@@ -33,8 +37,6 @@ public class SwitchBrowserTest extends TestCase {
 	
 	@Override
 	protected void runTest() throws Throwable {
-		
-		BrowserController browserController = BrowserController.getInstance();
 		
 		WebDriver driver = browserController.getWebDriver();
 		
