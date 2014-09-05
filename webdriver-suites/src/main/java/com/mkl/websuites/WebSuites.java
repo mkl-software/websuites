@@ -37,7 +37,7 @@ public class WebSuites {
 		log.debug("suite method");
 		
 		TestSuite suite = new TestSuite();
-		suite.setName("Master multi-browser test");
+		suite.setName("Multi-browser test suite");
 		
 		WebSuitesRunner runner = runningClass.getAnnotation(WebSuitesRunner.class);
 		
@@ -46,7 +46,7 @@ public class WebSuites {
 		WebSuitesConfig config = runner.configurationClass().
 				getAnnotation(WebSuitesConfig.class);
 		
-		ConfigurationManager.getInstance().setConfiguration(config);
+		ServiceFactory.get(ConfigurationManager.class).setConfiguration(config);
 		
 		BrowserController browserController = ServiceFactory.get(BrowserController.class);
 		

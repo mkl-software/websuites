@@ -7,16 +7,16 @@ import org.openqa.selenium.WebDriver;
 
 import com.mkl.websuites.internal.BrowserController;
 import com.mkl.websuites.internal.ConfigurationManager;
-import com.mkl.websuites.internal.impl.BrowserControllerImpl;
+import com.mkl.websuites.internal.services.ServiceFactory;
 
 
 @Slf4j
 public abstract class MultiBrowserTestCase extends TestCase {
 
 	
-	private  BrowserController browserController = BrowserControllerImpl.getInstance();
+	private  BrowserController browserController = ServiceFactory.get(BrowserController.class);
 
-	protected WebSuitesConfig configuration = ConfigurationManager.getInstance().getConfiguration();
+	protected WebSuitesConfig configuration = ServiceFactory.get(ConfigurationManager.class).getConfiguration();
 	
 	protected String currentBrowser;
 	
@@ -25,6 +25,7 @@ public abstract class MultiBrowserTestCase extends TestCase {
 	protected String basePath;
 	
 
+	
 	public MultiBrowserTestCase() {
 		super();
 		this.basePath = configuration.host() + ":" + configuration.port() + configuration.basePath();
@@ -53,26 +54,4 @@ public abstract class MultiBrowserTestCase extends TestCase {
 
 	protected abstract String getTestName();
 
-
-	@Override
-	protected void setUp() throws Exception {
-		log.debug("setUp for test: " + this.getName());
-		super.setUp();
-		
-	}
-	
-	
-	@Override
-	protected void tearDown() throws Exception {
-		log.debug("tearDown for test: " + this.getName());
-		
-		// check if last test in the suite list and close/switch browser
-		
-//		if (parentSuite.getClass().equals(BrowserController.getInstance().getLastSuiteClass())) {
-//			
-//			log.debug("this is last test case in the top suite");
-//		}
-		
-		super.tearDown();
-	}
 }

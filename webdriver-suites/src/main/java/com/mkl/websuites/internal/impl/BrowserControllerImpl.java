@@ -14,16 +14,17 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.mkl.websuites.Browser;
 import com.mkl.websuites.Browser.BrowserType;
-import com.mkl.websuites.internal.BrowserController;
 import com.mkl.websuites.BrowsersConfiguration;
 import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesException;
+import com.mkl.websuites.internal.BrowserController;
 
 
 
 @Slf4j
 public class BrowserControllerImpl implements BrowserController {
 
+	
 	
 	private Queue<String> browsersToRun = new LinkedBlockingQueue<String>();
 
@@ -39,6 +40,7 @@ public class BrowserControllerImpl implements BrowserController {
 	
 	
 	
+	private BrowserControllerImpl() {}
 	
 	private static BrowserController instance = new BrowserControllerImpl();
 	
@@ -68,6 +70,11 @@ public class BrowserControllerImpl implements BrowserController {
 		
 		Browser[] browsers = browsersConfiguration.browsers();
 		
+		// populate default FF browser in case it's not existing int the browser config annotation:
+		driverClassMap.put("ff", FirefoxDriver.class);
+		browserNameMap.put("ff", "Firefox");
+		// if it's existing it will overwritten in next loop
+		
 		for (Browser browser : browsers) {
 			
 			browserNameMap.put(browser.localId(), browser.displayName());
@@ -87,6 +94,7 @@ public class BrowserControllerImpl implements BrowserController {
 				configureBrowser("", browser, FirefoxDriver.class);
 			}
 		}
+		
 	}
 
 

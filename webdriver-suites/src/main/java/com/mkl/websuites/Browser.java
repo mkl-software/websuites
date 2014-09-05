@@ -23,5 +23,5 @@ public @interface Browser {
 	
 	String displayName();
 	
-	String webDriverPath();
+	String webDriverPath() default "";
 }

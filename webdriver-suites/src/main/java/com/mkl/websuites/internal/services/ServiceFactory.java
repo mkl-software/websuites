@@ -43,6 +43,7 @@ public class ServiceFactory {
 	
 	
 	public static <T> T get(Class<T> serviceClass) {
+		
 		if (!isInitialized) {
 			log.error("trying to acquire service before service factory us initialized");
 			throw new WebbitException("Trying to acquire service " + serviceClass.getName() +

@@ -2,28 +2,11 @@ package com.mkl.websuites.internal;
 
 import com.mkl.websuites.WebSuitesConfig;
 
-public class ConfigurationManager {
+public interface ConfigurationManager {
 
-	private WebSuitesConfig configuration;
+	void setConfiguration(WebSuitesConfig configuration);
 
-	
-	
-	private static ConfigurationManager instance = new ConfigurationManager();
-	
-	public static ConfigurationManager getInstance() {
-		return instance;
-	}
+	WebSuitesConfig getConfiguration();
 
-	
-	
-	
-
-	public WebSuitesConfig getConfiguration() {
-		return configuration;
-	}
-
-	public void setConfiguration(WebSuitesConfig configuration) {
-		this.configuration = configuration;
-	}
 	
 }
