@@ -22,7 +22,7 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 public class WebSuites {
 
 	
-	Class<?> runningClass;
+	private Class<?> runningClass;
 	
 	
 	public WebSuites() {}

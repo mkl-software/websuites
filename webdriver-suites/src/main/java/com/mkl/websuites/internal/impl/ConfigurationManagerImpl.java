@@ -1,12 +1,17 @@
 package com.mkl.websuites.internal.impl;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.internal.ConfigurationManager;
 
+
+
 public class ConfigurationManagerImpl implements ConfigurationManager {
 
-	private WebSuitesConfig configuration;
-
+	
+	private @Getter @Setter WebSuitesConfig configuration;
 
 	
 	private ConfigurationManagerImpl() {}
@@ -17,18 +22,6 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 		return instance;
 	}
 
-	
-	
-	
 
-	@Override
-	public WebSuitesConfig getConfiguration() {
-		return configuration;
-	}
-
-	@Override
-	public void setConfiguration(WebSuitesConfig configuration) {
-		this.configuration = configuration;
-	}
 	
 }

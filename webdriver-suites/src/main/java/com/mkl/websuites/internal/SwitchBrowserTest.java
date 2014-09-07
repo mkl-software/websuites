@@ -11,6 +11,8 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 @Slf4j
 public class SwitchBrowserTest extends TestCase {
 
+	
+	
 	private BrowserController browserController = ServiceFactory.get(BrowserController.class);
 	
 	private String browserName;

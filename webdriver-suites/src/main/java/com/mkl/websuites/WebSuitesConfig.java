@@ -3,7 +3,7 @@ package com.mkl.websuites;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import com.mkl.websuites.internal.ext.EmptyExtensionDefinition;
+import com.mkl.websuites.internal.ext.EmptyServiceOverrideDefinition;
 
 
 
@@ -27,6 +27,6 @@ public @interface WebSuitesConfig {
 	
 	String[] scenarioFileExtensions() default {"scn"};
 
-	Class<?> serviceOverrides() default EmptyExtensionDefinition.class;
+	Class<?> serviceOverrides() default EmptyServiceOverrideDefinition.class;
 
 }

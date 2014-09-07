@@ -7,6 +7,4 @@ import com.mkl.websuites.ext.Customization;
 @Customization(
 		serviceOverrides = {}
 )
-public class EmptyExtensionDefinition {
-
-}
+public class EmptyServiceOverrideDefinition {}
