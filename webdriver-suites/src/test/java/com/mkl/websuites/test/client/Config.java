@@ -12,7 +12,8 @@ import com.mkl.websuites.test.BrowsersConfig;
 	basePath = "/",
 	browsers = {"chrome", "ff"},
 	waitTimeout = 10,
-	browsersConfiguration = BrowsersConfig.class
+	browsersConfiguration = BrowsersConfig.class,
+	serviceOverrides = LocalExtensions.class
 	
 )
 public class Config {}

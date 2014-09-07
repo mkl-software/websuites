@@ -8,10 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.webbitserver.WebbitException;
 
-import com.mkl.websuites.internal.BrowserController;
-import com.mkl.websuites.internal.ConfigurationManager;
-import com.mkl.websuites.internal.impl.BrowserControllerImpl;
-import com.mkl.websuites.internal.impl.ConfigurationManagerImpl;
+import com.mkl.websuites.ext.ServiceDefinition;
+import com.mkl.websuites.ext.ServiceDefinition.Service;
 
 
 @Slf4j
@@ -34,13 +32,32 @@ public class ServiceFactory {
 		
 		instanceMap = new HashMap<Class<?>, Class<?>>();
 		
-		instanceMap.put(BrowserController.class, BrowserControllerImpl.class);
-		instanceMap.put(ConfigurationManager.class, ConfigurationManagerImpl.class);
+		ServiceDefinition defaultServiceDefinition =
+				DefaultServiceDefinitions.class.getAnnotation(ServiceDefinition.class);
+		
+		Service[] services = defaultServiceDefinition.value();
+		
+		for (Service service : services) {
+			instanceMap.put(service.service(), service.implementation());
+		}
+		
+		applyServiceOverridesFrom(runnerClass);
 		
 		log.debug("service factory initialized");
 	}
 	
 	
+	private static void applyServiceOverridesFrom(Class<?> runnerClass) {
+		
+//		WebSuitesConfig config = runnerClass
+//				.getAnnotation(WebSuitesRunner.class)
+//				.configurationClass()
+//				.getAnnotation(WebSuitesConfig.class);
+//		
+//		Class<?> overridesDef = config.serviceOverrides();
+	}
+
+
 	@SuppressWarnings("unchecked")
 	public static <T> T get(Class<T> serviceClass) {
 		
