@@ -13,7 +13,7 @@ public class InternalWebSuitesRunner extends JUnit38ClassRunner {
 	
 	public InternalWebSuitesRunner(Class<?> klass) throws Throwable {
 		
-		super(new WebSuites().defineMasterSuite(klass));
+		super(new WebSuites(klass).defineMasterSuite());
 		
 		log.debug("custom runner initialized for runner: " + klass);
 		

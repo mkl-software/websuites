@@ -20,6 +20,6 @@ public interface BrowserController {
 
 	public abstract String getLocalBrowserNameForTestInit();
 
-	public abstract String getBrowserName(String currentBrowser);
+	public abstract String getBrowserDisplayName(String currentBrowser);
 
 }

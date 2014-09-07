@@ -22,14 +22,20 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 public class WebSuites {
 
 	
-	public WebSuites() {
+	Class<?> runningClass;
+	
+	
+	public WebSuites() {}
+	
+	public WebSuites(Class<?> klass) {
 		
-		ServiceFactory.init(this.getClass());
+		ServiceFactory.init(klass);
+		runningClass = klass;
 	}
 	
 	
 
-	public TestSuite defineMasterSuite(Class<?> runningClass) throws
+	public TestSuite defineMasterSuite() throws
 			InstantiationException,
 			IllegalAccessException, NoSuchMethodException, SecurityException,
 			IllegalArgumentException, InvocationTargetException {

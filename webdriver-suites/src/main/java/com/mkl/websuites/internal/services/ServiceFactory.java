@@ -8,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.webbitserver.WebbitException;
 
+import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.ext.Customization;
 import com.mkl.websuites.ext.ServiceDefinition;
 import com.mkl.websuites.ext.ServiceDefinition.Service;
 
@@ -49,12 +52,32 @@ public class ServiceFactory {
 	
 	private static void applyServiceOverridesFrom(Class<?> runnerClass) {
 		
-//		WebSuitesConfig config = runnerClass
-//				.getAnnotation(WebSuitesRunner.class)
-//				.configurationClass()
-//				.getAnnotation(WebSuitesConfig.class);
-//		
-//		Class<?> overridesDef = config.serviceOverrides();
+		WebSuitesConfig config = runnerClass
+				.getAnnotation(WebSuitesRunner.class)
+				.configurationClass()
+				.getAnnotation(WebSuitesConfig.class);
+		
+		Class<?> overridesDef = config.serviceOverrides();
+		
+		if (overridesDef != null) {
+			
+			Customization customization = overridesDef.getAnnotation(Customization.class);
+			
+			if (customization == null) {
+				log.error("customization class must be annotated with Customization annotation");
+				throw new WebbitException("customization class must be "
+						+ "annotated with Customization annotation");
+			}
+			
+			Service[] serviceOverrides = customization.serviceOverrides();
+			
+			for (Service override  : serviceOverrides) {
+				log.debug("applied service definition override for " + override.service()
+						+ " with impl: " + override.implementation());
+				instanceMap.put (override.service(), override.implementation());
+			}
+			
+		}
 	}
 
 

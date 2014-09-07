@@ -24,7 +24,7 @@ public class SwitchBrowserTest extends TestCase {
 	@Override
 	public String getName() {
 		
-		String displayName = browserController.getBrowserName(browserName);
+		String displayName = browserController.getBrowserDisplayName(browserName);
 		
 		// no browser configured for this ID
 		if (displayName == null) {

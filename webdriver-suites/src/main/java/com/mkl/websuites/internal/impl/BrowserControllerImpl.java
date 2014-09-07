@@ -26,21 +26,21 @@ public class BrowserControllerImpl implements BrowserController {
 
 	
 	
-	private Queue<String> browsersToRun = new LinkedBlockingQueue<String>();
+	protected Queue<String> browsersToRun = new LinkedBlockingQueue<String>();
 
-	private WebDriver webDriver;
+	protected WebDriver webDriver;
 	
 	private boolean firstBrowser = true;
 	
 	private String localBrowserNameForTestInit;
 
-	private Map<String, Class<?>> driverClassMap = new HashMap<String, Class<?>>();
+	protected Map<String, Class<?>> driverClassMap = new HashMap<String, Class<?>>();
 
-	private Map<String, String> browserNameMap = new HashMap<String, String>();
+	protected Map<String, String> browserDisplayNameMap = new HashMap<String, String>();
 	
 	
 	
-	private BrowserControllerImpl() {}
+	protected BrowserControllerImpl() {}
 	
 	private static BrowserController instance = new BrowserControllerImpl();
 	
@@ -72,12 +72,12 @@ public class BrowserControllerImpl implements BrowserController {
 		
 		// populate default FF browser in case it's not existing int the browser config annotation:
 		driverClassMap.put("ff", FirefoxDriver.class);
-		browserNameMap.put("ff", "Firefox");
+		browserDisplayNameMap.put("ff", "Firefox");
 		// if it's existing it will overwritten in next loop
 		
 		for (Browser browser : browsers) {
 			
-			browserNameMap.put(browser.localId(), browser.displayName());
+			browserDisplayNameMap.put(browser.localId(), browser.displayName());
 			
 			if (browser.browserType() == BrowserType.INTERNET_EXPLORER) {
 				
@@ -101,7 +101,7 @@ public class BrowserControllerImpl implements BrowserController {
 
 
 
-	private void configureBrowser(String envKey, Browser browser, Class<?> driverClass) {
+	protected void configureBrowser(String envKey, Browser browser, Class<?> driverClass) {
 		
 		if (!envKey.isEmpty()) {
 			System.setProperty(envKey, browser.webDriverPath());
@@ -199,9 +199,9 @@ public class BrowserControllerImpl implements BrowserController {
 	 * @see com.mkl.websuites.internal.IBrowserControlle#getBrowserName(java.lang.String)
 	 */
 	@Override
-	public String getBrowserName(String currentBrowser) {
+	public String getBrowserDisplayName(String currentBrowser) {
 		
-		return browserNameMap.get(currentBrowser);
+		return browserDisplayNameMap.get(currentBrowser);
 	}
 
 }
