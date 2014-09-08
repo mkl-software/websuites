@@ -3,12 +3,17 @@ package com.mkl.websuites;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import com.mkl.websuites.internal.ext.EmptyServiceOverrideDefinition;
+import com.mkl.websuites.ext.Customization;
 
 
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface WebSuitesConfig {
+	
+	
+	@Customization
+	public static class EmptyServiceOverrideDefinition {}
+
 
 	@BrowsersConfiguration
 	public static class DefaultBrowserConfig {}

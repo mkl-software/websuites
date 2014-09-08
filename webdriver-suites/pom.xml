@@ -17,12 +17,20 @@
 
   <dependencies>
   
+  
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.9</version>
+      <version>4.11</version>
       <scope>compile</scope>
     </dependency>
+    
+    <dependency>
+		<groupId>org.jmockit</groupId>
+		<artifactId>jmockit</artifactId>
+		<version>1.11</version>
+		<scope>test</scope>
+	</dependency>
     
     <dependency>
 		<groupId>org.projectlombok</groupId>

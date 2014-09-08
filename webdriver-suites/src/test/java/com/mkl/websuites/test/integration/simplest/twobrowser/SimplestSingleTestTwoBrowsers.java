@@ -16,7 +16,7 @@ public class SimplestSingleTestTwoBrowsers extends JettyBasedTest {
 	
 
 	@Test
-	public void test() throws Throwable {
+	public void checkWebTestResult() throws Throwable {
 		
 		Result result = new JUnitCore().run(new InternalWebSuitesRunner(LocalTestConfig.Runner.class));
 		

@@ -1,18 +1,18 @@
 package com.mkl.websuites.internal.services;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.webbitserver.WebbitException;
-
 import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.ext.Customization;
-import com.mkl.websuites.ext.ServiceDefinition;
-import com.mkl.websuites.ext.ServiceDefinition.Service;
+import com.mkl.websuites.internal.services.ServiceDefinition.Service;
+
 
 
 @Slf4j
@@ -31,6 +31,10 @@ public class ServiceFactory {
 	
 	public static void init(Class<?> runnerClass) {
 		
+		if (isInitialized) {
+			throw new WebSuitesException("Cannot initialize ServiceFactory more than once.");
+		}
+		
 		isInitialized = true;
 		
 		instanceMap = new HashMap<Class<?>, Class<?>>();
@@ -44,7 +48,9 @@ public class ServiceFactory {
 			instanceMap.put(service.service(), service.implementation());
 		}
 		
-		applyServiceOverridesFrom(runnerClass);
+		if (runnerClass != null) {
+			applyServiceOverridesFrom(runnerClass);
+		}
 		
 		log.debug("service factory initialized");
 	}
@@ -70,7 +76,7 @@ public class ServiceFactory {
 			
 			if (customization == null) {
 				log.error("customization class must be annotated with Customization annotation");
-				throw new WebbitException("customization class must be "
+				throw new WebSuitesException("customization class must be "
 						+ "annotated with Customization annotation");
 			}
 			
@@ -91,13 +97,18 @@ public class ServiceFactory {
 		
 		if (!isInitialized) {
 			log.error("trying to acquire service before service factory us initialized");
-			throw new WebbitException("Trying to acquire service " + serviceClass.getName() +
+			throw new WebSuitesException("Trying to acquire service " + serviceClass.getName() +
 					" before service factory is initialized");
 		}
 		
 		
 		try {
-			return (T) instanceMap.get(serviceClass).getMethod("getInstance").invoke(null);
+			Method factoryMethod = instanceMap.get(serviceClass).getDeclaredMethod("getInstance");
+			if (factoryMethod == null) {
+				throw new WebSuitesException("Service " + serviceClass + " must implement public "
+						+ "static getInstance() factory method to provide service instances.");
+			}
+			return (T) factoryMethod.invoke(null);
 			
 		} catch (IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException | NoSuchMethodException
@@ -106,7 +117,7 @@ public class ServiceFactory {
 			log.error("cannot make instance for service: " + serviceClass.getName() +
 					", erro: " + e.getLocalizedMessage());
 			
-			throw new WebbitException("Cannot instantiate service: " + serviceClass.getName() +
+			throw new WebSuitesException("Cannot instantiate service: " + serviceClass.getName() +
 					", erro: " + e.getLocalizedMessage() +
 					". Make sure the service has public static getInstance() method.");
 			

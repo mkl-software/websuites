@@ -1,4 +1,4 @@
-package com.mkl.websuites.test;
+package com.mkl.websuites.test.suites;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -14,9 +14,8 @@ import com.mkl.websuites.test.integration.simplest.twobrowser.SimplestSingleTest
 		{
 			SimplestSingleTestOneBrowser.class,
 			SimplestSingleTestTwoBrowsers.class,
-			SampleForJenkins.class
 		}
 )
-public class MasterSuite {
+public class WebTests {
 
 }

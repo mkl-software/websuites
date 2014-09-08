@@ -1,11 +1,14 @@
 package com.mkl.websuites.test.core;
 
 import lombok.extern.slf4j.Slf4j;
+import mockit.Deencapsulation;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.webapp.WebAppContext;
+
+import com.mkl.websuites.internal.services.ServiceFactory;
 
 
 @Slf4j
@@ -24,6 +27,9 @@ public class JettyBasedTest {
 
 	@BeforeClass
 	public static void setupTestEnv() {
+		
+		// reset underlying ServiceFactory
+		Deencapsulation.setField(ServiceFactory.class, "isInitialized", false);
 		
 		server = new Server(90);
 		
