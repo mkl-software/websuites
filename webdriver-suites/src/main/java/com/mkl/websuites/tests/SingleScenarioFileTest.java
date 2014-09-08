@@ -8,7 +8,7 @@ import junit.framework.Test;
 import com.mkl.websuites.MultiBrowserSuite;
 import com.mkl.websuites.MultiBrowserTestCase;
 
-public abstract class OneFileScenarioTest extends MultiBrowserSuite {
+public abstract class SingleScenarioFileTest extends MultiBrowserSuite {
 
 	
 

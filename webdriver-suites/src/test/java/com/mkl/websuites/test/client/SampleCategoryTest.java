@@ -1,8 +1,8 @@
 package com.mkl.websuites.test.client;
 
-import com.mkl.websuites.tests.OneFileScenarioTest;
+import com.mkl.websuites.tests.SingleScenarioFileTest;
 
-public class SampleCategoryTest extends OneFileScenarioTest {
+public class SampleCategoryTest extends SingleScenarioFileTest {
 
 
 
