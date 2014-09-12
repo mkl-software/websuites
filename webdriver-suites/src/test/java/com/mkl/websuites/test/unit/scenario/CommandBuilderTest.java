@@ -37,7 +37,7 @@ public class CommandBuilderTest extends ServiceBasedTest {
 		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
 		
 		Deencapsulation.invoke(
-				logic, "buildCommandArgumentTypesMap");
+				logic, "scanClasspathForCommands");
 		Map commandArgTypes = Deencapsulation.getField(logic, "commandTypesMap");
 		
 		assertTrue(commandArgTypes.size() > 0);

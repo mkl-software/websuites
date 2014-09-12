@@ -1,18 +1,23 @@
 package com.mkl.websuites.internal.command;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import lombok.extern.slf4j.Slf4j;
+
+import org.reflections.Reflections;
 
 import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.internal.command.impl.SampleCommand;
 
 
 
+@Slf4j
 @SuppressWarnings("rawtypes")
 public class StandardCommandBuilder implements CommandBuilder {
 
@@ -34,40 +39,50 @@ public class StandardCommandBuilder implements CommandBuilder {
 	
 	public StandardCommandBuilder() {
 		
-		 buildCommandConstructorMap();
-		 buildCommandArgumentTypesMap();
+		scanClasspathForCommands();
 	}
 	
 	
 	
 	
-	protected void buildCommandArgumentTypesMap() {
+	protected void scanClasspathForCommands() {
+		
+		Reflections reflections = new Reflections("com.mkl.websuites");
+
+		Set<Class<?>> allCommandsInClasspath = 
+				reflections.getTypesAnnotatedWith(CommandDescriptor.class);
+		
 		commandTypesMap = new HashMap<>();
-		
-		List<Class> argTypes = Arrays.asList((Class) String.class);
-		
-		commandTypesMap.put("sample", argTypes);
-	}
-
-
-
-	protected void buildCommandConstructorMap() {
-		
 		commandConstructorMap = new HashMap<>();
+
+		log.debug("classpath scanned with reflection for annotated command,"
+				+ " found {} commands", allCommandsInClasspath.size());
 		
-		List<Class> argTypes = Arrays.asList((Class) String.class);
 		
-		try {
-			commandConstructorMap.put("sample", SampleCommand
-					.class
-					.getConstructor(argTypes.toArray(new Class[] {})));
+		for (Class<?> commandClass : allCommandsInClasspath) {
 			
-		} catch (NoSuchMethodException | SecurityException e) {
+			CommandDescriptor commandDescriptor = commandClass.getAnnotation(CommandDescriptor.class);
 			
-			throw new WebSuitesException("Error in command configuration");
+			List<Class> argumentTypes = Arrays.asList(commandDescriptor.argumentTypes());
+			
+			commandTypesMap.put(commandDescriptor.name(),
+							argumentTypes);
+			
+			Constructor constructor;
+			try {
+				
+				constructor = commandClass.getConstructor(argumentTypes.toArray(new Class[] {}));
+				commandConstructorMap.put(commandDescriptor.name(), constructor);
+				
+			} catch (NoSuchMethodException | SecurityException e) {
+				
+				throw new WebSuitesException("cannot find constructor for command + "  +
+						commandDescriptor.name() + " with annotated argument list: " + argumentTypes);
+			}
 		}
-		
 	}
+
+
 
 
 
