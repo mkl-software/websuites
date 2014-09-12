@@ -10,6 +10,7 @@ import junit.framework.TestCase;
 import com.mkl.websuites.internal.ConfigurationManager;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandParser;
+import com.mkl.websuites.internal.command.CommandPostProcessor;
 import com.mkl.websuites.internal.command.CommandProcessor;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
@@ -45,8 +46,10 @@ public class StandardScenarioFileProcessor implements ScenarioFileProcessor {
 		List<Command> parsedCommands = 
 				ServiceFactory.get(CommandParser.class).parseCommandFromFile(preprocessedScenarioFile);
 		
+		List<Command> postProcessedCommands = ServiceFactory.get(CommandPostProcessor.class).postProcessCommands(parsedCommands);
+		
 		List<Test> convertedCommandsToTests =
-				ServiceFactory.get(CommandProcessor.class).convertCommandsToTests(parsedCommands);
+				ServiceFactory.get(CommandProcessor.class).convertCommandsToTests(postProcessedCommands);
 		
 		return convertedCommandsToTests;
 		

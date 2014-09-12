@@ -8,7 +8,7 @@ import junit.framework.Test;
 
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SuiteClasses {
+public @interface StandaloneSuite {
 
 
 	Class<? extends Test>[] suite() default {};

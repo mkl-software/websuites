@@ -1,9 +1,9 @@
 package com.mkl.websuites.test.client;
 
 import com.mkl.websuites.AnnotatedSuite;
-import com.mkl.websuites.SuiteClasses;
+import com.mkl.websuites.StandaloneSuite;
 
 
 
-@SuiteClasses(suite = {SampleStandaloneTest.class})
+@StandaloneSuite(suite = {SampleStandaloneTest.class})
 public class MySuite extends AnnotatedSuite {}

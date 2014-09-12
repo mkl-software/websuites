@@ -15,7 +15,7 @@ public class AnnotatedSuite extends MultiBrowserSuite {
 	@Override
 	protected List<Test> defineTests() {
 		
-		SuiteClasses config = this.getClass().getAnnotation(SuiteClasses.class);
+		StandaloneSuite config = this.getClass().getAnnotation(StandaloneSuite.class);
 		
 		if (config == null) {
 			

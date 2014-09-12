@@ -1,51 +1,34 @@
 package com.mkl.websuites.test.unit.scenario;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.io.File;
 import java.util.List;
 
-import lombok.extern.slf4j.Slf4j;
-
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.mkl.websuites.internal.scenario.ScenarioFilePreprocessor;
 import com.mkl.websuites.internal.services.ServiceFactory;
-
-import static org.junit.Assert.*;
+import com.mkl.websuites.test.core.ServiceBasedTest;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@Slf4j
-public class ScenarioPreprocessingTest {
+public class ScenarioPreprocessingTest extends ServiceBasedTest {
 
 	
 
 	private static final String BASE_PATH = "src/test/resources/unit/scenarios/";
 
 
-	@BeforeClass
-	public static void init() {
-		
-		try {
-			ServiceFactory.init(null);
-		} catch (Exception e) {
-			log.debug("ServiceFactory already initialized, ignoring, not a problem");
-		}
+	@Override
+	protected Class<?> getServiceUnderTest() {
+		return ScenarioFilePreprocessor.class;
 	}
-	
-	
-	@Test
-	public void _0serviceExising() {
-		try {
-			assertNotNull(ServiceFactory.get(ScenarioFilePreprocessor.class));
-		} catch (NullPointerException e) {
-			fail("service not configured");
-		}
 
-	}
-	
+
 	@Test
 	public void testEmptyFile() {
 		
