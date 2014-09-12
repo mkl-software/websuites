@@ -8,10 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.junit.runner.RunWith;
 
-import com.mkl.websuites.internal.BrowserController;
-import com.mkl.websuites.internal.CleanupBrowsersTest;
 import com.mkl.websuites.internal.ConfigurationManager;
-import com.mkl.websuites.internal.SwitchBrowserTest;
+import com.mkl.websuites.internal.browser.BrowserController;
+import com.mkl.websuites.internal.browser.CleanupBrowsersTest;
+import com.mkl.websuites.internal.browser.SwitchBrowserTest;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 import com.mkl.websuites.internal.services.ServiceFactory;
 

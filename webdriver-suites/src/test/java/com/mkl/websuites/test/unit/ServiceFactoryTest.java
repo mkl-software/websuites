@@ -11,7 +11,7 @@ import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.ext.Customization;
-import com.mkl.websuites.internal.BrowserController;
+import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.impl.BrowserControllerImpl;
 import com.mkl.websuites.internal.services.DefaultServiceDefinitions;
 import com.mkl.websuites.internal.services.ServiceDefinition;

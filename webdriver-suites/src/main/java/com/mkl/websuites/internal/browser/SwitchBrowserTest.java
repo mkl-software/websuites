@@ -1,4 +1,4 @@
-package com.mkl.websuites.internal;
+package com.mkl.websuites.internal.browser;
 
 import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;

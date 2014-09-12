@@ -17,7 +17,7 @@ import com.mkl.websuites.Browser.BrowserType;
 import com.mkl.websuites.BrowsersConfiguration;
 import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesException;
-import com.mkl.websuites.internal.BrowserController;
+import com.mkl.websuites.internal.browser.BrowserController;
 
 
 

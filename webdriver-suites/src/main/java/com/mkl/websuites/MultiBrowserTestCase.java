@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mkl.websuites.internal.BrowserController;
 import com.mkl.websuites.internal.ConfigurationManager;
+import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
 

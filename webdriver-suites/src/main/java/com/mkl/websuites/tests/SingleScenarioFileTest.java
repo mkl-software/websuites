@@ -1,12 +1,12 @@
 package com.mkl.websuites.tests;
 
-import java.util.Arrays;
 import java.util.List;
 
 import junit.framework.Test;
 
 import com.mkl.websuites.MultiBrowserSuite;
-import com.mkl.websuites.MultiBrowserTestCase;
+import com.mkl.websuites.internal.scenario.ScenarioFileProcessor;
+import com.mkl.websuites.internal.services.ServiceFactory;
 
 public abstract class SingleScenarioFileTest extends MultiBrowserSuite {
 
@@ -20,20 +20,11 @@ public abstract class SingleScenarioFileTest extends MultiBrowserSuite {
 		
 		final String fileLocation = getScenarioFileLocation();
 		
-		MultiBrowserTestCase scenarioFileTestCase = new MultiBrowserTestCase() {
-			
-			
-			@Override
-			protected void runLocally() {
-				assertTrue(true);
-			}
-
-			@Override
-			protected String getTestName() {
-				return fileLocation;
-			}
-		};
+		ScenarioFileProcessor scenarioFileProcessor = ServiceFactory.get(ScenarioFileProcessor.class);
 		
-		return Arrays.asList((Test) scenarioFileTestCase);
+		List<Test> scenarioTests = scenarioFileProcessor.processSingleScenarioFile(fileLocation);
+		
+		return scenarioTests;
+		
 	}
 }
