@@ -1,4 +1,4 @@
-package com.mkl.websuites.internal.command.impl;
+package com.mkl.websuites.test.unit.scenario;
 
 import lombok.extern.slf4j.Slf4j;
 

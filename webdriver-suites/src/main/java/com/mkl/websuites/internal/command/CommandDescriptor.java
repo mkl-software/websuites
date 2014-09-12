@@ -10,6 +10,7 @@ public @interface CommandDescriptor {
 
 	String name();
 
+	@SuppressWarnings("rawtypes")
 	Class[] argumentTypes();
 
 }

@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.reflections.Reflections;
 
 import com.mkl.websuites.WebSuitesException;
-import com.mkl.websuites.internal.command.impl.SampleCommand;
 
 
 
@@ -116,6 +115,7 @@ public class StandardCommandBuilder implements CommandBuilder {
 
 
 
+	@SuppressWarnings("unchecked")
 	protected List<Object> convertArgumentsToProperTypes(String[] arguments,
 			List<Class> argumentTypes) {
 		
@@ -123,7 +123,7 @@ public class StandardCommandBuilder implements CommandBuilder {
 		
 		List resolvableWithValueOf =
 				Arrays.asList(Boolean.class, Integer.class, Float.class,
-						Double.class, Long.class, Short.class);
+						Double.class, Long.class, Short.class, Byte.class);
 		for (int i = 0; i < arguments.length; i++) {
 			
 			Class argType = argumentTypes.get(i);

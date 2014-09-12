@@ -14,7 +14,6 @@ import org.junit.Test;
 
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandBuilder;
-import com.mkl.websuites.internal.command.impl.SampleCommand;
 import com.mkl.websuites.internal.services.ServiceFactory;
 import com.mkl.websuites.test.core.ServiceBasedTest;
 
@@ -32,7 +31,7 @@ public class CommandBuilderTest extends ServiceBasedTest {
 	
 	
 	@Test
-	public void _0testSampleCommandArgTypes() {
+	public void testSampleCommandArgTypes() {
 		
 		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
 		
@@ -135,6 +134,43 @@ public class CommandBuilderTest extends ServiceBasedTest {
 		assertTrue(command instanceof SampleCommand);
 		
 		assertEquals("command argument", Deencapsulation.getField(command, "arg"));
+	}
+	
+	
+	
+	@Test
+	public void testNoArgCommand() {
+		
+		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
+		
+		Command command = Deencapsulation.invoke(
+				logic, "instantiateCommand", "noArg",
+				new String[] {});
+		
+		assertNotNull(command);
+		
+		assertTrue(command instanceof NoArgCommand);
+	}
+
+
+
+	@Test
+	public void testMultiArgCommand() {
+		
+		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
+		
+		Command command = Deencapsulation.invoke(
+				logic, "instantiateCommand", "multiArg",
+				new String[] {"string value", "5687", "true", "23"});
+		
+		assertNotNull(command);
+		
+		assertTrue(command instanceof MultiArgCommand);
+		
+		assertEquals("string value", Deencapsulation.getField(command, "string"));
+		assertEquals(5687, Deencapsulation.getField(command, "integer"));
+		assertEquals(true, Deencapsulation.getField(command, "bool"));
+		assertEquals((byte) 23, Deencapsulation.getField(command, "bytee"));
 	}
 
 }

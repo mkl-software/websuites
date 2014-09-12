@@ -1,9 +1,8 @@
 package com.mkl.websuites.test.unit.scenario;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import mockit.Deencapsulation;
 
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -19,10 +18,6 @@ public class ScenarioFileProcessorTest extends ServiceBasedTest {
 
 	
 	
-	@BeforeClass
-	public static void init() {
-		ServiceFactory.init(null);
-	}
 	
 	
 	@Override
