@@ -15,13 +15,13 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 
 
 
-public class ScenarioFileProcessorImpl implements ScenarioFileProcessor {
+public class StandardScenarioFileProcessor implements ScenarioFileProcessor {
 
 	
 	protected ConfigurationManager config = ServiceFactory.get(ConfigurationManager.class);
 	
 	
-	private static ScenarioFileProcessor instance = new ScenarioFileProcessorImpl();
+	private static ScenarioFileProcessor instance = new StandardScenarioFileProcessor();
 
 	public static ScenarioFileProcessor getInstance() {
 		return instance ;
@@ -39,8 +39,11 @@ public class ScenarioFileProcessorImpl implements ScenarioFileProcessor {
 			return failToLoadScenario(scenarioFileName);
 		}
 		
+		List<String> preprocessedScenarioFile =
+				ServiceFactory.get(ScenarioFilePreprocessor.class).preprocessScenarioFile(scenarioFile);
+		
 		List<Command> parsedCommands = 
-				ServiceFactory.get(CommandParser.class).parseCommandFromFile(scenarioFile);
+				ServiceFactory.get(CommandParser.class).parseCommandFromFile(preprocessedScenarioFile);
 		
 		List<Test> convertedCommandsToTests =
 				ServiceFactory.get(CommandProcessor.class).convertCommandsToTests(parsedCommands);

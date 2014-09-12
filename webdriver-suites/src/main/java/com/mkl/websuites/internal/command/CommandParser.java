@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface CommandParser {
 
-	List<Command> parseCommandFromFile(File scenarioFile);
+	List<Command> parseCommandFromFile(List<String> preprocessedScenarioFile);
 
 }

@@ -1,4 +1,4 @@
-package com.mkl.websuites.internal.impl;
+package com.mkl.websuites.internal.browser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,12 +17,11 @@ import com.mkl.websuites.Browser.BrowserType;
 import com.mkl.websuites.BrowsersConfiguration;
 import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesException;
-import com.mkl.websuites.internal.browser.BrowserController;
 
 
 
 @Slf4j
-public class BrowserControllerImpl implements BrowserController {
+public class StandardBrowserController implements BrowserController {
 
 	
 	
@@ -40,9 +39,9 @@ public class BrowserControllerImpl implements BrowserController {
 	
 	
 	
-	protected BrowserControllerImpl() {}
+	protected StandardBrowserController() {}
 	
-	private static BrowserController instance = new BrowserControllerImpl();
+	private static BrowserController instance = new StandardBrowserController();
 	
 	public static BrowserController getInstance() {
 		return instance;

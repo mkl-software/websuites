@@ -12,7 +12,7 @@ import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.ext.Customization;
 import com.mkl.websuites.internal.browser.BrowserController;
-import com.mkl.websuites.internal.impl.BrowserControllerImpl;
+import com.mkl.websuites.internal.browser.StandardBrowserController;
 import com.mkl.websuites.internal.services.DefaultServiceDefinitions;
 import com.mkl.websuites.internal.services.ServiceDefinition;
 import com.mkl.websuites.internal.services.ServiceFactory;
@@ -69,11 +69,11 @@ public class ServiceFactoryTest {
 	)
 	public static class DummyRunnerClass {}
 	
-	public static class DummyBrowserControllerWrong extends BrowserControllerImpl {
+	public static class DummyBrowserControllerWrong extends StandardBrowserController {
 		// no getInstance() method
 	}
 	
-	public static class DummyBrowserControllerCorrect extends BrowserControllerImpl {
+	public static class DummyBrowserControllerCorrect extends StandardBrowserController {
 		public static DummyBrowserControllerCorrect getInstance() {
 			return new DummyBrowserControllerCorrect();
 		}

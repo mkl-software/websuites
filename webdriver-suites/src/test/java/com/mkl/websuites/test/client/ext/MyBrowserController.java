@@ -2,11 +2,11 @@ package com.mkl.websuites.test.client.ext;
 
 import lombok.extern.slf4j.Slf4j;
 
-import com.mkl.websuites.internal.impl.BrowserControllerImpl;
+import com.mkl.websuites.internal.browser.StandardBrowserController;
 
 
 @Slf4j
-public class MyBrowserController extends BrowserControllerImpl {
+public class MyBrowserController extends StandardBrowserController {
 
 	private static MyBrowserController instance = new MyBrowserController();
 
