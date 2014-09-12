@@ -4,7 +4,9 @@ import com.mkl.websuites.internal.ConfigurationManager;
 import com.mkl.websuites.internal.StandardConfigurationManager;
 import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.browser.StandardBrowserController;
+import com.mkl.websuites.internal.scenario.ScenarioFilePreprocessor;
 import com.mkl.websuites.internal.scenario.ScenarioFileProcessor;
+import com.mkl.websuites.internal.scenario.StandardScenarioFilePreprocessor;
 import com.mkl.websuites.internal.scenario.StandardScenarioFileProcessor;
 import com.mkl.websuites.internal.services.ServiceDefinition.Service;
 
@@ -24,6 +26,10 @@ import com.mkl.websuites.internal.services.ServiceDefinition.Service;
 	@Service(
 			service = ScenarioFileProcessor.class,
 			implementation = StandardScenarioFileProcessor.class
+	),
+	@Service(
+			service = ScenarioFilePreprocessor.class,
+			implementation = StandardScenarioFilePreprocessor.class
 	)
 })
 public class DefaultServiceDefinitions {

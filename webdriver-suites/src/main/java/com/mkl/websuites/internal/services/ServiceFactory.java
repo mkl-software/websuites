@@ -115,10 +115,10 @@ public class ServiceFactory {
 				| SecurityException e) {
 			
 			log.error("cannot make instance for service: " + serviceClass.getName() +
-					", erro: " + e.getLocalizedMessage());
+					", error: " + e.getLocalizedMessage());
 			
 			throw new WebSuitesException("Cannot instantiate service: " + serviceClass.getName() +
-					", erro: " + e.getLocalizedMessage() +
+					", error: " + e.getLocalizedMessage() +
 					". Make sure the service has public static getInstance() method.");
 			
 		}
