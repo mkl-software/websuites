@@ -20,7 +20,7 @@ public abstract class MultiBrowserTestCase extends TestCase {
 	
 	protected String currentBrowser;
 	
-	protected WebDriver webDriver;
+	protected WebDriver browser;
 	
 	protected String basePath;
 	
@@ -28,8 +28,22 @@ public abstract class MultiBrowserTestCase extends TestCase {
 	
 	public MultiBrowserTestCase() {
 		super();
-		this.basePath = configuration.host() + ":" + configuration.port() + configuration.basePath();
+		this.basePath = normalizeUrlPath(configuration.host(),
+				configuration.port(), configuration.basePath());
 		this.currentBrowser = browserController.getLocalBrowserNameForTestInit();
+	}
+
+
+	private String normalizeUrlPath(String host, int portNumber, String basePath) {
+		
+		host = host.matches("[a-z]+:///?.*") ? host : "http://" + host;
+		String port = portNumber == 80 ? "" : ":" + portNumber;
+		String path = basePath;
+		path = path.startsWith("/") || path.isEmpty() ? path : "/" + path;
+		String url = host + port + path;
+		// normalize "/" but after http:// section:
+		url = url.substring(0, 7) + url.substring(7).replaceAll("//", "/");
+		return url;
 	}
 	
 	
@@ -44,7 +58,7 @@ public abstract class MultiBrowserTestCase extends TestCase {
 		
 		log.debug("running: " + this.getClass().getName() + " with test name: " + getName());
 		
-		this.webDriver = browserController.getWebDriver();
+		this.browser = browserController.getWebDriver();
 		
 		runLocally();
 	}
