@@ -8,6 +8,6 @@ import com.mkl.websuites.WebSuitesRunner;
 
 @WebSuitesRunner(
 		configurationClass = Config.class,
-		suite = {SampleCategoryTest.class})
+		suite = {SampleStandaloneTest.class})
 
 public class Runner extends WebSuites {}
