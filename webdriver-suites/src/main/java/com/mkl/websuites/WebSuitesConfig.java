@@ -22,7 +22,7 @@ public @interface WebSuitesConfig {
 
 	int port() default 80;
 
-	String basePath();
+	String basePath() default "/";
 
 	String[] browsers();
 	

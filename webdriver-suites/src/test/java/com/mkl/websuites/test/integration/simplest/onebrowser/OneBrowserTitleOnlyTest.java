@@ -10,9 +10,9 @@ public class OneBrowserTitleOnlyTest extends MultiBrowserTestCase {
 	@Override
 	protected void runLocally() {
 		
-		webDriver.get(basePath);
+		browser.get(basePath);
 		
-		assertEquals("Test server", webDriver.getTitle());
+		assertEquals("Test server", browser.getTitle());
 	}
 
 	@Override

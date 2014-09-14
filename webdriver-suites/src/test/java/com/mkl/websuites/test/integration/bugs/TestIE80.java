@@ -25,7 +25,6 @@ public class TestIE80 extends WebSuiteStandaloneTest {
 		goTo("google.com:80");
 		Assert.assertFalse(browser.getTitle().contains("Google"));
 		
-		// test if basePath propagation is fixing this automatically:
 		
 		try {
 			Thread.sleep(1000);
@@ -33,6 +32,7 @@ public class TestIE80 extends WebSuiteStandaloneTest {
 			e.printStackTrace();
 		}
 		
+		// test if basePath propagation is fixing this automatically:
 		System.out.println(basePath);
 		goTo(basePath);
 		Assert.assertTrue(browser.getTitle().contains("Google"));
