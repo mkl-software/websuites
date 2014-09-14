@@ -120,9 +120,8 @@
 			          <includes>
 				            <include>**/MasterSuite.java</include>
 			          </includes>
-<!-- 			          <excludes> -->
-<!-- 				            <exclude>**/*</exclude> -->
-<!-- 			          </excludes> -->
+<!-- 			          <argLine>-javaagent:${settings.localRepository}\org\jmockit\jmockit\jmockit-1.11.jar</argLine> -->
+<!--       				  <useSystemClassLoader>true</useSystemClassLoader> -->
 		          </configuration>
         	</plugin>
 		    

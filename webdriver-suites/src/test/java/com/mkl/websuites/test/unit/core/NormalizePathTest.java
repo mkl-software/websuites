@@ -3,6 +3,7 @@ package com.mkl.websuites.test.unit.core;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import static junitparams.JUnitParamsRunner.$;
+import lombok.extern.slf4j.Slf4j;
 import mockit.Deencapsulation;
 import mockit.MockUp;
 
@@ -15,6 +16,7 @@ import com.mkl.websuites.MultiBrowserTestCase;
 
 
 
+@Slf4j
 @RunWith(JUnitParamsRunner.class)
 public class NormalizePathTest {
 
@@ -27,11 +29,8 @@ public class NormalizePathTest {
 	@BeforeClass
 	public static void init() {
 		
-		logic = new MockUp<MultiBrowserTestCase>() {
-			@SuppressWarnings("unused")
-			// clear out the constructor and all fields
-			void $init() {}
-		}.getMockInstance();
+		logic = new MockUp<MultiBrowserTestCase>() {}.getMockInstance();
+		log.debug("JMockit mock " + logic.getClass() + " initialized, JMockit configured properly");
 	}
 	
 
@@ -57,16 +56,12 @@ public class NormalizePathTest {
 	@Parameters
 	public void testNormalizedPath(String host, int port, String path, String expected) {
 		
-		String normalized = invoke(host, port, path);
+		String normalized =
+				Deencapsulation.invoke(logic, "normalizeUrlPath", host, port, path);
 		
 		Assert.assertEquals(expected, normalized);
 	}
-	
 
 	
-
-	private String invoke(String host, int port, String path) {
-		
-		return Deencapsulation.invoke(logic, "normalizeUrlPath", host, port, path);
-	}
+	
 }
