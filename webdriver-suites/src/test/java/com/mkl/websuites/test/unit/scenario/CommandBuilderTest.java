@@ -126,8 +126,7 @@ public class CommandBuilderTest extends ServiceBasedTest {
 		
 		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
 		
-		Command command = Deencapsulation.invoke(
-				logic, "instantiateCommand", "sample", new String[] {"command argument"});
+		Command command = logic.instantiateCommand("sample", new String[] {"command argument"});
 		
 		assertNotNull(command);
 		
@@ -143,9 +142,7 @@ public class CommandBuilderTest extends ServiceBasedTest {
 		
 		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
 		
-		Command command = Deencapsulation.invoke(
-				logic, "instantiateCommand", "noArg",
-				new String[] {});
+		Command command = logic.instantiateCommand("noArg",	new String[] {});
 		
 		assertNotNull(command);
 		
@@ -159,8 +156,7 @@ public class CommandBuilderTest extends ServiceBasedTest {
 		
 		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
 		
-		Command command = Deencapsulation.invoke(
-				logic, "instantiateCommand", "multiArg",
+		Command command = logic.instantiateCommand("multiArg",
 				new String[] {"string value", "5687", "true", "23"});
 		
 		assertNotNull(command);

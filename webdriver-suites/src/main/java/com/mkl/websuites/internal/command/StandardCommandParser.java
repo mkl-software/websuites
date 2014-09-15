@@ -46,7 +46,7 @@ public class StandardCommandParser implements CommandParser {
 		
 		String commandName = tokens[0];
 		
-		String[] arguments = Arrays.copyOfRange(tokens, 2, tokens.length);
+		String[] arguments = Arrays.copyOfRange(tokens, 1, tokens.length);
 		
 		Command command = commandManager.instantiateCommand(commandName, arguments);
 		

@@ -36,5 +36,9 @@ public class MultiArgCommand implements Command {
 	public void run() {
 
 	}
+	
+	public byte getByte() {
+		return bytee;
+	}
 
 }
