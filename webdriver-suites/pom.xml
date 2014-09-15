@@ -120,7 +120,7 @@
 			          <includes>
 				            <include>**/MasterSuite.java</include>
 			          </includes>
-			          <argLine>-javaagent:${settings.localRepository}\org\jmockit\jmockit\1.11\jmockit-1.11.jar</argLine>
+			          <argLine>-javaagent:${settings.localRepository}/org/jmockit/jmockit/1.11/jmockit-1.11.jar</argLine>
       				  <useSystemClassLoader>true</useSystemClassLoader>
 		          </configuration>
         	</plugin>
