@@ -1,8 +1,6 @@
 package com.mkl.websuites.test.unit.scenario;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +10,7 @@ import mockit.Deencapsulation;
 
 import org.junit.Test;
 
+import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandBuilder;
 import com.mkl.websuites.internal.services.ServiceFactory;
@@ -167,6 +166,26 @@ public class CommandBuilderTest extends ServiceBasedTest {
 		assertEquals(5687, Deencapsulation.getField(command, "integer"));
 		assertEquals(true, Deencapsulation.getField(command, "bool"));
 		assertEquals((byte) 23, Deencapsulation.getField(command, "bytee"));
+	}
+	
+	
+	
+	@Test(expected = WebSuitesException.class)
+	public void testArgumentErrorWrongArgumentCount() {
+		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
+		logic.instantiateCommand("sample simple value", // without tabs
+				new String[] {});
+		fail("command should not be craeted");
+	}
+	
+	
+	
+	@Test(expected = WebSuitesException.class)
+	public void testArgumentErrorToManyArguments() {
+		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
+		logic.instantiateCommand("sample",
+				new String[] {"param", "another not expected"});
+		fail("command should not be craeted");
 	}
 
 }

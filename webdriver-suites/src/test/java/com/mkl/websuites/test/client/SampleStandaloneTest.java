@@ -7,6 +7,7 @@ public class SampleStandaloneTest extends MultiBrowserTestCase {
 
 	@Override
 	protected void runLocally() {
+		browser.get("http://google.com");
 	}
 
 	@Override

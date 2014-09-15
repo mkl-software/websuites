@@ -49,13 +49,18 @@ public class StandardCommandBuilder implements CommandBuilder {
 		
 		Constructor commandConstructor = commandConstructorMap.get(commandName);
 		
+		if (commandConstructor == null) {
+			throw new WebSuitesException("Failed to create command: " + commandName +
+					" - command not configured properly for arguments " + Arrays.toString(arguments));
+		}
+		
 		List<Class> argumentTypes = commandTypesMap.get(commandName);
 		
 		if (arguments.length != argumentTypes.size()) {
 			
 			throw new WebSuitesException("Failed to create command: " + commandName +
 					" - invalid argument list " + Arrays.toString(arguments) +
-					" for expected argument types " + commandConstructor);
+					" for expected argument types " + argumentTypes);
 		}
 		
 		List<Object> commandArguments = convertArgumentsToProperTypes(arguments, argumentTypes);
