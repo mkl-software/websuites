@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.mkl.websuites.test.integration.command.EmptyCommandIntegrationTest;
 import com.mkl.websuites.test.integration.simplest.onebrowser.SimplestSingleTestOneBrowser;
 import com.mkl.websuites.test.integration.simplest.twobrowser.SimplestSingleTestTwoBrowsers;
 
@@ -14,6 +15,7 @@ import com.mkl.websuites.test.integration.simplest.twobrowser.SimplestSingleTest
 		{
 			SimplestSingleTestOneBrowser.class,
 			SimplestSingleTestTwoBrowsers.class,
+			EmptyCommandIntegrationTest.class
 		}
 )
 public class WebTests {

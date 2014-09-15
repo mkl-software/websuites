@@ -10,7 +10,7 @@ import com.mkl.websuites.test.BrowsersConfig;
 	host = "localhost",
 	port = 8080,
 	basePath = "/",
-	browsers = {"ff", "chrome", "ie"},
+	browsers = {"chrome"},
 	waitTimeout = 10,
 	browsersConfiguration = BrowsersConfig.class
 //	serviceOverrides = LocalExtensions.class

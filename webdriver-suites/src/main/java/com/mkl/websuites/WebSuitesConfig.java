@@ -18,7 +18,7 @@ public @interface WebSuitesConfig {
 	@BrowsersConfiguration
 	public static class DefaultBrowserConfig {}
 
-	String host();
+	String host() default "localhost";
 
 	int port() default 80;
 

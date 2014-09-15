@@ -11,7 +11,7 @@ import com.mkl.websuites.internal.ConfigurationManager;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandParser;
 import com.mkl.websuites.internal.command.CommandPostProcessor;
-import com.mkl.websuites.internal.command.CommandProcessor;
+import com.mkl.websuites.internal.command.CommandTestConverter;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
 
@@ -49,7 +49,8 @@ public class StandardScenarioFileProcessor implements ScenarioFileProcessor {
 		List<Command> postProcessedCommands = ServiceFactory.get(CommandPostProcessor.class).postProcessCommands(parsedCommands);
 		
 		List<Test> convertedCommandsToTests =
-				ServiceFactory.get(CommandProcessor.class).convertCommandsToTests(postProcessedCommands);
+				ServiceFactory.get(CommandTestConverter.class)
+				.convertCommandsToTests(postProcessedCommands, scenarioFileName);
 		
 		return convertedCommandsToTests;
 		

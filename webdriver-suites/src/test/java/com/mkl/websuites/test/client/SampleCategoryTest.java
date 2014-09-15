@@ -9,7 +9,7 @@ public class SampleCategoryTest extends SingleScenarioFileTest {
 	@Override
 	protected String getScenarioFileLocation() {
 		
-		return "ui-test/scenarios/search/search1.scn";
+		return "src/test/resources/unit/scenarios/running/oneSampleCommand.scn";
 	}
 
 }
