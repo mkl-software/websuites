@@ -81,7 +81,8 @@ public class StandardCommandBuilder implements CommandBuilder {
 
 	protected void scanClasspathForCommands() {
 		
-		Reflections reflections = new Reflections("com.mkl.websuites.internal.command.impl");
+		Reflections reflections = new Reflections("com.mkl.websuites.internal.command.impl",
+												  "com.mkl.websuites.test.unit.scenario");
 
 		Set<Class<?>> allCommandsInClasspath = 
 				reflections.getTypesAnnotatedWith(CommandDescriptor.class);
