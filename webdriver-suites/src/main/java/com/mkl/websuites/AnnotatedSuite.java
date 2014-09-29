@@ -21,7 +21,7 @@ public class AnnotatedSuite extends MultiBrowserSuite {
 			
 			log.error("missing SuiteClasses annotation");
 			
-			throw new WebSuitesException("Missing \"SuiteClasses\" annotation on suite class :" 
+			throw new WebSuitesException("Missing \"StandaloneSuite\" annotation on suite class :" 
 			+ getClass().getName() + ". Add the annotation and defined test suites there.");
 		}
 		

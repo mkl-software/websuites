@@ -1,0 +1,5 @@
+goto	google.pl
+type	#gbqfq	sprawdzamy
+wait	2000
+click	#gbqfb
+wait	3000

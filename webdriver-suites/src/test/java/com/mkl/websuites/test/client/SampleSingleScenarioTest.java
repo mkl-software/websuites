@@ -9,7 +9,7 @@ public class SampleSingleScenarioTest extends SingleScenarioFileTest {
 	@Override
 	protected String getScenarioFileLocation() {
 		
-		return "src/test/resources/client/commandTesting.scn";
+		return "src/test/resources/client/scenarioTesting.scn";
 	}
 
 }

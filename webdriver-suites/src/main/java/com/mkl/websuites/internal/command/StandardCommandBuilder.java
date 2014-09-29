@@ -50,8 +50,8 @@ public class StandardCommandBuilder implements CommandBuilder {
 		Constructor commandConstructor = commandConstructorMap.get(commandName);
 		
 		if (commandConstructor == null) {
-			throw new WebSuitesException("Failed to create command: " + commandName +
-					" - command not configured properly for arguments " + Arrays.toString(arguments));
+			throw new WebSuitesException("Failed to create command \"" + commandName +
+					"\" - command not configured properly for arguments " + Arrays.toString(arguments));
 		}
 		
 		List<Class> argumentTypes = commandTypesMap.get(commandName);
@@ -81,7 +81,7 @@ public class StandardCommandBuilder implements CommandBuilder {
 
 	protected void scanClasspathForCommands() {
 		
-		Reflections reflections = new Reflections("com.mkl.websuites");
+		Reflections reflections = new Reflections("com.mkl.websuites.internal.command.impl");
 
 		Set<Class<?>> allCommandsInClasspath = 
 				reflections.getTypesAnnotatedWith(CommandDescriptor.class);
