@@ -12,6 +12,7 @@ import com.mkl.websuites.test.core.WebSuitesResultCheck;
 import com.mkl.websuites.test.integration.command.EmptyCommandIntegrationTestConfig.LocalConfig;
 import com.mkl.websuites.test.integration.command.EmptyCommandIntegrationTestConfig.LocalEmptyCommandIntegrationTest;
 import com.mkl.websuites.test.unit.scenario.SampleCommand;
+import com.mkl.websuites.tests.ScenarioFiles;
 import com.mkl.websuites.tests.SingleScenarioFileTest;
 
 
@@ -20,15 +21,8 @@ class EmptyCommandIntegrationTestConfig {
 	@WebSuitesConfig(browsers = {"ff"})
 	public static class LocalConfig {}
 
-	public static class LocalEmptyCommandIntegrationTest extends SingleScenarioFileTest {
-
-		@Override
-		protected String getScenarioFileLocation() {
-			
-			return "src/test/resources/unit/scenarios/running/oneSampleCommand.scn";
-		}
-		
-	}
+	@ScenarioFiles("src/test/resources/unit/scenarios/running/oneSampleCommand.scn")
+	public static class LocalEmptyCommandIntegrationTest extends SingleScenarioFileTest {}
 }
 
 
