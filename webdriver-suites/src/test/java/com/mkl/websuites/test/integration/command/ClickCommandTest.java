@@ -16,8 +16,7 @@ import com.mkl.websuites.tests.WebSuiteStandaloneTest;
 
 class ClickCommandTestConfig {
 	
-	@WebSuitesConfig(browsers = {"ff"}, browsersConfiguration=BrowsersConfig.class)
-	public static class LocalConfig {}
+	
 
 	@ScenarioFiles("src/test/resources/integration/command/clickTest1.scn")
 	public static class LocalUnderlyingGotoTest extends ScenarioFileTest {}
@@ -46,7 +45,7 @@ class ClickCommandTestConfig {
 public class ClickCommandTest extends WebSuitesResultCheck {
 
 	
-	@WebSuitesRunner(configurationClass = ClickCommandTestConfig.LocalConfig.class,
+	@WebSuitesRunner(configurationClass = LocalConfig.class,
 			suite = {ClickCommandTestConfig.LocalUnderlyingGotoTest.class,
 		             ClickCommandTestConfig.ClickCheckTest.class})
 	public static class LocalRunner  extends WebSuites {}

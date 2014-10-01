@@ -6,21 +6,16 @@ import mockit.Verifications;
 import org.junit.Test;
 
 import com.mkl.websuites.WebSuites;
-import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
-import com.mkl.websuites.test.integration.command.EmptyCommandIntegrationTestConfig.LocalConfig;
 import com.mkl.websuites.test.integration.command.EmptyCommandIntegrationTestConfig.LocalEmptyCommandIntegrationTest;
 import com.mkl.websuites.test.unit.scenario.SampleCommand;
-import com.mkl.websuites.tests.ScenarioFiles;
 import com.mkl.websuites.tests.ScenarioFileTest;
+import com.mkl.websuites.tests.ScenarioFiles;
 
 
 class EmptyCommandIntegrationTestConfig {
 	
-	@WebSuitesConfig(browsers = {"ff"})
-	public static class LocalConfig {}
-
 	@ScenarioFiles("src/test/resources/unit/scenarios/running/oneSampleCommand.scn")
 	public static class LocalEmptyCommandIntegrationTest extends ScenarioFileTest {}
 }

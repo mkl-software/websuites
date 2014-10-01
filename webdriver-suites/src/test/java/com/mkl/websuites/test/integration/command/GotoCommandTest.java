@@ -3,20 +3,17 @@ package com.mkl.websuites.test.integration.command;
 import org.junit.Test;
 
 import com.mkl.websuites.WebSuites;
-import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
 import com.mkl.websuites.test.integration.command.GotoCommandTestConfig.GotoCheckTest;
-import com.mkl.websuites.tests.ScenarioFiles;
 import com.mkl.websuites.tests.ScenarioFileTest;
+import com.mkl.websuites.tests.ScenarioFiles;
 import com.mkl.websuites.tests.WebSuiteStandaloneTest;
 
 
 
 class GotoCommandTestConfig {
 	
-	@WebSuitesConfig(browsers = {"ff"})
-	public static class LocalConfig {}
 
 	@ScenarioFiles("src/test/resources/integration/command/gotoLocalAddress.scn")
 	public static class LocalUnderlyingGotoTest extends ScenarioFileTest {}
@@ -42,7 +39,7 @@ class GotoCommandTestConfig {
 public class GotoCommandTest extends WebSuitesResultCheck {
 
 	
-	@WebSuitesRunner(configurationClass = GotoCommandTestConfig.LocalConfig.class,
+	@WebSuitesRunner(configurationClass = LocalConfig.class,
 			suite = {GotoCommandTestConfig.LocalUnderlyingGotoTest.class, GotoCheckTest.class})
 	public static class LocalRunner  extends WebSuites {}
 	
