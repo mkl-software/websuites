@@ -2,6 +2,11 @@ package com.mkl.websuites.tests;
 
 import com.mkl.websuites.MultiBrowserTestCase;
 
+
+/**
+ * Convenience API for standalone tests.
+ *
+ */
 public abstract class WebSuiteStandaloneTest extends MultiBrowserTestCase {
 
 	

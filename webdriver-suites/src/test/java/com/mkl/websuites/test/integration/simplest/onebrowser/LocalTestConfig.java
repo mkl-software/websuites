@@ -4,6 +4,7 @@ import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.test.BrowsersConfig;
+import com.mkl.websuites.test.core.JettyBasedTest;
 
 public class LocalTestConfig {
 
@@ -11,7 +12,7 @@ public class LocalTestConfig {
 			basePath = "/integration/simple/titleOnly.html",
 			browsers = {"ff"},
 			host = "http://localhost",
-			port = 90,
+			port = JettyBasedTest.PORT_NUMER,
 			browsersConfiguration = BrowsersConfig.class
 			
 	)

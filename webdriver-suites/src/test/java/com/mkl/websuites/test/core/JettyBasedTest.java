@@ -15,6 +15,8 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 public class JettyBasedTest {
 
 	
+	public static final int PORT_NUMER = 90;
+	
 	private static Server server;
 
 
@@ -31,7 +33,7 @@ public class JettyBasedTest {
 		// reset underlying ServiceFactory
 		Deencapsulation.setField(ServiceFactory.class, "isInitialized", false);
 		
-		server = new Server(90);
+		server = new Server(PORT_NUMER);
 		
 		server.setStopAtShutdown(true);
 		
