@@ -71,4 +71,12 @@ public class JettyBasedTest {
 		}
 		
 	}
+	
+	
+	
+	// for manual server start:
+	public static void main(String[] args) {
+		
+		setupTestEnv();
+	}
 }
