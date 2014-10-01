@@ -6,11 +6,11 @@ import java.util.List;
 
 import junit.framework.Test;
 
-import com.mkl.websuites.MultiBrowserSuite;
+import com.mkl.websuites.internal.MultiBrowserSuite;
 import com.mkl.websuites.internal.scenario.ScenarioFileProcessor;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
-public abstract class SingleScenarioFileTest extends MultiBrowserSuite {
+public abstract class ScenarioFileTest extends MultiBrowserSuite {
 
 	
 

@@ -1,6 +1,6 @@
 package com.mkl.websuites.test.client;
 
-import com.mkl.websuites.MultiBrowserTestCase;
+import com.mkl.websuites.internal.MultiBrowserTestCase;
 
 public class SampleStandaloneTest extends MultiBrowserTestCase {
 

@@ -1,6 +1,6 @@
 package com.mkl.websuites.test.integration.simplest.onebrowser;
 
-import com.mkl.websuites.MultiBrowserTestCase;
+import com.mkl.websuites.internal.MultiBrowserTestCase;
 
 
 

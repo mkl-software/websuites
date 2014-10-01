@@ -13,7 +13,7 @@ import com.mkl.websuites.test.integration.command.EmptyCommandIntegrationTestCon
 import com.mkl.websuites.test.integration.command.EmptyCommandIntegrationTestConfig.LocalEmptyCommandIntegrationTest;
 import com.mkl.websuites.test.unit.scenario.SampleCommand;
 import com.mkl.websuites.tests.ScenarioFiles;
-import com.mkl.websuites.tests.SingleScenarioFileTest;
+import com.mkl.websuites.tests.ScenarioFileTest;
 
 
 class EmptyCommandIntegrationTestConfig {
@@ -22,7 +22,7 @@ class EmptyCommandIntegrationTestConfig {
 	public static class LocalConfig {}
 
 	@ScenarioFiles("src/test/resources/unit/scenarios/running/oneSampleCommand.scn")
-	public static class LocalEmptyCommandIntegrationTest extends SingleScenarioFileTest {}
+	public static class LocalEmptyCommandIntegrationTest extends ScenarioFileTest {}
 }
 
 

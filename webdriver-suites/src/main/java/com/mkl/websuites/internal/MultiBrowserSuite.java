@@ -1,4 +1,4 @@
-package com.mkl.websuites;
+package com.mkl.websuites.internal;
 
 import java.util.List;
 
