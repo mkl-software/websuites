@@ -10,7 +10,7 @@ import com.mkl.websuites.internal.services.ServiceDefinition.Service;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Customization {
 
-	Service[] serviceOverrides() default {};
+	Service[] serviceOverrides() default {}; 
 	
 	String[] customCommandScanPackages() default {};
 
