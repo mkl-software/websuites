@@ -12,27 +12,27 @@ import com.mkl.websuites.tests.WebSuiteStandaloneTest;
 
 
 
-class ClickCommandTestConfig {
+class TypeCommandTestConfig {
 	
 	
 
-	@ScenarioFiles("src/test/resources/integration/command/clickTest1.scn")
-	public static class LocalUnderlyingGotoTest extends ScenarioFileTest {}
+	@ScenarioFiles("src/test/resources/integration/command/typeTextTest1.scn")
+	public static class LocalUnderlyingTest extends ScenarioFileTest {}
 	
-	public static class ClickCheckTest extends WebSuiteStandaloneTest {
+	public static class TypeTextCheckTest extends WebSuiteStandaloneTest {
 
 		@Override
 		protected void runLocally() {
 			
 			Alert alert = browser.switchTo().alert();
 			String text = alert.getText();
-			assertEquals("click works", text);
+			assertEquals("typed text from scn file", text);
 			alert.accept();
 		}
 
 		@Override
 		protected String getTestName() {
-			return "Click with alert";
+			return "Type text and click to check alert text";
 		}
 		
 	}
@@ -40,12 +40,12 @@ class ClickCommandTestConfig {
 	
 }
 
-public class ClickCommandTest extends WebSuitesResultCheck {
+public class TypeCommandTest extends WebSuitesResultCheck {
 
 	
 	@WebSuitesRunner(configurationClass = LocalConfig.class,
-			suite = {ClickCommandTestConfig.LocalUnderlyingGotoTest.class,
-		             ClickCommandTestConfig.ClickCheckTest.class})
+			suite = {TypeCommandTestConfig.LocalUnderlyingTest.class,
+					TypeCommandTestConfig.TypeTextCheckTest.class})
 	public static class LocalRunner  extends WebSuites {}
 	
 	
@@ -56,7 +56,7 @@ public class ClickCommandTest extends WebSuitesResultCheck {
 	
 	@Override
 	protected int defineExpectedRunCount() {
-		return 3 + 1; // + 1 for click result check
+		return 3 + 1; // + 1 for type result check
 	}
 
 	@Override
