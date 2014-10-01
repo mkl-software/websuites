@@ -18,7 +18,7 @@ public class GotoCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void runCommand() {
+	protected void runStandardCommand() {
 		
 		if (address.startsWith("/")) {
 			// relative address:
@@ -35,7 +35,5 @@ public class GotoCommand extends BaseCommand {
 		browser.get(address);
 		
 	}
-	
-	
 
 }

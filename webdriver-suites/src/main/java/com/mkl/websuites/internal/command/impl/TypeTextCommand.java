@@ -18,14 +18,13 @@ public class TypeTextCommand extends BaseCommand {
 	
 	
 	public TypeTextCommand(String element, String textToType) {
-		super();
 		this.element = element;
 		this.textToType = textToType;
 	}
 
 
 	@Override
-	protected void runCommand() {
+	protected void runStandardCommand() {
 		try {
 			WebElement elem = browser.findElement(By.cssSelector(element));
 			elem.sendKeys(textToType);
@@ -33,5 +32,6 @@ public class TypeTextCommand extends BaseCommand {
 			Assert.fail("No element for selecor " + element + " can be found on the page.");
 		}
 	}
+
 
 }

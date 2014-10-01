@@ -15,6 +15,8 @@ public abstract class BaseCommand implements Command {
 	protected WebDriver browser;
 	
 	
+
+
 	@Override
 	public void run() {
 		
@@ -22,11 +24,13 @@ public abstract class BaseCommand implements Command {
 		
 		log.debug("running " + this.getClass().getName() + " command");
 		
-		runCommand();
+		runStandardCommand();
+			
 	}
+	
+	
 
-
-	protected abstract void runCommand();
+	protected abstract void runStandardCommand();
 	
 	
 }

@@ -17,13 +17,12 @@ public class WaitCommand extends BaseCommand {
 	
 	
 	public WaitCommand(Integer time) {
-		super();
 		this.time = time;
 	}
 
 
 	@Override
-	protected void runCommand() {
+	protected void runStandardCommand() {
 		log.debug("test command run");
 		try {
 			Thread.sleep(time);
@@ -32,5 +31,6 @@ public class WaitCommand extends BaseCommand {
 			Assert.fail("Wait command interrupted.");
 		}
 	}
+
 
 }

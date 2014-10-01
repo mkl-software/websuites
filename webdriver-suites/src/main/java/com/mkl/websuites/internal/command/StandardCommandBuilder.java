@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.reflections.Reflections;
 
 import com.mkl.websuites.WebSuitesException;
+import com.mkl.websuites.internal.command.impl.ParameterizedCommand;
 
 
 
@@ -25,6 +26,7 @@ public class StandardCommandBuilder implements CommandBuilder {
 	private static StandardCommandBuilder instance = new StandardCommandBuilder();
 	
 	private Map<String, Constructor> commandConstructorMap;
+	private Map<String, Constructor> parameterizedCommandConstructorMap;
 
 	private Map<String, List<Class>> commandTypesMap;
 
@@ -47,34 +49,72 @@ public class StandardCommandBuilder implements CommandBuilder {
 	@Override
 	public Command instantiateCommand(String commandName, String[] arguments) {
 		
-		Constructor commandConstructor = commandConstructorMap.get(commandName);
+		Constructor commandConstructor;
+		
+		boolean areParametersInMapFormat = checkIfArgumentsAreParametersMap(arguments);
+		
+		if (areParametersInMapFormat) {
+			
+			commandConstructor = parameterizedCommandConstructorMap.get(commandName);
+			
+		} else {
+		
+			commandConstructor = commandConstructorMap.get(commandName);
+		}
 		
 		if (commandConstructor == null) {
 			throw new WebSuitesException("Failed to create command \"" + commandName +
-					"\" - command not configured properly for arguments " + Arrays.toString(arguments));
+					"\" - command class doesn't have constructor for arguments " +
+					Arrays.toString(arguments));
 		}
 		
 		List<Class> argumentTypes = commandTypesMap.get(commandName);
 		
-		if (arguments.length != argumentTypes.size()) {
+		if (!areParametersInMapFormat && arguments.length != argumentTypes.size()) {
 			
 			throw new WebSuitesException("Failed to create command: " + commandName +
 					" - invalid argument list " + Arrays.toString(arguments) +
 					" for expected argument types " + argumentTypes);
 		}
 		
-		List<Object> commandArguments = convertArgumentsToProperTypes(arguments, argumentTypes);
+		List<Object> commandArguments;
+		
+		if (areParametersInMapFormat) {
+			
+			commandArguments = convertArgumentsToParameterMap(arguments);
+		} else {
+			
+			commandArguments = convertArgumentsToProperTypes(arguments, argumentTypes);
+		}
 		
 		try {
+			
 			Command command = (Command) commandConstructor.newInstance(commandArguments.toArray());
 			
 			return command;
 			
 		} catch (Exception e) {
 			
-			throw new WebSuitesException("");
+			throw new WebSuitesException("Cannot instantiate command " + commandName +
+					" using constructor " + commandConstructor + " for arguments " +
+					commandArguments, e);
 		}
 		
+	}
+
+
+
+	protected boolean checkIfArgumentsAreParametersMap(String[] arguments) {
+		
+		if (arguments.length == 0) {
+			return false;
+		}
+		for (String arg : arguments) {
+			if (arg.split("=").length != 2) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 
@@ -89,6 +129,7 @@ public class StandardCommandBuilder implements CommandBuilder {
 		
 		commandTypesMap = new HashMap<>();
 		commandConstructorMap = new HashMap<>();
+		parameterizedCommandConstructorMap = new HashMap<>();
 
 		log.debug("classpath scanned with reflection for annotated command,"
 				+ " found {} commands", allCommandsInClasspath.size());
@@ -96,31 +137,88 @@ public class StandardCommandBuilder implements CommandBuilder {
 		
 		for (Class<?> commandClass : allCommandsInClasspath) {
 			
-			CommandDescriptor commandDescriptor = commandClass.getAnnotation(CommandDescriptor.class);
+			populateCommandInformation(commandClass);
+		}
+	}
+
+
+
+	protected void populateCommandInformation(Class<?> commandClass) {
+		
+		CommandDescriptor commandDescriptor = commandClass.getAnnotation(CommandDescriptor.class);
+		
+		String commandName = commandDescriptor.name();
+		
+		List<Class> argumentTypes = Arrays.asList(commandDescriptor.argumentTypes());
+		
+		commandTypesMap.put(commandName, argumentTypes);
+		
+		resolveStandardCommandConstructor(commandClass, commandName, argumentTypes);
+		
+		resolveParameterizedCommandConstructor(commandClass, commandName);
+	}
+
+	
+	
+
+
+	protected void resolveStandardCommandConstructor(Class<?> commandClass,
+			String commandName, List<Class> argumentTypes) {
+		try {
 			
-			List<Class> argumentTypes = Arrays.asList(commandDescriptor.argumentTypes());
+			Constructor constructor =
+					commandClass.getConstructor(argumentTypes.toArray(new Class[] {}));
+			commandConstructorMap.put(commandName, constructor);
 			
-			commandTypesMap.put(commandDescriptor.name(),
-							argumentTypes);
+		} catch (NoSuchMethodException | SecurityException e) {
 			
+			throw new WebSuitesException("Cannot find constructor for command + "  +
+					commandName + " with annotated argument list: " + argumentTypes);
+		}
+	}
+
+
+
+	protected void resolveParameterizedCommandConstructor(
+			Class<?> commandClass, String commandName) {
+		
+		if (ParameterizedCommand.class.isAssignableFrom(commandClass)) {
+			// check for Map<String, String> constructor:
 			try {
 				
 				Constructor constructor =
-						commandClass.getConstructor(argumentTypes.toArray(new Class[] {}));
-				commandConstructorMap.put(commandDescriptor.name(), constructor);
+						commandClass.getConstructor(Map.class);
+				parameterizedCommandConstructorMap.put(commandName, constructor);
 				
 			} catch (NoSuchMethodException | SecurityException e) {
 				
-				throw new WebSuitesException("cannot find constructor for command + "  +
-						commandDescriptor.name() + " with annotated argument list: " + argumentTypes);
+				throw new WebSuitesException("Cannot find constructor with "
+						+ "Map<String, String> parameter for parameterized command + "  +
+						commandName);
 			}
 		}
 	}
 
 
 
+	protected List<Object> convertArgumentsToParameterMap(String[] arguments) {
+		
+		Map<String, String> resultMap = new HashMap<>();
+		
+		for (String arg : arguments) {
+			
+			String[] tokens = arg.split("=");
+			resultMap.put(tokens[0], tokens[1]);
+		}
+		return Arrays.asList((Object) resultMap);
+	}
 
 
+
+	/**
+	 *  Converts lists of string command arguments to strong-typed values of
+	 *	given types in argumentTypes.
+	 */
 	@SuppressWarnings("unchecked")
 	protected List<Object> convertArgumentsToProperTypes(String[] arguments,
 			List<Class> argumentTypes) {
