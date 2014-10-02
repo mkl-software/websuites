@@ -104,13 +104,16 @@ public class StandardCommandBuilder implements CommandBuilder {
 
 
 
+	// TODO: for now it will detect parameter map only if all tokens contain at least
+	// one "=" char. Change it to accept various combinations. Resolve situation when
+	// command has n arguments and one passes n parameters in the map - how to differentiate?
 	protected boolean checkIfArgumentsAreParametersMap(String[] arguments) {
 		
 		if (arguments.length == 0) {
 			return false;
 		}
 		for (String arg : arguments) {
-			if (arg.split("=").length != 2) {
+			if (arg.indexOf("=") == -1) {
 				return false;
 			}
 		}
@@ -207,8 +210,8 @@ public class StandardCommandBuilder implements CommandBuilder {
 		
 		for (String arg : arguments) {
 			
-			String[] tokens = arg.split("=");
-			resultMap.put(tokens[0], tokens[1]);
+			String[] tokens = arg.split("=", 2);
+			resultMap.put(tokens[0], tokens.length == 2 ? tokens[1] : "");
 		}
 		return Arrays.asList((Object) resultMap);
 	}

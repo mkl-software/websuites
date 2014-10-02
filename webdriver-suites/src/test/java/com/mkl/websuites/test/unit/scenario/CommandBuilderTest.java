@@ -29,10 +29,26 @@ public class CommandBuilderTest extends ServiceBasedTest {
 	
 	
 	
+	private List<Object> convertArguments(String[] args, List types) {
+		CommandBuilder logic = getLogic();
+		List<Object> values = Deencapsulation.invoke(
+				logic, "convertArgumentsToProperTypes", args, types);
+		return values;
+	}
+
+
+
+	private CommandBuilder getLogic() {
+		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
+		return logic;
+	}
+
+
+
 	@Test
 	public void testSampleCommandArgTypes() {
 		
-		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
+		CommandBuilder logic = getLogic();
 		
 		Deencapsulation.invoke(
 				logic, "scanClasspathForCommands");
@@ -46,14 +62,6 @@ public class CommandBuilderTest extends ServiceBasedTest {
 		
 		assertEquals(1, types.size());
 		assertEquals(String.class, types.get(0));
-	}
-	
-	
-	private List<Object> convertArguments(String[] args, List types) {
-		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
-		List<Object> values = Deencapsulation.invoke(
-				logic, "convertArgumentsToProperTypes", args, types);
-		return values;
 	}
 
 
@@ -123,7 +131,7 @@ public class CommandBuilderTest extends ServiceBasedTest {
 	@Test
 	public void testSimpleCommand() {
 		
-		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
+		CommandBuilder logic = getLogic();
 		
 		Command command = logic.instantiateCommand("sample", new String[] {"command argument"});
 		
@@ -139,7 +147,7 @@ public class CommandBuilderTest extends ServiceBasedTest {
 	@Test
 	public void testNoArgCommand() {
 		
-		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
+		CommandBuilder logic = getLogic();
 		
 		Command command = logic.instantiateCommand("noArg",	new String[] {});
 		
@@ -153,7 +161,7 @@ public class CommandBuilderTest extends ServiceBasedTest {
 	@Test
 	public void testMultiArgCommand() {
 		
-		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
+		CommandBuilder logic = getLogic();
 		
 		Command command = logic.instantiateCommand("multiArg",
 				new String[] {"string value", "5687", "true", "23"});
@@ -172,7 +180,7 @@ public class CommandBuilderTest extends ServiceBasedTest {
 	
 	@Test(expected = WebSuitesException.class)
 	public void testArgumentErrorWrongArgumentCount() {
-		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
+		CommandBuilder logic = getLogic();
 		logic.instantiateCommand("sample simple value", // without tabs
 				new String[] {});
 		fail("command should not be craeted");
@@ -182,10 +190,48 @@ public class CommandBuilderTest extends ServiceBasedTest {
 	
 	@Test(expected = WebSuitesException.class)
 	public void testArgumentErrorToManyArguments() {
-		CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
+		CommandBuilder logic = getLogic();
 		logic.instantiateCommand("sample",
 				new String[] {"param", "another not expected"});
 		fail("command should not be craeted");
 	}
 
+
+
+	@Test
+	public void testParameterizedCommandMapParsing1() {
+		CommandBuilder logic = getLogic();
+		String[] valueLine = new String [] {"param=value", "param2=value2", "param3=value3"};
+		List result = convertParams(logic, valueLine);
+		assertNotNull(result);
+		assertEquals(1, result.size());
+		Map paramMap = (Map) result.get(0);
+		assertEquals(3, paramMap.size());
+		assertEquals("value", paramMap.get("param"));
+		assertEquals("value2", paramMap.get("param2"));
+		assertEquals("value3", paramMap.get("param3"));
+	}
+
+
+
+	private List convertParams(CommandBuilder logic, String[] valueLine) {
+		return Deencapsulation
+				.invoke(logic, "convertArgumentsToParameterMap", (Object) valueLine);
+	}
+	
+	
+	@Test
+	public void testParameterizedCommandMapParsing2() {
+		CommandBuilder logic = getLogic();
+		String[] valueLine = new String [] {"param=value anotherThing space",
+				"param2=value2=next=next=next=next=end", "param3"};
+		List result = convertParams(logic, valueLine);
+		assertNotNull(result);
+		assertEquals(1, result.size());
+		Map paramMap = (Map) result.get(0);
+		assertEquals(3, paramMap.size());
+		assertEquals("value anotherThing space", paramMap.get("param"));
+		assertEquals("value2=next=next=next=next=end", paramMap.get("param2"));
+		assertEquals("", paramMap.get("param3"));
+	}
 }

@@ -1,6 +1,7 @@
 package com.mkl.websuites.test.integration.command;
 
 import org.junit.Test;
+import org.junit.runner.Result;
 
 import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
@@ -46,17 +47,13 @@ public class GotoCommandTest extends WebSuitesResultCheck {
 	
 	@Test
 	public void testGotoLocalWebAddress() throws Throwable {
-		super.checkWebTestResult();
+		
+		Result testResult = super.checkWebTestResult(LocalRunner.class);
+		
+		checkRunCount(3 + 1, testResult); // +1 for LocalUnderlyingGotoTest
+		
+		checkIfNoFailures(testResult);
 	}
 	
-	@Override
-	protected int defineExpectedRunCount() {
-		return 3 + 1; // + 1 for page address check
-	}
-
-	@Override
-	protected Class<?> getRunnerClass() {
-		return LocalRunner.class;
-	}
 
 }

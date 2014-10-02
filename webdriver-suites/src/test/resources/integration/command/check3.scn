@@ -1,0 +1,6 @@
+# one scenario for both existing and not for ID param
+goto	http://localhost:90/integration/commands/checkWebElements.html
+# OK
+check	id=existing
+# failure:
+check	id=not_existing_id

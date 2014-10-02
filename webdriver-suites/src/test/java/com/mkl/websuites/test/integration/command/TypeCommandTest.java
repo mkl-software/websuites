@@ -1,6 +1,7 @@
 package com.mkl.websuites.test.integration.command;
 
 import org.junit.Test;
+import org.junit.runner.Result;
 import org.openqa.selenium.Alert;
 
 import com.mkl.websuites.WebSuites;
@@ -51,17 +52,13 @@ public class TypeCommandTest extends WebSuitesResultCheck {
 	
 	@Test
 	public void testClick() throws Throwable {
-		super.checkWebTestResult();
+		
+		Result testResult = super.checkWebTestResult(LocalRunner.class);
+		
+		checkRunCount(3 + 1, testResult); // +1 for TypeTextCheckTest
+		
+		checkIfNoFailures(testResult);
 	}
 	
-	@Override
-	protected int defineExpectedRunCount() {
-		return 3 + 1; // + 1 for type result check
-	}
-
-	@Override
-	protected Class<?> getRunnerClass() {
-		return LocalRunner.class;
-	}
 
 }

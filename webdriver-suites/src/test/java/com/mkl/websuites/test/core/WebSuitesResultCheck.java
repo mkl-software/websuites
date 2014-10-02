@@ -2,23 +2,33 @@ package com.mkl.websuites.test.core;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import mockit.Deencapsulation;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
+import com.mkl.websuites.internal.services.ServiceFactory;
 
 public abstract class WebSuitesResultCheck extends JettyBasedTest {
 
 	
 	
-	protected void checkWebTestResult() throws Throwable {
+	protected Result checkWebTestResult(Class<? extends WebSuites> localRunner) throws Throwable {
 		
-		Result result = new JUnitCore().run(new InternalWebSuitesRunner(getRunnerClass()));
+		Result result = new JUnitCore().run(new InternalWebSuitesRunner(localRunner));
 		
-		assertEquals(defineExpectedRunCount(), result.getRunCount());
+		return result;
 		
+	}
+
+	protected void checkRunCount(int expectedRunCount, Result result) {
+		assertEquals(expectedRunCount, result.getRunCount());
+	}
+
+	protected void checkIfNoFailures(Result result) {
 		if (result.getFailureCount() > 0) {
 			
 			System.out.println(result.getFailures());
@@ -34,15 +44,13 @@ public abstract class WebSuitesResultCheck extends JettyBasedTest {
 			fail("There are failurs in the unerlying test being invoked, see "
 					+ "details below:\n" + sb.toString());
 		}
-		
-		additionalChecks();
-		
+	}
+	
+	
+	protected void resetServiceFactory() {
+		Deencapsulation.setField(ServiceFactory.class, "isInitialized", false);
 	}
 
-	protected void additionalChecks() {}
 
-	protected abstract int defineExpectedRunCount();
-
-	protected abstract Class<?> getRunnerClass();
 	
 }

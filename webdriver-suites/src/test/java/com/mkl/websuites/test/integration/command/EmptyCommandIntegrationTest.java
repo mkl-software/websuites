@@ -4,6 +4,7 @@ import mockit.Mocked;
 import mockit.Verifications;
 
 import org.junit.Test;
+import org.junit.runner.Result;
 
 import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
@@ -28,10 +29,13 @@ public class EmptyCommandIntegrationTest extends WebSuitesResultCheck {
 	
 	
 	
-	
 	@Test
 	public void verifySampleCommandInvocation(@Mocked final SampleCommand mockedCommand) throws Throwable {
-		super.checkWebTestResult();
+		
+		Result testResult = super.checkWebTestResult(LocalRunner.class);
+		
+		checkRunCount(3, testResult);
+		
 		new Verifications() {{
 			mockedCommand.run();
 		}
@@ -39,14 +43,6 @@ public class EmptyCommandIntegrationTest extends WebSuitesResultCheck {
 	}
 	
 	
-	@Override
-	protected int defineExpectedRunCount() {
-		return 3;
-	}
 
-	@Override
-	protected Class<?> getRunnerClass() {
-		return LocalRunner.class;
-	}
 }
 

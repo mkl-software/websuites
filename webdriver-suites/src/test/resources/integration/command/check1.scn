@@ -1,0 +1,3 @@
+# assert element that exists on a web page
+goto	http://localhost:90/integration/commands/checkWebElements.html
+check	#existing
