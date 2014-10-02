@@ -193,7 +193,7 @@ public class StandardCommandBuilder implements CommandBuilder {
 			} catch (NoSuchMethodException | SecurityException e) {
 				
 				throw new WebSuitesException("Cannot find constructor with "
-						+ "Map<String, String> parameter for parameterized command + "  +
+						+ "Map<String, String> parameter for parameterized command:  "  +
 						commandName);
 			}
 		}

@@ -1,37 +1,38 @@
 package com.mkl.websuites.internal.command.impl;
 
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import java.util.Map;
+
 import org.openqa.selenium.WebElement;
 
-import com.mkl.websuites.internal.command.BaseCommand;
 import com.mkl.websuites.internal.command.CommandDescriptor;
 
 
 @CommandDescriptor(name = "type", argumentTypes = {String.class, String.class})
-public class TypeTextCommand extends BaseCommand {
+public class TypeTextCommand extends OperationOnWebElement {
 
 	
-	private String element;
 	private String textToType;
 	
 	
+	public TypeTextCommand(Map<String, String> parameterMap) {
+		super(parameterMap);
+	}
+
+
 	public TypeTextCommand(String element, String textToType) {
-		this.element = element;
+		super(null);
+		super.element = element;
 		this.textToType = textToType;
 	}
 
 
 	@Override
-	protected void runStandardCommand() {
-		try {
-			WebElement elem = browser.findElement(By.cssSelector(element));
-			elem.sendKeys(textToType);
-		} catch (NoSuchElementException e) {
-			Assert.fail("No element for selecor " + element + " can be found on the page.");
-		}
+	protected void doOperationOnElement(WebElement elem) {
+		
+		elem.sendKeys(textToType);
+		
 	}
+
 
 
 }
