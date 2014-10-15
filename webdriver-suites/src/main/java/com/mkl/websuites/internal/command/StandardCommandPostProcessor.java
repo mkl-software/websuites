@@ -1,6 +1,12 @@
 package com.mkl.websuites.internal.command;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
+
+import com.mkl.websuites.WebSuitesException;
+import com.mkl.websuites.internal.command.impl.ControlFlowHandler;
+import com.mkl.websuites.internal.command.impl.EndControlFlowHandler;
 
 public class StandardCommandPostProcessor implements CommandPostProcessor {
 
@@ -18,7 +24,123 @@ public class StandardCommandPostProcessor implements CommandPostProcessor {
 	@Override
 	public List<Command> postProcessCommands(List<Command> parsedCommands) {
 		
-		return parsedCommands;
+		List<Command> processedCommands = processControlHandlers(parsedCommands);
+		
+		return processedCommands;
+	}
+
+
+
+
+	protected List<Command> processControlHandlers(List<Command> originalCommandList) {
+		
+		/*
+		 * Algorithm:
+		 * 		currentFoldedCommandList = inputList
+		 * 		depths = findMaxNestingDepth
+		 * 		for i in depths
+		 * 			for j in currentFoldedCommandList
+		 * 				if commands[j] is controlFlowHandler
+		 * 					foldNextCommandsUntiEndCommandWithCorrespondingDepthIsFound
+		 * 					deleteLastEndCommand
+		 * 					updateCurrentFoldedcommandList
+		 * 				else
+		 * 					addCommandToCurrentList
+		 */		
+		
+		findMaxNestingDepth(originalCommandList);
+		
+		List<Command> outputFoldedList = new ArrayList<>();
+		List<Command> elementsToRemoveFromOutputList = new ArrayList<>();
+		
+		Stack<List<Command>> nestedCommands = new Stack<>();
+		nestedCommands.push(outputFoldedList);
+		
+		List<Command> currentLevel = outputFoldedList;
+		
+		for (Command command : originalCommandList) {
+			
+			if (command instanceof ControlFlowHandler) {
+				
+				if (command instanceof EndControlFlowHandler) {
+					
+					nestedCommands.pop();
+					currentLevel = nestedCommands.peek();
+					
+				} else {
+					currentLevel.add(command);
+					currentLevel = ((ControlFlowHandler) command).getNestedCommands();
+					nestedCommands.push(currentLevel);
+				}
+			} else {
+				
+				currentLevel.add(command);
+				// mark to remove from first level:
+				if (currentLevel != outputFoldedList) {
+					
+					elementsToRemoveFromOutputList.add(command);
+				}
+			}
+		}
+		
+		List<Command> processedWithControlHandlers = new ArrayList<>();
+		
+		for (Command command : outputFoldedList) {
+			
+			if (!elementsToRemoveFromOutputList.contains(command)) {
+				
+				processedWithControlHandlers.add(command);
+			}
+		}
+		
+		
+//		List<Command> currentDepthLevelCommands = new ArrayList<Command>();
+//		List<Command> outputFoldedList = new ArrayList<Command>(originalCommandList);
+//		
+//		for (int currentDepth = 0; currentDepth < depth; currentDepth++) {
+//			
+//			for (Command command : outputFoldedList) {
+//				
+//				if (command instanceof ControlFlowHandler) {
+//					
+//					if (!(command instanceof EndControlFlowHandler)) {
+//						
+//						
+//					}
+//				}
+//			}
+//		}
+		
+		return processedWithControlHandlers;
+	}
+
+
+
+
+	private int findMaxNestingDepth(List<Command> parsedCommands) {
+		
+		int depth = 0;
+		int maxDepth = 0;
+		for (Command command : parsedCommands) {
+			
+			if (command instanceof ControlFlowHandler) {
+				if (command instanceof EndControlFlowHandler) {
+					depth--;
+				} else {
+					depth++;
+					maxDepth = depth;
+				}
+			}
+		}
+		
+		if (depth != 0) {
+			
+			throw new WebSuitesException("Error in control flow statements - please check if "
+					+ "the control flow blocks (repeat, if, subtest etc) are properly "
+					+ "closed by \"end\" statements");
+		}
+		
+		return maxDepth;
 	}
 
 

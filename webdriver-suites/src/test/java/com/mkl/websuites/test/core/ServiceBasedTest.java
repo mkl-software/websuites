@@ -12,7 +12,7 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 
 
 @Slf4j
-public abstract class ServiceBasedTest {
+public abstract class ServiceBasedTest<T> {
 
 	@BeforeClass
 	public static void init() {
@@ -23,16 +23,21 @@ public abstract class ServiceBasedTest {
 			log.debug("ServiceFactory already initialized, ignoring, not a problem");
 		}
 	}
+	
+	protected T logic() {
+		return ServiceFactory.get(getServiceUnderTestClass());
+	}
+	
 
 	@Before
 	public void serviceExisting() {
 		try {
-			assertNotNull(ServiceFactory.get(getServiceUnderTest()));
+			assertNotNull(ServiceFactory.get(getServiceUnderTestClass()));
 		} catch (NullPointerException e) {
 			fail("service not configured");
 		}
 	}
 
-	protected abstract Class<?> getServiceUnderTest();
+	protected abstract Class<T> getServiceUnderTestClass();
 
 }

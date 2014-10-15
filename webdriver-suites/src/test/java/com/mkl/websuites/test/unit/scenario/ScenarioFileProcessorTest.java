@@ -29,7 +29,7 @@ public class ScenarioFileProcessorTest extends ServiceBasedTest {
 	
 	
 	@Override
-	protected Class<?> getServiceUnderTest() {
+	protected Class<?> getServiceUnderTestClass() {
 		return CommandParser.class;
 	}
 

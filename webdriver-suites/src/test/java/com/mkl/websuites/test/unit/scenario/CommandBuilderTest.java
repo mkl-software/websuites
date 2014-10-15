@@ -23,7 +23,7 @@ public class CommandBuilderTest extends ServiceBasedTest {
 
 	
 	@Override
-	protected Class<?> getServiceUnderTest() {
+	protected Class<?> getServiceUnderTestClass() {
 		return CommandBuilder.class;
 	}
 	

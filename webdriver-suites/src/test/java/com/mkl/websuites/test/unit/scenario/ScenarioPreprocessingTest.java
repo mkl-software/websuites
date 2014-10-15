@@ -24,7 +24,7 @@ public class ScenarioPreprocessingTest extends ServiceBasedTest {
 
 
 	@Override
-	protected Class<?> getServiceUnderTest() {
+	protected Class<?> getServiceUnderTestClass() {
 		return ScenarioFilePreprocessor.class;
 	}
 
