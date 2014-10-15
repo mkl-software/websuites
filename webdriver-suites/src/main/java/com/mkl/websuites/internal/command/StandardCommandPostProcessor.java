@@ -17,7 +17,12 @@ public class StandardCommandPostProcessor implements CommandPostProcessor {
 	
 	@Override
 	public List<Command> postProcessCommands(List<Command> parsedCommands) {
+		
 		return parsedCommands;
 	}
+
+
+
+
 
 }

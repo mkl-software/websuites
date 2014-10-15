@@ -57,7 +57,7 @@ public abstract class ParameterizedCommand extends BaseCommand {
 	
 	
 
-	protected int checkNumberOfMatchingParams(String[] validParams) {
+	protected int checkNumberOfMatchingParams(String... validParams) {
 		
 		int k = 0;
 		for (String key : validParams) {
