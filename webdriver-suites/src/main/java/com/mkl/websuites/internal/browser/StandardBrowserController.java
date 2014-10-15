@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,13 +30,16 @@ public class StandardBrowserController implements BrowserController {
 
 	protected WebDriver webDriver;
 	
+	
+	private int globalTimeout;
+	
 	private boolean firstBrowser = true;
 	
 	private String localBrowserNameForTestInit;
 
-	protected Map<String, Class<?>> driverClassMap = new HashMap<String, Class<?>>();
+	private Map<String, Class<?>> driverClassMap = new HashMap<String, Class<?>>();
 
-	protected Map<String, String> browserDisplayNameMap = new HashMap<String, String>();
+	private Map<String, String> browserDisplayNameMap = new HashMap<String, String>();
 	
 	
 	
@@ -51,9 +55,6 @@ public class StandardBrowserController implements BrowserController {
 	
 	
 	
-	/* (non-Javadoc)
-	 * @see com.mkl.websuites.internal.IBrowserControlle#initializeBrowsersEnvironment(com.mkl.websuites.WebSuitesConfig)
-	 */
 	@Override
 	public void initializeBrowsersEnvironment(WebSuitesConfig config) {
 		
@@ -66,6 +67,8 @@ public class StandardBrowserController implements BrowserController {
 			throw new WebSuitesException("Empty browser configuration, please fill properly "
 					+ "the BrowserConfiguration section in the configuration");
 		}
+		
+		globalTimeout = config.waitTimeout();
 		
 		Browser[] browsers = browsersConfiguration.browsers();
 		
@@ -112,9 +115,6 @@ public class StandardBrowserController implements BrowserController {
 	
 	
 	
-	/* (non-Javadoc)
-	 * @see com.mkl.websuites.internal.IBrowserControlle#addBrowser(java.lang.String)
-	 */
 	@Override
 	public void addBrowser(String browser) {
 		browsersToRun.offer(browser);
@@ -122,18 +122,12 @@ public class StandardBrowserController implements BrowserController {
 	}
 	
 	
-	/* (non-Javadoc)
-	 * @see com.mkl.websuites.internal.IBrowserControlle#currentBrowser()
-	 */
 	@Override
 	public String currentBrowser() {
 		return browsersToRun.peek();
 	}
 	
 	
-	/* (non-Javadoc)
-	 * @see com.mkl.websuites.internal.IBrowserControlle#removeCurrentBrowser()
-	 */
 	@Override
 	public String removeCurrentBrowser() {
 		String current = "";
@@ -147,18 +141,12 @@ public class StandardBrowserController implements BrowserController {
 
 
 
-	/* (non-Javadoc)
-	 * @see com.mkl.websuites.internal.IBrowserControlle#getWebDriver()
-	 */
 	@Override
 	public WebDriver getWebDriver() {
 		return webDriver;
 	}
 
 
-	/* (non-Javadoc)
-	 * @see com.mkl.websuites.internal.IBrowserControlle#setNextWebDriver()
-	 */
 	@Override
 	public void setNextWebDriver() {
 		
@@ -176,27 +164,24 @@ public class StandardBrowserController implements BrowserController {
 		
 		try {
 			webDriver = (WebDriver) driverClass.newInstance();
+			webDriver.manage().timeouts().implicitlyWait(globalTimeout, TimeUnit.SECONDS);
 			
 		} catch (InstantiationException | IllegalAccessException e) {
 			
-			log.error("cannot create an instance of Web Driver for [" + currentBrowser +
-					"] with class: " + driverClass);
+			String msg = "cannot create an instance of Web Driver for [" + currentBrowser +
+					"] with class: " + driverClass;
+			log.error(msg);
+			throw new WebSuitesException(msg, e);
 		}
 	}
 
 
-	/* (non-Javadoc)
-	 * @see com.mkl.websuites.internal.IBrowserControlle#getLocalBrowserNameForTestInit()
-	 */
 	@Override
 	public String getLocalBrowserNameForTestInit() {
 		return localBrowserNameForTestInit;
 	}
 
 
-	/* (non-Javadoc)
-	 * @see com.mkl.websuites.internal.IBrowserControlle#getBrowserName(java.lang.String)
-	 */
 	@Override
 	public String getBrowserDisplayName(String currentBrowser) {
 		
