@@ -1,5 +1,14 @@
-goto	google.pl
-type	#gbqfq	sprawdzamy
+goto	vocmaster.com:8080/vocman
+type	#login_input	klosiu
+type	#pass_input	klosiu
+click	div.button
+check	.logged-user-info
+click	#cat_157
+click	#tableAction_add
 wait	2000
-click	#gbqfb
-wait	3000
+repeat	times=2
+type	#v_word	word
+type	#v_translation	translation
+click	#addSubmitButton
+wait	2000
+end

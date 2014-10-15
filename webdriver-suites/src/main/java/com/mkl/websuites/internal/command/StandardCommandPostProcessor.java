@@ -36,16 +36,6 @@ public class StandardCommandPostProcessor implements CommandPostProcessor {
 		
 		/*
 		 * Algorithm:
-		 * 		currentFoldedCommandList = inputList
-		 * 		depths = findMaxNestingDepth
-		 * 		for i in depths
-		 * 			for j in currentFoldedCommandList
-		 * 				if commands[j] is controlFlowHandler
-		 * 					foldNextCommandsUntiEndCommandWithCorrespondingDepthIsFound
-		 * 					deleteLastEndCommand
-		 * 					updateCurrentFoldedcommandList
-		 * 				else
-		 * 					addCommandToCurrentList
 		 */		
 		
 		findMaxNestingDepth(originalCommandList);
@@ -57,6 +47,7 @@ public class StandardCommandPostProcessor implements CommandPostProcessor {
 		nestedCommands.push(outputFoldedList);
 		
 		List<Command> currentLevel = outputFoldedList;
+		
 		
 		for (Command command : originalCommandList) {
 			
@@ -75,7 +66,7 @@ public class StandardCommandPostProcessor implements CommandPostProcessor {
 			} else {
 				
 				currentLevel.add(command);
-				// mark to remove from first level:
+				// if nested mark to remove from first level:
 				if (currentLevel != outputFoldedList) {
 					
 					elementsToRemoveFromOutputList.add(command);
@@ -92,24 +83,6 @@ public class StandardCommandPostProcessor implements CommandPostProcessor {
 				processedWithControlHandlers.add(command);
 			}
 		}
-		
-		
-//		List<Command> currentDepthLevelCommands = new ArrayList<Command>();
-//		List<Command> outputFoldedList = new ArrayList<Command>(originalCommandList);
-//		
-//		for (int currentDepth = 0; currentDepth < depth; currentDepth++) {
-//			
-//			for (Command command : outputFoldedList) {
-//				
-//				if (command instanceof ControlFlowHandler) {
-//					
-//					if (!(command instanceof EndControlFlowHandler)) {
-//						
-//						
-//					}
-//				}
-//			}
-//		}
 		
 		return processedWithControlHandlers;
 	}
