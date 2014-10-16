@@ -11,3 +11,4 @@ repeat	times=2
 	type	#v_translation	translation
 	click	#addSubmitButton
 	wait	2000
+end
