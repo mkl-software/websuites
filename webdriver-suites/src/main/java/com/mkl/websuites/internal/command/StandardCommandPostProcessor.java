@@ -38,7 +38,7 @@ public class StandardCommandPostProcessor implements CommandPostProcessor {
 		 * Algorithm:
 		 */		
 		
-		findMaxNestingDepth(originalCommandList);
+		validateNestingDepths(originalCommandList);
 		
 		List<Command> outputFoldedList = new ArrayList<>();
 		List<Command> elementsToRemoveFromOutputList = new ArrayList<>();
@@ -90,10 +90,9 @@ public class StandardCommandPostProcessor implements CommandPostProcessor {
 
 
 
-	private int findMaxNestingDepth(List<Command> parsedCommands) {
+	private void validateNestingDepths(List<Command> parsedCommands) {
 		
 		int depth = 0;
-		int maxDepth = 0;
 		for (Command command : parsedCommands) {
 			
 			if (command instanceof ControlFlowHandler) {
@@ -101,7 +100,6 @@ public class StandardCommandPostProcessor implements CommandPostProcessor {
 					depth--;
 				} else {
 					depth++;
-					maxDepth = depth;
 				}
 			}
 		}
@@ -109,11 +107,10 @@ public class StandardCommandPostProcessor implements CommandPostProcessor {
 		if (depth != 0) {
 			
 			throw new WebSuitesException("Error in control flow statements - please check if "
-					+ "the control flow blocks (repeat, if, subtest etc) are properly "
+					+ "the control flow blocks (\"repeat\", \"if\", \"subtest\" etc.) are properly "
 					+ "closed by \"end\" statements");
 		}
 		
-		return maxDepth;
 	}
 
 

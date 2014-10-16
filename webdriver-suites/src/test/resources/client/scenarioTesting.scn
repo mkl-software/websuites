@@ -7,8 +7,7 @@ click	#cat_157
 click	#tableAction_add
 wait	2000
 repeat	times=2
-type	#v_word	word
-type	#v_translation	translation
-click	#addSubmitButton
-wait	2000
-end
+	type	#v_word	word
+	type	#v_translation	translation
+	click	#addSubmitButton
+	wait	2000
