@@ -71,7 +71,7 @@ public class ControlFlowProcessingTest extends ServiceBasedTest<CommandPostProce
 	@Parameters
 	public void testMaxDepthFindingAlgorithm(List<Command> input, int expectedDepth) {
 		
-		int depth = Deencapsulation.invoke(logic(), "findMaxNestingDepth", input);
+		int depth = Deencapsulation.invoke(logic(), "checkMaxNestingDepths", input);
 		
 		assertEquals(expectedDepth, depth);
 	}
@@ -84,10 +84,10 @@ public class ControlFlowProcessingTest extends ServiceBasedTest<CommandPostProce
 				(Command) new RepeatControlFlowHandler(),
 				new NoArgCommand(),
 				new NoArgCommand(),
-				new NoArgCommand()
+				new NoArgCommand() // no end, error
 				);
 		
-		Deencapsulation.invoke(logic(), "findMaxNestingDepth", commandsFromScn);
+		Deencapsulation.invoke(logic(), "checkMaxNestingDepths", commandsFromScn);
 	}
 	
 	
@@ -207,6 +207,42 @@ public class ControlFlowProcessingTest extends ServiceBasedTest<CommandPostProce
 		for (Command command : fourthLevel) {
 			assertTrue(command instanceof NoArgCommand);
 		}
+	}
+	
+	
+	
+	
+	@Test
+	public void testComplexNesting() {
+		
+		List<Command> commandsFromScn = Arrays.asList(
+				(Command) new NoArgCommand(),
+				new RepeatControlFlowHandler(),
+				new NoArgCommand(),
+				new NoArgCommand(),
+				new EndControlFlowHandler(),
+				new RepeatControlFlowHandler(),
+				new NoArgCommand(),
+				new RepeatControlFlowHandler(),
+				new NoArgCommand(),
+				new NoArgCommand(),
+				new EndControlFlowHandler(),
+				new RepeatControlFlowHandler(),
+				new NoArgCommand(),
+				new EndControlFlowHandler(),
+				new NoArgCommand(),
+				new EndControlFlowHandler(),
+				new NoArgCommand()
+				);
+		
+		List<Command> processed = logic().postProcessCommands(commandsFromScn);
+		
+		assertEquals(4, processed.size());
+		
+		assertTrue(processed.get(0) instanceof NoArgCommand);
+		assertTrue(processed.get(1) instanceof RepeatControlFlowHandler);
+		assertTrue(processed.get(2) instanceof RepeatControlFlowHandler);
+		assertTrue(processed.get(3) instanceof NoArgCommand);
 	}
 
 }
