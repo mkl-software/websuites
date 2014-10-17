@@ -5,17 +5,27 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
+import mockit.Deencapsulation;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.command.Command;
+import com.mkl.websuites.internal.command.impl.CheckCommand;
+import com.mkl.websuites.internal.command.impl.ParameterizedCommand;
 import com.mkl.websuites.internal.command.impl.SetPropCommand;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
 import static org.junit.Assert.*;
+import static junitparams.JUnitParamsRunner.$;
 
 
+
+@RunWith(JUnitParamsRunner.class)
 public class PropertiesTest {
 
 
@@ -71,5 +81,39 @@ public class PropertiesTest {
 		assertTrue(props.isSet("age"));
 		assertTrue(props.isSet("active"));
 		assertFalse(props.isSet("banned"));
+	}
+	
+	
+	
+	@Parameters
+	@Test
+	public void testPropertyResolutionInStrings(String line, Map<String, String> props,
+			String expectedLine) {
+		
+		WebSuitesUserProperties globalProps = WebSuitesUserProperties.get();
+		globalProps.clear();
+		globalProps.populateFrom(props);
+		ParameterizedCommand command = new CheckCommand("");
+		String result = Deencapsulation.invoke(command, "populateStringWithProperties", line);
+		assertEquals(expectedLine, result);
+	}
+	
+	
+	
+	@SuppressWarnings({ "unused", "serial" })
+	private Object[] parametersForTestPropertyResolutionInStrings() {
+		return $(
+				$("", new HashMap<String, String>(), ""),
+				$("line without properties", new HashMap<String, String>(), "line without properties"),
+				$("my name is ${name}", new HashMap<String, String>() {{put("name", "Marcin");}},
+						"my name is Marcin"),
+				$("my age is ${name} and I'm ${status} doing ${count} activities at ${place}",
+				   new HashMap<String, String>() {{put("name", "Adam");put("status", "active");
+				   		put("count", "24"); put("place", "gym");}},
+				  "my age is Adam and I'm active doing 24 activities at gym"),
+				$("missing property value ${prop}",
+				   new HashMap<String, String>() {{put("another", "value");}},
+				   "missing property value ${prop}")
+				);
 	}
 }
