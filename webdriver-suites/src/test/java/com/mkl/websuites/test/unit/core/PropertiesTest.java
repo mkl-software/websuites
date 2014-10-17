@@ -31,6 +31,7 @@ public class PropertiesTest {
 
 	@BeforeClass
 	public static void init() {
+		Deencapsulation.setField(ServiceFactory.class, "isInitialized", false);
 		ServiceFactory.init(null);
 	}
 	

@@ -5,13 +5,15 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.mkl.websuites.test.unit.core.NormalizePathTest;
+import com.mkl.websuites.test.unit.core.PropertiesTest;
 
 
 
 @RunWith(Suite.class)
 @SuiteClasses({
 	
-	NormalizePathTest.class
+	NormalizePathTest.class,
+	PropertiesTest.class
 })
 public class CoreTests {
 

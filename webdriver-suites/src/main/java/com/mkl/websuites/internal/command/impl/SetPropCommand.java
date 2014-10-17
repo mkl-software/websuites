@@ -1,5 +1,6 @@
 package com.mkl.websuites.internal.command.impl;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,9 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 public class SetPropCommand extends ParameterizedCommand {
 
 
+	public SetPropCommand() {
+		this (new HashMap<String, String>());
+	}
 	
 	
 	public SetPropCommand(Map<String, String> parameterMap) {
