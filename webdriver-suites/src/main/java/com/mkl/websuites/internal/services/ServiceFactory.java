@@ -29,7 +29,7 @@ public class ServiceFactory {
 	
 	
 	
-	public static void init(Class<?> runnerClass) {
+	public static void init(Class<?> jUnitRunnerClass) {
 		
 		if (isInitialized) {
 			throw new WebSuitesException("Cannot initialize ServiceFactory more than once.");
@@ -48,8 +48,8 @@ public class ServiceFactory {
 			instanceMap.put(service.service(), service.implementation());
 		}
 		
-		if (runnerClass != null) {
-			applyServiceOverridesFrom(runnerClass);
+		if (jUnitRunnerClass != null) {
+			applyServiceOverridesFrom(jUnitRunnerClass);
 		}
 		
 		log.debug("service factory initialized");
