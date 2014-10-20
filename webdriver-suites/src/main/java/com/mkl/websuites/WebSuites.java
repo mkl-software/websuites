@@ -79,8 +79,10 @@ public class WebSuites {
 			suite.addTest(browserSuite);
 		}
 		
-		
-		suite.addTest(new CleanupBrowsersTest());
+		if (!config.dontCloseBrowserAtTheEnd()) {
+			
+			suite.addTest(new CleanupBrowsersTest());
+		}
 		
 		
 		return suite;

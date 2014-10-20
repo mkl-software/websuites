@@ -28,8 +28,8 @@ public class TypeTextCommand extends OperationOnWebElement {
 
 	@Override
 	protected void doOperationOnElement(WebElement elem) {
-		
-		elem.sendKeys(textToType);
+		String text = populateStringWithProperties(textToType);
+		elem.sendKeys(text);
 		
 	}
 

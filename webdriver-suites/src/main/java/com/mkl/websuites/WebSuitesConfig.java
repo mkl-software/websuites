@@ -30,6 +30,8 @@ public @interface WebSuitesConfig {
 
 	int waitTimeout() default 30;
 	
+	boolean dontCloseBrowserAtTheEnd() default false;
+	
 	String[] scenarioFileExtensions() default {"scn"};
 
 	Class<?> serviceOverrides() default EmptyServiceOverrideDefinition.class;

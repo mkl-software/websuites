@@ -24,7 +24,7 @@ public abstract class OperationOnWebElement extends ParameterizedCommand {
 	protected void runStandardCommand() {
 			
 		parameterMap = new HashMap<String, String>();
-		parameterMap.put("css", element);
+		parameterMap.put("css", populateStringWithProperties(element));
 		runCommandWithParameters();
 	}
 	

@@ -6,9 +6,9 @@ check	.logged-user-info
 click	#cat_157
 click	#tableAction_add
 wait	2000
-repeat	times=2
-	type	#v_word	word
-	type	#v_translation	translation
+repeat	times=20
+	type	#v_word	word number ${1}
+	type	#v_translation	translation number ${1}
 	click	#addSubmitButton
-	wait	2000
+	wait	500
 end

@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Stack;
 
 import com.mkl.websuites.WebSuitesException;
-import com.mkl.websuites.internal.command.impl.ControlFlowHandler;
-import com.mkl.websuites.internal.command.impl.EndControlFlowHandler;
+import com.mkl.websuites.internal.command.impl.flow.ControlFlowHandler;
+import com.mkl.websuites.internal.command.impl.flow.EndControlFlowHandler;
 
 public class StandardCommandPostProcessor implements CommandPostProcessor {
 

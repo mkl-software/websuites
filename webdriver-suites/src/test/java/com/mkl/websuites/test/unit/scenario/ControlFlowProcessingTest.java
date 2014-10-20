@@ -13,8 +13,8 @@ import org.junit.runner.RunWith;
 import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandPostProcessor;
-import com.mkl.websuites.internal.command.impl.EndControlFlowHandler;
-import com.mkl.websuites.internal.command.impl.RepeatControlFlowHandler;
+import com.mkl.websuites.internal.command.impl.flow.EndControlFlowHandler;
+import com.mkl.websuites.internal.command.impl.flow.RepeatControlFlowHandler;
 import com.mkl.websuites.test.core.ServiceBasedTest;
 
 import static junitparams.JUnitParamsRunner.$;
