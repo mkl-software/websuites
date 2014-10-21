@@ -1,4 +1,4 @@
-package com.mkl.websuites.test.suites;
+package com.mkl.websuites.test.integration;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

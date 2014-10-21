@@ -18,7 +18,7 @@ class TypeCommandTestConfig {
 	
 
 	@ScenarioFiles("src/test/resources/integration/command/typeTextTest1.scn")
-	public static class LocalUnderlyingTest extends ScenarioFileTest {}
+	public static class LocalUnderlyingTypeTest extends ScenarioFileTest {}
 	
 	public static class TypeTextCheckTest extends WebSuiteStandaloneTest {
 
@@ -44,8 +44,8 @@ class TypeCommandTestConfig {
 public class TypeCommandTest extends WebSuitesResultCheck {
 
 	
-	@WebSuitesRunner(configurationClass = LocalConfig.class,
-			suite = {TypeCommandTestConfig.LocalUnderlyingTest.class,
+	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class,
+			suite = {TypeCommandTestConfig.LocalUnderlyingTypeTest.class,
 					TypeCommandTestConfig.TypeTextCheckTest.class})
 	public static class LocalRunner  extends WebSuites {}
 	

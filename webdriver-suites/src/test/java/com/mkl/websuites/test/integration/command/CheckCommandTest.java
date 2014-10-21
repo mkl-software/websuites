@@ -34,19 +34,19 @@ class CheckCommandTestConfig {
 public class CheckCommandTest extends WebSuitesResultCheck {
 
 	
-	@WebSuitesRunner(configurationClass = LocalConfig.class,
+	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class,
 			suite = CheckCommandTestConfig.ScenarioWithExistingElemByCssId.class)
 	public static class LocalRunnerExistingElemCssId  extends WebSuites {}
 	
-	@WebSuitesRunner(configurationClass = LocalConfig.class,
+	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class,
 			suite = CheckCommandTestConfig.ScenarioWithNonExistingElemByCssId.class)
 	public static class LocalRunnerNotExistingElemCssId  extends WebSuites {}
 	
-	@WebSuitesRunner(configurationClass = LocalConfig.class,
+	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class,
 			suite = CheckCommandTestConfig.ScenarioForIdParam.class)
 	public static class LocalRunnerForIdParam  extends WebSuites {}
 	
-	@WebSuitesRunner(configurationClass = LocalConfig.class,
+	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class,
 			suite = CheckCommandTestConfig.ScenarioForXpathParam.class)
 	public static class LocalRunnerForXpathParam  extends WebSuites {}
 	

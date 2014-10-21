@@ -24,7 +24,7 @@ class EmptyCommandIntegrationTestConfig {
 
 public class EmptyCommandIntegrationTest extends WebSuitesResultCheck {
 
-	@WebSuitesRunner(configurationClass = LocalConfig.class, suite = LocalEmptyCommandIntegrationTest.class)
+	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class, suite = LocalEmptyCommandIntegrationTest.class)
 	public static class LocalRunner  extends WebSuites {}
 	
 	

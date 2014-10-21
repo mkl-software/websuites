@@ -40,7 +40,7 @@ class GotoCommandTestConfig {
 public class GotoCommandTest extends WebSuitesResultCheck {
 
 	
-	@WebSuitesRunner(configurationClass = LocalConfig.class,
+	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class,
 			suite = {GotoCommandTestConfig.LocalUnderlyingGotoTest.class, GotoCheckTest.class})
 	public static class LocalRunner  extends WebSuites {}
 	

@@ -1,0 +1,5 @@
+goto	http://localhost:90/integration/commands/repeatTimesTest.html
+repeat	times=5
+click	#elementWithId
+type	#propTestElement	${1}
+end
