@@ -18,6 +18,9 @@ import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandParser;
 import com.mkl.websuites.internal.services.ServiceFactory;
 import com.mkl.websuites.test.core.ServiceBasedTest;
+import com.mkl.websuites.test.unit.scenario.cmd.MultiArgCommand;
+import com.mkl.websuites.test.unit.scenario.cmd.NoArgCommand;
+import com.mkl.websuites.test.unit.scenario.cmd.SampleCommand;
 
 
 

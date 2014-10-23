@@ -10,7 +10,7 @@ import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
 import com.mkl.websuites.test.integration.command.EmptyCommandIntegrationTestConfig.LocalEmptyCommandIntegrationTest;
-import com.mkl.websuites.test.unit.scenario.SampleCommand;
+import com.mkl.websuites.test.unit.scenario.cmd.SampleCommand;
 import com.mkl.websuites.tests.ScenarioFileTest;
 import com.mkl.websuites.tests.ScenarioFiles;
 

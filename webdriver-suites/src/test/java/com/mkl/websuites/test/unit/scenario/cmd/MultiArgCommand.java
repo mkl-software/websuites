@@ -1,4 +1,4 @@
-package com.mkl.websuites.test.unit.scenario;
+package com.mkl.websuites.test.unit.scenario.cmd;
 
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandDescriptor;

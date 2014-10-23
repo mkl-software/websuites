@@ -16,6 +16,7 @@ import com.mkl.websuites.internal.command.CommandPostProcessor;
 import com.mkl.websuites.internal.command.impl.flow.EndControlFlowHandler;
 import com.mkl.websuites.internal.command.impl.flow.RepeatControlFlowHandler;
 import com.mkl.websuites.test.core.ServiceBasedTest;
+import com.mkl.websuites.test.unit.scenario.cmd.NoArgCommand;
 
 import static junitparams.JUnitParamsRunner.$;
 import static org.junit.Assert.*;
