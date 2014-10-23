@@ -1,7 +1,7 @@
 package com.mkl.websuites.internal.command.impl.validator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,10 +14,13 @@ public class CommandSchemaValidator {
 
 	
 	private List<SchemaValidationRule> schemaValidationRules;
+	
+	private List<ParameterValueValidator> parameterValueValidators;
 
 	public CommandSchemaValidator(List<SchemaValidationRule> schemaValidationRules) {
 		
 		this.schemaValidationRules = schemaValidationRules;
+		parameterValueValidators = new ArrayList<ParameterValueValidator>();
 	}
 	
 	public CommandSchemaValidator(SchemaValidationRule ... rules) {
@@ -50,8 +53,20 @@ public class CommandSchemaValidator {
 					+ "allowed parameters. Please specifiy proper parameters following command "
 					+ "documentation. Allowed parameter configurations are: " + schemaValidationRules);
 		}
+		
+		for (ParameterValueValidator validator : parameterValueValidators) {
+			
+			validator.validateParam(parameters.get(validator.getParamName()));
+		}
 	}
 
+	
+	
+	public CommandSchemaValidator addParameterValueValidator(ParameterValueValidator validator) {
+		parameterValueValidators.add(validator);
+		return this;
+	}
+	
 
 	private boolean matchRule(Map<String, String> parameters,
 			SchemaValidationRule rule) {

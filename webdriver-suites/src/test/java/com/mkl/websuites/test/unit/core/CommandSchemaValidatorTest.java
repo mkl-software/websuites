@@ -14,6 +14,7 @@ import pl.wkr.fluentrule.api.FluentExpectedException;
 
 import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.internal.command.impl.validator.CommandSchemaValidator;
+import com.mkl.websuites.internal.command.impl.validator.IntegerNumberParamValidator;
 import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 
@@ -156,12 +157,12 @@ public class CommandSchemaValidatorTest {
 		rule.addMandatoryElements("required");
 		rule.addOptionalElements("optional");
 		sut = new CommandSchemaValidator(rule);
-		Map<String, String> someMap = new HashMap<String, String>();
+		Map<String, String> params = new HashMap<String, String>();
 		// and
-		someMap.put("topElem", "some value doesn't matter what");
-		someMap.put("required", "some value doesn't matter what");
+		params.put("topElem", "some value doesn't matter what");
+		params.put("required", "some value doesn't matter what");
 		//when
-		sut.validateCommandSchema(someMap );
+		sut.validateCommandSchema(params);
 		//then no exception expected
 	}
 	
@@ -174,13 +175,13 @@ public class CommandSchemaValidatorTest {
 		rule.addMandatoryElements("required");
 		rule.addOptionalElements("optional");
 		sut = new CommandSchemaValidator(rule);
-		Map<String, String> someMap = new HashMap<String, String>();
+		Map<String, String> params = new HashMap<String, String>();
 		// and
-		someMap.put("topElem", "some value doesn't matter what");
-		someMap.put("optional", "some value doesn't matter what");
+		params.put("topElem", "some value doesn't matter what");
+		params.put("optional", "some value doesn't matter what");
 		//then
 		expectValidationException("[required]", "[optional]");
-		sut.validateCommandSchema(someMap );
+		sut.validateCommandSchema(params );
 	}
 	
 	
@@ -192,13 +193,13 @@ public class CommandSchemaValidatorTest {
 		rule.addOptionalElements("optional");
 		sut = new CommandSchemaValidator(rule);
 		// and
-		Map<String, String> someMap = new HashMap<String, String>();
-		someMap.put("topElem", "some value doesn't matter what");
-		someMap.put("required", "some value doesn't matter what");
-		someMap.put("not optional", "some value doesn't matter what");
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("topElem", "some value doesn't matter what");
+		params.put("required", "some value doesn't matter what");
+		params.put("not optional", "some value doesn't matter what");
 		//then
 		expectValidationException("[required]", "[optional]");
-		sut.validateCommandSchema(someMap );
+		sut.validateCommandSchema(params );
 	}
 	
 	
@@ -218,19 +219,19 @@ public class CommandSchemaValidatorTest {
 		rule.addOptionalElements("optional3");
 		sut = new CommandSchemaValidator(rule);
 		// and
-		Map<String, String> someMap = new HashMap<String, String>();
-		someMap.put("topElem", "some value doesn't matter what");
-		someMap.put("required1", "some value doesn't matter what");
-		someMap.put("required2", "some value doesn't matter what");
-		someMap.put("required3", "some value doesn't matter what");
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("topElem", "some value doesn't matter what");
+		params.put("required1", "some value doesn't matter what");
+		params.put("required2", "some value doesn't matter what");
+		params.put("required3", "some value doesn't matter what");
 		String[] options = optionals.split(";");
 		for (String optional : options) {
 			if (!optional.isEmpty()) {
-				someMap.put(optional, "some value doesn't matter what");
+				params.put(optional, "some value doesn't matter what");
 			}
 		}
 		//then
-		sut.validateCommandSchema(someMap );
+		sut.validateCommandSchema(params );
 	}
 	
 	
@@ -246,27 +247,116 @@ public class CommandSchemaValidatorTest {
 		rule.addMandatoryElements("required3");
 		sut = new CommandSchemaValidator(rule);
 		// and
-		Map<String, String> someMap = new HashMap<String, String>();
-		someMap.put("topElem", "some value doesn't matter what");
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("topElem", "some value doesn't matter what");
 		String[] requiredParams = required.split(";");
 		for (String param : requiredParams) {
 			if (!param.isEmpty()) {
-				someMap.put(param, "some value doesn't matter what");
+				params.put(param, "some value doesn't matter what");
 			}
 		}
 		//then
 		expectValidationException("[required1, required2, required3]", "[]");
-		sut.validateCommandSchema(someMap );
+		sut.validateCommandSchema(params );
 		}
 
 
 
 	private void expectValidationException(String requiredParams, String optionalParams) {
 		
-		expectedException.expect(WebSuitesException.class)
+		expectedException
+			.expect(WebSuitesException.class)
 			.hasMessageStartingWith("Given parameters")
 			.hasMessageContaining("don't match command allowed parameters")
 			.hasMessageContaining(requiredParams)
 			.hasMessageContaining(optionalParams);
+	}
+	
+	
+	
+	@Parameters({"", "not numeric", "--2", "dd2", "34sfe"})
+	@Test
+	public void shouldNotPassValidationInvalidParamNumericValueNotNumber(String paramValue) {
+		//given
+		SchemaValidationRule rule = new SchemaValidationRule("topElem");
+		sut = new CommandSchemaValidator(rule);
+		sut.addParameterValueValidator(new IntegerNumberParamValidator("topElem"));
+		// and
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("topElem", paramValue);
+		// and
+		expectedException.expect(WebSuitesException.class)
+			.hasMessageStartingWith("Parameter topElem")
+			.hasMessageContaining("must be proper integer value");
+		// then
+		sut.validateCommandSchema(params);
+	}
+	
+	
+	@Parameters({"12", "0", "3", "2135323233", "24324234"})
+	@Test
+	public void shouldPassValidationParamNumericValue(String paramValue) {
+		//given
+		SchemaValidationRule rule = new SchemaValidationRule("topElem");
+		sut = new CommandSchemaValidator(rule);
+		sut.addParameterValueValidator(new IntegerNumberParamValidator("topElem"));
+		// and
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("topElem", paramValue);
+		// then
+		sut.validateCommandSchema(params);
+	}
+	
+	
+	
+	@Parameters({"-12", "-0", "-3", "-200", "-300"})
+	@Test
+	public void shouldPassValidationParamNumericNegativeValue(String paramValue) {
+		//given
+		SchemaValidationRule rule = new SchemaValidationRule("topElem");
+		sut = new CommandSchemaValidator(rule);
+		sut.addParameterValueValidator(new IntegerNumberParamValidator("topElem", -500, 1));
+		// and
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("topElem", paramValue);
+		// then
+		sut.validateCommandSchema(params);
+	}
+	
+	
+	@Parameters({"-12,0,-3", "-1,3,2", "100,200,199","100,200,200","100,200,100"})
+	@Test
+	public void shouldPassValidationParamNumericValueBetween(int a, int b, int value) {
+		//given
+		SchemaValidationRule rule = new SchemaValidationRule("topElem");
+		sut = new CommandSchemaValidator(rule);
+		sut.addParameterValueValidator(
+				new IntegerNumberParamValidator("topElem", a, b));
+		// and
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("topElem", value + "");
+		// then
+		sut.validateCommandSchema(params);
+	}
+	
+	
+	
+	@Parameters({"-12,0,-13", "-1,3,4", "100,200,2000000","100,200,99","100,200,-100"})
+	@Test
+	public void shouldNotPassValidationParamNumericValueBetween(int a, int b, int value) {
+		//given
+		SchemaValidationRule rule = new SchemaValidationRule("topElem");
+		sut = new CommandSchemaValidator(rule);
+		sut.addParameterValueValidator(
+				new IntegerNumberParamValidator("topElem", a, b));
+		// and
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("topElem", value + "");
+		// and
+		expectedException.expect(WebSuitesException.class)
+			.hasMessage("Integer value for param topElem must be between " +
+					a + " and " + b);
+		// then
+		sut.validateCommandSchema(params);
 	}
 }
