@@ -34,13 +34,15 @@ public class SchemaValidationRule {
 	}
 	
 	
-	public void addMandatoryElements(String ... elements) {
+	public SchemaValidationRule addMandatoryElements(String ... elements) {
 		mandatoryElements.addAll(Arrays.asList(elements));
+		return this;
 	}
 	
 	
-	public void addOptionalElements(String ... elements) {
+	public SchemaValidationRule addOptionalElements(String ... elements) {
 		optionalElements.addAll(Arrays.asList(elements));
+		return this;
 	}
 	
 	

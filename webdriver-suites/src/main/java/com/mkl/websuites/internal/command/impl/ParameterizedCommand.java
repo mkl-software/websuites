@@ -13,7 +13,6 @@ import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.command.BaseCommand;
 import com.mkl.websuites.internal.command.impl.validator.CommandSchemaValidator;
 import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
-import com.mkl.websuites.internal.command.impl.validator.ValidationResult;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
 
@@ -39,16 +38,23 @@ public abstract class ParameterizedCommand extends BaseCommand {
 			super.run();
 		} else {
 			
-			validateParameters();
-			
-			browser = ServiceFactory.get(BrowserController.class).getWebDriver();
 			log.debug("running parameterized command " + this.getClass() +
 					" with parameters " + parameterMap);
+			
+			validateParameters();
+			
+			populateBrowser();
 			
 			resolvePropertyValuesInParameterMap();
 			
 			runCommandWithParameters();
 		}
+	}
+
+
+
+	protected void populateBrowser() {
+		browser = ServiceFactory.get(BrowserController.class).getWebDriver();
 	}
 
 

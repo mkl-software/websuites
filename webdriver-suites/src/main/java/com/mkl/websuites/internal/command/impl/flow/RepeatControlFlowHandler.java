@@ -25,10 +25,23 @@ public class RepeatControlFlowHandler extends ControlFlowHandler{
 	@Override
 	protected void runCommandWithParameters() {
 		
+		if (parameterMap.containsKey("times")) {
+			doTimes();
+		}
+	}
+
+	
+	
+	
+	private void doTimes() {
+		WebSuitesUserProperties props = WebSuitesUserProperties.get();
 		int n = Integer.valueOf(parameterMap.get("times"));
-		
+		String counterProperty = "1";
+		if (parameterMap.containsKey("counter")) {
+			counterProperty = parameterMap.get("counter");
+		}
 		for (int i = 0; i < n; i++) {
-			WebSuitesUserProperties.get().setProperty("1", (i + 1) + "");
+			props.setProperty(counterProperty, (i + 1) + "");
 			for (Command command : nestedCommands) {
 				command.run();
 			}
@@ -39,10 +52,8 @@ public class RepeatControlFlowHandler extends ControlFlowHandler{
 	@Override
 	protected List<SchemaValidationRule> defineValidationRules() {
 		
-		SchemaValidationRule timesRule = new SchemaValidationRule("times");
-		timesRule.addOptionalElements("counter");
-		
-		return Arrays.asList(timesRule);
+		return Arrays.asList(
+				new SchemaValidationRule("times").addOptionalElements("counter"));
 	}
 
 	
