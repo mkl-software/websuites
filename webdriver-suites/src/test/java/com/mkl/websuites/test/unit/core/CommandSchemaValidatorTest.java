@@ -3,8 +3,12 @@ package com.mkl.websuites.test.unit.core;
 import java.util.HashMap;
 import java.util.Map;
 
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
+
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import pl.wkr.fluentrule.api.FluentExpectedException;
 
@@ -15,6 +19,7 @@ import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 
 
+@RunWith(JUnitParamsRunner.class)
 public class CommandSchemaValidatorTest {
 
 	
@@ -199,14 +204,18 @@ public class CommandSchemaValidatorTest {
 	
 	
 	
+	@Parameters({"", "optional1;optional2;optional3", "optional1", "optional2", "optional3",
+		         "optional3;optional1", "optional2;optional3", "optional1;optional3"})
 	@Test
-	public void shouldPassValidationManyRequired() {
+	public void shouldPassValidationManyRequired(String optionals) {
 		//given
 		SchemaValidationRule rule = new SchemaValidationRule("topElem");
 		rule.addMandatoryElements("required1");
 		rule.addMandatoryElements("required2");
 		rule.addMandatoryElements("required3");
-		rule.addOptionalElements("optional");
+		rule.addOptionalElements("optional1");
+		rule.addOptionalElements("optional2");
+		rule.addOptionalElements("optional3");
 		sut = new CommandSchemaValidator(rule);
 		// and
 		Map<String, String> someMap = new HashMap<String, String>();
@@ -214,10 +223,41 @@ public class CommandSchemaValidatorTest {
 		someMap.put("required1", "some value doesn't matter what");
 		someMap.put("required2", "some value doesn't matter what");
 		someMap.put("required3", "some value doesn't matter what");
-		someMap.put("optional", "some value doesn't matter what");
+		String[] options = optionals.split(";");
+		for (String optional : options) {
+			if (!optional.isEmpty()) {
+				someMap.put(optional, "some value doesn't matter what");
+			}
+		}
 		//then
 		sut.validateCommandSchema(someMap );
 	}
+	
+	
+	
+		@Parameters({"required1", "required2", "required3",
+	        "required3;required1", "required2;required3", "required1;required3"})
+		@Test
+		public void shouldNotPassValidationManyRequired(String required) {
+		//given
+		SchemaValidationRule rule = new SchemaValidationRule("topElem");
+		rule.addMandatoryElements("required1");
+		rule.addMandatoryElements("required2");
+		rule.addMandatoryElements("required3");
+		sut = new CommandSchemaValidator(rule);
+		// and
+		Map<String, String> someMap = new HashMap<String, String>();
+		someMap.put("topElem", "some value doesn't matter what");
+		String[] requiredParams = required.split(";");
+		for (String param : requiredParams) {
+			if (!param.isEmpty()) {
+				someMap.put(param, "some value doesn't matter what");
+			}
+		}
+		//then
+		expectValidationException("[required1, required2, required3]", "[]");
+		sut.validateCommandSchema(someMap );
+		}
 
 
 
