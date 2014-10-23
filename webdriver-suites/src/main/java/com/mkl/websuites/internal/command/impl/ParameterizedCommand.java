@@ -1,6 +1,7 @@
 package com.mkl.websuites.internal.command.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.command.BaseCommand;
+import com.mkl.websuites.internal.command.impl.validator.CommandSchemaValidator;
+import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
+import com.mkl.websuites.internal.command.impl.validator.ValidationResult;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
 
@@ -35,6 +39,8 @@ public abstract class ParameterizedCommand extends BaseCommand {
 			super.run();
 		} else {
 			
+			validateParameters();
+			
 			browser = ServiceFactory.get(BrowserController.class).getWebDriver();
 			log.debug("running parameterized command " + this.getClass() +
 					" with parameters " + parameterMap);
@@ -43,6 +49,13 @@ public abstract class ParameterizedCommand extends BaseCommand {
 			
 			runCommandWithParameters();
 		}
+	}
+
+
+
+	protected void validateParameters() {
+		new CommandSchemaValidator(defineValidationRules())
+			.validateCommandSchema(parameterMap);
 	}
 	
 	
@@ -77,36 +90,37 @@ public abstract class ParameterizedCommand extends BaseCommand {
 
 
 
-	protected boolean validateAnyOf(String ... paramNames) {
-		
-		return checkNumberOfMatchingParams(paramNames) > 0;
-	}
-	
-	
-	protected boolean validateAllOf(String ... paramNames) {
-		
-		return checkNumberOfMatchingParams(paramNames) == paramNames.length;
-	}
+//	protected boolean validateAnyOf(String ... paramNames) {
+//		
+//		return checkNumberOfMatchingParams(paramNames) > 0;
+//	}
+//	
+//	
+//	protected boolean validateAllOf(String ... paramNames) {
+//		
+//		return checkNumberOfMatchingParams(paramNames) == paramNames.length;
+//	}
 
 
 	protected abstract void runCommandWithParameters();
 
 
+	protected abstract List<SchemaValidationRule> defineValidationRules();
 	
 	
 
-	protected int checkNumberOfMatchingParams(String... validParams) {
-		
-		int k = 0;
-		for (String key : validParams) {
-			
-			if (parameterMap.containsKey(key)) {
-				k++;
-			}
-			
-		}
-		return k;
-	}
+//	protected int checkNumberOfMatchingParams(String... validParams) {
+//		
+//		int k = 0;
+//		for (String key : validParams) {
+//			
+//			if (parameterMap.containsKey(key)) {
+//				k++;
+//			}
+//			
+//		}
+//		return k;
+//	}
 
 
 }

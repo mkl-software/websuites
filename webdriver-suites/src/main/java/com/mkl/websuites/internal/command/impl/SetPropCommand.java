@@ -1,12 +1,14 @@
 package com.mkl.websuites.internal.command.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 
 import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 
 @Slf4j
@@ -34,6 +36,13 @@ public class SetPropCommand extends ParameterizedCommand {
 		
 		log.warn("no properties to set in this command");
 
+	}
+
+
+	@Override
+	protected List<SchemaValidationRule> defineValidationRules() {
+		
+		return SchemaValidationRule.emptyValidationRules();
 	}
 
 }

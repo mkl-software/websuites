@@ -96,7 +96,7 @@ public class ServiceFactory {
 	public static <T> T get(Class<T> serviceClass) {
 		
 		if (!isInitialized) {
-			log.error("trying to acquire service before service factory us initialized");
+			log.error("trying to acquire service before service factory is initialized");
 			throw new WebSuitesException("Trying to acquire service " + serviceClass.getName() +
 					" before service factory is initialized");
 		}

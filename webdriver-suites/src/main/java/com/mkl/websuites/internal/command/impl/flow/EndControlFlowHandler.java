@@ -1,8 +1,10 @@
 package com.mkl.websuites.internal.command.impl.flow;
 
+import java.util.List;
 import java.util.Map;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +24,12 @@ public class EndControlFlowHandler extends ControlFlowHandler {
 	@Override
 	protected void runCommandWithParameters() {
 
+	}
+
+	@Override
+	protected List<SchemaValidationRule> defineValidationRules() {
+		
+		return SchemaValidationRule.emptyValidationRules();
 	}
 
 }

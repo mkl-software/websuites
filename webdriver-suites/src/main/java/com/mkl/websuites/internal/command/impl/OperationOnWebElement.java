@@ -1,13 +1,17 @@
 package com.mkl.websuites.internal.command.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+
+import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 public abstract class OperationOnWebElement extends ParameterizedCommand {
 
@@ -32,15 +36,13 @@ public abstract class OperationOnWebElement extends ParameterizedCommand {
 	@Override
 	protected void runCommandWithParameters() {
 		
-		String[] validParams = new String[]{
-				"css", "id", "xpath", "linkText", "className", "name", "tagName"};
 		
-		int matchingParams = checkNumberOfMatchingParams(validParams);
-		
-		if (matchingParams != 1) {
-			Assert.fail("Click command parameters " + parameterMap + " are not valid. Please specify "
-					+ "exactly one of the following params: " + Arrays.toString(validParams));
-		}
+//		int matchingParams = checkNumberOfMatchingParams(validParams);
+//		
+//		if (matchingParams != 1) {
+//			Assert.fail("Click command parameters " + parameterMap + " are not valid. Please specify "
+//					+ "exactly one of the following params: " + Arrays.toString(validParams));
+//		}
 		
 		By by = null;
 		
@@ -84,6 +86,22 @@ public abstract class OperationOnWebElement extends ParameterizedCommand {
 		}
 	}
 
+	
+	@Override
+	protected List<SchemaValidationRule> defineValidationRules() {
+		
+		List<SchemaValidationRule> rules = new ArrayList<SchemaValidationRule>();
+		String[] validParams = new String[]{
+				"css", "id", "xpath", "linkText", "className", "name", "tagName"};
+		
+		for (String paramName : validParams) {
+			SchemaValidationRule rule = new SchemaValidationRule(paramName);
+			rules.add(rule);
+		}
+		
+		return rules;
+	}
+	
 
 	protected abstract void doOperationOnElement(WebElement elem);
 
