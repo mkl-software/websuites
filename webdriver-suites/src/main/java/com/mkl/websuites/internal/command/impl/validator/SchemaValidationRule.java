@@ -31,11 +31,6 @@ public class SchemaValidationRule {
 		this.topLevelRequiredElement = topLevelRequiredElement;
 		mandatoryElements = new ArrayList<String>();
 		optionalElements = new ArrayList<String>();
-		miniDocumentation = String.format("\nparameter \"%s\" with mandatory params %s "
-				+ "and optional params %s",
-				topLevelRequiredElement,
-				mandatoryElements.toString(),
-				optionalElements.toString());
 	}
 	
 	
@@ -51,6 +46,16 @@ public class SchemaValidationRule {
 	
 	@Override
 	public String toString() {
-		return miniDocumentation;
+		
+		if (miniDocumentation != null && !miniDocumentation.isEmpty()) {
+			
+			return miniDocumentation;
+		}
+		
+		return String.format("\nparameter \"%s\" with mandatory params %s "
+				+ "and optional params %s",
+				topLevelRequiredElement,
+				mandatoryElements.toString(),
+				optionalElements.toString());
 	}
 }
