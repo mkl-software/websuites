@@ -84,15 +84,84 @@ public class RepeatControlFlowHandlerTest {
 	
 	
 	
-	@Parameters({"times=5;another=2", "time=5", "times=5;counter=i;another=2"})
+	@Parameters({"times=5;another=2", "time=5", "times=5;counter=i;another=2", "times=5;cnt=i"})
 	@Test
-	public void shouldNotPassTimesValidation(String encodedProperties) {
+	public void shouldNotPassTimesValidationIncorrectAttributes(String encodedProperties) {
 		//when
 		expectValidationException();
 		//then
 		runSutForProperties(encodedProperties);
 	}
+	
+	
+	@Parameters({"--2", "sfdf", "$erer}"})
+	@Test
+	public void shouldNotPassValidationTimesValueIncorrect(String timesValue) {
+		// given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("times", timesValue);
+		sut = new RepeatControlFlowHandler(params );
+		// and
+		expectedException.expect(WebSuitesException.class)
+			.hasMessageContaining("must be proper integer value");
+		//when
+		sut.run();
+		//then expect exception
+	}
+	
+	
+	
+	@Test
+	public void shouldNotPassValidationTimesValueNotInRange() {
+		// given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("times", "-1");
+		sut = new RepeatControlFlowHandler(params );
+		// and
+		expectedException.expect(WebSuitesException.class)
+			.hasMessageContaining("Integer value for param")
+			.hasMessageContaining("must be between");
+		//when
+		sut.run();
+		//then expect exception
+	}
 
+	
+	@Test
+	public void shouldDoRepeatTimesWithPropertyValue(@Mocked final Command command) {
+		// given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("times", "${howMany}");
+		sut = new RepeatControlFlowHandler(params);
+		sut.setNestedCommands(Arrays.asList(command));
+		// and
+		WebSuitesUserProperties.get().setProperty("howMany", "12");
+		// when
+		sut.run();
+		// then
+		new Verifications() {{
+			command.run();
+			times = 12;
+		}
+		};
+	}
+	
+	
+	
+	@Parameters({"wef", "O", "-2", "43ffddf", "efe35"})
+	@Test
+	public void shouldNotPassValidationWithResolvedProperty(String howManyTimes) {
+		// given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("times", "${howMany}");
+		sut = new RepeatControlFlowHandler(params);
+		// and
+		WebSuitesUserProperties.get().setProperty("howMany", howManyTimes);
+		// when
+		expectedException.expect(WebSuitesException.class);
+		// then
+		sut.run();
+	}
 	
 
 	private void runSutForProperties(String encodedProperties) {

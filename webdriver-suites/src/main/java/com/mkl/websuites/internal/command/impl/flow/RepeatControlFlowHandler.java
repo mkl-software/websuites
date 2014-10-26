@@ -7,6 +7,8 @@ import java.util.Map;
 import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.internal.command.impl.validator.IntegerNumberParamValidator;
+import com.mkl.websuites.internal.command.impl.validator.ParameterValueValidator;
 import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 
@@ -54,6 +56,12 @@ public class RepeatControlFlowHandler extends ControlFlowHandler{
 		
 		return Arrays.asList(
 				new SchemaValidationRule("times").addOptionalElements("counter"));
+	}
+	
+	@Override
+	protected List<ParameterValueValidator> defineParameterValueValidators() {
+		
+		return Arrays.asList((ParameterValueValidator) new IntegerNumberParamValidator("times"));
 	}
 
 	

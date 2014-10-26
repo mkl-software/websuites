@@ -2,6 +2,7 @@ package com.mkl.websuites.internal.command.impl.validator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,14 +18,16 @@ public class CommandSchemaValidator {
 	
 	private List<ParameterValueValidator> parameterValueValidators;
 
-	public CommandSchemaValidator(List<SchemaValidationRule> schemaValidationRules) {
+	public CommandSchemaValidator(List<SchemaValidationRule> schemaValidationRules,
+			List<ParameterValueValidator> paramValueValidators) {
 		
 		this.schemaValidationRules = schemaValidationRules;
-		parameterValueValidators = new ArrayList<ParameterValueValidator>();
+		this.parameterValueValidators = paramValueValidators;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public CommandSchemaValidator(SchemaValidationRule ... rules) {
-		this(Arrays.asList(rules));
+		this(Arrays.asList(rules), (List) Collections.emptyList());
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.mkl.websuites.test.unit.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import pl.wkr.fluentrule.api.FluentExpectedException;
 import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.internal.command.impl.validator.CommandSchemaValidator;
 import com.mkl.websuites.internal.command.impl.validator.IntegerNumberParamValidator;
+import com.mkl.websuites.internal.command.impl.validator.ParameterValueValidator;
 import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 
@@ -36,7 +38,8 @@ public class CommandSchemaValidatorTest {
 	@Test
 	public void shouldPassValidationWhenNoValidationRules() {
 		//given
-		sut = new CommandSchemaValidator(SchemaValidationRule.emptyValidationRules());
+		sut = new CommandSchemaValidator(SchemaValidationRule.emptyValidationRules(),
+				new ArrayList<ParameterValueValidator>());
 		Map<String, String> someMap = new HashMap<String, String>();
 		// and
 		someMap.put("paramOne", "value one");

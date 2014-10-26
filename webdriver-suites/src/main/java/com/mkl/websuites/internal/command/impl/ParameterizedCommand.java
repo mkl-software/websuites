@@ -1,5 +1,6 @@
 package com.mkl.websuites.internal.command.impl;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.command.BaseCommand;
 import com.mkl.websuites.internal.command.impl.validator.CommandSchemaValidator;
+import com.mkl.websuites.internal.command.impl.validator.ParameterValueValidator;
 import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
@@ -41,11 +43,11 @@ public abstract class ParameterizedCommand extends BaseCommand {
 			log.debug("running parameterized command " + this.getClass() +
 					" with parameters " + parameterMap);
 			
+			resolvePropertyValuesInParameterMap();
+			
 			validateParameters();
 			
 			populateBrowser();
-			
-			resolvePropertyValuesInParameterMap();
 			
 			runCommandWithParameters();
 		}
@@ -60,7 +62,7 @@ public abstract class ParameterizedCommand extends BaseCommand {
 
 
 	protected void validateParameters() {
-		new CommandSchemaValidator(defineValidationRules())
+		new CommandSchemaValidator(defineValidationRules(), defineParameterValueValidators())
 			.validateCommandSchema(parameterMap);
 	}
 	
@@ -112,6 +114,10 @@ public abstract class ParameterizedCommand extends BaseCommand {
 
 
 	protected abstract List<SchemaValidationRule> defineValidationRules();
+	
+	protected  List<ParameterValueValidator> defineParameterValueValidators() {
+		return Collections.emptyList();
+	}
 	
 	
 
