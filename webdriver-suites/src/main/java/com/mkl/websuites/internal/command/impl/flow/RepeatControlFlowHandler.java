@@ -39,11 +39,19 @@ public class RepeatControlFlowHandler extends ControlFlowHandler{
 	
 	private void doData() {
 		String data = parameterMap.get("data");
+		String[] paramNames = null;
+		if (parameterMap.containsKey("params")) {
+			paramNames = parameterMap.get("params").split(",");
+		}
 		String[] dataRows = data.split(";");
 		for (String dataRow : dataRows) {
 			String[] params = dataRow.split(",");
 			for (int i = 0; i < params.length; i++) {
-				WebSuitesUserProperties.get().setProperty((i+1) + "", params[i]);
+				if (paramNames == null) {
+					WebSuitesUserProperties.get().setProperty((i+1) + "", params[i]);
+				} else {
+					WebSuitesUserProperties.get().setProperty(paramNames[i] + "", params[i]);
+				}
 			}
 			runNestedCommands();
 		}

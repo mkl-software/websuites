@@ -221,6 +221,40 @@ public class RepeatControlFlowHandlerTest {
 		};
 	}
 	
+	
+	
+	@Test
+	public void shouldRepeatWithInlineDataWithInlinePropertyNames(
+			@Mocked final Command command, @Mocked final WebSuitesUserProperties mockedProps) {
+		// given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("data", "1,2,3;4,5,6;7,8,9");
+		params.put("params", "param1,j,text");
+		sut = new RepeatControlFlowHandler(params);
+		sut.setNestedCommands(Arrays.asList(command));
+		// and
+		new NonStrictExpectations() {{
+			WebSuitesUserProperties.get();
+			result = mockedProps;
+		}
+		};
+		//when
+		sut.run();
+		//then
+		new VerificationsInOrder() {{
+			mockedProps.setProperty("param1", "1");
+			mockedProps.setProperty("j", "2");
+			mockedProps.setProperty("text", "3");
+			mockedProps.setProperty("param1", "4");
+			mockedProps.setProperty("j", "5");
+			mockedProps.setProperty("text", "6");
+			mockedProps.setProperty("param1", "7");
+			mockedProps.setProperty("j", "8");
+			mockedProps.setProperty("text", "9");
+		}
+		};
+	}
+	
 
 	private void runSutForProperties(String encodedProperties) {
 		String[] props = encodedProperties.split(";");
