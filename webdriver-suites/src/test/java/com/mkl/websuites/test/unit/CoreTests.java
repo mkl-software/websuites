@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.mkl.websuites.internal.command.impl.OperationOnWebElementTest;
 import com.mkl.websuites.test.unit.core.CommandSchemaValidatorTest;
 import com.mkl.websuites.test.unit.core.NormalizePathTest;
 import com.mkl.websuites.test.unit.core.PropertiesTest;
@@ -15,7 +16,8 @@ import com.mkl.websuites.test.unit.core.PropertiesTest;
 	
 	NormalizePathTest.class,
 	PropertiesTest.class,
-	CommandSchemaValidatorTest.class
+	CommandSchemaValidatorTest.class,
+	OperationOnWebElementTest.class
 })
 public class CoreTests {
 

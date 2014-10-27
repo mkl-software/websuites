@@ -1,7 +1,6 @@
 package com.mkl.websuites.internal.command.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,13 +36,6 @@ public abstract class OperationOnWebElement extends ParameterizedCommand {
 	protected void runCommandWithParameters() {
 		
 		
-//		int matchingParams = checkNumberOfMatchingParams(validParams);
-//		
-//		if (matchingParams != 1) {
-//			Assert.fail("Click command parameters " + parameterMap + " are not valid. Please specify "
-//					+ "exactly one of the following params: " + Arrays.toString(validParams));
-//		}
-		
 		By by = null;
 		
 		if (parameterMap.keySet().contains("id")) {
@@ -63,7 +55,11 @@ public abstract class OperationOnWebElement extends ParameterizedCommand {
 		}
 		
 		if (parameterMap.keySet().contains("linkText")) {
-			by = By.partialLinkText(parameterMap.get("linkText"));
+			by = By.linkText(parameterMap.get("linkText"));
+		}
+		
+		if (parameterMap.keySet().contains("partialLinkText")) {
+			by = By.partialLinkText(parameterMap.get("partialLinkText"));
 		}
 		
 		if (parameterMap.keySet().contains("name")) {
@@ -82,7 +78,8 @@ public abstract class OperationOnWebElement extends ParameterizedCommand {
 			doOperationOnElement(elem);
 			
 		} catch (NoSuchElementException e) {
-			Assert.fail("No element for selecor " + by + " can be found on the page.");
+			Assert.fail("No element for selecor " + by + " can be found on the page. "
+					+ "Selection parameters: " + parameterMap);
 		}
 	}
 
@@ -92,7 +89,8 @@ public abstract class OperationOnWebElement extends ParameterizedCommand {
 		
 		List<SchemaValidationRule> rules = new ArrayList<SchemaValidationRule>();
 		String[] validParams = new String[]{
-				"css", "id", "xpath", "linkText", "className", "name", "tagName"};
+				"css", "id", "xpath", "linkText", "partialLinkText",
+				"className", "name", "tagName"};
 		
 		for (String paramName : validParams) {
 			SchemaValidationRule rule = new SchemaValidationRule(paramName);
