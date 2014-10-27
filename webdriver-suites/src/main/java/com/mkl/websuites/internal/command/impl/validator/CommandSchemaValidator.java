@@ -58,7 +58,10 @@ public class CommandSchemaValidator {
 		
 		for (ParameterValueValidator validator : parameterValueValidators) {
 			
-			validator.validateParam(parameters.get(validator.getParamName()));
+			String paramValue = parameters.get(validator.getParamName());
+			if (paramValue != null) {
+				validator.validateParam(paramValue);
+			}
 		}
 	}
 

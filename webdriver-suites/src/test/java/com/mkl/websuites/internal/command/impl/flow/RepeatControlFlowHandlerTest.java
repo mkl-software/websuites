@@ -11,7 +11,9 @@ import junitparams.Parameters;
 import mockit.Mock;
 import mockit.MockUp;
 import mockit.Mocked;
+import mockit.NonStrictExpectations;
 import mockit.Verifications;
+import mockit.VerificationsInOrder;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -35,6 +37,8 @@ public class RepeatControlFlowHandlerTest {
 	
 	@Rule
 	public FluentExpectedException expectedException = FluentExpectedException.none();
+
+
 	
 	@Before
 	public void init() {
@@ -43,6 +47,8 @@ public class RepeatControlFlowHandlerTest {
 			void populateBrowser() {}
 		};
 	}
+	
+	
 	
 	
 	@Test
@@ -161,6 +167,58 @@ public class RepeatControlFlowHandlerTest {
 		expectedException.expect(WebSuitesException.class);
 		// then
 		sut.run();
+	}
+	
+	
+	
+	@Test
+	public void shouldRepeatWithInlineDataSimpleVersion(@Mocked final Command command) {
+		// given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("data", "1,2,3;4,5,6;7,8,9");
+		sut = new RepeatControlFlowHandler(params);
+		sut.setNestedCommands(Arrays.asList(command));
+		//when
+		sut.run();
+		//then
+		new Verifications() {{
+			command.run();
+			times = 3;
+		}
+		};
+	}
+	
+	
+	
+	@Test
+	public void shouldRepeatWithInlineDataWithPropertyValueCheck(
+			@Mocked final Command command, @Mocked final WebSuitesUserProperties mockedProps) {
+		// given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("data", "1,2,3;4,5,6;7,8,9");
+		sut = new RepeatControlFlowHandler(params);
+		sut.setNestedCommands(Arrays.asList(command));
+		// and
+		new NonStrictExpectations() {{
+			WebSuitesUserProperties.get();
+			result = mockedProps;
+		}
+		};
+		//when
+		sut.run();
+		//then
+		new VerificationsInOrder() {{
+			mockedProps.setProperty("1", "1");
+			mockedProps.setProperty("2", "2");
+			mockedProps.setProperty("3", "3");
+			mockedProps.setProperty("1", "4");
+			mockedProps.setProperty("2", "5");
+			mockedProps.setProperty("3", "6");
+			mockedProps.setProperty("1", "7");
+			mockedProps.setProperty("2", "8");
+			mockedProps.setProperty("3", "9");
+		}
+		};
 	}
 	
 

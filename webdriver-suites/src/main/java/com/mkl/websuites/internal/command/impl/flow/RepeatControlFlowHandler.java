@@ -29,12 +29,26 @@ public class RepeatControlFlowHandler extends ControlFlowHandler{
 		
 		if (parameterMap.containsKey("times")) {
 			doTimes();
+		} else if (parameterMap.containsKey("data")) {
+			doData();
 		}
 	}
 
 	
 	
 	
+	private void doData() {
+		String data = parameterMap.get("data");
+		String[] dataRows = data.split(";");
+		for (String dataRow : dataRows) {
+			String[] params = dataRow.split(",");
+			for (int i = 0; i < params.length; i++) {
+				WebSuitesUserProperties.get().setProperty((i+1) + "", params[i]);
+			}
+			runNestedCommands();
+		}
+	}
+
 	private void doTimes() {
 		WebSuitesUserProperties props = WebSuitesUserProperties.get();
 		int n = Integer.valueOf(parameterMap.get("times"));
@@ -44,9 +58,13 @@ public class RepeatControlFlowHandler extends ControlFlowHandler{
 		}
 		for (int i = 0; i < n; i++) {
 			props.setProperty(counterProperty, (i + 1) + "");
-			for (Command command : nestedCommands) {
-				command.run();
-			}
+			runNestedCommands();
+		}
+	}
+
+	private void runNestedCommands() {
+		for (Command command : nestedCommands) {
+			command.run();
 		}
 	}
 
@@ -55,7 +73,8 @@ public class RepeatControlFlowHandler extends ControlFlowHandler{
 	protected List<SchemaValidationRule> defineValidationRules() {
 		
 		return Arrays.asList(
-				new SchemaValidationRule("times").addOptionalElements("counter"));
+				new SchemaValidationRule("times").addOptionalElements("counter"),
+				new SchemaValidationRule("data").addOptionalElements("params"));
 	}
 	
 	@Override
