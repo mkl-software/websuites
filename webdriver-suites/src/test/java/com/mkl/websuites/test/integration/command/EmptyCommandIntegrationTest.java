@@ -1,7 +1,8 @@
 package com.mkl.websuites.test.integration.command;
 
-import mockit.Mocked;
-import mockit.Verifications;
+import static org.assertj.core.api.Assertions.assertThat;
+import mockit.Mock;
+import mockit.MockUp;
 
 import org.junit.Test;
 import org.junit.runner.Result;
@@ -30,16 +31,22 @@ public class EmptyCommandIntegrationTest extends WebSuitesResultCheck {
 	
 	
 	@Test
-	public void verifySampleCommandInvocation(@Mocked final SampleCommand mockedCommand) throws Throwable {
+	public void verifySampleCommandInvocation() throws Throwable {
+		
+		// not a perfect verification, would pass also if SampleCommand constructor wasn't
+		// invoked at all... But in this when argument string is modified, the test doesn't pass
+		// it's OK for testing purposes
+		new MockUp<SampleCommand>() {
+			@Mock
+			public void $init(String argument) {
+				assertThat(argument).isEqualTo("from scenario file");
+			}
+		};
 		
 		Result testResult = super.checkWebTestResult(LocalRunner.class);
 		
 		checkRunCount(3, testResult);
 		
-		new Verifications() {{
-			mockedCommand.run();
-		}
-		};
 	}
 	
 	

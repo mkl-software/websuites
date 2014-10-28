@@ -13,6 +13,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <slf4j.version>1.7.5</slf4j.version>
+    <jmockit.version>1.12</jmockit.version>
   </properties>
 
   <dependencies>
@@ -42,7 +43,7 @@
     <dependency>
 		<groupId>org.jmockit</groupId>
 		<artifactId>jmockit</artifactId>
-		<version>1.12</version>
+		<version>${jmockit.version}</version>
 		<scope>test</scope>
 	</dependency>
 	
@@ -133,7 +134,7 @@
 			          <includes>
 				            <include>**/MasterSuite.java</include>
 			          </includes>
-			          <argLine>-javaagent:${settings.localRepository}/org/jmockit/jmockit/1.11/jmockit-1.11.jar</argLine>
+			          <argLine>-javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar</argLine>
       				  <useSystemClassLoader>true</useSystemClassLoader>
 		          </configuration>
         	</plugin>
