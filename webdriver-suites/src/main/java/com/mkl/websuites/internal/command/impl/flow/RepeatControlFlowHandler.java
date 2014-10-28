@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandDescriptor;
@@ -37,23 +38,38 @@ public class RepeatControlFlowHandler extends ControlFlowHandler{
 	
 	
 	
+	/**
+	 * Without "params" there will never be an exception, only the unfilled properties
+	 * will have null values.
+	 */
 	private void doData() {
-		String data = parameterMap.get("data");
-		String[] paramNames = null;
-		if (parameterMap.containsKey("params")) {
-			paramNames = parameterMap.get("params").split(",");
-		}
-		String[] dataRows = data.split(";");
-		for (String dataRow : dataRows) {
-			String[] params = dataRow.split(",");
-			for (int i = 0; i < params.length; i++) {
-				if (paramNames == null) {
-					WebSuitesUserProperties.get().setProperty((i+1) + "", params[i]);
-				} else {
-					WebSuitesUserProperties.get().setProperty(paramNames[i] + "", params[i]);
-				}
+		try {
+			String data = parameterMap.get("data");
+			String[] paramNames = null;
+			if (parameterMap.containsKey("params")) {
+				paramNames = parameterMap.get("params").split(",");
 			}
-			runNestedCommands();
+			String[] dataRows = data.split(";");
+			for (String dataRow : dataRows) {
+				String[] params = dataRow.split(",");
+				if (paramNames != null && params.length != paramNames.length) {
+					throw new Exception("Wrong parameter length in row: '" + dataRow +
+							"' in string '" + data + "'");
+				}
+				for (int i = 0; i < params.length; i++) {
+					if (paramNames == null) {
+						WebSuitesUserProperties.get().setProperty((i+1) + "", params[i]);
+					} else {
+						WebSuitesUserProperties.get().setProperty(paramNames[i] + "", params[i]);
+					}
+				}
+				runNestedCommands();
+			}
+		} catch (Exception e) {
+			String msg = "Error while parsing data string. Please provide inline parameters in data,"
+					+ "parameters should be seperated using a coma ',' and rows should be seperated "
+					+ "by a colon ';'. Sample correct parameters: data=1,2,3;i,j,k;x1,x2,x3";
+			throw new WebSuitesException(msg, e);
 		}
 	}
 

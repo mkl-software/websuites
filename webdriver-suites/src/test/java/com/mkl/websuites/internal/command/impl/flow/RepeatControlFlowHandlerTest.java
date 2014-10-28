@@ -1,6 +1,7 @@
 package com.mkl.websuites.internal.command.impl.flow;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
+import static junitparams.JUnitParamsRunner.$;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -93,10 +94,20 @@ public class RepeatControlFlowHandlerTest {
 	@Parameters({"times=5;another=2", "time=5", "times=5;counter=i;another=2", "times=5;cnt=i"})
 	@Test
 	public void shouldNotPassTimesValidationIncorrectAttributes(String encodedProperties) {
+		// given
+		String[] props = encodedProperties.split(";");
+		Map<String, String> params = new HashMap<String, String>();
+		for (String prop : props) {
+			String[] value = prop.split("=");
+			params.put(value[0], value[1]);
+		}
+		sut = new RepeatControlFlowHandler(params);
 		//when
-		expectValidationException();
+		expectedException.expect(WebSuitesException.class)
+			.hasMessageStartingWith("Given parameters")
+			.hasMessageContaining("don't match command allowed parameters");
 		//then
-		runSutForProperties(encodedProperties);
+		sut.run();
 	}
 	
 	
@@ -255,23 +266,40 @@ public class RepeatControlFlowHandlerTest {
 		};
 	}
 	
-
-	private void runSutForProperties(String encodedProperties) {
-		String[] props = encodedProperties.split(";");
+	
+	
+	@Parameters
+	@Test
+	public void shouldThrowExceptionWhenParsingInlineDataWithParams(String data) {
+		//given
 		Map<String, String> params = new HashMap<String, String>();
-		for (String prop : props) {
-			String[] value = prop.split("=");
-			params.put(value[0], value[1]);
-		}
+		params.put("data", data);
+		params.put("params", "x,y");
 		sut = new RepeatControlFlowHandler(params);
-		sut.run();
-	}
-
-
-	private void expectValidationException() {
+		// and
+		//when
 		expectedException.expect(WebSuitesException.class)
-			.hasMessageStartingWith("Given parameters")
-			.hasMessageContaining("don't match command allowed parameters");
+			.hasMessageContaining("Error while parsing data string");
+		sut.run();
+		//when
+		//then
+		
 	}
+	
+	@SuppressWarnings("unused")
+	private Object[] parametersForShouldThrowExceptionWhenParsingInlineDataWithParams() {
+		return $(
+			$(""),
+			$("1"),
+			$("1,2,3"),
+			$("1,2;1"),
+			$("1,2;1,2,3"),
+			$("1,2;1,2;1,2;1,2;1"),
+			$("1,2;1,2;1,2;1,2;1,2,3,4,5,6")
+		);
+	}
+	
+
+
 
 }
