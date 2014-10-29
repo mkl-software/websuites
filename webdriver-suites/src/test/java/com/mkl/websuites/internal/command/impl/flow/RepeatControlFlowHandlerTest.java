@@ -5,6 +5,7 @@ import static junitparams.JUnitParamsRunner.$;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import junitparams.JUnitParamsRunner;
@@ -27,6 +28,7 @@ import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.impl.ParameterizedCommand;
+import com.mkl.websuites.internal.command.impl.validator.SampleDataProvider;
 
 
 
@@ -256,12 +258,15 @@ public class RepeatControlFlowHandlerTest {
 			mockedProps.setProperty("param1", "1");
 			mockedProps.setProperty("j", "2");
 			mockedProps.setProperty("text", "3");
+			command.run();
 			mockedProps.setProperty("param1", "4");
 			mockedProps.setProperty("j", "5");
 			mockedProps.setProperty("text", "6");
+			command.run();
 			mockedProps.setProperty("param1", "7");
 			mockedProps.setProperty("j", "8");
 			mockedProps.setProperty("text", "9");
+			command.run();
 		}
 		};
 	}
@@ -300,6 +305,57 @@ public class RepeatControlFlowHandlerTest {
 	}
 	
 
+	
+	
+	@Parameters({
+		"com.mkl.websuites.internal.command.impl.validator.SampleDataProvider, true",
+		"com.mkl.websuites.internal.command.impl.validator.NotImplementingDataProvider, false",
+		"com.mkl.websuites.internal.command.impl.validator.WithoutNoArgConstructor, false"
+	})
+	@Test
+	public void shouldDoRepeatDataValidation(String dataProvider, boolean isValid) {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("dataProvider", dataProvider);
+		sut = new RepeatControlFlowHandler(params);
+		//when
+		if (!isValid) {
+			expectedException.expect(WebSuitesException.class);
+		}
+		//then
+		sut.run();
+	}
+	
+	
+	@Test
+	public void shouldDoRepeatDataProvider(
+			@Mocked final Command command, @Mocked final WebSuitesUserProperties mockedProps) {
+		// given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("dataProvider",
+				"com.mkl.websuites.internal.command.impl.validator.SampleDataProvider");
+		sut = new RepeatControlFlowHandler(params);
+		sut.setNestedCommands(Arrays.asList(command));
+		// and
+		new NonStrictExpectations() {{
+			WebSuitesUserProperties.get();
+			result = mockedProps;
+		}
+		};
+		//when
+		sut.run();
+		//then
+		final List<Map<String, String>> providedData = new SampleDataProvider().provideData();
+		new VerificationsInOrder() {{
+			mockedProps.populateFrom(providedData.get(0));
+			command.run();
+			mockedProps.populateFrom(providedData.get(1));
+			command.run();
+			mockedProps.populateFrom(providedData.get(2));
+			command.run();
+		}
+		};
+	}
 
 
 }

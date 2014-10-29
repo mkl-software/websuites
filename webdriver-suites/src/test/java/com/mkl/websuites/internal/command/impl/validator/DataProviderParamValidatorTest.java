@@ -22,7 +22,7 @@ public class DataProviderParamValidatorTest {
 	public void shouldPassValidation() {
 		//given
 		//when
-		sut.validateParam("com.mkl.websuites.internal.command.impl.validator.LocalEmptyDataProvider");
+		sut.validateParam("com.mkl.websuites.internal.command.impl.validator.SampleDataProvider");
 		//then no validation exception thrown
 	}
 	

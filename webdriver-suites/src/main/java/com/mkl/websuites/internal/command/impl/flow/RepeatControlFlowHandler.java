@@ -33,12 +33,33 @@ public class RepeatControlFlowHandler extends ControlFlowHandler{
 			doTimes();
 		} else if (parameterMap.containsKey("data")) {
 			doData();
+		} else if (parameterMap.containsKey("dataProvider")) {
+			doDataProvider();
 		}
 	}
 
 	
 	
 	
+	private void doDataProvider() {
+		String dataProviderClass = parameterMap.get("dataProvider");
+		try {
+			RepeatDataProvider dataProvider =
+					(RepeatDataProvider) Class.forName(dataProviderClass).newInstance();
+			List<Map<String,String>> data = dataProvider.provideData();
+			WebSuitesUserProperties userProperties = WebSuitesUserProperties.get();
+			
+			for (Map<String, String> params : data) {
+				
+				userProperties.populateFrom(params);
+				runNestedCommands();
+			}
+		} catch (Exception e) {
+			throw new WebSuitesException("Unepected exception when trying to initialize data "
+					+ "provider class " + dataProviderClass, e);
+		}
+	}
+
 	/**
 	 * Without "params" there will never be an exception, only the unfilled properties
 	 * will have null values.

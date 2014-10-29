@@ -14,7 +14,8 @@ import com.mkl.websuites.test.unit.ServiceFactoryTest;
 @SuiteClasses({
 		ServiceFactoryTest.class,
 		ScenarioTests.class,
-		CoreTests.class
+		CoreTests.class,
+		AllUnitTests.class
 })
 public class NonWebTests {
 
