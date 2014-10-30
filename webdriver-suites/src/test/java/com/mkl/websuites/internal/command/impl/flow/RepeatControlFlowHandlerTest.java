@@ -356,6 +356,49 @@ public class RepeatControlFlowHandlerTest {
 		}
 		};
 	}
+	
+	
+	
+	private static boolean flagForHandlerInvocationMarker; // a bit dirty, but I see no mocking here...
+	
+	public static class CustomRepeatHandler implements RepeatHandler {
+
+		@Override
+		public void doRepeat(List<Command> nestedCommands) {
+			flagForHandlerInvocationMarker = true;
+			assertThat(nestedCommands).hasSize(4);
+		}
+		
+	}
+	
+	@Test
+	public void shouldDoRepeatWithHandler(@Mocked final Command command) {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("handler", CustomRepeatHandler.class.getName());
+		sut = new RepeatControlFlowHandler(params);
+		sut.setNestedCommands(Arrays.asList(command, command, command, command));
+		// and
+		flagForHandlerInvocationMarker = false;
+		//when
+		sut.run();
+		//then
+		assertThat(flagForHandlerInvocationMarker).isTrue();
+	}
+	
+	
+	
+	@Test
+	public void shouldNotPassValidationWithDoRepeatWithHandler() {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("handler", "wrong");
+		sut = new RepeatControlFlowHandler(params);
+		//when
+		expectedException.expect(WebSuitesException.class);
+		//then
+		sut.run();
+	}
 
 
 }

@@ -11,6 +11,7 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.validator.DataProviderParamValidator;
 import com.mkl.websuites.internal.command.impl.validator.IntegerNumberParamValidator;
 import com.mkl.websuites.internal.command.impl.validator.ParameterValueValidator;
+import com.mkl.websuites.internal.command.impl.validator.RepeatHandlerValidator;
 import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 
@@ -35,12 +36,25 @@ public class RepeatControlFlowHandler extends ControlFlowHandler{
 			doData();
 		} else if (parameterMap.containsKey("dataProvider")) {
 			doDataProvider();
+		} else if (parameterMap.containsKey("handler")) {
+			doHandler();
 		}
 	}
 
 	
 	
 	
+	private void doHandler() {
+		String handlerClass = parameterMap.get("handler");
+		try {
+			RepeatHandler handler = (RepeatHandler) Class.forName(handlerClass).newInstance();
+			handler.doRepeat(nestedCommands);
+		} catch (Exception e) {
+			throw new WebSuitesException("Unepected exception when trying to initialize data "
+					+ "repeat handler class " + handlerClass, e);
+		}
+	}
+
 	private void doDataProvider() {
 		String dataProviderClass = parameterMap.get("dataProvider");
 		try {
@@ -121,14 +135,17 @@ public class RepeatControlFlowHandler extends ControlFlowHandler{
 		return Arrays.asList(
 				new SchemaValidationRule("times").addOptionalElements("counter"),
 				new SchemaValidationRule("data").addOptionalElements("params"),
-				new SchemaValidationRule("dataProvider"));
+				new SchemaValidationRule("dataProvider"),
+				new SchemaValidationRule("handler"));
 	}
 	
 	@Override
 	protected List<ParameterValueValidator> defineParameterValueValidators() {
 		
-		return Arrays.asList((ParameterValueValidator) new IntegerNumberParamValidator("times"),
-				new DataProviderParamValidator());
+		return Arrays.asList((ParameterValueValidator)
+				new IntegerNumberParamValidator("times"),
+				new DataProviderParamValidator(),
+				new RepeatHandlerValidator());
 	}
 
 	

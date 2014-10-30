@@ -31,7 +31,7 @@ public class DataProviderParamValidatorTest {
 	public void shouldNotPassValidationClassNotFound() {
 		//when
 		expectedException.expect(WebSuitesException.class)
-			.hasMessageContaining("Cannot find data provider class");
+			.hasMessageContaining("Cannot find specified class");
 		//then
 		sut.validateParam("com.mkl.websuites.internal.command.impl.validator.NotExisting");
 	}
@@ -41,7 +41,7 @@ public class DataProviderParamValidatorTest {
 	public void shouldNotPassValidationClassNotImplementingDataProvider() {
 		//when
 		expectedException.expect(WebSuitesException.class)
-			.hasMessageContaining("Data provider class")
+			.hasMessageContaining("Specified class")
 			.hasMessageContaining("must implement");
 		//then
 		sut.validateParam("com.mkl.websuites.internal.command.impl.validator."
