@@ -400,5 +400,49 @@ public class RepeatControlFlowHandlerTest {
 		sut.run();
 	}
 
+	
+	
+	@Test
+	public void shouldBeSubtest() {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("data", "1,2,3");
+		params.put("subtest", "true");
+		sut = new RepeatControlFlowHandler(params);
+		sut.run(); // for validation
+		//when
+		boolean isSubtest = sut.isSubtest();
+		//then
+		assertThat(isSubtest).isTrue();
+	}
+	
+	
+	@Test
+	public void shouldNotBeSubtestFalseValue() {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("data", "1,2,3");
+		params.put("subtest", "false");
+		sut = new RepeatControlFlowHandler(params);
+		sut.run(); // for validation
+		//when
+		boolean isSubtest = sut.isSubtest();
+		//then
+		assertThat(isSubtest).isFalse();
+	}
+	
+	
+	@Test
+	public void shouldNotBeSubtestNoAttribute() {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("data", "1,2,3");
+		sut = new RepeatControlFlowHandler(params);
+		sut.run(); // for validation
+		//when
+		boolean isSubtest = sut.isSubtest();
+		//then
+		assertThat(isSubtest).isFalse();
+	}
 
 }

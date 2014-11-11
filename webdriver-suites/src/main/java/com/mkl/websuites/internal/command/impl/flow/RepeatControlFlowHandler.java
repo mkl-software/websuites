@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import junit.framework.TestCase;
+
 import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.command.Command;
@@ -16,7 +18,7 @@ import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 
 @CommandDescriptor(name = "repeat")
-public class RepeatControlFlowHandler extends ControlFlowHandler{
+public class RepeatControlFlowHandler extends ControlFlowHandler implements Subtestable {
 
 	
 	public RepeatControlFlowHandler() {
@@ -69,7 +71,7 @@ public class RepeatControlFlowHandler extends ControlFlowHandler{
 				runNestedCommands();
 			}
 		} catch (Exception e) {
-			throw new WebSuitesException("Unepected exception when trying to initialize data "
+			throw new WebSuitesException("Unepected exception when trying to acquire data from "
 					+ "provider class " + dataProviderClass, e);
 		}
 	}
@@ -135,6 +137,9 @@ public class RepeatControlFlowHandler extends ControlFlowHandler{
 		return Arrays.asList(
 				new SchemaValidationRule("times").addOptionalElements("counter"),
 				new SchemaValidationRule("data").addOptionalElements("params"),
+				new SchemaValidationRule("data")
+					.addMandatoryElements("subtest")
+					.addOptionalElements("params"),
 				new SchemaValidationRule("dataProvider"),
 				new SchemaValidationRule("handler"));
 	}
@@ -146,6 +151,26 @@ public class RepeatControlFlowHandler extends ControlFlowHandler{
 				new IntegerNumberParamValidator("times"),
 				new DataProviderParamValidator(),
 				new RepeatHandlerValidator());
+	}
+
+	@Override
+	public boolean isSubtest() {
+		if (parameterMap.containsKey("subtest") &&
+			"TRUE".equalsIgnoreCase(parameterMap.get("subtest"))) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public String getSubtestName() {
+		return "REPEAT";
+	}
+
+	@Override
+	public List<TestCase> subTestCases() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
