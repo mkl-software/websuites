@@ -4,13 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandDescriptor;
-import com.mkl.websuites.internal.command.impl.flow.repeat.InlineDataRepeatHandler;
+import com.mkl.websuites.internal.command.impl.flow.repeat.InlineDataProvider;
 import com.mkl.websuites.internal.command.impl.flow.repeat.RepeatDataProvider;
 import com.mkl.websuites.internal.command.impl.flow.repeat.RepeatHandler;
 import com.mkl.websuites.internal.command.impl.validator.DataProviderParamValidator;
@@ -32,6 +30,9 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 		super(parameterMap);
 	}
 
+	
+	
+	
 	@Override
 	protected void runCommandWithParameters() {
 		
@@ -43,6 +44,63 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 			doRepeatWithDataProviderClass();
 		} else if (parameterMap.containsKey("handler")) {
 			doRepeatWithCustomRepeatHandlerClass();
+		}
+	}
+
+	
+	
+	
+	private void doRepeatNTimes() {
+		WebSuitesUserProperties props = WebSuitesUserProperties.get();
+		int n = Integer.valueOf(parameterMap.get("times"));
+		String counterProperty = "1";
+		if (parameterMap.containsKey("counter")) {
+			counterProperty = parameterMap.get("counter");
+		}
+		for (int i = 0; i < n; i++) {
+			props.setProperty(counterProperty, (i + 1) + "");
+			runNestedCommands();
+		}
+	}
+
+	
+	
+	
+	private void doRepeatWithDataProviderClass() {
+		
+		String dataProviderClass = parameterMap.get("dataProvider");
+		try {
+			RepeatDataProvider dataProvider =
+					(RepeatDataProvider) Class.forName(dataProviderClass).newInstance();
+			
+			runForDataProvider(dataProvider);
+			
+		} catch (Exception e) {
+			throw new WebSuitesException("Unepected exception when trying to acquire data from "
+					+ "provider class " + dataProviderClass, e);
+		}
+	}
+
+	
+	
+	
+	private void doRepeatWithInlineData() {
+		
+		runForDataProvider(new InlineDataProvider(parameterMap));
+	}
+
+	
+	
+	private void runForDataProvider(RepeatDataProvider dataProvider) {
+		
+		List<Map<String,String>> data = dataProvider.provideData();
+		WebSuitesUserProperties userProperties = WebSuitesUserProperties.get();
+		
+		for (Map<String, String> params : data) {
+			
+			userProperties.populateFrom(params);
+			
+			runNestedCommands();
 		}
 	}
 
@@ -62,50 +120,6 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 
 	
 	
-	
-	private void doRepeatWithDataProviderClass() {
-		String dataProviderClass = parameterMap.get("dataProvider");
-		try {
-			RepeatDataProvider dataProvider =
-					(RepeatDataProvider) Class.forName(dataProviderClass).newInstance();
-			List<Map<String,String>> data = dataProvider.provideData();
-			WebSuitesUserProperties userProperties = WebSuitesUserProperties.get();
-			
-			for (Map<String, String> params : data) {
-				
-				userProperties.populateFrom(params);
-				runNestedCommands();
-			}
-		} catch (Exception e) {
-			throw new WebSuitesException("Unepected exception when trying to acquire data from "
-					+ "provider class " + dataProviderClass, e);
-		}
-	}
-
-	/**
-	 * Without "params" there will never be an exception, only the unfilled properties
-	 * will have null values.
-	 */
-	private void doRepeatWithInlineData() {
-		
-		new InlineDataRepeatHandler(parameterMap).doRepeat(nestedCommands);
-	}
-
-	
-	
-	private void doRepeatNTimes() {
-		WebSuitesUserProperties props = WebSuitesUserProperties.get();
-		int n = Integer.valueOf(parameterMap.get("times"));
-		String counterProperty = "1";
-		if (parameterMap.containsKey("counter")) {
-			counterProperty = parameterMap.get("counter");
-		}
-		for (int i = 0; i < n; i++) {
-			props.setProperty(counterProperty, (i + 1) + "");
-			runNestedCommands();
-		}
-	}
-
 	private void runNestedCommands() {
 		for (Command command : nestedCommands) {
 			command.run();

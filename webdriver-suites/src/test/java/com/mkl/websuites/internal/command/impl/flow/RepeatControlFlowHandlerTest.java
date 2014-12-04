@@ -241,6 +241,100 @@ public class RepeatControlFlowHandlerTest {
 	
 	
 	
+	
+	
+	@Test
+	public void shouldRepeatWithInlineDataSimpleVersion(@Mocked final Command command) {
+		// given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("data", "1,2,3;4,5,6;7,8,9");
+		sut = new RepeatControlFlowHandler(params);
+		sut.setNestedCommands(Arrays.asList(command));
+		//when
+		sut.run();
+		//then
+		new Verifications() {{
+			command.run();
+			times = 3;
+		}};
+	}
+	
+	
+	
+	@Test
+	public void shouldRepeatWithInlineDataWithPropertyValueCheck(
+			@Mocked final Command command, @Mocked final WebSuitesUserProperties mockedProps) {
+		// given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("data", "1,2,3;4,5,6;7,8,9");
+		sut = new RepeatControlFlowHandler(params);
+		// and
+		new NonStrictExpectations() {{
+			WebSuitesUserProperties.get();
+			result = mockedProps;
+		}
+		};
+		sut.setNestedCommands(Arrays.asList(command));
+		//when
+		sut.run();
+		//then
+		new VerificationsInOrder() {{
+			
+			inlineExpectedData(command, mockedProps, "1", "2", "3");
+		}};
+	}
+	
+	
+	private void inlineExpectedData(final Command command,
+			final WebSuitesUserProperties mockedProps, String param1, String param2, String param3) {
+		Map<String, String> firstRow = new HashMap<String, String>();
+		firstRow.put(param1, "1");
+		firstRow.put(param2, "2");
+		firstRow.put(param3, "3");
+		mockedProps.populateFrom(firstRow);
+		command.run();
+		Map<String, String> secondRow = new HashMap<String, String>();
+		secondRow.put(param1, "4");
+		secondRow.put(param2, "5");
+		secondRow.put(param3, "6");
+		mockedProps.populateFrom(secondRow);
+		command.run();
+		Map<String, String> thirdRow = new HashMap<String, String>();
+		thirdRow.put(param1, "7");
+		thirdRow.put(param2, "8");
+		thirdRow.put(param3, "9");
+		mockedProps.populateFrom(thirdRow);
+		command.run();
+	}
+	
+	@Test
+	public void shouldRepeatWithInlineDataWithInlinePropertyNames(
+			@Mocked final Command command, @Mocked final WebSuitesUserProperties mockedProps) {
+		// given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("data", "1,2,3;4,5,6;7,8,9");
+		params.put("params", "param1,j,text");
+		sut = new RepeatControlFlowHandler(params);
+		// and
+		new NonStrictExpectations() {{
+			WebSuitesUserProperties.get();
+			result = mockedProps;
+		}
+		};
+		sut.setNestedCommands(Arrays.asList(command));
+		//when
+		sut.run();
+		//then
+		new VerificationsInOrder() {{
+			inlineExpectedData(command, mockedProps, "param1", "j", "text");
+		}
+		};
+	}
+	
+	
+	
+	
+	
 	private static boolean flagForHandlerInvocationMarker; // a bit dirty, but I see no mocking here...
 	
 	public static class CustomRepeatHandler implements RepeatHandler {
