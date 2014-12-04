@@ -6,6 +6,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.mkl.websuites.internal.command.impl.OperationOnWebElementTest;
 import com.mkl.websuites.internal.command.impl.flow.RepeatControlFlowHandlerTest;
+import com.mkl.websuites.internal.command.impl.flow.repeat.InlineDataRepeatHandlerTest;
 import com.mkl.websuites.internal.command.impl.validator.DataProviderParamValidatorTest;
 import com.mkl.websuites.test.unit.core.CommandSchemaValidatorTest;
 
@@ -17,7 +18,8 @@ import com.mkl.websuites.test.unit.core.CommandSchemaValidatorTest;
 			CommandSchemaValidatorTest.class,
 			OperationOnWebElementTest.class,
 			DataProviderParamValidatorTest.class,
-			RepeatControlFlowHandlerTest.class
+			RepeatControlFlowHandlerTest.class,
+			InlineDataRepeatHandlerTest.class
 		}
 )
 public class AllUnitTests {

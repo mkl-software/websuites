@@ -10,6 +10,9 @@ import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.internal.command.impl.flow.repeat.InlineDataRepeatHandler;
+import com.mkl.websuites.internal.command.impl.flow.repeat.RepeatDataProvider;
+import com.mkl.websuites.internal.command.impl.flow.repeat.RepeatHandler;
 import com.mkl.websuites.internal.command.impl.validator.DataProviderParamValidator;
 import com.mkl.websuites.internal.command.impl.validator.IntegerNumberParamValidator;
 import com.mkl.websuites.internal.command.impl.validator.ParameterValueValidator;
@@ -33,20 +36,20 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 	protected void runCommandWithParameters() {
 		
 		if (parameterMap.containsKey("times")) {
-			doTimes();
+			doRepeatNTimes();
 		} else if (parameterMap.containsKey("data")) {
-			doData();
+			doRepeatWithInlineData();
 		} else if (parameterMap.containsKey("dataProvider")) {
-			doDataProvider();
+			doRepeatWithDataProviderClass();
 		} else if (parameterMap.containsKey("handler")) {
-			doHandler();
+			doRepeatWithCustomRepeatHandlerClass();
 		}
 	}
 
 	
 	
 	
-	private void doHandler() {
+	private void doRepeatWithCustomRepeatHandlerClass() {
 		String handlerClass = parameterMap.get("handler");
 		try {
 			RepeatHandler handler = (RepeatHandler) Class.forName(handlerClass).newInstance();
@@ -57,7 +60,10 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 		}
 	}
 
-	private void doDataProvider() {
+	
+	
+	
+	private void doRepeatWithDataProviderClass() {
 		String dataProviderClass = parameterMap.get("dataProvider");
 		try {
 			RepeatDataProvider dataProvider =
@@ -80,38 +86,14 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 	 * Without "params" there will never be an exception, only the unfilled properties
 	 * will have null values.
 	 */
-	private void doData() {
-		try {
-			String data = parameterMap.get("data");
-			String[] paramNames = null;
-			if (parameterMap.containsKey("params")) {
-				paramNames = parameterMap.get("params").split(",");
-			}
-			String[] dataRows = data.split(";");
-			for (String dataRow : dataRows) {
-				String[] params = dataRow.split(",");
-				if (paramNames != null && params.length != paramNames.length) {
-					throw new Exception("Wrong parameter length in row: '" + dataRow +
-							"' in string '" + data + "'");
-				}
-				for (int i = 0; i < params.length; i++) {
-					if (paramNames == null) {
-						WebSuitesUserProperties.get().setProperty((i+1) + "", params[i]);
-					} else {
-						WebSuitesUserProperties.get().setProperty(paramNames[i] + "", params[i]);
-					}
-				}
-				runNestedCommands();
-			}
-		} catch (Exception e) {
-			String msg = "Error while parsing data string. Please provide inline parameters in data,"
-					+ "parameters should be seperated using a coma ',' and rows should be seperated "
-					+ "by a colon ';'. Sample correct parameters: data=1,2,3;i,j,k;x1,x2,x3";
-			throw new WebSuitesException(msg, e);
-		}
+	private void doRepeatWithInlineData() {
+		
+		new InlineDataRepeatHandler(parameterMap).doRepeat(nestedCommands);
 	}
 
-	private void doTimes() {
+	
+	
+	private void doRepeatNTimes() {
 		WebSuitesUserProperties props = WebSuitesUserProperties.get();
 		int n = Integer.valueOf(parameterMap.get("times"));
 		String counterProperty = "1";
@@ -167,11 +149,15 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 		return "REPEAT";
 	}
 
+	
+	/**
+	 * Invoked at test tree creation time.
+	 */
 	@Override
-	public List<TestCase> subTestCases() {
-		// TODO Auto-generated method stub
+	public List<String> getSubTestCaseNames() {
 		return null;
 	}
+
 
 	
 

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.mkl.websuites.internal.command.impl.flow.RepeatDataProvider;
+import com.mkl.websuites.internal.command.impl.flow.repeat.RepeatDataProvider;
 
 public class SampleDataProvider implements RepeatDataProvider {
 

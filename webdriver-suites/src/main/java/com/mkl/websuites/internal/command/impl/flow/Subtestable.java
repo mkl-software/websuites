@@ -2,8 +2,6 @@ package com.mkl.websuites.internal.command.impl.flow;
 
 import java.util.List;
 
-import junit.framework.TestCase;
-
 public interface Subtestable {
 
 	
@@ -11,5 +9,5 @@ public interface Subtestable {
 	
 	String getSubtestName();
 	
-	List<TestCase> subTestCases();
+	List<String> getSubTestCaseNames();
 }

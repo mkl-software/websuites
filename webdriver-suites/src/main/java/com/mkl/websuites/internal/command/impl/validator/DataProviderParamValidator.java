@@ -1,6 +1,6 @@
 package com.mkl.websuites.internal.command.impl.validator;
 
-import com.mkl.websuites.internal.command.impl.flow.RepeatDataProvider;
+import com.mkl.websuites.internal.command.impl.flow.repeat.RepeatDataProvider;
 
 
 public class DataProviderParamValidator extends ClassParameterValidator {
