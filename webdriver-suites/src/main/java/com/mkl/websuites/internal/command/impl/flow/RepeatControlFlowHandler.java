@@ -1,5 +1,6 @@
 package com.mkl.websuites.internal.command.impl.flow;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -165,11 +166,28 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 
 	
 	/**
-	 * Invoked at test tree creation time.
+	 * Invoked at test tree creation time, so data provider must be available before running
+	 * real test.
+	 * Test case name consists of all parameter values separated by commas.
 	 */
 	@Override
 	public List<String> getSubTestCaseNames() {
-		return null;
+		
+		List<String> testCaseNames = new ArrayList<String>();
+		
+		if (parameterMap.containsKey("data")) {
+			List<Map<String,String>> data = new InlineDataProvider(parameterMap).provideData();
+			for (Map<String, String> dataRow : data ) {
+				StringBuilder testCaseName = new StringBuilder();
+				for (String value : dataRow.values()) {
+					testCaseName.append(value).append(",");
+				}
+				testCaseName.deleteCharAt(testCaseName.length() - 1);
+				testCaseNames.add(testCaseName.toString());
+			}
+		}
+		
+		return testCaseNames;
 	}
 
 

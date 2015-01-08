@@ -1,6 +1,6 @@
 package com.mkl.websuites.internal.command.impl.flow;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -367,7 +367,7 @@ public class RepeatControlFlowHandlerTest {
 	@Test
 	public void shouldNotPassValidationWithDoRepeatWithHandler() {
 		//given
-		Map<String, String> params = new HashMap<String, String>();
+		Map<String, String> params = new HashMap<>();
 		params.put("handler", "wrong");
 		sut = new RepeatControlFlowHandler(params);
 		//when
@@ -381,7 +381,7 @@ public class RepeatControlFlowHandlerTest {
 	@Test
 	public void shouldBeSubtest() {
 		//given
-		Map<String, String> params = new HashMap<String, String>();
+		Map<String, String> params = new HashMap<>();
 		params.put("data", "1,2,3");
 		params.put("subtest", "true");
 		sut = new RepeatControlFlowHandler(params);
@@ -419,6 +419,21 @@ public class RepeatControlFlowHandlerTest {
 		boolean isSubtest = sut.isSubtest();
 		//then
 		assertThat(isSubtest).isFalse();
+	}
+	
+	
+	
+	@Test
+	public void shouldReturnTestCaseNames() {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("subtest", "true");
+		params.put("data", "1,2,3;x,y,z;p,q,r;v1,v2,v3");
+		sut = new RepeatControlFlowHandler(params);
+		//when
+		List<String> subTestCaseNames = sut.getSubTestCaseNames();
+		//then
+		assertThat(subTestCaseNames).hasSize(4).containsExactly("1,2,3", "x,y,z", "p,q,r", "v1,v2,v3");
 	}
 
 }
