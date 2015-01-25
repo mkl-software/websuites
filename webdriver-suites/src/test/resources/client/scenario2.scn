@@ -1,3 +1,5 @@
-goto	http://localhost:90/integration/commands/typeTextTest1.html
-click	tagName=h1
-wait	5000
+#goto	http://localhost:90/integration/commands/typeTextTest1.html
+#click	tagName=h1
+#wait	5000
+
+goto	http://google.pl

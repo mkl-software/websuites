@@ -16,6 +16,7 @@ import mockit.NonStrictExpectations;
 import mockit.Verifications;
 import mockit.VerificationsInOrder;
 
+import org.assertj.core.util.VisibleForTesting;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -245,7 +246,7 @@ public class RepeatControlFlowHandlerTest {
 	
 	@Test
 	public void shouldRepeatWithInlineDataSimpleVersion(@Mocked final Command command) {
-		// given
+		// given 3 param sets
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("data", "1,2,3;4,5,6;7,8,9");
 		sut = new RepeatControlFlowHandler(params);
@@ -287,6 +288,7 @@ public class RepeatControlFlowHandlerTest {
 	
 	private void inlineExpectedData(final Command command,
 			final WebSuitesUserProperties mockedProps, String param1, String param2, String param3) {
+		
 		Map<String, String> firstRow = new HashMap<String, String>();
 		firstRow.put(param1, "1");
 		firstRow.put(param2, "2");
@@ -336,7 +338,10 @@ public class RepeatControlFlowHandlerTest {
 	
 	
 	private static boolean flagForHandlerInvocationMarker; // a bit dirty, but I see no mocking here...
-	
+	/**
+	 * Used only in "shouldDoRepeatWithCustomHandler".
+	 */
+	@VisibleForTesting
 	public static class CustomRepeatHandler implements RepeatHandler {
 
 		@Override
@@ -348,7 +353,7 @@ public class RepeatControlFlowHandlerTest {
 	}
 	
 	@Test
-	public void shouldDoRepeatWithHandler(@Mocked final Command command) {
+	public void shouldDoRepeatWithCustomHandler(@Mocked final Command command) {
 		//given
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("handler", CustomRepeatHandler.class.getName());

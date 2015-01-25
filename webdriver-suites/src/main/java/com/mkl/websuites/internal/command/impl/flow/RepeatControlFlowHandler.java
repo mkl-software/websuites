@@ -183,6 +183,7 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 					testCaseName.append(value).append(",");
 				}
 				testCaseName.deleteCharAt(testCaseName.length() - 1);
+				
 				testCaseNames.add(testCaseName.toString());
 			}
 		}

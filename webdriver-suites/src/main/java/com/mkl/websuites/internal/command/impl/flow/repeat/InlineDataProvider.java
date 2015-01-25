@@ -1,7 +1,7 @@
 package com.mkl.websuites.internal.command.impl.flow.repeat;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,31 +28,36 @@ public class InlineDataProvider implements RepeatDataProvider {
 		List<Map<String, String>> resultData = new ArrayList<Map<String,String>>();
 		
 		try {
+			
 			String data = parameterMap.get("data");
 			String[] paramNames = null;
+			
+			// check for explicit parameter names:
 			if (parameterMap.containsKey("params")) {
 				paramNames = parameterMap.get("params").split(",");
 			}
+			
 			String[] dataRows = data.split(";");
 			
 			for (String dataRow : dataRows) {
 				
-				Map<String, String> row = new HashMap<String, String>();
+				Map<String, String> row = new LinkedHashMap<String, String>();
 				
-				String[] params = dataRow.split(",");
-				if (paramNames != null && params.length != paramNames.length) {
+				String[] values = dataRow.split(",");
+				
+				if (paramNames != null && values.length != paramNames.length) {
 					throw new Exception("Wrong parameter length in row: '" + dataRow +
 							"' in string '" + data + "'");
 				}
 				
-				for (int i = 0; i < params.length; i++) {
+				for (int i = 0; i < values.length; i++) {
 					
 					if (paramNames == null) { // number starting 1 are the keys
 //						WebSuitesUserProperties.get().setProperty((i+1) + "", params[i]);
-						row.put((i+1) + "", params[i]);
+						row.put((i+1) + "", values[i]);
 					} else {
 //						WebSuitesUserProperties.get().setProperty(paramNames[i] + "", params[i]);
-						row.put(paramNames[i] + "", params[i]);
+						row.put(paramNames[i] + "", values[i]);
 					}
 				}
 				

@@ -43,8 +43,10 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 		List<Test> convertedTests;
 		
 		if (!containsSubtests()) {
+			
 			convertedTests = convertWtihoutSubtests();
 		} else {
+			
 			convertedTests = convertForSubtests();
 		}
 		
