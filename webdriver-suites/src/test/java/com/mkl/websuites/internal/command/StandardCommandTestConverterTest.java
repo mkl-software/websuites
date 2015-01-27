@@ -1,19 +1,20 @@
 package com.mkl.websuites.internal.command;
 
-import static org.assertj.core.api.Assertions.*;
-import static junitparams.JUnitParamsRunner.$;
 import static java.util.Arrays.asList;
+import static junitparams.JUnitParamsRunner.$;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import junit.framework.TestSuite;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import mockit.Deencapsulation;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -39,7 +40,6 @@ public class StandardCommandTestConverterTest {
 	
 	
 	
-	@Ignore
 	@Test
 	public void shoulDoConversionForOneSubtestControlFlowCommandWihoutNested() {
 		//given
@@ -51,7 +51,20 @@ public class StandardCommandTestConverterTest {
 		//when
 		List<junit.framework.Test> convertedTests = sut.convertCommandsToTests(commands, "");
 		//then
-		assertThat(convertedTests).hasSize(3); // before-repeat -> empty sute for repeat -> after repeat
+		assertThat(convertedTests).hasSize(1); // one master suite for all inner test definitions
+		assertThat(convertedTests.get(0)).isInstanceOf(TestSuite.class);
+		TestSuite masterSuite = (TestSuite) convertedTests.get(0);
+		List<junit.framework.Test> innerTestsInsideSuiteScenario = Collections.list(masterSuite.tests());
+		// should be: test for before-repeat commands -> empty suite for repeat subtests ->
+		// test for after repeat commands:
+		assertThat(innerTestsInsideSuiteScenario).hasSize(3);
+		assertThat(innerTestsInsideSuiteScenario.get(0))
+			.isInstanceOf(junit.framework.Test.class)
+			.isNotInstanceOf(TestSuite.class);
+		assertThat(innerTestsInsideSuiteScenario.get(1)).isExactlyInstanceOf(TestSuite.class);
+		assertThat(innerTestsInsideSuiteScenario.get(2))
+			.isInstanceOf(junit.framework.Test.class)
+			.isNotInstanceOf(TestSuite.class);
 	}
 	
 	

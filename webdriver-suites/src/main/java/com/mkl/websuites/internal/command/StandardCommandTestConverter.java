@@ -3,14 +3,15 @@ package com.mkl.websuites.internal.command;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+import lombok.extern.slf4j.Slf4j;
+
 import org.assertj.core.util.VisibleForTesting;
 
 import com.mkl.websuites.internal.command.impl.flow.ControlFlowHandler;
 import com.mkl.websuites.internal.command.impl.flow.Subtestable;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import lombok.extern.slf4j.Slf4j;
 
 
 
@@ -20,7 +21,9 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 
 	
 	private List<Command> inputCommandList;
+	
 	private String masterScenarioFileName;
+	
 	private boolean hasSubtests;
 	
 
@@ -56,8 +59,28 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 
 
 	private List<Test> convertForSubtests() {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Test> resultTestList = new ArrayList<Test>();
+		
+		TestSuite mainScenarioTopLevelSuit = new TestSuite();
+		resultTestList.add(mainScenarioTopLevelSuit);
+		
+		Test beforeRepeat = new TestCase() {};
+		TestSuite repeatSubtests = new TestSuite();
+		Test afterRepeat = new TestCase() {};
+		
+		List<Command> commandsBeforeRepeat = new ArrayList<Command>();
+		for (Command command : inputCommandList) {
+			if (!(command instanceof Subtestable)) {
+				commandsBeforeRepeat.add(command);
+			}
+		}
+		
+		mainScenarioTopLevelSuit.addTest(beforeRepeat);
+		mainScenarioTopLevelSuit.addTest(repeatSubtests);
+		mainScenarioTopLevelSuit.addTest(afterRepeat);
+		
+		return resultTestList;
 	}
 
 
