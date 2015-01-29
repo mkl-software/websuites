@@ -69,6 +69,36 @@ public class StandardCommandTestConverterTest {
 	
 	
 	
+	
+	@Test
+	public void shoulDoConversionForOneSubtestControlFlowCommandWih14NestedCommands() {
+		//given
+		Command command = new SampleCommand("");
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("subtest", "true");
+		RepeatControlFlowHandler repeat = new RepeatControlFlowHandler(params);
+		List<Command> commands = Arrays.asList(command, repeat, command, command);
+		//when
+		List<junit.framework.Test> convertedTests = sut.convertCommandsToTests(commands, "");
+		//then
+		assertThat(convertedTests).hasSize(1); // one master suite for all inner test definitions
+		assertThat(convertedTests.get(0)).isInstanceOf(TestSuite.class);
+		TestSuite masterSuite = (TestSuite) convertedTests.get(0);
+		List<junit.framework.Test> innerTestsInsideSuiteScenario = Collections.list(masterSuite.tests());
+		// should be: test for before-repeat commands -> empty suite for repeat subtests ->
+		// test for after repeat commands:
+		assertThat(innerTestsInsideSuiteScenario).hasSize(3);
+		assertThat(innerTestsInsideSuiteScenario.get(0))
+		.isInstanceOf(junit.framework.Test.class)
+		.isNotInstanceOf(TestSuite.class);
+		assertThat(innerTestsInsideSuiteScenario.get(1)).isExactlyInstanceOf(TestSuite.class);
+		assertThat(innerTestsInsideSuiteScenario.get(2))
+		.isInstanceOf(junit.framework.Test.class)
+		.isNotInstanceOf(TestSuite.class);
+	}
+	
+	
+	
 	@Parameters(method = "provideCommandListsWithNoSubtests")
 	@Test
 	public void shouldNotContainSubtest(List<Command> inputList) {
