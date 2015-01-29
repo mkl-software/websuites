@@ -24,6 +24,7 @@ public class WebSuites {
 	
 	private Class<?> runningClass;
 	
+	private static String currentlyDefiningBrowser;
 	
 	public WebSuites() {}
 	
@@ -63,6 +64,8 @@ public class WebSuites {
 		
 		for (String browser : browsers) {
 			
+			currentlyDefiningBrowser = browser;
+			
 			browserController.addBrowser(browser);
 		
 			TestSuite browserSuite = new TestSuite("Running for [" + browser + "]");
@@ -86,5 +89,16 @@ public class WebSuites {
 		
 		
 		return suite;
+	}
+
+	
+	
+	/**
+	 * To allow quickly identify in the code for which browser
+	 * are tests currently defined for.
+	 * @return
+	 */
+	public static String getCurrentlyDefiningBrowser() {
+		return currentlyDefiningBrowser;
 	}
 }

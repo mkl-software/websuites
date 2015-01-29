@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.assertj.core.util.VisibleForTesting;
 
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.internal.command.impl.flow.ControlFlowHandler;
 import com.mkl.websuites.internal.command.impl.flow.Subtestable;
 
@@ -100,9 +101,12 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 		
 		Test test = new TestCase() {
 			
+			private String currentlyDefiningBrowser = WebSuites.getCurrentlyDefiningBrowser();
+			
 			@Override
 			public String getName() {
-				return masterScenarioFileName;
+				return masterScenarioFileName +
+						" [" + currentlyDefiningBrowser + "]";
 			}
 			
 			@Override
