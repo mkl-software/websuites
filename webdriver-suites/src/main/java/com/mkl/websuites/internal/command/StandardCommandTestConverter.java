@@ -12,6 +12,7 @@ import org.assertj.core.util.VisibleForTesting;
 
 import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.internal.command.impl.flow.ControlFlowHandler;
+import com.mkl.websuites.internal.command.impl.flow.RepeatControlFlowHandler;
 import com.mkl.websuites.internal.command.impl.flow.Subtestable;
 
 
@@ -21,7 +22,7 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 
 
 	
-	private List<Command> inputCommandList;
+//	private List<Command> inputCommandList;
 	
 	private String masterScenarioFileName;
 	
@@ -41,17 +42,17 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 	public List<Test> convertCommandsToTests(final List<Command> parsedCommands,
 			final String scenarioFileName) {
 		
-		this.inputCommandList = parsedCommands;
+//		this.inputCommandList = parsedCommands;
 		this.masterScenarioFileName = scenarioFileName;
 		
 		List<Test> convertedTests;
 		
-		if (!containsSubtests()) {
+		if (!containsSubtests(parsedCommands)) {
 			
-			convertedTests = convertWtihoutSubtests();
+			convertedTests = convertWtihoutSubtests(parsedCommands);
 		} else {
 			
-			convertedTests = convertForSubtests();
+			convertedTests = convertForSubtests(parsedCommands);
 		}
 		
 		return convertedTests;
@@ -59,34 +60,121 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 
 
 
-	private List<Test> convertForSubtests() {
+	/**
+	 * When a REPEAT statement is configured for subtests, then all DDL params in the REPEAT should
+	 * be rendered inside seperate JUnit test cases. But then all commands before and after the REPEAT
+	 * should also be put inside test cases.
+	 * There could also be nested REPEAT-subtest statements, so finally the test case tree might become
+	 * really complex.
+	 * @param parsedCommands 
+	 * @return
+	 */
+	private List<Test> convertForSubtests(List<Command> inputCommandList) {
 
 		List<Test> resultTestList = new ArrayList<Test>();
 		
 		TestSuite mainScenarioTopLevelSuit = new TestSuite();
 		resultTestList.add(mainScenarioTopLevelSuit);
 		
-		Test beforeRepeat = new TestCase() {};
-		TestSuite repeatSubtests = new TestSuite();
-		Test afterRepeat = new TestCase() {};
 		
-		List<Command> commandsBeforeRepeat = new ArrayList<Command>();
+		List<Test> thisLevelTests = new ArrayList<Test>();
+		
+		List<Command> commandsBufferBetweenRepeats = new ArrayList<Command>();
+		
 		for (Command command : inputCommandList) {
-			if (!(command instanceof Subtestable)) {
-				commandsBeforeRepeat.add(command);
-			}
+			
+			if (!(command instanceof RepeatControlFlowHandler)) { // TODO: consider other cases
+				
+				commandsBufferBetweenRepeats.add(command);
+				
+			} else {
+				
+				RepeatControlFlowHandler repeatCommand = (RepeatControlFlowHandler) command;
+				
+				if (repeatCommand.isSubtest()) {
+					
+					if (!commandsBufferBetweenRepeats.isEmpty()) {
+						thisLevelTests.add(newTestCase(commandsBufferBetweenRepeats));
+						commandsBufferBetweenRepeats.clear();
+					}
+					
+					TestSuite repeatSuite = new TestSuite();
+					repeatSuite.setName(repeatCommand.getSubtestName());
+					
+					int idx = 0;
+					for (String paramTestCase : repeatCommand.getSubTestCaseNames()) {
+						
+						repeatSuite.addTest(newDdlParamTestCase(repeatCommand, paramTestCase, idx++));
+					}
+					thisLevelTests.add(repeatSuite);
+					
+				} else {
+					
+					commandsBufferBetweenRepeats.add(command);
+				}
+				
+			} 
 		}
 		
-		mainScenarioTopLevelSuit.addTest(beforeRepeat);
-		mainScenarioTopLevelSuit.addTest(repeatSubtests);
-		mainScenarioTopLevelSuit.addTest(afterRepeat);
+		if (!commandsBufferBetweenRepeats.isEmpty()) {
+			thisLevelTests.add(newTestCase(commandsBufferBetweenRepeats));
+		}
+		
+		for (Test test : thisLevelTests) {
+			mainScenarioTopLevelSuit.addTest(test);
+		}
 		
 		return resultTestList;
 	}
 
 
 
-	private boolean containsSubtests() {
+	private Test newDdlParamTestCase(final RepeatControlFlowHandler repeatCommand,
+			final String paramTestCase, final int paramIndex) {
+		
+		return new TestCase() {
+			
+			@Override
+			public String getName() {
+				
+				return paramTestCase;
+			}
+			
+			@Override
+			protected void runTest() throws Throwable {
+
+				repeatCommand.runForDDlParam(paramIndex);
+			}
+		};
+	}
+
+
+
+	private Test newTestCase(final List<Command> innerCommands) {
+		
+		final String fromName = innerCommands.get(0).toString();
+		final String toName = innerCommands.get(innerCommands.size() - 1).toString();
+		
+		return new TestCase() {
+			
+			@Override
+			public String getName() {
+				return "commands [" + fromName + "] -> [" + toName + "]";
+			}
+			
+			@Override
+			protected void runTest() throws Throwable {
+				
+				for (Command command : innerCommands) {
+					command.run();
+				}
+			}
+		};
+	}
+
+
+
+	private boolean containsSubtests(List<Command> inputCommandList) {
 		
 		hasSubtests = false;
 		
@@ -119,12 +207,18 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 
 
 
-	private List<Test> convertWtihoutSubtests() {
+	/**
+	 * Without subtests there is just one JUnit test case for all commands inside this scenario file.
+	 * @return
+	 */
+	private List<Test> convertWtihoutSubtests(final List<Command> inputCommandList) {
+		
 		List<Test> tests = new ArrayList<Test>();
+		
+		final String currentlyDefiningBrowser = WebSuites.getCurrentlyDefiningBrowser();
 		
 		Test test = new TestCase() {
 			
-			private String currentlyDefiningBrowser = WebSuites.getCurrentlyDefiningBrowser();
 			
 			@Override
 			public String getName() {

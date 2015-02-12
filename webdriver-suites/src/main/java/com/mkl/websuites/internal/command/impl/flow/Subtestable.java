@@ -9,5 +9,4 @@ public interface Subtestable {
 	
 	String getSubtestName();
 	
-	List<String> getSubTestCaseNames();
 }

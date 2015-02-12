@@ -20,7 +20,7 @@ import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 
 @CommandDescriptor(name = "repeat")
-public class RepeatControlFlowHandler extends ControlFlowHandler implements Subtestable {
+public class RepeatControlFlowHandler extends ControlFlowHandler implements Subtestable, DDlParameterized {
 
 	
 	public RepeatControlFlowHandler() {
@@ -189,6 +189,12 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 		}
 		
 		return testCaseNames;
+	}
+
+	@Override
+	public void runForDDlParam(int paramIndex) {
+		
+		// TODO: implement it...
 	}
 
 
