@@ -71,6 +71,8 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 	 */
 	private List<Test> convertForSubtests(List<Command> inputCommandList) {
 
+		// for now implemented for ONE LEVEL, without recursion! TODO: Add recursion too.
+		
 		List<Test> resultTestList = new ArrayList<Test>();
 		
 		TestSuite mainScenarioTopLevelSuit = new TestSuite();

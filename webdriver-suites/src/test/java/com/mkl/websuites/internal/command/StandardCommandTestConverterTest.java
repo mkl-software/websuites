@@ -25,7 +25,28 @@ import com.mkl.websuites.test.unit.scenario.cmd.SampleCommand;
 @RunWith(JUnitParamsRunner.class)
 public class StandardCommandTestConverterTest {
 
+	
+	
 	private StandardCommandTestConverter sut = new StandardCommandTestConverter();
+	
+	private Command simpleCommand;
+	private RepeatControlFlowHandler subtestRepeat;
+	
+	private enum ExpectedTestType {
+		TEST_CASE, TEST_SUITE
+	}
+	
+	{
+		simpleCommand = new SampleCommand("");
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("subtest", "true");
+		subtestRepeat = new RepeatControlFlowHandler(params);
+	}
+	
+	
+	
+	
+	
 	
 	@Test
 	public void shouldDoPlainConversionForNoConstrolFlowCommands() {
@@ -39,55 +60,37 @@ public class StandardCommandTestConverterTest {
 	}
 	
 	
+	
+	
 	@Test
 	public void shoulDoConversionForOneSubtestControlFlowCommandOnlyRepeat() {
-		//given
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("subtest", "true");
-		RepeatControlFlowHandler repeat = new RepeatControlFlowHandler(params);
-		List<Command> commands = Arrays.asList((Command) repeat); // only repeat
-		//when
-		List<junit.framework.Test> convertedTests = sut.convertCommandsToTests(commands, "");
-		//then
-		assertThat(convertedTests).hasSize(1); // one master suite for all inner test definitions
-		assertThat(convertedTests.get(0)).isInstanceOf(TestSuite.class);
-		TestSuite masterSuite = (TestSuite) convertedTests.get(0);
-		List<junit.framework.Test> innerTestsInsideSuiteScenario = Collections.list(masterSuite.tests());
+		
+		List<junit.framework.Test> innerTestsInsideSuiteScenario = checkSubTestMasterSuitAndGetInnerTests(
+				Arrays.asList((Command) subtestRepeat));
+		
 		// should be: empty suite for repeat subtests
-		assertThat(innerTestsInsideSuiteScenario).hasSize(1);
-		junit.framework.Test repeatSuite = innerTestsInsideSuiteScenario.get(0);
-		assertThat(repeatSuite)
-			.isExactlyInstanceOf(TestSuite.class);
-		assertThat(Collections.list(((TestSuite) repeatSuite).tests()))
+		assertTestTypesInsideMasterSuite(innerTestsInsideSuiteScenario, ExpectedTestType.TEST_SUITE);
+		
+		// and inside that suite there should no be any test cases:
+		assertThat(Collections.list(((TestSuite) innerTestsInsideSuiteScenario.get(0)).tests()))
 			.hasSize(0);
 	}
 	
 	
+	
 	@Test
 	public void shoulDoConversionForOneSubtestControlFlowCommandWithoutNestedWithProceedingAndFollowing() {
+		
 		//given
-		Command command = new SampleCommand("");
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("subtest", "true");
-		RepeatControlFlowHandler repeat = new RepeatControlFlowHandler(params);
-		List<Command> commands = Arrays.asList(command, repeat, command, command);
-		//when
-		List<junit.framework.Test> convertedTests = sut.convertCommandsToTests(commands, "");
-		//then
-		assertThat(convertedTests).hasSize(1); // one master suite for all inner test definitions
-		assertThat(convertedTests.get(0)).isInstanceOf(TestSuite.class);
-		TestSuite masterSuite = (TestSuite) convertedTests.get(0);
-		List<junit.framework.Test> innerTestsInsideSuiteScenario = Collections.list(masterSuite.tests());
+		List<junit.framework.Test> innerTestsInsideSuiteScenario = checkSubTestMasterSuitAndGetInnerTests(
+				Arrays.asList(simpleCommand, subtestRepeat, simpleCommand, simpleCommand));
+		
 		// should be: test for before-repeat commands -> empty suite for repeat subtests ->
 		// test for after repeat commands:
-		assertThat(innerTestsInsideSuiteScenario).hasSize(3);
-		assertThat(innerTestsInsideSuiteScenario.get(0))
-			.isInstanceOf(junit.framework.Test.class)
-			.isNotInstanceOf(TestSuite.class);
-		assertThat(innerTestsInsideSuiteScenario.get(1)).isExactlyInstanceOf(TestSuite.class);
-		assertThat(innerTestsInsideSuiteScenario.get(2))
-			.isInstanceOf(junit.framework.Test.class)
-			.isNotInstanceOf(TestSuite.class);
+		
+		assertTestTypesInsideMasterSuite(innerTestsInsideSuiteScenario,
+				ExpectedTestType.TEST_CASE, ExpectedTestType.TEST_SUITE, ExpectedTestType.TEST_CASE);
+		
 	}
 	
 	
@@ -95,55 +98,80 @@ public class StandardCommandTestConverterTest {
 	
 	@Test
 	public void shoulDoConversionForOneSubtestControlFlowCommandWihoutNestedWithoutPreceeding() {
-		//given
-		Command command = new SampleCommand("");
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("subtest", "true");
-		RepeatControlFlowHandler repeat = new RepeatControlFlowHandler(params);
-		List<Command> commands = Arrays.asList(repeat, command, command);
-		//when
-		List<junit.framework.Test> convertedTests = sut.convertCommandsToTests(commands, "");
-		//then
-		assertThat(convertedTests).hasSize(1); // one master suite for all inner test definitions
-		assertThat(convertedTests.get(0)).isInstanceOf(TestSuite.class);
-		TestSuite masterSuite = (TestSuite) convertedTests.get(0);
-		List<junit.framework.Test> innerTestsInsideSuiteScenario = Collections.list(masterSuite.tests());
+		
+		// given
+		List<junit.framework.Test> innerTestsInsideSuiteScenario = checkSubTestMasterSuitAndGetInnerTests(
+				Arrays.asList(subtestRepeat, simpleCommand, simpleCommand));
+		
 		// should be: empty suite for repeat subtests -> test for after repeat commands:
-		assertThat(innerTestsInsideSuiteScenario).hasSize(2);
-		assertThat(innerTestsInsideSuiteScenario.get(0))
-			.isExactlyInstanceOf(TestSuite.class);
-		assertThat(innerTestsInsideSuiteScenario.get(1))
-			.isInstanceOf(junit.framework.Test.class)
-			.isNotInstanceOf(TestSuite.class);
+		
+		assertTestTypesInsideMasterSuite(innerTestsInsideSuiteScenario,
+				ExpectedTestType.TEST_SUITE, ExpectedTestType.TEST_CASE);
+		
 	}
+
 	
 	
+
 	@Test
 	public void shoulDoConversionForOneSubtestControlFlowCommandWihoutNestedWithoutFollowing() {
-		//given
-		Command command = new SampleCommand("");
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("subtest", "true");
-		RepeatControlFlowHandler repeat = new RepeatControlFlowHandler(params);
-		List<Command> commands = Arrays.asList(command, command, repeat);
+		
+		// given
+		List<junit.framework.Test> innerTestsInsideSuiteScenario = checkSubTestMasterSuitAndGetInnerTests(
+				Arrays.asList(simpleCommand, simpleCommand, subtestRepeat));
+		
+		// should be: test for before repeat commands -> empty suite for repeat subtests
+		
+		assertTestTypesInsideMasterSuite(innerTestsInsideSuiteScenario,
+				ExpectedTestType.TEST_CASE, ExpectedTestType.TEST_SUITE);
+		
+	}
+	
+	
+	
+	private List<junit.framework.Test> checkSubTestMasterSuitAndGetInnerTests(List<Command> sourceCommands) {
+		
 		//when
-		List<junit.framework.Test> convertedTests = sut.convertCommandsToTests(commands, "");
+		List<junit.framework.Test> convertedTests = sut.convertCommandsToTests(sourceCommands, "");
 		//then
 		assertThat(convertedTests).hasSize(1); // one master suite for all inner test definitions
 		assertThat(convertedTests.get(0)).isInstanceOf(TestSuite.class);
 		TestSuite masterSuite = (TestSuite) convertedTests.get(0);
 		List<junit.framework.Test> innerTestsInsideSuiteScenario = Collections.list(masterSuite.tests());
-		// should be: test for before repeat commands -> empty suite for repeat subtests
-		assertThat(innerTestsInsideSuiteScenario).hasSize(2);
-		assertThat(innerTestsInsideSuiteScenario.get(0))
-			.isInstanceOf(junit.framework.Test.class)
-			.isNotInstanceOf(TestSuite.class);
-		assertThat(innerTestsInsideSuiteScenario.get(1))
-			.isExactlyInstanceOf(TestSuite.class);
+		return innerTestsInsideSuiteScenario;
 	}
 	
 	
 	
+	private void assertTestTypesInsideMasterSuite(List<junit.framework.Test> innerTestsInsideSuiteScenario, 
+			ExpectedTestType ... expectedTypes) {
+		
+		assertThat(innerTestsInsideSuiteScenario).hasSize(expectedTypes.length);
+		
+		int idx = 0;
+		for (ExpectedTestType testType : expectedTypes) {
+			
+			if (testType == ExpectedTestType.TEST_CASE) {
+				
+				assertThat(innerTestsInsideSuiteScenario.get(idx))
+					.isInstanceOf(junit.framework.Test.class)
+					.isNotInstanceOf(TestSuite.class);
+				
+			} else if (testType == ExpectedTestType.TEST_SUITE) {
+				
+				assertThat(innerTestsInsideSuiteScenario.get(idx))
+				.isExactlyInstanceOf(TestSuite.class);
+			}
+			
+			idx++;
+		}
+	}
+
+	
+	
+	
+	
+
 	@Parameters(method = "provideCommandListsWithNoSubtests")
 	@Test
 	public void shouldNotContainSubtest(List<Command> inputList) {
