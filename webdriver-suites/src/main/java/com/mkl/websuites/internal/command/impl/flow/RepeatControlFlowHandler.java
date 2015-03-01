@@ -23,6 +23,10 @@ import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 public class RepeatControlFlowHandler extends ControlFlowHandler implements Subtestable, DDlParameterized {
 
 	
+	
+	private int ddlParameterIndex = -1;
+	
+	
 	public RepeatControlFlowHandler() {
 		super();
 	}
@@ -36,6 +40,8 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 	
 	@Override
 	protected void runCommandWithParameters() {
+		
+		ddlParameterIndex = -1;
 		
 		if (parameterMap.containsKey("times")) {
 			doRepeatNTimes();
@@ -97,12 +103,20 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 		List<Map<String,String>> data = dataProvider.provideData();
 		WebSuitesUserProperties userProperties = WebSuitesUserProperties.get();
 		
-		for (Map<String, String> params : data) {
+		if (ddlParameterIndex == -1) {
+		
+			for (Map<String, String> params : data) {
+				
+				userProperties.populateFrom(params);
+				runNestedCommands();
+			}
+		
+		} else {
 			
-			userProperties.populateFrom(params);
-			
+			userProperties.populateFrom(data.get(ddlParameterIndex));
 			runNestedCommands();
 		}
+		
 	}
 
 	
@@ -193,8 +207,13 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 
 	@Override
 	public void runForDDlParam(int paramIndex) {
-		
-		// TODO: implement it...
+
+		if (parameterMap.containsKey("data")) {
+			
+			ddlParameterIndex = paramIndex;
+			
+			doRepeatWithInlineData();
+		}
 	}
 
 

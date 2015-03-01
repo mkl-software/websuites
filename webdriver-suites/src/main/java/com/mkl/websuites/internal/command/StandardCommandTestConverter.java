@@ -75,7 +75,8 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 		
 		List<Test> resultTestList = new ArrayList<Test>();
 		
-		TestSuite mainScenarioTopLevelSuit = new TestSuite();
+		TestSuite mainScenarioTopLevelSuit = new TestSuite(); // TODO: not needed? master suite is scenario suite...
+		mainScenarioTopLevelSuit.setName("Master suite for subtest");
 		resultTestList.add(mainScenarioTopLevelSuit);
 		
 		

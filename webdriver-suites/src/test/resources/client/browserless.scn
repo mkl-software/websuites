@@ -1,0 +1,8 @@
+echo	command before
+repeat	data=first;second;3rd;czwarty;piaty;szosty;seventh	subtest=true
+echo	Simple echo message from scenario file ${1}
+echo	another statement with param ${1}
+wait	500
+end
+echo	command after
+echo	another after

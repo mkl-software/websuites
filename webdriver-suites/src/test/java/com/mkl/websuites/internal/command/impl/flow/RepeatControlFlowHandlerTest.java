@@ -1,9 +1,10 @@
 package com.mkl.websuites.internal.command.impl.flow;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -439,6 +440,38 @@ public class RepeatControlFlowHandlerTest {
 		List<String> subTestCaseNames = sut.getSubTestCaseNames();
 		//then
 		assertThat(subTestCaseNames).hasSize(4).containsExactly("1,2,3", "x,y,z", "p,q,r", "v1,v2,v3");
+	}
+	
+	
+	
+	@Test
+	public void shouldRunForDdlParam(@Mocked final Command command,
+			@Mocked final WebSuitesUserProperties mockedProps) {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("subtest", "true");
+		params.put("data", "1,2,3;x,y,z;p,q,r;v1,v2,v3");
+		sut = new RepeatControlFlowHandler(params);
+		// and
+		new NonStrictExpectations() {{
+			WebSuitesUserProperties.get();
+			result = mockedProps;
+		}
+		};
+		sut.setNestedCommands(Arrays.asList(command));
+		//when
+		sut.runForDDlParam(2);
+		//then
+		new VerificationsInOrder() {{
+			
+			Map<String, String> row = new LinkedHashMap<String, String>();
+			row.put("1", "p");
+			row.put("2", "q");
+			row.put("3", "r");
+			mockedProps.populateFrom(row);
+			command.run();
+		}};
+		
 	}
 
 }

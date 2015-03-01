@@ -61,8 +61,24 @@ public class WebSuites {
 		
 		String[] browsers = config.browsers();
 		
+		// TODO: refactor it more elegantly
+		if (browsers.length == 1 && browsers[0].equals("none")) {
+			// run for non-browser mode:
+			currentlyDefiningBrowser = "none";
+			TestSuite browserSuite = new TestSuite("Running without any browser");
+			for (Class<? extends Test> testClass : suites) {
+				
+				Test dynamicTest = testClass.newInstance();
+				browserSuite.addTest(dynamicTest);
+			}
+			suite.addTest(browserSuite);
+		}
 		
 		for (String browser : browsers) {
+			
+			if (browser.equals("none")) {
+				continue;
+			}
 			
 			currentlyDefiningBrowser = browser;
 			
@@ -82,7 +98,7 @@ public class WebSuites {
 			suite.addTest(browserSuite);
 		}
 		
-		if (!config.dontCloseBrowserAtTheEnd()) {
+		if (!config.dontCloseBrowserAtTheEnd() && !(browsers.length == 1 && browsers[0].equals("none"))) {
 			
 			suite.addTest(new CleanupBrowsersTest());
 		}

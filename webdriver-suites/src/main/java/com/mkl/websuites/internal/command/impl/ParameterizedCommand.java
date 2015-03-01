@@ -4,12 +4,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import lombok.extern.slf4j.Slf4j;
 
-import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.command.BaseCommand;
 import com.mkl.websuites.internal.command.impl.validator.CommandSchemaValidator;
@@ -81,33 +78,8 @@ public abstract class ParameterizedCommand extends BaseCommand {
 
 
 
-	protected String populateStringWithProperties(String origValue) {
-		String populated = new String(origValue);
-		String regex = "\\$\\{(.*?)\\}";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(origValue);
-		while (matcher.find()) {
-			String propName = matcher.group(1);
-			String value = WebSuitesUserProperties.get().getProperty(propName);
-			if (value != null) {
-				populated = populated.replaceAll("\\$\\{" + propName +"\\}", value);
-			}
-		}
-		return populated;
-	}
+	
 
-
-
-//	protected boolean validateAnyOf(String ... paramNames) {
-//		
-//		return checkNumberOfMatchingParams(paramNames) > 0;
-//	}
-//	
-//	
-//	protected boolean validateAllOf(String ... paramNames) {
-//		
-//		return checkNumberOfMatchingParams(paramNames) == paramNames.length;
-//	}
 
 
 	protected abstract void runCommandWithParameters();
@@ -121,18 +93,6 @@ public abstract class ParameterizedCommand extends BaseCommand {
 	
 	
 
-//	protected int checkNumberOfMatchingParams(String... validParams) {
-//		
-//		int k = 0;
-//		for (String key : validParams) {
-//			
-//			if (parameterMap.containsKey(key)) {
-//				k++;
-//			}
-//			
-//		}
-//		return k;
-//	}
 
 
 }

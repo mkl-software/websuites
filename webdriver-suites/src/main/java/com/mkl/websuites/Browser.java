@@ -14,7 +14,8 @@ public @interface Browser {
 		CHROME,
 		FIREFOX,
 		SAFARI,
-		OPERA
+		OPERA,
+		NONE
 	}
 
 	BrowserType browserType();

@@ -17,5 +17,13 @@ public @interface BrowsersConfiguration {
 			localId = "ff",
 			displayName = "Firefox",
 			webDriverPath = ""
-	)};
+		),
+		
+		@Browser(
+			browserType = BrowserType.NONE,
+			localId = "none",
+			displayName = "None",
+			webDriverPath = ""
+		)
+	};
 }

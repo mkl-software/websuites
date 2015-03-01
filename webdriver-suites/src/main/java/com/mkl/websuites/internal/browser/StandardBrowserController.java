@@ -81,20 +81,19 @@ public class StandardBrowserController implements BrowserController {
 			
 			browserDisplayNameMap.put(browser.localId(), browser.displayName());
 			
-			if (browser.browserType() == BrowserType.INTERNET_EXPLORER) {
-				
-				configureBrowser("webdriver.ie.driver", browser, InternetExplorerDriver.class);
-			}
-			
-			if (browser.browserType() == BrowserType.CHROME) {
-				
+			switch (browser.browserType()) {
+			case CHROME:
 				configureBrowser("webdriver.chrome.driver", browser, ChromeDriver.class);
+				break;
+			case FIREFOX:
+				configureBrowser("", browser, FirefoxDriver.class);
+				break;
+			case INTERNET_EXPLORER:
+				configureBrowser("webdriver.ie.driver", browser, InternetExplorerDriver.class);
+				break;
+			
 			}
 			
-			if (browser.browserType() == BrowserType.FIREFOX) {
-				
-				configureBrowser("", browser, FirefoxDriver.class);
-			}
 		}
 		
 	}
