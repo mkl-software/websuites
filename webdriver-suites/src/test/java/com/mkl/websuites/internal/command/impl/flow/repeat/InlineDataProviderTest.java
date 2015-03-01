@@ -1,8 +1,10 @@
 package com.mkl.websuites.internal.command.impl.flow.repeat;
 
 import static junitparams.JUnitParamsRunner.$;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import junitparams.JUnitParamsRunner;
@@ -30,6 +32,35 @@ public class InlineDataProviderTest {
 	
 	
 	
+	@Test
+	public void shouldParseEmptyDataString() {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("data", "");
+		sut = new InlineDataProvider(params);
+		//when
+		List<Map<String,String>> data = sut.provideData();
+		//then
+		assertThat(data).hasSize(0);
+		
+	}
+	
+	
+	@Test
+	public void shouldAllowEmptyStringInParamValues() {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("data", ",a,b,c");
+		sut = new InlineDataProvider(params);
+		//when
+		List<Map<String,String>> data = sut.provideData();
+		//then
+		assertThat(data).hasSize(1);
+		assertThat(data.get(0)).hasSize(4);
+		assertThat(data.get(0).get("1")).isEmpty();
+		
+	}
+	
 	
 	@Parameters
 	@Test
@@ -37,22 +68,20 @@ public class InlineDataProviderTest {
 		//given
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("data", data);
-		params.put("params", "x,y");
+		params.put("params", "x,y"); // expecting 2 params in inline data, otherwise expected exception
 		sut = new InlineDataProvider(params);
-		// and
 		//when
 		expectedException.expect(WebSuitesException.class)
 			.hasMessageContaining("Error while parsing data string");
+		
+		// then
 		sut.provideData();
-		//when
-		//then
 		
 	}
 	
 	@SuppressWarnings("unused")
 	private Object[] parametersForShouldThrowExceptionWhenParsingInlineDataWithParams() {
 		return $(
-			$(""),
 			$("1"),
 			$("1,2,3"),
 			$("1,2;1"),

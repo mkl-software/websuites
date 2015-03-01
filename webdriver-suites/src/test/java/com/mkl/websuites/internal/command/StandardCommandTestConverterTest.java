@@ -2,7 +2,7 @@ package com.mkl.websuites.internal.command;
 
 import static java.util.Arrays.asList;
 import static junitparams.JUnitParamsRunner.$;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -79,7 +79,7 @@ public class StandardCommandTestConverterTest {
 	
 	
 	@Test
-	public void shoulDoConversionForOneSubtestControlFlowCommandWithoutNestedWithProceedingAndFollowing() {
+	public void shoulDoConversionForOneSubtestRepeatWithProceedingAndFollowing() {
 		
 		//given
 		List<junit.framework.Test> innerTestsInsideSuiteScenario = checkSubTestMasterSuitAndGetInnerTests(
@@ -97,7 +97,7 @@ public class StandardCommandTestConverterTest {
 	
 	
 	@Test
-	public void shoulDoConversionForOneSubtestControlFlowCommandWihoutNestedWithoutPreceeding() {
+	public void shoulDoConversionForSubtestRepeatWithoutPreceeding() {
 		
 		// given
 		List<junit.framework.Test> innerTestsInsideSuiteScenario = checkSubTestMasterSuitAndGetInnerTests(
@@ -114,7 +114,7 @@ public class StandardCommandTestConverterTest {
 	
 
 	@Test
-	public void shoulDoConversionForOneSubtestControlFlowCommandWihoutNestedWithoutFollowing() {
+	public void shoulDoConversionForSubtestRepeatWithoutFollowing() {
 		
 		// given
 		List<junit.framework.Test> innerTestsInsideSuiteScenario = checkSubTestMasterSuitAndGetInnerTests(
@@ -124,6 +124,48 @@ public class StandardCommandTestConverterTest {
 		
 		assertTestTypesInsideMasterSuite(innerTestsInsideSuiteScenario,
 				ExpectedTestType.TEST_CASE, ExpectedTestType.TEST_SUITE);
+		
+	}
+	
+	
+	
+	@Test
+	public void shoulDoConversionForSubtestRepeatSevenRepeatsOnly() {
+		
+		// given
+		List<junit.framework.Test> innerTestsInsideSuiteScenario = checkSubTestMasterSuitAndGetInnerTests(
+				Arrays.asList((Command) subtestRepeat, subtestRepeat, subtestRepeat, subtestRepeat, subtestRepeat,
+						subtestRepeat, subtestRepeat));
+		
+		// should be: seven suites only
+		
+		assertTestTypesInsideMasterSuite(innerTestsInsideSuiteScenario,
+				ExpectedTestType.TEST_SUITE, ExpectedTestType.TEST_SUITE, ExpectedTestType.TEST_SUITE,
+				ExpectedTestType.TEST_SUITE, ExpectedTestType.TEST_SUITE, ExpectedTestType.TEST_SUITE,
+				ExpectedTestType.TEST_SUITE);
+		
+	}
+	
+	
+	
+	@Test
+	public void shoulDoConversionForSubtestRepeatComplexCase() {
+		
+		// given
+		List<junit.framework.Test> innerTestsInsideSuiteScenario = checkSubTestMasterSuitAndGetInnerTests(
+				Arrays.asList(subtestRepeat, simpleCommand, simpleCommand, subtestRepeat,
+						      simpleCommand, simpleCommand, simpleCommand, subtestRepeat,
+						      subtestRepeat, simpleCommand, subtestRepeat, simpleCommand,
+						      simpleCommand));
+		
+		// should be: test suite for first repeat -> test case for 2 commands -> test suite for repeat,
+		// test case for 3 commands -> test suite for repeat -> test suite for repeat -> test case for 1 command ->
+		// test suite for repeat -> test case for 2 last commands
+		
+		assertTestTypesInsideMasterSuite(innerTestsInsideSuiteScenario,
+				ExpectedTestType.TEST_SUITE, ExpectedTestType.TEST_CASE, ExpectedTestType.TEST_SUITE,
+				ExpectedTestType.TEST_CASE, ExpectedTestType.TEST_SUITE, ExpectedTestType.TEST_SUITE,
+				ExpectedTestType.TEST_CASE, ExpectedTestType.TEST_SUITE, ExpectedTestType.TEST_CASE);
 		
 	}
 	
@@ -168,6 +210,26 @@ public class StandardCommandTestConverterTest {
 	}
 
 	
+	
+	
+	@Parameters(value = {",0", "1,1", "1;2,2", "1;2;3;4;5;6;7;8;9, 9"})
+	@Test
+	public void shouldDoConversionForRepeatWithDddlParams(String inlineData, int ddlCasesCount) {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("subtest", "true");
+		params.put("data", inlineData);
+		RepeatControlFlowHandler subtestRepeatWithDDl = new RepeatControlFlowHandler(params);
+		//when
+		List<junit.framework.Test> innerTests =
+				checkSubTestMasterSuitAndGetInnerTests(Arrays.asList((Command) subtestRepeatWithDDl));
+		//then
+		assertTestTypesInsideMasterSuite(innerTests, ExpectedTestType.TEST_SUITE);
+		
+		assertThat(Collections.list(((TestSuite) innerTests.get(0)).tests()))
+			.hasSize(ddlCasesCount);
+		
+	}
 	
 	
 	

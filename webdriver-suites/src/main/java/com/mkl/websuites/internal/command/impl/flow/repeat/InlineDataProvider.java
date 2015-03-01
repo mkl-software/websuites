@@ -34,10 +34,17 @@ public class InlineDataProvider implements RepeatDataProvider {
 			
 			// check for explicit parameter names:
 			if (parameterMap.containsKey("params")) {
-				paramNames = parameterMap.get("params").split(",");
+				String paramNamesString = parameterMap.get("params").trim();
+				if (!paramNamesString.isEmpty()) {
+					paramNames = paramNamesString.split(",");
+				}
 			}
 			
 			String[] dataRows = data.split(";");
+			
+			if (dataRows.length == 1 && dataRows[0].trim().isEmpty()) {
+				return resultData;
+			}
 			
 			for (String dataRow : dataRows) {
 				
@@ -52,12 +59,16 @@ public class InlineDataProvider implements RepeatDataProvider {
 				
 				for (int i = 0; i < values.length; i++) {
 					
-					if (paramNames == null) { // number starting 1 are the keys
-//						WebSuitesUserProperties.get().setProperty((i+1) + "", params[i]);
-						row.put((i+1) + "", values[i]);
+					String value = values[i];
+					value = value == null ? "" : value;
+					
+					if (paramNames == null) { // in this case numbers starting from 1 are the keys
+						
+						row.put((i+1) + "", value);
+						
 					} else {
-//						WebSuitesUserProperties.get().setProperty(paramNames[i] + "", params[i]);
-						row.put(paramNames[i] + "", values[i]);
+						
+						row.put(paramNames[i] + "", value); // otherwise use explicit param names
 					}
 				}
 				
