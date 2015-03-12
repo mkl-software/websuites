@@ -1,0 +1,3 @@
+repeat	data=one,ein,un;two,zwei,deux;three,drei,trois;four,vier,quatre
+internal-test	repeated param value is ${1}
+end

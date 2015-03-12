@@ -8,6 +8,7 @@ import com.mkl.websuites.test.unit.scenario.CommandBuilderTest;
 import com.mkl.websuites.test.unit.scenario.ControlFlowProcessingTest;
 import com.mkl.websuites.test.unit.scenario.ScenarioFileProcessorTest;
 import com.mkl.websuites.test.unit.scenario.ScenarioPreprocessingTest;
+import com.mkl.websuites.test.unit.scenario.flows.RepeatDetailedIntegrationTest;
 
 
 
@@ -17,6 +18,7 @@ import com.mkl.websuites.test.unit.scenario.ScenarioPreprocessingTest;
 	ScenarioFileProcessorTest.class,
 	CommandBuilderTest.class,
 	ControlFlowProcessingTest.class,
+	RepeatDetailedIntegrationTest.class
 })
 public class ScenarioTests {
 

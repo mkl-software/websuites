@@ -1,0 +1,3 @@
+repeat	times=7
+internal-test	repeated 7 times
+end

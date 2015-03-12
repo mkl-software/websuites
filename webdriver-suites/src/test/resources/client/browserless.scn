@@ -1,8 +1,10 @@
-echo	command before
-repeat	data=first;second;3rd;czwarty;piaty;szosty;seventh	subtest=true
-echo	Simple echo message from scenario file ${1}
-echo	another statement with param ${1}
-wait	500
+echo	command before first repeat
+repeat	data=first	subtest=true	subtestName=One param repeat
+	echo	First repeat echo message from scenario file ${1}
+	echo	another statement with param ${1}
+	#wait	100
 end
-echo	command after
-echo	another after
+#echo	command after first repeat before second
+#repeat	data=1,2,3;a,b,c;x,y,z	subtest=true	subtestName=Two params repeat
+#	echo	params: ${1}  ${2}  ${3}
+#end

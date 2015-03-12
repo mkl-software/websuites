@@ -150,7 +150,8 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 				new SchemaValidationRule("data").addOptionalElements("params"),
 				new SchemaValidationRule("data")
 					.addMandatoryElements("subtest")
-					.addOptionalElements("params"),
+					.addOptionalElements("params")
+					.addOptionalElements("subtestName"),
 				new SchemaValidationRule("dataProvider"),
 				new SchemaValidationRule("handler"));
 	}
@@ -175,7 +176,9 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 
 	@Override
 	public String getSubtestName() {
-		return "REPEAT";
+		String localName = parameterMap.get("subtestName");
+		localName = localName == null ? "" : localName;
+		return localName.isEmpty() ? "REPEAT" : localName;
 	}
 
 	
@@ -214,6 +217,13 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 			
 			doRepeatWithInlineData();
 		}
+	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return isSubtest() ? getSubtestName() : "Repeat, " + nestedCommands.size() + " nested commands";
 	}
 
 

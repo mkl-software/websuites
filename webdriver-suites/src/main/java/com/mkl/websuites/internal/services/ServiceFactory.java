@@ -32,7 +32,9 @@ public class ServiceFactory {
 	public static void init(Class<?> jUnitRunnerClass) {
 		
 		if (isInitialized) {
-			throw new WebSuitesException("Cannot initialize ServiceFactory more than once.");
+			//throw new WebSuitesException("Cannot initialize ServiceFactory more than once.");
+			log.warn("Trying to initialize ServiceFactory more than once");
+			// TODO: throw or not WSE? not a big case to allow init more than once...
 		}
 		
 		isInitialized = true;

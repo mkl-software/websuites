@@ -13,7 +13,7 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 public class WaitCommand extends BaseCommand {
 
 	
-	int time;
+	private int time;
 	
 	
 	public WaitCommand(Integer time) {
@@ -30,6 +30,12 @@ public class WaitCommand extends BaseCommand {
 		} catch (InterruptedException e) {
 			Assert.fail("Wait command interrupted.");
 		}
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "wait (" + time + ")";
 	}
 
 

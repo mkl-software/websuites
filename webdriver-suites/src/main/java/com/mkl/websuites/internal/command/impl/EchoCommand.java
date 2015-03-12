@@ -18,5 +18,10 @@ public class EchoCommand extends BaseCommand {
 
 		System.out.println(populateStringWithProperties(message));
 	}
+	
+	@Override
+	public String toString() {
+		return "echo";
+	}
 
 }

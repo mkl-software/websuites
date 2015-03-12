@@ -1,0 +1,3 @@
+repeat	times=4	counter=k
+internal-test	repeated param value is ${k}
+end
