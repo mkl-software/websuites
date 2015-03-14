@@ -34,7 +34,7 @@ public class CommandInvocationVerifier {
 		String expected = verificationQueue.poll();
 		
 		assertThat(expected)
-			.overridingErrorMessage("Expecting internal-test command invocation with argument: " + message)
+			.overridingErrorMessage("Expecting internal-test command invocation with argument: \"" + message + "\"")
 			.isNotNull();
 		
 		assertThat(message).isEqualTo(expected);

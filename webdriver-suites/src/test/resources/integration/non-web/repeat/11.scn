@@ -1,0 +1,12 @@
+repeat	data=1	subtest=true	subtestName=One param repeat
+	internal-test	first repeat statement
+end
+repeat	data=1	subtest=true	subtestName=One param repeat
+	internal-test	second repeat statement
+end
+repeat	data=1	subtest=true	subtestName=One param repeat
+	internal-test	third repeat statement
+end
+repeat	data=1	subtest=true	subtestName=One param repeat
+	internal-test	fourth repeat statement
+end

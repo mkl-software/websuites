@@ -21,5 +21,11 @@ public class UnitTestVerificationCommand extends BaseCommand {
 		CommandInvocationVerifier.getInstance().verifyInvocation(populateStringWithProperties(message));
 
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "internal-test (" + message + ")";
+	}
 
 }

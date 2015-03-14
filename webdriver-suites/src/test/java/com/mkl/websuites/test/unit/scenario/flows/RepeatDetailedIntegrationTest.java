@@ -23,10 +23,11 @@ import com.mkl.websuites.tests.ScenarioFiles;
 public class RepeatDetailedIntegrationTest {
 
 	
+	private static final String SCN_DIR = "src/test/resources/integration/non-web/repeat/";
 	private final CommandInvocationVerifier commandVerifier = CommandInvocationVerifier.getInstance();
 
 
-	@ScenarioFiles("src/test/resources/integration/non-web/repeat/01.scn")
+	@ScenarioFiles("src/test/resources/integration/non-web/repeat/11.scn")
 	public static class ScenarioFile extends ScenarioFileTest {}
 	
 	@WebSuitesConfig(browsers = "none")
@@ -37,10 +38,10 @@ public class RepeatDetailedIntegrationTest {
 	
 	
 	@Test
-	public void shouldRun00SimplestCase() throws Throwable {
+	public void shouldPassSimplestCaseScn00() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation("src/test/resources/integration/non-web/repeat/00.scn");
+		overrideScenarioFileNameAnnotation(SCN_DIR + "00.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -59,10 +60,10 @@ public class RepeatDetailedIntegrationTest {
 	
 	
 	@Test
-	public void shouldRun01Repeat7Times() throws Throwable {
+	public void shouldRepeat7TimesScn01() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation("src/test/resources/integration/non-web/repeat/01.scn");
+		overrideScenarioFileNameAnnotation(SCN_DIR + "01.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -89,10 +90,10 @@ public class RepeatDetailedIntegrationTest {
 	
 	
 	@Test
-	public void shouldRun02Repeat5TimesWithDefaultCounter() throws Throwable {
+	public void shouldRepeat5TimesWithDefaultCounterScn02() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation("src/test/resources/integration/non-web/repeat/02.scn");
+		overrideScenarioFileNameAnnotation(SCN_DIR + "02.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -115,10 +116,10 @@ public class RepeatDetailedIntegrationTest {
 	
 	
 	@Test
-	public void shouldRun03Repeat5TimesWithNamedCounter() throws Throwable {
+	public void shouldRepeat5TimesWithNamedCounterScn03() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation("src/test/resources/integration/non-web/repeat/03.scn");
+		overrideScenarioFileNameAnnotation(SCN_DIR + "03.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -141,10 +142,10 @@ public class RepeatDetailedIntegrationTest {
 	
 	
 	@Test
-	public void shouldRun04RepeatWithInlineDataOneParam() throws Throwable {
+	public void shouldRepeatWithInlineDataOneParamScn04() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation("src/test/resources/integration/non-web/repeat/04.scn");
+		overrideScenarioFileNameAnnotation(SCN_DIR + "04.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -167,10 +168,10 @@ public class RepeatDetailedIntegrationTest {
 	
 	
 	@Test
-	public void shouldRun05RepeatWithInlineDataThreeParams() throws Throwable {
+	public void shouldRepeatWithInlineDataThreeParamsScn05() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation("src/test/resources/integration/non-web/repeat/05.scn");
+		overrideScenarioFileNameAnnotation(SCN_DIR + "05.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -193,10 +194,10 @@ public class RepeatDetailedIntegrationTest {
 	
 	
 	@Test
-	public void shouldRun06RepeatWithInlineDataNamesParams() throws Throwable {
+	public void shouldRepeatWithInlineDataNamesParamsScn06() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation("src/test/resources/integration/non-web/repeat/06.scn");
+		overrideScenarioFileNameAnnotation(SCN_DIR + "06.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -211,6 +212,178 @@ public class RepeatDetailedIntegrationTest {
 		checkIfNoFailures(result);
 		
 		assertThat(result.getRunCount()).isEqualTo(1);
+		
+		commandVerifier.checkRemaining();
+	}
+	
+	
+	
+	
+	@Test
+	public void shouldRunRepeatInSubtestRepeatScn07() throws Throwable {
+		
+		//given
+		// bug with commands before subtest repeat are not executed
+		overrideScenarioFileNameAnnotation(SCN_DIR + "07.scn");
+		
+		commandVerifier.clearVerificationQueue();
+		
+		commandVerifier.expectInvocations("repeat in subtest 1");
+		commandVerifier.expectInvocations("repeat in subtest 2");
+		commandVerifier.expectInvocations("repeat in subtest 3");
+		commandVerifier.expectInvocations("repeat in subtest 4");
+		
+		//when
+		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
+		
+		//then
+		checkIfNoFailures(result);
+		
+		assertThat(result.getRunCount()).isEqualTo(4); // 4 param cases
+		
+		commandVerifier.checkRemaining();
+	}
+	
+	
+	
+	@Test
+	public void shouldRunCommandsBeforeSubtestRepeatScn08() throws Throwable {
+		
+		//given
+		overrideScenarioFileNameAnnotation(SCN_DIR + "08.scn");
+		
+		commandVerifier.clearVerificationQueue();
+		
+		commandVerifier.expectInvocations("before repeat");
+		commandVerifier.expectInvocations("repeat statement");
+		
+		//when
+		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
+		
+		//then
+		checkIfNoFailures(result);
+		
+		assertThat(result.getRunCount()).isEqualTo(2); // 1 for command before + one param case
+		
+		commandVerifier.checkRemaining();
+	}
+	
+	
+	
+	
+	@Test
+	public void shouldRunCommandsAfterSubtestRepeatScn09() throws Throwable {
+		
+		//given
+		overrideScenarioFileNameAnnotation(SCN_DIR + "09.scn");
+		
+		commandVerifier.clearVerificationQueue();
+		
+		commandVerifier.expectInvocations("repeat statement");
+		commandVerifier.expectInvocations("repeat statement");
+		commandVerifier.expectInvocations("after repeat");
+		
+		//when
+		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
+		
+		//then
+		checkIfNoFailures(result);
+		
+		assertThat(result.getRunCount()).isEqualTo(3); // 2 param case + 1 for command after
+		
+		commandVerifier.checkRemaining();
+	}
+	
+	
+	
+	
+	@Test
+	public void shouldRunCommandsBeforeAndAfterSubtestRepeatScn10() throws Throwable {
+		
+		//given
+		overrideScenarioFileNameAnnotation(SCN_DIR + "10.scn");
+		
+		commandVerifier.clearVerificationQueue();
+		
+		commandVerifier.expectInvocations("before repeat");
+		commandVerifier.expectInvocations("repeat statement");
+		commandVerifier.expectInvocations("repeat statement");
+		commandVerifier.expectInvocations("repeat statement");
+		commandVerifier.expectInvocations("after repeat");
+		
+		//when
+		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
+		
+		//then
+		checkIfNoFailures(result);
+		
+		assertThat(result.getRunCount()).isEqualTo(5); // 1 for command before + 3 param case + 1 command after
+		
+		commandVerifier.checkRemaining();
+	}
+	
+	
+	
+	
+	@Test
+	public void shouldRun4ConsecutiveSubtestRepeatsScn11() throws Throwable {
+		
+		//given
+		overrideScenarioFileNameAnnotation(SCN_DIR + "11.scn");
+		
+		commandVerifier.clearVerificationQueue();
+		
+		commandVerifier.expectInvocations("first repeat statement");
+		commandVerifier.expectInvocations("second repeat statement");
+		commandVerifier.expectInvocations("third repeat statement");
+		commandVerifier.expectInvocations("fourth repeat statement");
+		
+		//when
+		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
+		
+		//then
+		checkIfNoFailures(result);
+		
+		assertThat(result.getRunCount()).isEqualTo(4); // 4 param test cases
+		
+		commandVerifier.checkRemaining();
+	}
+	
+	
+	
+	@Test
+	public void shouldRunRepeatsWithCommandsCombinationScn12() throws Throwable {
+		
+		//given
+		overrideScenarioFileNameAnnotation(SCN_DIR + "12.scn");
+		
+		commandVerifier.clearVerificationQueue();
+		
+		commandVerifier.expectInvocations("start test");
+		commandVerifier.expectInvocations("first repeat statement 1");
+		commandVerifier.expectInvocations("first repeat statement 2");
+		commandVerifier.expectInvocations("after first repeat");
+		commandVerifier.expectInvocations("something");
+		commandVerifier.expectInvocations("something");
+		commandVerifier.expectInvocations("something");
+		commandVerifier.expectInvocations("second repeat statement a");
+		commandVerifier.expectInvocations("second repeat statement b");
+		commandVerifier.expectInvocations("second repeat statement c");
+		commandVerifier.expectInvocations("second repeat statement d");
+		commandVerifier.expectInvocations("after second repeat");
+		commandVerifier.expectInvocations("third repeat statement x");
+		commandVerifier.expectInvocations("third repeat statement y");
+		commandVerifier.expectInvocations("third repeat statement z");
+		commandVerifier.expectInvocations("after third repeat");
+		commandVerifier.expectInvocations("end of test");
+		
+		//when
+		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
+		
+		//then
+		checkIfNoFailures(result);
+		
+		assertThat(result.getRunCount()).isEqualTo(13); 
 		
 		commandVerifier.checkRemaining();
 	}

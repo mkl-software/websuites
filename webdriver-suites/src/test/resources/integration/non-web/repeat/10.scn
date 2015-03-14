@@ -1,0 +1,5 @@
+internal-test	before repeat
+repeat	data=1;2;3	subtest=true	subtestName=One param repeat
+	internal-test	repeat statement
+end
+internal-test	after repeat

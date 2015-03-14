@@ -158,6 +158,9 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 		final String fromName = innerCommands.get(0).toString();
 		final String toName = innerCommands.get(innerCommands.size() - 1).toString();
 		
+		final List<Command> localInnerCommands = new ArrayList<Command>();
+		localInnerCommands.addAll(innerCommands);
+		
 		return new TestCase() {
 			
 			@Override
@@ -168,7 +171,7 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 			@Override
 			protected void runTest() throws Throwable {
 				
-				for (Command command : innerCommands) {
+				for (Command command : localInnerCommands) {
 					command.run();
 				}
 			}

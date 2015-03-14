@@ -1,0 +1,17 @@
+internal-test	start test
+repeat	data=1;2	subtest=true	subtestName=One param repeat
+	internal-test	first repeat statement ${1}
+end
+internal-test	after first repeat
+internal-test	something
+internal-test	something
+internal-test	something
+repeat	data=a;b;c;d	subtest=true	subtestName=One param repeat
+	internal-test	second repeat statement ${1}
+end
+internal-test	after second repeat
+repeat	data=x;y;z	subtest=true	subtestName=One param repeat
+	internal-test	third repeat statement ${1}
+end
+internal-test	after third repeat
+internal-test	end of test

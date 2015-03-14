@@ -1,5 +1,5 @@
 echo	command before first repeat
-repeat	data=first	subtest=true	subtestName=One param repeat
+repeat	data=first	subtest=false	subtestName=One param repeat
 	echo	First repeat echo message from scenario file ${1}
 	echo	another statement with param ${1}
 	#wait	100

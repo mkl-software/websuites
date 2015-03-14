@@ -1,0 +1,3 @@
+repeat	data=1;2;3;4	subtest=true	subtestName=One param repeat
+	internal-test	repeat in subtest ${1}
+end
