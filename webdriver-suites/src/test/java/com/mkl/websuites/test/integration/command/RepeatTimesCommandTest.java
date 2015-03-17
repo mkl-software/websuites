@@ -8,7 +8,7 @@ import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
 import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.ScenarioFiles;
+import com.mkl.websuites.tests.Scenarios;
 import com.mkl.websuites.tests.WebSuiteStandaloneTest;
 
 
@@ -17,7 +17,7 @@ class RepeatTimesCommandTestConfig {
 	
 	
 
-	@ScenarioFiles("src/test/resources/integration/command/repeatTimes.scn")
+	@Scenarios("src/test/resources/integration/command/repeatTimes.scn")
 	public static class LocalUnderlyingRepeatTest extends ScenarioFileTest {}
 	
 	public static class RepeatCheckTest extends WebSuiteStandaloneTest {

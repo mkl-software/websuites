@@ -10,23 +10,23 @@ import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
 import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.ScenarioFiles;
+import com.mkl.websuites.tests.Scenarios;
 
 
 
 class CheckCommandTestConfig {
 	
-	@ScenarioFiles("src/test/resources/integration/command/check1.scn")
+	@Scenarios("src/test/resources/integration/command/check1.scn")
 	public static class ScenarioWithExistingElemByCssId extends ScenarioFileTest {}
 	
-	@ScenarioFiles("src/test/resources/integration/command/check2.scn")
+	@Scenarios("src/test/resources/integration/command/check2.scn")
 	public static class ScenarioWithNonExistingElemByCssId extends ScenarioFileTest {}
 	
 	
-	@ScenarioFiles("src/test/resources/integration/command/check3.scn")
+	@Scenarios("src/test/resources/integration/command/check3.scn")
 	public static class ScenarioForIdParam extends ScenarioFileTest {}
 	
-	@ScenarioFiles("src/test/resources/integration/command/check4.scn")
+	@Scenarios("src/test/resources/integration/command/check4.scn")
 	public static class ScenarioForXpathParam extends ScenarioFileTest {}
 	
 }

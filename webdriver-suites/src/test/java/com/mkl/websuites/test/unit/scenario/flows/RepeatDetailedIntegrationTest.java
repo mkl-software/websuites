@@ -18,7 +18,7 @@ import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 import com.mkl.websuites.test.unit.scenario.CommandInvocationVerifier;
 import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.ScenarioFiles;
+import com.mkl.websuites.tests.Scenarios;
 
 public class RepeatDetailedIntegrationTest {
 
@@ -27,7 +27,7 @@ public class RepeatDetailedIntegrationTest {
 	private final CommandInvocationVerifier commandVerifier = CommandInvocationVerifier.getInstance();
 
 
-	@ScenarioFiles("src/test/resources/integration/non-web/repeat/11.scn")
+	@Scenarios("src/test/resources/integration/non-web/repeat/11.scn")
 	public static class ScenarioFile extends ScenarioFileTest {}
 	
 	@WebSuitesConfig(browsers = "none")
@@ -395,14 +395,14 @@ public class RepeatDetailedIntegrationTest {
 	
 	private void overrideScenarioFileNameAnnotation(final String name) throws Throwable {
 		
-		final ScenarioFiles origScnFiles = ScenarioFile.class.getAnnotation(ScenarioFiles.class);
+		final Scenarios origScnFiles = ScenarioFile.class.getAnnotation(Scenarios.class);
 		
 		Field field = Class.class.getDeclaredField("annotations");
 	    field.setAccessible(true);
 	    @SuppressWarnings({ "rawtypes", "unchecked" })
 		Map<Class<? extends Annotation>, Annotation> annotations = (Map) field.get(ScenarioFile.class);
 		
-		Annotation newValue = new ScenarioFiles() {
+		Annotation newValue = new Scenarios() {
 			
 			
 			@Override
@@ -416,7 +416,7 @@ public class RepeatDetailedIntegrationTest {
 			}
 		};
 		
-		annotations.put(ScenarioFiles.class, newValue);
+		annotations.put(Scenarios.class, newValue);
 	}
 	
 	

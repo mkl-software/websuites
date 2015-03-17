@@ -35,7 +35,7 @@ public abstract class ScenarioFileTest extends MultiBrowserSuite {
 
 	protected List<String> getScenarioFileLocations() {
 		
-		ScenarioFiles config = this.getClass().getAnnotation(ScenarioFiles.class);
+		Scenarios config = this.getClass().getAnnotation(Scenarios.class);
 		
 		String[] paths = config.value();
 		

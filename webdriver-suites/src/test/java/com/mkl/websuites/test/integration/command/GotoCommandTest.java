@@ -8,7 +8,7 @@ import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
 import com.mkl.websuites.test.integration.command.GotoCommandTestConfig.GotoCheckTest;
 import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.ScenarioFiles;
+import com.mkl.websuites.tests.Scenarios;
 import com.mkl.websuites.tests.WebSuiteStandaloneTest;
 
 
@@ -16,7 +16,7 @@ import com.mkl.websuites.tests.WebSuiteStandaloneTest;
 class GotoCommandTestConfig {
 	
 
-	@ScenarioFiles("src/test/resources/integration/command/gotoLocalAddress.scn")
+	@Scenarios("src/test/resources/integration/command/gotoLocalAddress.scn")
 	public static class LocalUnderlyingGotoTest extends ScenarioFileTest {}
 	
 	public static class GotoCheckTest extends WebSuiteStandaloneTest {
