@@ -1,7 +1,7 @@
 package com.mkl.websuites.test.unit.scenario.flows;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
+import static com.mkl.websuites.test.core.TestUtils.checkIfNoFailures;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -10,7 +10,6 @@ import java.util.Map;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
 
 import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesConfig;
@@ -420,21 +419,5 @@ public class RepeatDetailedIntegrationTest {
 	}
 	
 	
-	protected void checkIfNoFailures(Result result) {
-		if (result.getFailureCount() > 0) {
-			
-			System.out.println(result.getFailures());
-			
-			StringBuffer sb = new StringBuffer();
-			
-			for (Failure failure : result.getFailures()) {
-				sb.append("[" + failure.getTestHeader() + "] ")
-					.append(failure.getMessage());
-					
-			}
-			
-			fail("There are failurs in the unerlying test being invoked, see "
-					+ "details below:\n" + sb.toString());
-		}
-	}
+	
 }

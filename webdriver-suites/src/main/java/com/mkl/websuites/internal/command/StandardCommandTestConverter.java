@@ -223,19 +223,24 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 		
 		final String currentlyDefiningBrowser = WebSuites.getCurrentlyDefiningBrowser();
 		
+		final String testName = new String(masterScenarioFileName) +
+				" [" + currentlyDefiningBrowser + "]";
+		
+		final List<Command> localCommandsToRunList = new ArrayList<Command>();
+		localCommandsToRunList.addAll(inputCommandList);
+	
 		Test test = new TestCase() {
 			
 			
 			@Override
 			public String getName() {
-				return masterScenarioFileName +
-						" [" + currentlyDefiningBrowser + "]";
+				return testName;
 			}
 			
 			@Override
 			protected void runTest() throws Throwable {
 				
-				for (Command command : inputCommandList) {
+				for (Command command : localCommandsToRunList) {
 				
 					log.debug("running command from " + command);
 					command.run();
