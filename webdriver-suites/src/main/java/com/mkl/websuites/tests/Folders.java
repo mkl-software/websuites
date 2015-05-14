@@ -10,5 +10,7 @@ public @interface Folders {
 
 	String[] path();
 	
+	SortingStrategy sortingStrategy() default SortingStrategy.APLHABETICAL;
+	
 	boolean ignoreSubfolders() default false;
 }

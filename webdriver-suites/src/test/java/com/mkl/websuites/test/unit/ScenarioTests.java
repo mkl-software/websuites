@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.mkl.websuites.test.integration.nonweb.FolderedScenarioFilesTest;
 import com.mkl.websuites.test.unit.scenario.CommandBuilderTest;
 import com.mkl.websuites.test.unit.scenario.ControlFlowProcessingTest;
 import com.mkl.websuites.test.unit.scenario.ScenarioFileProcessorTest;
@@ -16,6 +17,7 @@ import com.mkl.websuites.test.unit.scenario.flows.RepeatDetailedIntegrationTest;
 @SuiteClasses({
 	ScenarioPreprocessingTest.class,
 	ScenarioFileProcessorTest.class,
+	FolderedScenarioFilesTest.class,
 	CommandBuilderTest.class,
 	ControlFlowProcessingTest.class,
 	RepeatDetailedIntegrationTest.class

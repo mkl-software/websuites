@@ -1,11 +1,9 @@
 package com.mkl.websuites.test.unit.scenario.flows;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.mkl.websuites.test.core.TestUtils.checkIfNoFailures;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
@@ -15,6 +13,7 @@ import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
+import com.mkl.websuites.test.core.TestUtils;
 import com.mkl.websuites.test.unit.scenario.CommandInvocationVerifier;
 import com.mkl.websuites.tests.ScenarioFileTest;
 import com.mkl.websuites.tests.Scenarios;
@@ -389,34 +388,25 @@ public class RepeatDetailedIntegrationTest {
 	
 	
 	
-	
-	
-	
-	private void overrideScenarioFileNameAnnotation(final String name) throws Throwable {
-		
-		final Scenarios origScnFiles = ScenarioFile.class.getAnnotation(Scenarios.class);
-		
-		Field field = Class.class.getDeclaredField("annotations");
-	    field.setAccessible(true);
-	    @SuppressWarnings({ "rawtypes", "unchecked" })
-		Map<Class<? extends Annotation>, Annotation> annotations = (Map) field.get(ScenarioFile.class);
+	private void overrideScenarioFileNameAnnotation(final String scenarioName) throws Throwable {
 		
 		Annotation newValue = new Scenarios() {
 			
 			
 			@Override
 			public String[] value() {
-				return new String[] {name};
+				return new String[] {scenarioName};
 			}
 
 			@Override
 			public Class<? extends Annotation> annotationType() {
-				return origScnFiles.annotationType();
+				return ((Scenarios) ScenarioFile.class.getAnnotation(Scenarios.class)).annotationType();
 			}
 		};
 		
-		annotations.put(Scenarios.class, newValue);
+		TestUtils.overrideScenarioFileNameAnnotation(ScenarioFile.class, Scenarios.class, newValue);
 	}
+	
 	
 	
 	

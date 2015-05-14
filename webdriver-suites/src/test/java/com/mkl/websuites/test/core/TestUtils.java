@@ -2,6 +2,10 @@ package com.mkl.websuites.test.core;
 
 import static org.junit.Assert.fail;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.util.Map;
+
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
@@ -25,5 +29,46 @@ public class TestUtils {
 			fail("There are failurs in the unerlying test being invoked, see "
 					+ "details below:\n" + sb.toString());
 		}
+	}
+	
+	
+	
+//	@SuppressWarnings({ "unchecked", "rawtypes" })
+//	public static void overrideScenarioFileNameAnnotation(Class<?> annotatedClass,
+//			Class<? extends Annotation> annotationClass, Annotation newValue) 
+//			throws Throwable {
+//		
+//		Field field = Class.class.getDeclaredField("annotations");
+//	    field.setAccessible(true);
+//		Map<Class<? extends Annotation>, Annotation> annotations = (Map) field.get(annotatedClass);
+//		
+//		
+//		annotations.put(annotationClass, newValue);
+//	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void overrideScenarioFileNameAnnotation(Class<?> annotatedClass,
+			Class<? extends Annotation> annotationClass,
+			Annotation newValue) 
+			throws Throwable {
+		
+			annotatedClass.getAnnotation(annotationClass);
+		
+		Field field = Class.class.getDeclaredField("annotations");
+	    field.setAccessible(true);
+		Map<Class<? extends Annotation>, Annotation> annotations = (Map) field.get(annotatedClass);
+		
+		
+		annotations.put(annotationClass, newValue);
+	}
+
+
+
+	public static Annotation originalAnnotationFor(Class<?> annotatedClass,
+			Class<? extends Annotation> annotationClass) {
+		
+		final Annotation originalAnnotation = annotatedClass.getAnnotation(annotationClass);
+		
+		return originalAnnotation;
 	}
 }
