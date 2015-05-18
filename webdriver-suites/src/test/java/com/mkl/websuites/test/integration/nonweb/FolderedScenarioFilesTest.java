@@ -27,7 +27,7 @@ public class FolderedScenarioFilesTest {
 	private final CommandInvocationVerifier commandVerifier = CommandInvocationVerifier.getInstance();
 
 
-	@Folders(path = "", ignoreSubfolders = true)
+	@Folders(path = "src/test/resources/integration/non-web/folderedScenarios/2", ignoreSubfolders = false)
 	public static class FolderTest extends ScenarioFolderTest {}
 	
 	@WebSuitesConfig(browsers = "none")
@@ -48,9 +48,8 @@ public class FolderedScenarioFilesTest {
 		//when
 		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
 		//then
-		TestUtils.checkIfNoFailures(result);
+		TestUtils.checkCorrectResultRunsCount(result, 4);
 		commandVerifier.checkRemaining();
-		assertThat(result.getRunCount()).isEqualTo(4);
 	}
 	
 	
@@ -66,9 +65,43 @@ public class FolderedScenarioFilesTest {
 		//when
 		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
 		//then
+		TestUtils.checkCorrectResultRunsCount(result, 5);
+		commandVerifier.checkRemaining();
+	}
+	
+	
+	@Test
+	public void shouldRunSubfolderedScenariosWithIgnoreSubfolders() throws Throwable {
+		
+		//given (same as above but with ignore subfolders)
+		overrideFolderAnnotation(FOLDERS_BASE + "2", true);
+		
+		commandVerifier.clearVerificationQueue();
+		commandVerifier.expectInvocations("top1.scn", "top2.scn");
+		//when
+		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
+		//then
 		TestUtils.checkIfNoFailures(result);
 		commandVerifier.checkRemaining();
-		assertThat(result.getRunCount()).isEqualTo(5);
+		assertThat(result.getRunCount()).isEqualTo(2);
+	}
+	
+	
+	
+	@Test
+	public void shouldRunTopLevelScenariosDeepSubfolderOneScn() throws Throwable {
+		
+		//given
+		overrideFolderAnnotation(FOLDERS_BASE + "3", false);
+		
+		commandVerifier.clearVerificationQueue();
+		commandVerifier.expectInvocations("deep one");
+		//when
+		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
+		//then
+		TestUtils.checkIfNoFailures(result);
+		commandVerifier.checkRemaining();
+		assertThat(result.getRunCount()).isEqualTo(1);
 	}
 	
 	

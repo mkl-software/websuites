@@ -1,5 +1,6 @@
 package com.mkl.websuites.test.core;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
 import java.lang.annotation.Annotation;
@@ -29,6 +30,16 @@ public class TestUtils {
 			fail("There are failurs in the unerlying test being invoked, see "
 					+ "details below:\n" + sb.toString());
 		}
+	}
+	
+	
+	public static void checkCorrectResultRunsCount(Result result, int runCount) {
+		
+		checkIfNoFailures(result);
+		
+		assertThat(result.getRunCount()).isEqualTo(runCount);
+		
+		assertThat(result.getIgnoreCount()).isZero();
 	}
 	
 	

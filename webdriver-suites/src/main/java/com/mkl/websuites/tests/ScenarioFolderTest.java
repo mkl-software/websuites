@@ -15,6 +15,12 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 
 public class ScenarioFolderTest extends MultiBrowserSuite {
 
+	
+	private boolean ignoreSubfolders;
+
+
+
+
 	@Override
 	protected List<Test> defineTests() {
 		
@@ -24,19 +30,17 @@ public class ScenarioFolderTest extends MultiBrowserSuite {
 			throw new WebSuitesException("Missing com.mkl.websuites.tests.Folders annotation");
 		}
 		
-		boolean ignoreSubfolders = folderConfig.ignoreSubfolders();
+		ignoreSubfolders = folderConfig.ignoreSubfolders();
 		
 		List<Test> topLevelFolderSuites = new ArrayList<Test>();
 		
 		for (String path : folderConfig.path()) {
 			
-			TestSuite topLeveLTestSuite = processScenarioFilesInFolder(path);
+			TestSuite topLeveLFolderSuite = new TestSuite(path);
 			
-			if (!ignoreSubfolders) {
-				processRecursivelyFolder(path, topLeveLTestSuite);
-			}
+			processRecursivelyFolder(path, topLeveLFolderSuite);
 			
-			topLevelFolderSuites.add(topLeveLTestSuite);
+			topLevelFolderSuites.add(topLeveLFolderSuite);
 		}
 		
 		return topLevelFolderSuites;
@@ -47,6 +51,20 @@ public class ScenarioFolderTest extends MultiBrowserSuite {
 	
 	private void processRecursivelyFolder(String folderPath, TestSuite parentSuite) {
 
+		TestSuite currentFolderSuite = new TestSuite(folderPath);
+		
+		List<Test> testsInCurrentFolder = processScenarioFilesInFolder(folderPath);
+		
+		for (Test test : testsInCurrentFolder) {
+			currentFolderSuite.addTest(test);
+		}
+		
+		parentSuite.addTest(currentFolderSuite);
+		
+		if (ignoreSubfolders) {
+			return;
+		}
+		
 		File folder = new File(folderPath);
 		
 		File[] nestedFolders = folder.listFiles(new FileFilter() {
@@ -59,18 +77,16 @@ public class ScenarioFolderTest extends MultiBrowserSuite {
 		
 		for (File nested : nestedFolders) {
 			
-			TestSuite nestedFolderSuite = processScenarioFilesInFolder(nested.getAbsolutePath());
-			
-			parentSuite.addTest(nestedFolderSuite);
+			processRecursivelyFolder(nested.getAbsolutePath(), currentFolderSuite);
 		}
+		
 	}
 
 
 
 
-	protected TestSuite processScenarioFilesInFolder(String folderPath) {
+	protected List<Test> processScenarioFilesInFolder(String folderPath) {
 
-		TestSuite folderSuite = new TestSuite(folderPath);
 		
 		File folder = new File(folderPath);
 		
@@ -84,18 +100,17 @@ public class ScenarioFolderTest extends MultiBrowserSuite {
 			}
 		});
 		
+		List<Test> testsInThisFolder = new ArrayList<Test>();
+		
 		for (File scnearioFile : scenarioFiles) {
 			
 			List<Test> testsInScenarioFile =
 					scenarioFileProcessor.processSingleScenarioFile(scnearioFile.getAbsolutePath());
 			
-			for (Test scenarioTest : testsInScenarioFile) {
-				
-				folderSuite.addTest(scenarioTest);
-			}
+			testsInThisFolder.addAll(testsInScenarioFile);
 		}
 		
-		return folderSuite;
+		return testsInThisFolder;
 	}
 
 }
