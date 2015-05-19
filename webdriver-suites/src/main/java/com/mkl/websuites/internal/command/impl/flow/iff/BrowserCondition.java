@@ -6,9 +6,9 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 public class BrowserCondition implements IfCondition {
 
 	
-	private String requiredBrowser;
+	protected String requiredBrowser;
 	
-	private boolean negate;
+	protected boolean negate;
 	
 	
 	
@@ -29,15 +29,17 @@ public class BrowserCondition implements IfCondition {
 	@Override
 	public boolean isConditionMet() {
 		
-		String curentBrowser = ServiceFactory.get(BrowserController.class).currentBrowser();
+		String curentBrowser = currentBrowser();
 		
 		boolean browsersOK = requiredBrowser.equals(curentBrowser);
 		
-		if (negate) {
-			return !browsersOK;
-		}
+		return negate ? !browsersOK : browsersOK;
 		
-		return browsersOK;
+	}
+
+
+	protected String currentBrowser() {
+		return ServiceFactory.get(BrowserController.class).currentBrowser();
 	}
 
 }
