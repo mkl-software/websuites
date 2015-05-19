@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.flow.ControlFlowHandler;
@@ -34,11 +35,25 @@ public class IfControlFlowHandler extends ControlFlowHandler {
 		
 		IfCondition ifStatement = null;
 		
-		if (parameterMap.containsKey("browser")) {
-			ifStatement = new BrowserCondition(parameterMap.get("browser"));
+		String param = "browser";
+		if (parameterMap.containsKey(param)) {
+			ifStatement = new BrowserCondition(parameterMap.get(param));
 		}
-		if (parameterMap.containsKey("browserIsNot")) {
-			ifStatement = new BrowserCondition(parameterMap.get("browserIsNot"), true);
+		param = "browserIsNot";
+		if (parameterMap.containsKey(param)) {
+			ifStatement = new BrowserCondition(parameterMap.get(param), true);
+		}
+		param = "browserIn";
+		if (parameterMap.containsKey(param)) {
+			ifStatement = new BrowserSetCondition(parameterMap.get(param));
+		}
+		param = "browserNotIn";
+		if (parameterMap.containsKey(param)) {
+			ifStatement = new BrowserSetCondition(parameterMap.get(param), true);
+		}
+		
+		if (ifStatement == null) {
+			throw new WebSuitesException("Unrecognized \"if\" configuration parameters: " + parameterMap);
 		}
 		
 		if (ifStatement.isConditionMet()) {

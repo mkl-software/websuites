@@ -88,6 +88,40 @@ public class IfControlFlowHandlerTest {
 		
 		expectCommandRunCountForBrowserConfig(command, browserController, "browserIsNot", "ie", "ie", 0);
 	}
+	
+	
+	@Test
+	public void shouldDoIfWhenBrowserMatchesWithinSet(@Mocked final Command command,
+			@Mocked StandardBrowserController browserController) {
+		
+		expectCommandRunCountForBrowserConfig(command, browserController, "browserIn", "ff,chrome,ie", "ie", 1);
+	}
+	
+	
+	@Test
+	public void shouldNotDoIfWhenBrowserDoesnNotMatchesWithinSet(@Mocked final Command command,
+			@Mocked StandardBrowserController browserController) {
+		
+		expectCommandRunCountForBrowserConfig(command, browserController, "browserIn", "ff,chrome,ie", "safari", 0);
+	}
+	
+	
+	
+	@Test
+	public void shouldNotDoIfWhenBrowserMatchesWithSet(@Mocked final Command command,
+			@Mocked StandardBrowserController browserController) {
+		
+		expectCommandRunCountForBrowserConfig(command, browserController, "browserNotIn", "ff,chrome,ie", "ie", 0);
+	}
+	
+	
+	@Test
+	public void shouldDoIfWhenBrowserDoesNotMatcheWithinSet(@Mocked final Command command,
+			@Mocked StandardBrowserController browserController) {
+		
+		expectCommandRunCountForBrowserConfig(command, browserController,
+				"browserNotIn", "ff,chrome,ie", "safari", 1);
+	}
 
 	
 	
