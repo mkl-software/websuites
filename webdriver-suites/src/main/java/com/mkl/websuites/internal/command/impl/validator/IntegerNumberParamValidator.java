@@ -2,12 +2,12 @@ package com.mkl.websuites.internal.command.impl.validator;
 
 import com.mkl.websuites.WebSuitesException;
 
-public class IntegerNumberParamValidator implements ParameterValueValidator {
+public class IntegerNumberParamValidator extends SingleValueValidator {
 
 	
 	private int lowerRange;
 	private int upperRange;
-	private String paramName;
+	
 	
 	public IntegerNumberParamValidator(String paramName) {
 		this(paramName, 0, Integer.MAX_VALUE);
@@ -18,9 +18,9 @@ public class IntegerNumberParamValidator implements ParameterValueValidator {
 	}
 
 	public IntegerNumberParamValidator(String param, int lowerRange, int upperRange) {
+		super(param);
 		this.lowerRange = lowerRange;
 		this.upperRange = upperRange;
-		this.paramName = param;
 	}
 
 	@Override
@@ -37,12 +37,6 @@ public class IntegerNumberParamValidator implements ParameterValueValidator {
 					paramValue + "'must be proper integer value");
 		}
 		
-	}
-	
-	
-	@Override
-	public String getParamName() {
-		return paramName;
 	}
 
 }

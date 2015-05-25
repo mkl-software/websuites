@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.mkl.websuites.WebSuitesException;
+import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.flow.ControlFlowHandler;
+import com.mkl.websuites.internal.command.impl.validator.BooleanParamValidator;
 import com.mkl.websuites.internal.command.impl.validator.IfConditionParamValidation;
-import com.mkl.websuites.internal.command.impl.validator.IntegerNumberParamValidator;
 import com.mkl.websuites.internal.command.impl.validator.ParameterValueValidator;
 import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
@@ -52,6 +53,13 @@ public class IfControlFlowHandler extends ControlFlowHandler {
 			ifStatement = new BrowserSetCondition(parameterMap.get(param), true);
 		}
 		
+		param = "property";
+		if (parameterMap.containsKey(param)) {
+			
+			ifStatement = buildPropertyCondition();
+		}
+		
+		
 		if (ifStatement == null) {
 			throw new WebSuitesException("Unrecognized \"if\" configuration parameters: " + parameterMap);
 		}
@@ -62,9 +70,6 @@ public class IfControlFlowHandler extends ControlFlowHandler {
 		}
 	}
 
-	
-	
-	
 	private void runNestedCommands() {
 		for (Command command : nestedCommands) {
 			command.run();
@@ -80,6 +85,10 @@ public class IfControlFlowHandler extends ControlFlowHandler {
 				new SchemaValidationRule("browserIsNot"),
 				new SchemaValidationRule("browserIn"),
 				new SchemaValidationRule("browserNotIn"),
+				new SchemaValidationRule("property").addMandatoryElements("isset"),
+				new SchemaValidationRule("property").addMandatoryElements("valueIs"),
+				new SchemaValidationRule("property").addMandatoryElements("valueIsNot"),
+				new SchemaValidationRule("property").addMandatoryElements("valueMatches"),
 				new SchemaValidationRule("condition").addOptionalElements("params"));
 	}
 	
@@ -87,7 +96,7 @@ public class IfControlFlowHandler extends ControlFlowHandler {
 	protected List<ParameterValueValidator> defineParameterValueValidators() {
 		
 		return Arrays.asList((ParameterValueValidator)
-				new IntegerNumberParamValidator("times"),
+				new BooleanParamValidator("isset"),
 				new IfConditionParamValidation());
 	}
 
@@ -96,6 +105,42 @@ public class IfControlFlowHandler extends ControlFlowHandler {
 	
 	
 	
+	protected IfCondition buildPropertyCondition() {
+		
+		PropertyValueCondition ifStatement = 
+				new PropertyValueCondition(parameterMap.get("property"));
+		
+		if (parameterMap.containsKey("isset")) {
+			
+			final boolean expectTrue = Boolean.valueOf(parameterMap.get("isset"));
+			
+			ifStatement.setValueAcceptor(new PropertyValueAcceptor() {
+			
+			@Override
+			boolean accept(String name, String actualValue) {
+				boolean isset = WebSuitesUserProperties.get().isSet(name);
+				return expectTrue ? isset : !isset;
+			}
+			});
+		}
+		
+		if (parameterMap.containsKey("valueIs")) {
+			
+			ifStatement.setValueAcceptor(new PropertyValueAcceptor() {
+				
+				@Override
+				boolean accept(String name, String actualValue) {
+					
+					String expectedValue = parameterMap.get("valueIs");
+					
+					return actualValue.equals(expectedValue);
+				}
+				});
+		}
+		
+		return ifStatement;
+	}
+
 	@Override
 	public String toString() {
 		return "If, " + nestedCommands.size() + " nested commands";

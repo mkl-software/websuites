@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import junitparams.JUnitParamsRunner;
 import mockit.Expectations;
 import mockit.Mock;
 import mockit.MockUp;
@@ -13,15 +14,20 @@ import mockit.Verifications;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import pl.wkr.fluentrule.api.FluentExpectedException;
 
+import com.mkl.websuites.WebSuitesException;
+import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.browser.StandardBrowserController;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.impl.ParameterizedCommand;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
 
+
+@RunWith(JUnitParamsRunner.class)
 public class IfControlFlowHandlerTest {
 
 	
@@ -122,7 +128,61 @@ public class IfControlFlowHandlerTest {
 		expectCommandRunCountForBrowserConfig(command, browserController,
 				"browserNotIn", "ff,chrome,ie", "safari", 1);
 	}
-
+	
+	
+	
+	
+	
+	@Test
+	public void shouldNotPassValidationForIncorrectIsset(final @Mocked Command command) {
+		
+		expectedException.expect(WebSuitesException.class);
+		runPropertyConditionFor("incorrect", "existing", false, command);
+	}
+	
+	
+	@Test
+	public void shouldDoWhenPropertyIsSet(final @Mocked Command command) {
+		
+		runPropertyConditionFor("true", "existing", true, command);
+	}
+	
+	
+	
+	@Test
+	public void shouldNotDoWhenPropertyIsNotSet(final @Mocked Command command) {
+		
+		runPropertyConditionFor("true", null, false, command);
+	}
+	
+	
+	@Test
+	public void shouldDoWhenPropertyIsNotSet(final @Mocked Command command) {
+		
+		runPropertyConditionFor("false", null, true, command);
+	}
+	
+	
+	private void runPropertyConditionFor(String isset, String propertyValue, final boolean shouldRun,
+			final @Mocked Command command) {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("property", "testProperty");
+		params.put("isset", isset);
+		sut = new IfControlFlowHandler(params);
+		sut.setNestedCommands(Arrays.asList(command));
+		// and
+		WebSuitesUserProperties.get().setProperty("testProperty", propertyValue);
+		// when
+		sut.run();
+		//then
+		new Verifications() {{
+			command.run();
+			times = shouldRun ? 1 : 0;
+		}};
+	}
+	
+	
 	
 	
 

@@ -9,6 +9,7 @@ import com.mkl.websuites.internal.command.impl.flow.RepeatControlFlowHandlerTest
 import com.mkl.websuites.internal.command.impl.flow.iff.BrowserSetConditionTest;
 import com.mkl.websuites.internal.command.impl.flow.iff.IfControlFlowHandlerTest;
 import com.mkl.websuites.internal.command.impl.flow.repeat.InlineDataProviderTest;
+import com.mkl.websuites.internal.command.impl.validator.BooleanParamValidatorTest;
 import com.mkl.websuites.internal.command.impl.validator.DataProviderParamValidatorTest;
 import com.mkl.websuites.test.unit.core.CommandSchemaValidatorTest;
 import com.mkl.websuites.tests.ScenarioFolderTestTest;
@@ -25,7 +26,8 @@ import com.mkl.websuites.tests.ScenarioFolderTestTest;
 			InlineDataProviderTest.class,
 			ScenarioFolderTestTest.class,
 			IfControlFlowHandlerTest.class,
-			BrowserSetConditionTest.class
+			BrowserSetConditionTest.class,
+			BooleanParamValidatorTest.class
 		}
 )
 public class AllUnitTests {
