@@ -185,6 +185,48 @@ public class IfControlFlowHandlerTest {
 	
 	
 	
+	@Test
+	public void shouldDoWhenPropertyValueMatches(final @Mocked Command command) {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("property", "testProperty");
+		params.put("valueIs", "expected value");
+		sut = new IfControlFlowHandler(params);
+		sut.setNestedCommands(Arrays.asList(command));
+		// and
+		WebSuitesUserProperties.get().setProperty("testProperty", "expected value");
+		// when
+		sut.run();
+		//then
+		new Verifications() {{
+			command.run();
+			times = 1;
+		}};
+	}
+	
+	
+	
+	@Test
+	public void shouldNotDoWhenPropertyValueDoesNotMatch(final @Mocked Command command) {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("property", "testProperty");
+		params.put("valueIs", "expected value");
+		sut = new IfControlFlowHandler(params);
+		sut.setNestedCommands(Arrays.asList(command));
+		// and
+		WebSuitesUserProperties.get().setProperty("testProperty", "not expected value");
+		// when
+		sut.run();
+		//then
+		new Verifications() {{
+			command.run();
+			times = 0;
+		}};
+	}
+	
+	
+	
 
 
 	private void expectCommandRunCountForBrowserConfig(final Command command,

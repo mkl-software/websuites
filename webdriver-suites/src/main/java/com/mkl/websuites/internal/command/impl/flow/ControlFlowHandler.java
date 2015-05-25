@@ -24,7 +24,7 @@ public abstract class ControlFlowHandler extends ParameterizedCommand {
 	public ControlFlowHandler() {
 		// for compatibility only, control flow command will only take maps as parameters:
 		this (new HashMap<String, String>());
-		log.error("Control flow handlers may not use default constructors, "
+		log.warn("Control flow handlers may not use default constructors, "
 				+ "please use Map<String, String> constructor instead.");
 	}
 	
