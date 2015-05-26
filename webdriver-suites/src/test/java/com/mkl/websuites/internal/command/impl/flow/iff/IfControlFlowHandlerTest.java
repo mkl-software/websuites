@@ -1,9 +1,10 @@
 package com.mkl.websuites.internal.command.impl.flow.iff;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import junitparams.JUnitParamsRunner;
@@ -244,6 +245,77 @@ public class IfControlFlowHandlerTest {
 	}
 	
 
+	public static class CustomIfConditionWithParams implements IfCondition {
+
+		private List<String> customParams;
+		
+		public CustomIfConditionWithParams(List<String> customParams) {
+			this.customParams = customParams;
+		}
+
+		@Override
+		public boolean isConditionMet() {
+			return "MKL Software".equals(customParams.get(0).toUpperCase() + " " + customParams.get(1));
+		}
+		
+	}
+	
+	
+	public static class CustomSimpleIfConditionWithTrue implements IfCondition {
+		@Override
+		public boolean isConditionMet() {
+			return true;
+		}
+	}
+	public static class CustomSimpleIfConditionWithFalse implements IfCondition {
+		@Override
+		public boolean isConditionMet() {
+			return false;
+		}
+	}
+	
+	
+	@Test
+	public void shouldRunCustomTrueConditionWithoutParams() {
+		// given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("condition", CustomSimpleIfConditionWithTrue.class.getName());
+		sut = new IfControlFlowHandler(params);
+		// when
+		IfCondition customCondition = sut.buildCustomCondition();
+		assertThat(customCondition.isConditionMet()).isTrue();
+	}
+	
+	
+	
+	@Test
+	public void shouldRunCustomFalseConditionWithoutParams() {
+		// given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("condition", CustomSimpleIfConditionWithFalse.class.getName());
+		sut = new IfControlFlowHandler(params);
+		// when
+		IfCondition customCondition = sut.buildCustomCondition();
+		assertThat(customCondition.isConditionMet()).isFalse();
+	}
+	
+	
+	
+	@Test
+	public void shouldRunCustomCondition() {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("condition", CustomIfConditionWithParams.class.getName());
+		params.put("params", "mkl,Software");
+		sut = new IfControlFlowHandler(params);
+		//when
+		IfCondition condition = sut.buildCustomCondition();
+		//then
+		assertThat(condition.isConditionMet()).isTrue();
+	}
+	
+	
+	
 
 	private void expectCommandRunCountForBrowserConfig(final Command command,
 			StandardBrowserController browserController, String configParam,

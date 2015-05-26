@@ -1,8 +1,11 @@
 package com.mkl.websuites.internal.command.impl.flow.iff;
 
+import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import lombok.extern.slf4j.Slf4j;
 
 import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.WebSuitesUserProperties;
@@ -15,6 +18,8 @@ import com.mkl.websuites.internal.command.impl.validator.ParameterValueValidator
 import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 
+
+@Slf4j
 @CommandDescriptor(name = "if")
 public class IfControlFlowHandler extends ControlFlowHandler {
 
@@ -57,6 +62,11 @@ public class IfControlFlowHandler extends ControlFlowHandler {
 		if (parameterMap.containsKey(param)) {
 			
 			ifStatement = buildPropertyCondition();
+		}
+		
+		if (parameterMap.containsKey("condition")) {
+			
+			ifStatement = buildCustomCondition();
 		}
 		
 		
@@ -154,6 +164,28 @@ public class IfControlFlowHandler extends ControlFlowHandler {
 			});
 		}
 		
+		return ifStatement;
+	}
+
+	protected IfCondition buildCustomCondition() {
+		IfCondition ifStatement;
+		String conditionClass = parameterMap.get("condition");
+		try {
+			Class<?> klass = Class.forName(conditionClass);
+			if (parameterMap.containsKey("params")) {
+				Constructor<?> constructor = klass.getConstructor(List.class);
+				List<String> params = Arrays.asList(parameterMap.get("params").split(","));
+				ifStatement = (IfCondition) constructor.newInstance(params);
+			} else {
+				ifStatement = (IfCondition) klass.newInstance();
+			}
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new WebSuitesException("Cannot instantiate 'if' condition class " +
+			conditionClass +" from parameters: " + parameterMap + ".\nMake sure that the class "
+					+ "implements com.mkl.websuites.internal.command.impl.flow.iff.IfCondition "
+					+ "interface and it has either no-args or java.util.List<String> constructor");
+		}
 		return ifStatement;
 	}
 
