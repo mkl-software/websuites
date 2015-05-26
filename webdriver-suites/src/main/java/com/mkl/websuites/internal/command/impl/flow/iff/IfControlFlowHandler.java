@@ -114,7 +114,7 @@ public class IfControlFlowHandler extends ControlFlowHandler {
 			
 			final boolean expectTrue = Boolean.valueOf(parameterMap.get("isset"));
 			
-			ifStatement.setValueAcceptor(new PropertyValueAcceptor() {
+			ifStatement.setValueAcceptor(new ValueAcceptor() {
 			
 			@Override
 			boolean accept(String name, String actualValue) {
@@ -124,18 +124,34 @@ public class IfControlFlowHandler extends ControlFlowHandler {
 			});
 		}
 		
-		if (parameterMap.containsKey("valueIs")) {
+		if (parameterMap.containsKey("valueIs") || parameterMap.containsKey("valueIsNot")) {
 			
-			ifStatement.setValueAcceptor(new PropertyValueAcceptor() {
+			final boolean reverse = parameterMap.containsKey("valueIsNot");
+			ifStatement.setValueAcceptor(new ValueAcceptor() {
 				
 				@Override
 				boolean accept(String name, String actualValue) {
 					
-					String expectedValue = parameterMap.get("valueIs");
-					
-					return actualValue.equals(expectedValue);
+					String expectedValue = reverse ? parameterMap.get("valueIsNot") : parameterMap.get("valueIs");
+					boolean conditionMet = actualValue.equals(expectedValue);
+					return reverse ? !conditionMet : conditionMet;
 				}
 				});
+		}
+		
+		
+		if (parameterMap.containsKey("valueMatches")) {
+			
+			ifStatement.setValueAcceptor(new ValueAcceptor() {
+				
+				@Override
+				boolean accept(String name, String actualValue) {
+					
+					String expectedValue =  parameterMap.get("valueMatches");
+					expectedValue = "^" + expectedValue + "$";
+					return actualValue.matches(expectedValue);
+				}
+			});
 		}
 		
 		return ifStatement;

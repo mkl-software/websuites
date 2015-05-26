@@ -7,7 +7,7 @@ public  class PropertyValueCondition implements IfCondition {
 	
 	private String propertyName;
 	
-	private PropertyValueAcceptor valueAcceptor;
+	private ValueAcceptor valueAcceptor;
 	
 	
 	public PropertyValueCondition(String propertyName) {
@@ -26,7 +26,7 @@ public  class PropertyValueCondition implements IfCondition {
 	}
 
 
-	public void setValueAcceptor(PropertyValueAcceptor valueAcceptor) {
+	public void setValueAcceptor(ValueAcceptor valueAcceptor) {
 		this.valueAcceptor = valueAcceptor;
 	}
 

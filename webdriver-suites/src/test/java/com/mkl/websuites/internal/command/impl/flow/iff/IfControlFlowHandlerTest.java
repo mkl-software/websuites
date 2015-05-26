@@ -1,10 +1,13 @@
 package com.mkl.websuites.internal.command.impl.flow.iff;
 
+import static org.assertj.core.api.Assertions.*;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import mockit.Expectations;
 import mockit.Mock;
 import mockit.MockUp;
@@ -131,20 +134,26 @@ public class IfControlFlowHandlerTest {
 	
 	
 	
+	@Test
+	public void shouldThrowExceptionWhenConditionConfigIsWrong() {
+		expectedException.expect(WebSuitesException.class);
+		runPropertyConditionTestFor("unrecognized", "a", "a", false, null);
+	}
+	
 	
 	
 	@Test
 	public void shouldNotPassValidationForIncorrectIsset(final @Mocked Command command) {
 		
 		expectedException.expect(WebSuitesException.class);
-		runPropertyConditionFor("incorrect", "existing", false, command);
+		runPropertyConditionTestFor("isset", "incorrect", "existing", false, command);
 	}
 	
 	
 	@Test
 	public void shouldDoWhenPropertyIsSet(final @Mocked Command command) {
 		
-		runPropertyConditionFor("true", "existing", true, command);
+		runPropertyConditionTestFor("isset", "true", "existing", true, command);
 	}
 	
 	
@@ -152,23 +161,23 @@ public class IfControlFlowHandlerTest {
 	@Test
 	public void shouldNotDoWhenPropertyIsNotSet(final @Mocked Command command) {
 		
-		runPropertyConditionFor("true", null, false, command);
+		runPropertyConditionTestFor("isset", "true", null, false, command);
 	}
 	
 	
 	@Test
 	public void shouldDoWhenPropertyIsNotSet(final @Mocked Command command) {
 		
-		runPropertyConditionFor("false", null, true, command);
+		runPropertyConditionTestFor("isset", "false", null, true, command);
 	}
 	
 	
-	private void runPropertyConditionFor(String isset, String propertyValue, final boolean shouldRun,
-			final @Mocked Command command) {
+	private void runPropertyConditionTestFor(String conditionType, String conditionValue,
+			String propertyValue, final boolean shouldRun, final Command command) {
 		//given
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("property", "testProperty");
-		params.put("isset", isset);
+		params.put(conditionType, conditionValue);
 		sut = new IfControlFlowHandler(params);
 		sut.setNestedCommands(Arrays.asList(command));
 		// and
@@ -187,45 +196,52 @@ public class IfControlFlowHandlerTest {
 	
 	@Test
 	public void shouldDoWhenPropertyValueMatches(final @Mocked Command command) {
-		//given
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("property", "testProperty");
-		params.put("valueIs", "expected value");
-		sut = new IfControlFlowHandler(params);
-		sut.setNestedCommands(Arrays.asList(command));
-		// and
-		WebSuitesUserProperties.get().setProperty("testProperty", "expected value");
-		// when
-		sut.run();
-		//then
-		new Verifications() {{
-			command.run();
-			times = 1;
-		}};
+		
+		runPropertyConditionTestFor("valueIs", "expected value", "expected value", true, command);
 	}
 	
 	
 	
 	@Test
 	public void shouldNotDoWhenPropertyValueDoesNotMatch(final @Mocked Command command) {
-		//given
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("property", "testProperty");
-		params.put("valueIs", "expected value");
-		sut = new IfControlFlowHandler(params);
-		sut.setNestedCommands(Arrays.asList(command));
-		// and
-		WebSuitesUserProperties.get().setProperty("testProperty", "not expected value");
-		// when
-		sut.run();
-		//then
-		new Verifications() {{
-			command.run();
-			times = 0;
-		}};
+		
+		runPropertyConditionTestFor("valueIs", "expected value", "not expected value", false, command);
 	}
 	
 	
+	
+	@Test
+	public void shouldDoWhenPropertyValueDoesNotMatch(final @Mocked Command command) {
+		
+		runPropertyConditionTestFor("valueIsNot", "expected value", "not expected value", true, command);
+	}
+	
+	
+	@Test
+	public void shouldNotDoWhenPropertyValueMatches(final @Mocked Command command) {
+		
+		runPropertyConditionTestFor("valueIsNot", "expected value", "expected value", false, command);
+	}
+	
+	
+	
+	@Parameters(value = {"...,abc,true", "...,123,true", "...,1234,false","\\d\\d,23,true",
+			"\\d\\d,2f,false", "set.*,setPropertyShouldMatch,true", "get.*,setDoesntMatch,false",
+			".*firefox.*,this firefox browser matches,true", ".*firefox.*,but IE doesn't,false"})
+	@Test
+	public void shouldDoWhenPropertyStringMatchesPatter(String regex, String value, boolean match) {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("property", "someProperty");
+		params.put("valueMatches", regex);
+		sut = new IfControlFlowHandler(params);
+		// and
+		WebSuitesUserProperties.get().setProperty("someProperty", value);
+		//when
+		IfCondition condition = sut.buildPropertyCondition();
+		//then
+		assertThat(condition.isConditionMet()).isEqualTo(match);
+	}
 	
 
 
