@@ -1,0 +1,9 @@
+if	browser=ff
+	internal-test	this is firefox
+end
+if	browser=ie
+	internal-test	should not run
+end
+if	browser=chrome
+	internal-test	should not run
+end

@@ -1,0 +1,18 @@
+# test assumes that browser is IE
+if	browserIn=ff,chrome,ie
+	if	browser=ff
+		internal-test	this is firefox
+	end
+	if	browserIn=ff,ie
+		internal-test	this is firefox or ie
+	end
+	if	browserNotIn=chrome,ff
+		internal-test	this is not firefox and not ie
+	end
+	if	browser=chrome
+		internal-test	this is chrome
+	end
+end
+if	browserNotIn=ff,chrome,safari
+	internal-test	not ff, not chrome, not safari
+end

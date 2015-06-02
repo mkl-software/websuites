@@ -1,0 +1,12 @@
+if	browser=ff
+	internal-test	this is firefox
+end
+if	browser=ie
+	internal-test	this is ie
+end
+if	browserIsNot=chrome
+	internal-test	not chrome
+end
+if	browserIsNot=ff
+	internal-test	not firefox
+end

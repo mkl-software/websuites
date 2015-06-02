@@ -9,6 +9,7 @@ import com.mkl.websuites.test.unit.scenario.CommandBuilderTest;
 import com.mkl.websuites.test.unit.scenario.ControlFlowProcessingTest;
 import com.mkl.websuites.test.unit.scenario.ScenarioFileProcessorTest;
 import com.mkl.websuites.test.unit.scenario.ScenarioPreprocessingTest;
+import com.mkl.websuites.test.unit.scenario.flows.IfDetailedIntegrationTest;
 import com.mkl.websuites.test.unit.scenario.flows.RepeatDetailedIntegrationTest;
 
 
@@ -20,7 +21,8 @@ import com.mkl.websuites.test.unit.scenario.flows.RepeatDetailedIntegrationTest;
 	FolderedScenarioFilesTest.class,
 	CommandBuilderTest.class,
 	ControlFlowProcessingTest.class,
-	RepeatDetailedIntegrationTest.class
+	RepeatDetailedIntegrationTest.class,
+	IfDetailedIntegrationTest.class
 })
 public class ScenarioTests {
 
