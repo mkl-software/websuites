@@ -182,6 +182,7 @@ public class IfControlFlowHandlerTest {
 		sut = new IfControlFlowHandler(params);
 		sut.setNestedCommands(Arrays.asList(command));
 		// and
+		WebSuitesUserProperties.get().clear();
 		WebSuitesUserProperties.get().setProperty("testProperty", propertyValue);
 		// when
 		sut.run();
@@ -237,6 +238,7 @@ public class IfControlFlowHandlerTest {
 		params.put("valueMatches", regex);
 		sut = new IfControlFlowHandler(params);
 		// and
+		WebSuitesUserProperties.get().clear();
 		WebSuitesUserProperties.get().setProperty("someProperty", value);
 		//when
 		IfCondition condition = sut.buildPropertyCondition();
@@ -312,6 +314,28 @@ public class IfControlFlowHandlerTest {
 		IfCondition condition = sut.buildCustomCondition();
 		//then
 		assertThat(condition.isConditionMet()).isTrue();
+	}
+	
+	
+	
+	
+	
+	@Test
+	public void shouldTolerateNullPropertyValues(final @Mocked Command command) {
+		//given
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("property", "someProperty");
+		params.put("valueIs", "whatever");
+		sut = new IfControlFlowHandler(params);
+		sut.setNestedCommands(Arrays.asList(command));
+		//when (missing property in WebSuitesUserProperties)
+		WebSuitesUserProperties.get().clear();
+		sut.run();
+		//then
+		new Verifications() {{
+			command.run();
+			times = 0;
+		}};
 	}
 	
 	

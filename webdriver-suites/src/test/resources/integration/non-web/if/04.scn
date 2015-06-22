@@ -1,0 +1,25 @@
+
+setProperties	userName=marcin	email=websuites@mkl-software.com
+
+
+if	property=userName	valueIs=marcin
+	internal-test	correct1
+end
+if	property=userName	valueIs=maciej
+	internal-test	incorrect
+end
+if	property=userName	valueIsNot=maciej
+	internal-test	correct2
+end
+
+if	property=userName	valueIsNot=marcin
+	internal-test	incorrect
+end
+
+if	property=userName	valueMatches=m.*n
+	internal-test	correct3
+end
+
+if	property=email	valueMatches=.*@.*
+	internal-test	correct4
+end

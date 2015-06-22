@@ -58,6 +58,9 @@ public class WebSuitesUserProperties {
 		globalProperties.put(name, null);
 	}
 	
+	/**
+	 * Use with care!
+	 */
 	public void clear() {
 		globalProperties.clear();
 	}

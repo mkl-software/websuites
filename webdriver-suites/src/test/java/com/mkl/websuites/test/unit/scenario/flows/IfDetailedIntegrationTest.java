@@ -12,6 +12,7 @@ import org.junit.runner.Result;
 import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.browser.StandardBrowserController;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 import com.mkl.websuites.test.core.TestUtils;
@@ -26,7 +27,7 @@ public class IfDetailedIntegrationTest {
 	private final CommandInvocationVerifier commandVerifier = CommandInvocationVerifier.getInstance();
 
 
-	@Scenarios("src/test/resources/integration/non-web/01.scn")
+	@Scenarios(SCN_DIR + "04.scn")
 	public static class ScenarioFile extends ScenarioFileTest {}
 	
 	@WebSuitesConfig(browsers = "none")
@@ -93,7 +94,33 @@ public class IfDetailedIntegrationTest {
 		TestUtils.checkCorrectResultRunsCount(result, 1);
 		commandVerifier.checkRemaining();
 	}
+	
+	
+	
+	
+	@Test
+	public void shouldRunForPropertyCondition() throws Throwable {
+		
+		//given
+		overrideScenarioFileNameAnnotation(SCN_DIR + "04.scn");
+		commandVerifier.clearVerificationQueue();
+		
+		commandVerifier.expectInvocations("correct1", "correct2", "correct3", "correct4");
+		
+		// and
+		WebSuitesUserProperties.get().clear();
+		
+		//when
+		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
+		
+		//then
+		TestUtils.checkCorrectResultRunsCount(result, 1);
+		commandVerifier.checkRemaining();
+	}
 
+	
+	
+	
 
 	private void mockCurrentBrowser(final String browser) {
 		new MockUp<StandardBrowserController>() {

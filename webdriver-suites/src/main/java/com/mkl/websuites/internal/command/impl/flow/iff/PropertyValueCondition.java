@@ -21,6 +21,9 @@ public  class PropertyValueCondition implements IfCondition {
 
 		WebSuitesUserProperties props = WebSuitesUserProperties.get();
 		String actualValue = props.getProperty(propertyName);
+		if (actualValue == null) {
+			actualValue = "";
+		}
 		
 		return valueAcceptor.accept(propertyName, actualValue);
 	}
