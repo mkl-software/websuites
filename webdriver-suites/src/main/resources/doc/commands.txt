@@ -1,0 +1,79 @@
+Commands to implement:
+-------------------------------------------------------------------------------------
+
+// consider also soft assertions for all below:
+
+check					checks if elements exists
+checkTitle
+chckTitleContains
+chckTitleMatches
+checkUrl
+checkUrlContains
+checkUrlMatches
+checkPageSourceContains
+checkPageSourceMatches
+checkText				checks if elements contains given text
+checkTextContains		checks if text contains given phrase
+checkTextMatches		checks if text mathces given regex
+checkAttr				checks if element has an attibute
+checkAttrValue			checks if element has an attribute with a given value
+checkAttrMatches			checks if element has an attribute with a given value
+checkSelected			checks if given checkbox is selected
+checkSelectedText		checks if given option in select component is chosen by text
+checkSelectedIdx		checks if given option in select component is chosen by index
+checkCssAttrValue		check for given element its CSS attribute value
+checkCssClass			checks if given element has given CSS class
+
+selectByIdx					selected option in the combobox
+selectByVisibleText
+deselectByIdx					selected option in the combobox
+deselectByVisibleText
+multiSelect
+multiDeselect
+
+// all waits should be Fluent, with params: timeout=n, pollingInterval=, ingoreNoSuchElementException
+waitFor					waits until element is present (timeout=n)
+waitUntilVisible		waits until element is visible (timeout=n)
+waitUntilClickable
+waitUntilTextInElem
+waitUntilSelected
+waitUntilTitleIs
+waitUntilAlert
+waitUntilInvisible
+waitUntilFrameAvailable
+
+setPageLoadTimeout
+setScriptTimeout
+setImplicitWait			globally sets the wait time until throwing exception for missing element
+
+click
+doubleClick
+ctrlClick
+shiftClick
+altClick
+ctrlShiftClick
+ctrlAltClick
+shiftAltClick
+dragAndDrop				from=source, to=target
+
+press					press given key or key combination separated by "+" (use literals for characters)
+keyDown
+keyUp
+
+addCookie				name=, value=, domain=, path=, expiry=(date), isSecure=, isHttpOnly (with defaults!)
+deleteAllCookies
+deleteCookieNamed
+getCookieValue			name=, target value read into property, e.g. ${cookieValues.#cookieName#}
+
+goto
+back
+forward
+refresh
+switchToWindow			switch to window with name
+switchToFrame			switch to frame with name
+closeAlert
+acceptConfirm
+dismissConfirm
+readPopup				reads alert, confirm or prompt content
+closeCurrent
+quit
