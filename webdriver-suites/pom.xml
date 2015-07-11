@@ -13,7 +13,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <slf4j.version>1.7.5</slf4j.version>
-    <jmockit.version>1.14</jmockit.version>
+    <jmockit.version>1.18</jmockit.version>
   </properties>
 
   <dependencies>
