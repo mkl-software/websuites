@@ -56,7 +56,7 @@ public class RepeatTimesCommandTest extends WebSuitesResultCheck {
 		
 		Result testResult = super.checkWebTestResult(LocalRunner.class);
 		
-		checkRunCount(3 + 1 , testResult); // + 1 for repeat result check
+		checkRunCount(CORRECT_TEST_COUNT_FOR_SINGLE_TEST + 1 , testResult); // + 1 for repeat result check
 		
 		checkIfNoFailures(testResult);
 		

@@ -1,9 +1,9 @@
 Commands to implement:
 -------------------------------------------------------------------------------------
 
-// consider also soft assertions for all below:
+// consider also soft assertions for all below:(e.g. "softCheck...")
 
-check					checks if elements exists
++check					checks if elements exists		
 checkTitle
 chckTitleContains
 chckTitleMatches
@@ -15,6 +15,9 @@ checkPageSourceMatches
 checkText				checks if elements contains given text
 checkTextContains		checks if text contains given phrase
 checkTextMatches		checks if text mathces given regex
+checkLink				checks if link with given text exists
+checkLinkContaining
+checkLinkMatching
 checkAttr				checks if element has an attibute
 checkAttrValue			checks if element has an attribute with a given value
 checkAttrMatches			checks if element has an attribute with a given value
@@ -47,6 +50,8 @@ setScriptTimeout
 setImplicitWait			globally sets the wait time until throwing exception for missing element
 
 click
+clickLink				click link with text
+clickLinkContaining
 doubleClick
 ctrlClick
 shiftClick

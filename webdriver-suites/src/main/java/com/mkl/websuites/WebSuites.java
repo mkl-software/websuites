@@ -98,7 +98,7 @@ public class WebSuites {
 			suite.addTest(browserSuite);
 		}
 		
-		if (!config.dontCloseBrowserAtTheEnd() && !(browsers.length == 1 && browsers[0].equals("none"))) {
+		if (!config.doNotCloseBrowserAtTheEnd() && !(browsers.length == 1 && browsers[0].equals("none"))) {
 			
 			suite.addTest(new CleanupBrowsersTest());
 		}

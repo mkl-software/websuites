@@ -13,7 +13,7 @@ import com.mkl.websuites.test.BrowsersConfig;
 	browsers = {"chrome", "ff"},
 	waitTimeout = 20,
 	browsersConfiguration = BrowsersConfig.class,
-	dontCloseBrowserAtTheEnd = false
+	doNotCloseBrowserAtTheEnd = false
 //	serviceOverrides = LocalExtensions.class
 	
 )

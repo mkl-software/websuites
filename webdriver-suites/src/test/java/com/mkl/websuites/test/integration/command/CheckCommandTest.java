@@ -51,14 +51,15 @@ public class CheckCommandTest extends WebSuitesResultCheck {
 	public static class LocalRunnerForXpathParam  extends WebSuites {}
 	
 	
+	
+	
+	
 	@Test
 	public void testElementExistingWithCssId() throws Throwable {
 		
-		resetServiceFactory();
-		
 		Result testResult = super.checkWebTestResult(LocalRunnerExistingElemCssId.class);
 		
-		checkRunCount(3, testResult);
+		checkRunCount(CORRECT_TEST_COUNT_FOR_SINGLE_TEST, testResult);
 		
 		checkIfNoFailures(testResult);
 	}
@@ -68,11 +69,9 @@ public class CheckCommandTest extends WebSuitesResultCheck {
 	@Test
 	public void testElementNotExistingWithCssId() throws Throwable {
 		
-		resetServiceFactory();
-		
 		Result testResult = super.checkWebTestResult(LocalRunnerNotExistingElemCssId.class);
 		
-		checkRunCount(3, testResult);
+		checkRunCount(CORRECT_TEST_COUNT_FOR_SINGLE_TEST, testResult);
 
 		Assert.assertEquals(1, testResult.getFailureCount());
 		
@@ -90,11 +89,9 @@ public class CheckCommandTest extends WebSuitesResultCheck {
 	@Test
 	public void testCheckForIdParam() throws Throwable {
 		
-		resetServiceFactory();
-		
 		Result testResult = super.checkWebTestResult(LocalRunnerForIdParam.class);
 		
-		checkRunCount(3, testResult);
+		checkRunCount(CORRECT_TEST_COUNT_FOR_SINGLE_TEST, testResult);
 		
 		Assert.assertEquals(1, testResult.getFailureCount()); // exactly 1, firtst test OK
 		
@@ -111,22 +108,12 @@ public class CheckCommandTest extends WebSuitesResultCheck {
 	@Test
 	public void testCheckForXpathParamNoFailures() throws Throwable {
 		
-		resetServiceFactory();
-		
 		Result testResult = super.checkWebTestResult(LocalRunnerForXpathParam.class);
 		
-		checkRunCount(3, testResult);
+		checkRunCount(CORRECT_TEST_COUNT_FOR_SINGLE_TEST, testResult);
 		
 		checkIfNoFailures(testResult);
 		
-//		Assert.assertEquals(1, testResult.getFailureCount()); // exactly 1, firtst test OK
-//		
-//		Failure failure = testResult.getFailures().get(0);
-//		
-//		String text = failure.getMessage();
-//		
-//		Assert.assertThat("Inproper failure message : " + text,
-//				text, CoreMatchers.containsString("not_existing_id"));
 	}
 	
 

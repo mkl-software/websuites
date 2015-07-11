@@ -55,7 +55,7 @@ public class ClickCommandTest extends WebSuitesResultCheck {
 		
 		Result testResult = super.checkWebTestResult(LocalRunner.class);
 		
-		checkRunCount(3 + 1 , testResult); // + 1 for click result check
+		checkRunCount(CORRECT_TEST_COUNT_FOR_SINGLE_TEST + 1 , testResult); // + 1 for click result check
 		
 		checkIfNoFailures(testResult);
 		

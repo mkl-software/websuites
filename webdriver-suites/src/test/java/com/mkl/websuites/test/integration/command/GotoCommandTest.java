@@ -50,7 +50,7 @@ public class GotoCommandTest extends WebSuitesResultCheck {
 		
 		Result testResult = super.checkWebTestResult(LocalRunner.class);
 		
-		checkRunCount(3 + 1, testResult); // +1 for LocalUnderlyingGotoTest
+		checkRunCount(CORRECT_TEST_COUNT_FOR_SINGLE_TEST + 1, testResult); // +1 for LocalUnderlyingGotoTest
 		
 		checkIfNoFailures(testResult);
 	}

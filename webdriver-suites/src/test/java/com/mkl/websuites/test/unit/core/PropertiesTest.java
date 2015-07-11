@@ -15,9 +15,9 @@ import org.junit.runner.RunWith;
 
 import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.command.Command;
-import com.mkl.websuites.internal.command.impl.CheckCommand;
 import com.mkl.websuites.internal.command.impl.ParameterizedCommand;
 import com.mkl.websuites.internal.command.impl.SetPropCommand;
+import com.mkl.websuites.internal.command.impl.check.CheckCommand;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
 import static org.junit.Assert.*;

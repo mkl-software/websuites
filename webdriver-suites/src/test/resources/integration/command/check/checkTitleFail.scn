@@ -1,0 +1,5 @@
+# load page with title "Test title full text"
+
+goto	http://localhost:90/integration/commands/check/checkTitleOK.html
+
+checkTitle	Not expected title

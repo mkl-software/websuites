@@ -1,4 +1,4 @@
-package com.mkl.websuites.internal.command.impl;
+package com.mkl.websuites.internal.command.impl.wait;
 
 import org.junit.Assert;
 

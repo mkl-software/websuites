@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import mockit.Deencapsulation;
 
+import org.junit.Before;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
@@ -14,6 +15,8 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 
 public abstract class WebSuitesResultCheck extends JettyBasedTest {
 
+	
+	protected static final int CORRECT_TEST_COUNT_FOR_SINGLE_TEST = 3;
 	
 	
 	protected Result checkWebTestResult(Class<? extends WebSuites> localRunner) throws Throwable {
@@ -47,7 +50,11 @@ public abstract class WebSuitesResultCheck extends JettyBasedTest {
 	}
 	
 	
-	protected void resetServiceFactory() {
+	
+	
+	@Before
+	public void prepareTest() {
+		
 		Deencapsulation.setField(ServiceFactory.class, "isInitialized", false);
 	}
 

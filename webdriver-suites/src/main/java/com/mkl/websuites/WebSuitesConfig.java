@@ -30,7 +30,7 @@ public @interface WebSuitesConfig {
 
 	int waitTimeout() default 30;
 	
-	boolean dontCloseBrowserAtTheEnd() default false;
+	boolean doNotCloseBrowserAtTheEnd() default false;
 	
 	String[] scenarioFileExtensions() default {"scn"};
 
