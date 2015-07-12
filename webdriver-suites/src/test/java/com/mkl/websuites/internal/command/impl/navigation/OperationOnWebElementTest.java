@@ -8,7 +8,7 @@ import mockit.Deencapsulation;
 import mockit.Mock;
 import mockit.MockUp;
 import mockit.Mocked;
-import mockit.Verifications;
+import mockit.Verifications; 
 
 import org.junit.Before;
 import org.junit.Test;
