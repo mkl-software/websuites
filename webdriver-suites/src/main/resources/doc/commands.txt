@@ -4,7 +4,7 @@ Commands to implement:
 // consider also soft assertions for all below:(e.g. "softCheck...")
 
 +check					checks if elements exists		
-checkTitle
++checkTitle
 chckTitleContains
 chckTitleMatches
 checkUrl
@@ -34,7 +34,7 @@ deselectByVisibleText
 multiSelect
 multiDeselect
 
-// all waits should be Fluent, with params: timeout=n, pollingInterval=, ingoreNoSuchElementException
+// all waits should be Fluent, with params: timeout=n, pollingInterval=m, ingoreNoSuchElementException=true/false
 waitFor					waits until element is present (timeout=n)
 waitUntilVisible		waits until element is visible (timeout=n)
 waitUntilClickable
@@ -50,8 +50,12 @@ setScriptTimeout
 setImplicitWait			globally sets the wait time until throwing exception for missing element
 
 click
-clickLink				click link with text
+clickLink				click <a> link with text
 clickLinkContaining
+clickLinkMatching
+clickText
+clickTextContaining		if more than one element matches, pick first one
+clickTextMaching		as above
 doubleClick
 ctrlClick
 shiftClick

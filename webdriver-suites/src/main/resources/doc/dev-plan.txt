@@ -1,0 +1,6 @@
+
+1. Finish commands implementation
+2. Implement include mechanism
+3. Move to GitHub !!
+4. Implement detailed tests for commands
+5. Review code, refactor and implement more unit tests

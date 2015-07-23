@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
 
 import com.mkl.websuites.WebSuitesUserProperties;
@@ -18,7 +19,7 @@ public abstract class BaseCommand implements Command {
 	
 	protected WebDriver browser;
 	
-	
+	protected static SoftAssertions softly = new SoftAssertions();
 
 
 	@Override
