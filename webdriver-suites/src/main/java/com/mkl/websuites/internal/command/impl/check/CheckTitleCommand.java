@@ -12,7 +12,7 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 public class CheckTitleCommand extends BaseCommand {
 
 	
-	private String expectedTitle;
+	protected String expectedTitle;
 	
 	
 	public CheckTitleCommand(String expectedTitle) {
@@ -25,14 +25,31 @@ public class CheckTitleCommand extends BaseCommand {
 	protected void runStandardCommand() {
 		
 		String title = browser.getTitle();
-		StringAssert checkIfTitle = titleAssertion(title);
-		checkIfTitle
-			.isEqualTo(expectedTitle)
-			.overridingErrorMessage("Expecting web page title to be '%s', but was '%s'", expectedTitle, title);
+		StringAssert checkIfTitle = mainTitleAssertion(title);
+		titleAssertionLogic(title, checkIfTitle);
 	}
 
 
-	protected StringAssert titleAssertion(String title) {
+	
+	/**
+	 * Overriden by different assertions.
+	 * @param title
+	 * @param checkIfTitle
+	 */
+	protected void titleAssertionLogic(String title, StringAssert checkIfTitle) {
+		checkIfTitle
+			.overridingErrorMessage("Expecting web page title to be '%s', but was '%s'", expectedTitle, title)
+			.isEqualTo(expectedTitle);
+	}
+
+
+
+	/**
+	 * Overriden by soft assertion.
+	 * @param title
+	 * @return
+	 */
+	protected StringAssert mainTitleAssertion(String title) {
 		return assertThat(title);
 	}
 

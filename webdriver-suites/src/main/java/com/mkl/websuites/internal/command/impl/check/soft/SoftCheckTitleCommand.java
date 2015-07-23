@@ -15,7 +15,7 @@ public class SoftCheckTitleCommand extends CheckTitleCommand {
 	
 	
 	@Override
-	protected StringAssert titleAssertion(String title) {
+	protected StringAssert mainTitleAssertion(String title) {
 		return softly.assertThat(title);
 	}
 
