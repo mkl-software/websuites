@@ -2,23 +2,24 @@ Commands to implement:
 -------------------------------------------------------------------------------------
 
 // consider also soft assertions for all below:(e.g. "softCheck...")
+// also do negated versions for most of the below - e.g. "~check"
 
 +check					checks if elements exists		
 +checkTitle
-chckTitleContains
-chckTitleMatches
++checkTitleContains
+checkTitleMatches
 checkUrl
-checkUrlContains
++checkUrlContains
 checkUrlMatches
 checkPageSourceContains
 checkPageSourceMatches
-checkText				checks if elements contains given text
+checkText				checks if element contains given text
 checkTextContains		checks if text contains given phrase
-checkTextMatches		checks if text mathces given regex
+checkTextMatches		checks if text matches given regex
 checkLink				checks if link with given text exists
 checkLinkContaining
 checkLinkMatching
-checkAttr				checks if element has an attibute
+checkAttr				checks if element has an attribute
 checkAttrValue			checks if element has an attribute with a given value
 checkAttrMatches			checks if element has an attribute with a given value
 checkSelected			checks if given checkbox is selected
@@ -26,6 +27,8 @@ checkSelectedText		checks if given option in select component is chosen by text
 checkSelectedIdx		checks if given option in select component is chosen by index
 checkCssAttrValue		check for given element its CSS attribute value
 checkCssClass			checks if given element has given CSS class
+checkElementVisible
+checkElementHidden		? - maybe only negated version for the command above
 
 selectByIdx					selected option in the combobox
 selectByVisibleText

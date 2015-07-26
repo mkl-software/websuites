@@ -2,7 +2,4 @@
 
 goto	http://localhost:90/integration/commands/check/checkTitleOK.html
 
-softCheckTitle	adf
-softCheckTitle	dfdcf
-softCheckTitle	wefdg
-checkAllSoft
+checkUrlContains	OK
