@@ -3,13 +3,15 @@ Commands to implement:
 
 // consider also soft assertions for all below:(e.g. "softCheck...")
 // also do negated versions for most of the below - e.g. "~check"
+// and negated soft (~softCheck...)
+// so 4 versions of all commands below:
 
-+check					checks if elements exists		
-+checkTitle
-+checkTitleContains
+(+s)check					checks if elements exists		
+(+s~|)checkTitle
+(+)checkTitleContains
 checkTitleMatches
 checkUrl
-+checkUrlContains
+(+)checkUrlContains
 checkUrlMatches
 checkPageSourceContains
 checkPageSourceMatches

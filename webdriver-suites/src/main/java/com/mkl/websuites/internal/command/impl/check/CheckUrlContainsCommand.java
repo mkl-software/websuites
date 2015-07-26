@@ -9,24 +9,27 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 
 
 @CommandDescriptor(name = "checkUrlContains", argumentTypes = String.class)
-public class CheckUrlCommand extends BaseCommand {
+public class CheckUrlContainsCommand extends BaseCommand {
 
 	
 	protected String expectedUrl;
 	
-	public CheckUrlCommand(String url) {
+	public CheckUrlContainsCommand(String url) {
 		this.expectedUrl = url;
 	}
 
 	@Override
 	protected void runStandardCommand() {
 		String currentUrl = browser.getCurrentUrl();
-		StringAssert checkIfTitle = urlAssertion(currentUrl);
-		urlAssertionLogic(checkIfTitle);
+		StringAssert checkIfUrl = urlAssertion(currentUrl);
+		urlAssertionLogic(currentUrl, checkIfUrl);
 	}
 
-	protected void urlAssertionLogic(StringAssert checkIfTitle) {
-		checkIfTitle.contains(expectedUrl);
+	protected void urlAssertionLogic(String currentUrl, StringAssert checkIfUrl) {
+		checkIfUrl
+			.overridingErrorMessage("Page URL expected to contain '%s', but the URL was %s",
+					expectedUrl, currentUrl)
+			.contains(expectedUrl);
 	}
 
 	protected StringAssert urlAssertion(String currentUrl) {

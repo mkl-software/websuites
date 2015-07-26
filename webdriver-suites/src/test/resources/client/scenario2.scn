@@ -2,4 +2,8 @@
 
 goto	http://localhost:90/integration/commands/check/checkTitleOK.html
 
-checkUrlContains	OK
+~softCheckTitle	Test title full text
+~softCheckTitle	Test title full text
+~softCheckTitle	Test title full text
+~softCheckTitle	Test title full text
+checkAllSoft
