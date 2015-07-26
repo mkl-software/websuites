@@ -6,7 +6,7 @@ Commands to implement:
 // and negated soft (~softCheck...)
 // so 4 versions of all commands below:
 
-(+s)check					checks if elements exists		
+(+)check					checks if elements exists		
 (+s~|)checkTitle
 (+)checkTitleContains
 checkTitleMatches

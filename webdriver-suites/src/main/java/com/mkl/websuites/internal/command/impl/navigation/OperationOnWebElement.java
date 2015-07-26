@@ -79,9 +79,19 @@ public abstract class OperationOnWebElement extends ParameterizedCommand {
 			doOperationOnElement(elem);
 			
 		} catch (NoSuchElementException e) {
-			Assert.fail("No element found for selecor " + by + " can be found on the page. "
+			
+			fail("No element found for selecor " + by + " can be found on the page. "
 					+ "Selection parameters: " + parameterMap);
 		}
+	}
+
+
+	/**
+	 * Exposed to override for soft assertions.
+	 * @param message
+	 */
+	protected void fail(String message) {
+		Assert.fail(message);
 	}
 
 	
