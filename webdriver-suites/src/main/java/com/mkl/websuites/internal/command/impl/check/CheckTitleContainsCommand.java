@@ -11,16 +11,17 @@ public class CheckTitleContainsCommand extends CheckTitleCommand {
 	public CheckTitleContainsCommand(String expectedTitle) {
 		super(expectedTitle);
 	}
-
+	
 	
 	@Override
-	protected void titleAssertionLogic(String title, StringAssert checkIfTitle) {
+	protected void runSingleStringAssertion(StringAssert assertThatTitle, String title) {
 		
-		checkIfTitle
+		assertThatTitle
 			.overridingErrorMessage("Page title expected to contain '%s', but the title was %s",
 					expectedTitle, title)
 			.contains(expectedTitle);
 	}
+
 	
 	
 }

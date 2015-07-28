@@ -1,6 +1,6 @@
 package com.mkl.websuites.internal.command.impl.check.soft;
 
-import org.assertj.core.api.StringAssert;
+import org.assertj.core.api.AbstractAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.CheckTitleCommand;
@@ -15,8 +15,9 @@ public class SoftCheckTitleCommand extends CheckTitleCommand {
 	
 	
 	@Override
-	protected StringAssert mainTitleAssertion(String title) {
-		return softly.assertThat(title);
+	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+		return softly.assertThat((String) args[0]);
 	}
+	
 
 }

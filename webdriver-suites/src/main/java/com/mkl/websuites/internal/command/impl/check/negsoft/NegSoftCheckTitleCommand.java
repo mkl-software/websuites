@@ -1,6 +1,6 @@
 package com.mkl.websuites.internal.command.impl.check.negsoft;
 
-import org.assertj.core.api.StringAssert;
+import org.assertj.core.api.AbstractAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.neg.NegCheckTitleCommand;
@@ -12,12 +12,12 @@ public class NegSoftCheckTitleCommand extends NegCheckTitleCommand {
 	public NegSoftCheckTitleCommand(String expectedTitle) {
 		super(expectedTitle);
 	}
-	
-	
+
 	
 	@Override
-	protected StringAssert mainTitleAssertion(String title) {
-		return softly.assertThat(title);
+	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+		return softly.assertThat((String) args[0]);
 	}
+	
 
 }

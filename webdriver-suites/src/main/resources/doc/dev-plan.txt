@@ -1,6 +1,7 @@
 
 1. Finish commands implementation
 2. Implement include mechanism
-3. Move to GitHub !!
+3. Move to GitHub !! (create mkl-software email account first)
 4. Implement detailed tests for commands
+5. Implement line info for detailed assertion messages
 5. Review code, refactor and implement more unit tests

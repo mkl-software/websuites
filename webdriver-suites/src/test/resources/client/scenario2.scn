@@ -2,7 +2,8 @@
 
 goto	http://localhost:90/integration/commands/check/checkTitleOK.html
 
-softCheck	id1
-softCheck	id2
-softCheck	id3
+~softCheckTitle	Test title full text
+~softCheckTitle	Test title full
+~softCheckTitle	Test title full text
+~softCheckTitle	Test title full
 checkAllSoft

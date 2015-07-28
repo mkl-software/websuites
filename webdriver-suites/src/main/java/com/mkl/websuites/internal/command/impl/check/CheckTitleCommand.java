@@ -1,15 +1,12 @@
 package com.mkl.websuites.internal.command.impl.check;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.assertj.core.api.StringAssert;
 
-import com.mkl.websuites.internal.command.BaseCommand;
 import com.mkl.websuites.internal.command.CommandDescriptor;
 
 
 @CommandDescriptor(name = "checkTitle", argumentTypes = {String.class})
-public class CheckTitleCommand extends BaseCommand {
+public class CheckTitleCommand extends AbstractSingleStringCheck {
 
 	
 	protected String expectedTitle;
@@ -22,35 +19,17 @@ public class CheckTitleCommand extends BaseCommand {
 
 
 	@Override
-	protected void runStandardCommand() {
-		
-		String title = browser.getTitle();
-		StringAssert checkIfTitle = mainTitleAssertion(title);
-		titleAssertionLogic(title, checkIfTitle);
+	protected String getStringParam() {
+		return browser.getTitle();
 	}
 
 
-	
-	/**
-	 * Overriden by different assertions.
-	 * @param title
-	 * @param checkIfTitle
-	 */
-	protected void titleAssertionLogic(String title, StringAssert checkIfTitle) {
-		checkIfTitle
+	@Override
+	protected void runSingleStringAssertion(StringAssert assertThatTitle, String title) {
+		
+		assertThatTitle
 			.overridingErrorMessage("Expecting web page title to be '%s', but was '%s'", expectedTitle, title)
 			.isEqualTo(expectedTitle);
-	}
-
-
-
-	/**
-	 * Overriden by soft assertion.
-	 * @param title
-	 * @return
-	 */
-	protected StringAssert mainTitleAssertion(String title) {
-		return assertThat(title);
 	}
 
 }

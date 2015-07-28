@@ -13,9 +13,12 @@ public class NegCheckTitleCommand extends CheckTitleCommand {
 		super(expectedTitle);
 	}
 	
+	
 	@Override
-	protected void titleAssertionLogic(String title, StringAssert checkIfTitle) {
-		checkIfTitle
+	protected void runSingleStringAssertion(StringAssert assertThatTitle,
+			String title) {
+		
+		assertThatTitle
 			.overridingErrorMessage("Expecting web page title NOT to be '%s'", expectedTitle)
 			.isNotEqualTo(expectedTitle);
 	}
