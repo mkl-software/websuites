@@ -53,6 +53,7 @@ waitUntilFrameAvailable
 setPageLoadTimeout
 setScriptTimeout
 setImplicitWait			globally sets the wait time until throwing exception for missing element
+restoreDefaultWait		restores what is configurad on WebSuitesConfig level
 
 click
 clickLink				click <a> link with text

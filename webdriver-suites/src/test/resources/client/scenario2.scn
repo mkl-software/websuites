@@ -2,8 +2,7 @@
 
 goto	http://localhost:90/integration/commands/check/checkTitleOK.html
 
-~softCheckTitle	Test title full text
-~softCheckTitle	Test title full
-~softCheckTitle	Test title full text
-~softCheckTitle	Test title full
-checkAllSoft
+checkText	dynamic text
+
+#~softCheckTitle	Test title full
+#checkAllSoft

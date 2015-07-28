@@ -1,5 +1,21 @@
 <html>
 	<head>
 		<title>Test title full text</title>
+		<script>
+		setTimeout(function() {
+			document.getElementById("fillIt").innerText = "dynamic text";
+		}, 3000);
+	</script>
 	</head>
+	<body>
+		<div>
+			<div>
+				<p>this is a paragraph</p>
+				<span>some text</span>
+				<b>another</b>
+				<span id="fillIt"></span>
+			</div>
+		</div>
+	</body>
+	
 </html>

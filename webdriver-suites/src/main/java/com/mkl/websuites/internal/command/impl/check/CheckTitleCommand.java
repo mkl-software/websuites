@@ -32,4 +32,5 @@ public class CheckTitleCommand extends AbstractSingleStringCheck {
 			.isEqualTo(expectedTitle);
 	}
 
+
 }
