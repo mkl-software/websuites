@@ -16,7 +16,7 @@ public class NegSoftCheckTitleCommand extends NegCheckTitleCommand {
 	
 	@Override
 	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return softly.assertThat((String) args[0]);
+		return soft(args);
 	}
 	
 

@@ -22,8 +22,22 @@ public abstract class AbstractCheck extends BaseCommand {
 	
 	protected abstract Object[] getAssertionsParameters();
 
+	/**
+	 * Overridden by either hard or soft assertion. Could be more elegant unless AssertJ API
+	 * which isn't consistent for hard and soft assertions...
+	 * @param args		Params that undergo an assertion
+	 */
 	protected abstract AbstractAssert<?, ?> buildAssertion(Object ... args);
 	
 	protected abstract void runAssertion(AbstractAssert<?, ?> assertion, Object ... args);
+	
+	/**
+	 * Convenience method invoked many times for soft assertions. Again, AssertJ API...
+	 * @param args
+	 * @return
+	 */
+	protected AbstractAssert<?, ?> soft(Object ... args) {
+		return softly.assertThat((String) args[0]);
+	}
 
 }

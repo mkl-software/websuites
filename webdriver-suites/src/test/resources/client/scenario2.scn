@@ -2,7 +2,14 @@
 
 goto	http://localhost:90/integration/commands/check/checkTitleOK.html
 
-checkText	dynamic text
+checkUrlContains	OK
 
-#~softCheckTitle	Test title full
-#checkAllSoft
+
+softCheckText	paragraph
+softCheckText	some
+softCheckText	bi
+softCheckText	text
+softCheckText	no
+softCheckText	fail
+softCheckText	dynamic
+checkAllSoft

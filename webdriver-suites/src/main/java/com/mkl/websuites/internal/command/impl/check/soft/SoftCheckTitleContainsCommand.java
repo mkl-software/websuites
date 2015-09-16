@@ -1,0 +1,21 @@
+package com.mkl.websuites.internal.command.impl.check.soft;
+
+import org.assertj.core.api.AbstractAssert;
+
+import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.internal.command.impl.check.CheckTitleContainsCommand;
+
+
+@CommandDescriptor(name = "softCheckTitleContains", argumentTypes = String.class)
+public class SoftCheckTitleContainsCommand extends CheckTitleContainsCommand {
+
+	public SoftCheckTitleContainsCommand(String expectedTitle) {
+		super(expectedTitle);
+	}
+
+	
+	@Override
+	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+		return soft(args);
+	}
+}

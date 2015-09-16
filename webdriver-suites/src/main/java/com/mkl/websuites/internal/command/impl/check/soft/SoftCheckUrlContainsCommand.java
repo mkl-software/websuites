@@ -1,6 +1,6 @@
 package com.mkl.websuites.internal.command.impl.check.soft;
 
-import org.assertj.core.api.StringAssert;
+import org.assertj.core.api.AbstractAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.CheckUrlContainsCommand;
@@ -15,8 +15,9 @@ public class SoftCheckUrlContainsCommand extends CheckUrlContainsCommand{
 	
 	
 	@Override
-	protected StringAssert urlAssertion(String currentUrl) {
-		return softly.assertThat(currentUrl);
+	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+		return soft(args);
 	}
+	
 
 }

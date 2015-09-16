@@ -123,6 +123,9 @@ public class ServiceFactory {
 					", error: " + e.getLocalizedMessage() +
 					". Make sure the service has public static getInstance() method.");
 			
+		} catch (Exception e) {
+			
+			throw new WebSuitesException("", e);
 		}
 		
 	}

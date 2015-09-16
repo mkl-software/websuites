@@ -150,6 +150,12 @@ public class StandardCommandBuilder implements CommandBuilder {
 		
 		CommandDescriptor commandDescriptor = commandClass.getAnnotation(CommandDescriptor.class);
 		
+		// apparently might be null - when inheriting from another annotated command the class is recognized
+		// from Reflections lib, but in fact it doesn't have its own annotation.
+		if (commandDescriptor == null) {
+			throw new WebSuitesException("Command class " + commandClass.getName() + " must be annotaded with "
+					+ "a proper CommandDescriptor annotation.");
+		}
 		String commandName = commandDescriptor.name();
 		
 		List<Class> argumentTypes = Arrays.asList(commandDescriptor.argumentTypes());

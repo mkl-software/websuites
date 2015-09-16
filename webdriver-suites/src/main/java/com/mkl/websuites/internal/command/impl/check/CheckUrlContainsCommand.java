@@ -1,15 +1,12 @@
 package com.mkl.websuites.internal.command.impl.check;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.assertj.core.api.StringAssert;
 
-import com.mkl.websuites.internal.command.BaseCommand;
 import com.mkl.websuites.internal.command.CommandDescriptor;
 
 
 @CommandDescriptor(name = "checkUrlContains", argumentTypes = String.class)
-public class CheckUrlContainsCommand extends BaseCommand {
+public class CheckUrlContainsCommand extends AbstractSingleStringCheck {
 
 	
 	protected String expectedUrl;
@@ -19,21 +16,20 @@ public class CheckUrlContainsCommand extends BaseCommand {
 	}
 
 	@Override
-	protected void runStandardCommand() {
-		String currentUrl = browser.getCurrentUrl();
-		StringAssert checkIfUrl = urlAssertion(currentUrl);
-		urlAssertionLogic(currentUrl, checkIfUrl);
+	protected String getStringParam() {
+		return browser.getCurrentUrl();
 	}
 
-	protected void urlAssertionLogic(String currentUrl, StringAssert checkIfUrl) {
-		checkIfUrl
+	@Override
+	protected void runSingleStringAssertion(StringAssert assertThatUrl, String currentUrl) {
+		
+		assertThatUrl
 			.overridingErrorMessage("Page URL expected to contain '%s', but the URL was %s",
 					expectedUrl, currentUrl)
 			.contains(expectedUrl);
+		
 	}
 
-	protected StringAssert urlAssertion(String currentUrl) {
-		return assertThat(currentUrl);
-	}
+
 
 }
