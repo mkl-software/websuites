@@ -18,6 +18,8 @@ public abstract class OperationOnWebElement extends ParameterizedCommand {
 	
 	protected String element;
 	
+	protected By by;
+	
 
 	public OperationOnWebElement(Map<String, String> parameterMap) {
 		super(parameterMap);
@@ -37,7 +39,7 @@ public abstract class OperationOnWebElement extends ParameterizedCommand {
 	protected void runCommandWithParameters() {
 		
 		
-		By by = null;
+		by = null;
 		
 		if (parameterMap.keySet().contains("id")) {
 			by = By.id(parameterMap.get("id"));
