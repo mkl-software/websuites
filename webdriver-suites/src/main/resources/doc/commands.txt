@@ -14,11 +14,11 @@ Commands to implement:
 (+s~|)	checkTitleMatches
 (+s~|)	checkUrl
 (+s~|)	checkUrlContains
-()	checkUrlMatches
+(+s~|)	checkUrlMatches
 ()	checkPageSourceContains
 ()	checkPageSourceMatches
 (+s)checkText				checks if element contains given text
-()	checkTextContains		checks if text contains given phrase
+()	checkTextContaining		checks if text contains given phrase
 ()	checkTextMatches		checks if text matches given regex
 ()	checkLink				checks if link with given text exists
 ()	checkLinkContaining
