@@ -12,8 +12,8 @@ Commands to implement:
 (+s~|)	checkTitle
 (+s~|)	checkTitleContains
 (+s~|)	checkTitleMatches
-()	checkUrl
-(+s)	checkUrlContains
+(+s~|)	checkUrl
+(+s~|)	checkUrlContains
 ()	checkUrlMatches
 ()	checkPageSourceContains
 ()	checkPageSourceMatches

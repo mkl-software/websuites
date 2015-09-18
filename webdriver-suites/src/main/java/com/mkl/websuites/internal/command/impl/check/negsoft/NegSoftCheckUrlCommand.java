@@ -1,8 +1,9 @@
-package com.mkl.websuites.internal.command.impl.check.neg;
+package com.mkl.websuites.internal.command.impl.check.negsoft;
 
 import org.assertj.core.api.AbstractAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.internal.command.impl.check.neg.NegCheckUrlCommand;
 
 
 @CommandDescriptor(name = "~softCheckUrl", argumentTypes = String.class)
