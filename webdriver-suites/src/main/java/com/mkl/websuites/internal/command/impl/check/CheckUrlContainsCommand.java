@@ -6,25 +6,19 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 
 
 @CommandDescriptor(name = "checkUrlContains", argumentTypes = String.class)
-public class CheckUrlContainsCommand extends AbstractSingleStringCheck {
+public class CheckUrlContainsCommand extends CheckUrlCommand {
 
 	
-	protected String expectedUrl;
-	
+
 	public CheckUrlContainsCommand(String url) {
-		this.expectedUrl = url;
-	}
-
-	@Override
-	protected String getStringParam() {
-		return browser.getCurrentUrl();
+		super(url);
 	}
 
 	@Override
 	protected void runSingleStringAssertion(StringAssert assertThatUrl, String currentUrl) {
 		
 		assertThatUrl
-			.overridingErrorMessage("Page URL expected to contain '%s', but the URL was %s",
+			.overridingErrorMessage("Page URL expected to contain '%s', but the URL was '%s",
 					expectedUrl, currentUrl)
 			.contains(expectedUrl);
 		
