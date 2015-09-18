@@ -40,7 +40,16 @@ public class StandardCommandBuilder implements CommandBuilder {
 	
 	public StandardCommandBuilder() {
 		
-		scanClasspathForCommands();
+		Set<Class<?>> allCommandsInClasspath = scanClasspathForCommands();
+		
+		commandTypesMap = new HashMap<>();
+		commandConstructorMap = new HashMap<>();
+		parameterizedCommandConstructorMap = new HashMap<>();
+		
+		for (Class<?> commandClass : allCommandsInClasspath) {
+			
+			commandTypesMap.putAll(populateCommandInformation(commandClass));
+		}
 	}
 	
 	
@@ -122,31 +131,26 @@ public class StandardCommandBuilder implements CommandBuilder {
 
 
 
-	protected void scanClasspathForCommands() {
+	protected Set<Class<?>> scanClasspathForCommands() {
 		
+		// TODO: remove test reference and configure additional scan path on the unit test side
 		Reflections reflections = new Reflections("com.mkl.websuites.internal.command.impl",
 												  "com.mkl.websuites.test.unit.scenario");
 
 		Set<Class<?>> allCommandsInClasspath = 
 				reflections.getTypesAnnotatedWith(CommandDescriptor.class);
 		
-		commandTypesMap = new HashMap<>();
-		commandConstructorMap = new HashMap<>();
-		parameterizedCommandConstructorMap = new HashMap<>();
-
 		log.debug("classpath scanned with reflection for annotated command,"
 				+ " found {} commands", allCommandsInClasspath.size());
 		
-		
-		for (Class<?> commandClass : allCommandsInClasspath) {
-			
-			populateCommandInformation(commandClass);
-		}
+		return allCommandsInClasspath;
 	}
 
 
 
-	protected void populateCommandInformation(Class<?> commandClass) {
+	protected Map<String, List<Class>> populateCommandInformation(Class<?> commandClass) {
+		
+		Map<String, List<Class>> commandTypesMap = new HashMap<>();
 		
 		CommandDescriptor commandDescriptor = commandClass.getAnnotation(CommandDescriptor.class);
 		
@@ -165,6 +169,8 @@ public class StandardCommandBuilder implements CommandBuilder {
 		resolveStandardCommandConstructor(commandClass, commandName, argumentTypes);
 		
 		resolveParameterizedCommandConstructor(commandClass, commandName);
+		
+		return commandTypesMap;
 	}
 
 	
