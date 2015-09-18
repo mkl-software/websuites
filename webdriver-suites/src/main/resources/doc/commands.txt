@@ -17,16 +17,18 @@ Commands to implement:
 (+s~|)	checkUrlMatches
 (+s~|)	checkPageSource
 (+s~|)	checkPageSourceContains
-()	checkPageSourceMatches
-(+s)checkText				checks if element contains given text
+((+s~|)	checkPageSourceMatches
+(+s)	checkText				checks if element contains given text
 ()	checkTextContaining		checks if text contains given phrase
 ()	checkTextMatches		checks if text matches given regex
 ()	checkLink				checks if link with given text exists
 ()	checkLinkContaining
 ()	checkLinkMatching
+()	checkLinkHREF			checks of link with given HREF value exists (?? - investigate)
 ()	checkAttr				checks if element has an attribute
 ()	checkAttrValue			checks if element has an attribute with a given value
-()	checkAttrMatches			checks if element has an attribute with a given value
+()	checkAttrValueContaning	checks if element has an attribute with a value matching string
+()	checkAttrMatches		checks if element has an attribute with a value matching regex
 ()	checkSelected			checks if given checkbox is selected
 ()	checkSelectedText		checks if given option in select component is chosen by text
 ()	checkSelectedIdx		checks if given option in select component is chosen by index
