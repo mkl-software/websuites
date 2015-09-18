@@ -10,8 +10,8 @@ Commands to implement:
 
 (+s~|)	check					checks if elements exists		
 (+s~|)	checkTitle
-(+s~)	checkTitleContains
-()	checkTitleMatches
+(+s~|)	checkTitleContains
+(+s~|)	checkTitleMatches
 ()	checkUrl
 (+s)	checkUrlContains
 ()	checkUrlMatches
