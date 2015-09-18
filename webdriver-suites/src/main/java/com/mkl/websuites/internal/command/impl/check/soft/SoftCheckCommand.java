@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.CheckCommand;
+import com.mkl.websuites.internal.command.impl.check.CheckUtils;
 
 
 @CommandDescriptor(name = "softCheck", argumentTypes = String.class)
@@ -21,10 +22,7 @@ public class SoftCheckCommand extends CheckCommand {
 	
 	@Override
 	protected void fail(String message) {
-		// no "fail(msg)" method in soft assertions :/ Workaround:
-		softly.assertThat(false)
-			.overridingErrorMessage(message)
-			.isTrue();
+		CheckUtils.softFail(softly, message);
 	}
 
 }

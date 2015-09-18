@@ -4,12 +4,10 @@ goto	http://localhost:90/integration/commands/check/checkTitleOK.html
 
 checkUrlContains	OK
 
-
-softCheckText	paragraph
-softCheckText	some
-softCheckText	bi
-softCheckText	text
-softCheckText	no
-softCheckText	fail
-softCheckText	dynamic
+~softCheck	#fillIt
+~softCheck	.header
+~softCheck	tagName=span
 checkAllSoft
+
+#softCheckText	fail
+#softCheckText	dynamic
