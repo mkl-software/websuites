@@ -9,8 +9,8 @@ import com.mkl.websuites.internal.command.impl.check.CheckTitleContainsCommand;
 @CommandDescriptor(name = "softCheckTitleContains", argumentTypes = String.class)
 public class SoftCheckTitleContainsCommand extends CheckTitleContainsCommand {
 
-	public SoftCheckTitleContainsCommand(String expectedTitle) {
-		super(expectedTitle);
+	public SoftCheckTitleContainsCommand(String titleFragment) {
+		super(titleFragment);
 	}
 
 	

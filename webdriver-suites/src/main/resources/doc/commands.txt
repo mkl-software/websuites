@@ -8,31 +8,31 @@ Commands to implement:
 
 ( legend: + - implemented normal check, "s" - soft, "~" - negated, | "-" negated soft)
 
-(+s~)check					checks if elements exists		
-(+s~|)checkTitle
-(+)checkTitleContains
-checkTitleMatches
-checkUrl
-(+)checkUrlContains
-checkUrlMatches
-checkPageSourceContains
-checkPageSourceMatches
-checkText				checks if element contains given text
-checkTextContains		checks if text contains given phrase
-checkTextMatches		checks if text matches given regex
-checkLink				checks if link with given text exists
-checkLinkContaining
-checkLinkMatching
-checkAttr				checks if element has an attribute
-checkAttrValue			checks if element has an attribute with a given value
-checkAttrMatches			checks if element has an attribute with a given value
-checkSelected			checks if given checkbox is selected
-checkSelectedText		checks if given option in select component is chosen by text
-checkSelectedIdx		checks if given option in select component is chosen by index
-checkCssAttrValue		check for given element its CSS attribute value
-checkCssClass			checks if given element has given CSS class
-checkElementVisible
-checkElementHidden		? - maybe only negated version for the command above
+(+s~|)	check					checks if elements exists		
+(+s~|)	checkTitle
+(+s~)	checkTitleContains
+()	checkTitleMatches
+()	checkUrl
+(+s)	checkUrlContains
+()	checkUrlMatches
+()	checkPageSourceContains
+()	checkPageSourceMatches
+(+s)checkText				checks if element contains given text
+()	checkTextContains		checks if text contains given phrase
+()	checkTextMatches		checks if text matches given regex
+()	checkLink				checks if link with given text exists
+()	checkLinkContaining
+()	checkLinkMatching
+()	checkAttr				checks if element has an attribute
+()	checkAttrValue			checks if element has an attribute with a given value
+()	checkAttrMatches			checks if element has an attribute with a given value
+()	checkSelected			checks if given checkbox is selected
+()	checkSelectedText		checks if given option in select component is chosen by text
+()	checkSelectedIdx		checks if given option in select component is chosen by index
+()	checkCssAttrValue		check for given element its CSS attribute value
+()	checkCssClass			checks if given element has given CSS class
+()	checkElementVisible
+()	checkElementHidden		? - maybe only negated version for the command above, or without negations
 
 selectByIdx					selected option in the combobox
 selectByVisibleText
