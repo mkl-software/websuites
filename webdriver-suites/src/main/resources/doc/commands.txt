@@ -16,7 +16,7 @@ Commands to implement:
 (+s~|)	checkUrlContains
 (+s~|)	checkUrlMatches
 (+s~|)	checkPageSource
-()	checkPageSourceContains
+(+s~|)	checkPageSourceContains
 ()	checkPageSourceMatches
 (+s)checkText				checks if element contains given text
 ()	checkTextContaining		checks if text contains given phrase
