@@ -41,7 +41,6 @@ public class CheckTextPresentCommand extends AbstractCheck {
 		((ListAssert<?>) assertion)
 			.overridingErrorMessage("Text '%s' is not present in any of the elements in the page" , text)
 			.isNotEmpty();
-		
 	}
 
 	

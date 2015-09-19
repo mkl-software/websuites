@@ -17,10 +17,12 @@ Commands to implement:
 (+s~|)	checkUrlMatches
 (+s~|)	checkPageSource
 (+s~|)	checkPageSourceContains
-((+s~|)	checkPageSourceMatches
-(+s)	checkText				checks if element contains given text
+(+s~|)	checkPageSourceMatches
+(+s~|)	checkText			checks if given string exists anywhere on the page
 ()	checkTextContaining		checks if text contains given phrase
 ()	checkTextMatches		checks if text matches given regex
+checkInnerHTML
+checkInnerText
 ()	checkLink				checks if link with given text exists
 ()	checkLinkContaining
 ()	checkLinkMatching
