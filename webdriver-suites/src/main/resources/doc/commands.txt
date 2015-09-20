@@ -1,5 +1,7 @@
+-------------------------------------------------------------------------------------
 Commands to implement:
 -------------------------------------------------------------------------------------
+
 
 // consider also soft assertions for all below:(e.g. "softCheck...")
 // also do negated versions for most of the below - e.g. "~check"
@@ -18,26 +20,31 @@ Commands to implement:
 (+s~|)	checkPageSource
 (+s~|)	checkPageSourceContains
 (+s~|)	checkPageSourceMatches
-(+s~|)	checkText			checks if given string exists anywhere on the page
-()	checkTextContaining		checks if text contains given phrase
-()	checkTextMatches		checks if text matches given regex
-checkInnerHTML
+(+s~|)	checkText				checks if given string exists anywhere on the page
+(+s~|)	checkTextMatching		checks if there is a text anywhere on the page that matches given regex
+checkElementText				checks if GIVEN element has EXACTLY this text as innerText
+checkElementTextContains		as above, but contains
+checkElementTextMatches			as above, matches
+checkInnerHTML				elem.getAttribute("innerHTML") or
+String contents = (String)((JavascriptExecutor)browser).executeScript("return arguments[0].innerHTML;", webElement);
 checkInnerText
-()	checkLink				checks if link with given text exists
+()	checkLink					checks if link with given text exists
 ()	checkLinkContaining
 ()	checkLinkMatching
-()	checkLinkHREF			checks of link with given HREF value exists (?? - investigate)
-()	checkAttr				checks if element has an attribute
-()	checkAttrValue			checks if element has an attribute with a given value
-()	checkAttrValueContaning	checks if element has an attribute with a value matching string
-()	checkAttrMatches		checks if element has an attribute with a value matching regex
-()	checkSelected			checks if given checkbox is selected
-()	checkSelectedText		checks if given option in select component is chosen by text
-()	checkSelectedIdx		checks if given option in select component is chosen by index
-()	checkCssAttrValue		check for given element its CSS attribute value
-()	checkCssClass			checks if given element has given CSS class
+()	checkLinkHREF				checks of link with given HREF value exists (?? - investigate)
+()	checkAttr					checks if element has an attribute
+()	checkAttrValue				checks if element has an attribute with a given value
+()	checkAttrValueContaning		checks if element has an attribute with a value matching string
+()	checkAttrMatches			checks if element has an attribute with a value matching regex
+()	checkSelected				checks if given checkbox is selected
+()	checkSelectedText			checks if given option in select component is chosen by text
+()	checkSelectedIdx			checks if given option in select component is chosen by index
+()	checkCssAttrValue			check for given element its CSS attribute value
+()	checkCssClass				checks if given element has given CSS class
 ()	checkElementVisible
-()	checkElementHidden		? - maybe only negated version for the command above, or without negations
+()	checkElementHidden			? - maybe only negated version for the command above, or without negations
+()	checkHeaderContains			checks HTML page haeder section
+()	checkHeaderMatches			checks HTML page haeder section
 
 selectByIdx					selected option in the combobox
 selectByVisibleText

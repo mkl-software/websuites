@@ -8,6 +8,10 @@ public abstract class AbstractCheck extends BaseCommand {
 
 	
 	
+	/**
+	 * Template method which decomposes asserting logic to enable elegant way of running
+	 * soft and negated assertions.
+	 */
 	@Override
 	protected void runStandardCommand() {
 
