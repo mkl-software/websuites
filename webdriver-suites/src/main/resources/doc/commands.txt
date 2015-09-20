@@ -22,12 +22,11 @@ Commands to implement:
 (+s~|)	checkPageSourceMatches
 (+s~|)	checkText				checks if given string exists anywhere on the page
 (+s~|)	checkTextMatching		checks if there is a text anywhere on the page that matches given regex
-checkElementText				checks if GIVEN element has EXACTLY this text as innerText
-checkElementTextContains		as above, but contains
-checkElementTextMatches			as above, matches
-checkInnerHTML				elem.getAttribute("innerHTML") or
+(+s~|)	checkElementText				checks if GIVEN element has EXACTLY this text as innerText
+()		checkElementTextContains		as above, but contains
+()		checkElementTextMatches			as above, matches
+()		checkInnerHTML				elem.getAttribute("innerHTML") or
 String contents = (String)((JavascriptExecutor)browser).executeScript("return arguments[0].innerHTML;", webElement);
-checkInnerText
 ()	checkLink					checks if link with given text exists
 ()	checkLinkContaining
 ()	checkLinkMatching
@@ -46,7 +45,7 @@ checkInnerText
 ()	checkHeaderContains			checks HTML page haeder section
 ()	checkHeaderMatches			checks HTML page haeder section
 
-selectByIdx					selected option in the combobox
+selectByIdx						selected option in the combobox
 selectByVisibleText
 deselectByIdx					selected option in the combobox
 deselectByVisibleText
@@ -54,6 +53,7 @@ multiSelect
 multiDeselect
 
 // all waits should be Fluent, with params: timeout=n, pollingInterval=m, ingoreNoSuchElementException=true/false
+wait					implemented
 waitFor					waits until element is present (timeout=n)
 waitUntilVisible		waits until element is visible (timeout=n)
 waitUntilClickable
@@ -75,8 +75,8 @@ clickLinkContaining
 clickLinkMatching
 clickText
 clickTextContaining		if more than one element matches, pick first one
-clickTextMaching		as above
-doubleClick
+clickTextMatching		as above
+doubleClick				(like clicks above)
 ctrlClick
 shiftClick
 altClick
