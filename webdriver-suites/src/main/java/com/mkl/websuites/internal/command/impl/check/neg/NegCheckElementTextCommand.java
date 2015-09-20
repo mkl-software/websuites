@@ -3,7 +3,6 @@ package com.mkl.websuites.internal.command.impl.check.neg;
 import java.util.Map;
 
 import org.assertj.core.api.StringAssert;
-import org.openqa.selenium.WebElement;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.AbstractCheck;
@@ -24,9 +23,6 @@ public class NegCheckElementTextCommand extends CheckElementTextCommand {
 	
 	protected class NegCheckElement extends CheckElementText {
 
-		public NegCheckElement(String elementText) {
-			super(elementText);
-		}
 		
 		@Override
 		protected void runSingleStringAssertion(StringAssert assertion,
@@ -41,9 +37,9 @@ public class NegCheckElementTextCommand extends CheckElementTextCommand {
 	
 	
 	@Override
-	protected AbstractCheck defineCheckLogic(final WebElement webElement) {
+	protected AbstractCheck defineCheckLogic() {
 		
-		return new NegCheckElement(webElement.getText());
+		return new NegCheckElement();
 	}
 
 }

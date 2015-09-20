@@ -23,7 +23,7 @@ Commands to implement:
 (+s~|)	checkText				checks if given string exists anywhere on the page
 (+s~|)	checkTextMatching		checks if there is a text anywhere on the page that matches given regex
 (+s~|)	checkElementText				checks if GIVEN element has EXACTLY this text as innerText
-()		checkElementTextContains		as above, but contains
+(+s~|)		checkElementTextContains		as above, but contains
 ()		checkElementTextMatches			as above, matches
 ()		checkInnerHTML				elem.getAttribute("innerHTML") or
 String contents = (String)((JavascriptExecutor)browser).executeScript("return arguments[0].innerHTML;", webElement);

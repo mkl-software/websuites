@@ -18,32 +18,14 @@ public class CheckElementTextCommand extends OperationOnWebElement {
 	
 	protected String expectedText;
 	
+	protected String actualInnerText;
 	
-	protected class CheckElementText extends AbstractSingleStringCheck {
-		
-		protected String elementText;
-		
-		public CheckElementText(String elementText) {
-			this.elementText = elementText;
-		}
-
-		@Override
-		protected void runSingleStringAssertion(StringAssert assertion,
-				String elementText) {
-			
-			assertion
-				.overridingErrorMessage("Expecting inner text of web page element with selector '%s'"
-						+ "to be exactly '%s', but was '%s'", by, expectedText, elementText)
-				.isEqualTo(expectedText);
-		}
-		
-		@Override
-		protected String getStringParam() {
-			return elementText;
-		}
+	
+	public CheckElementTextCommand(Map<String, String> parameterMap) {
+		super(parameterMap);
 	}
-	
-	
+
+
 	@SuppressWarnings("serial")
 	public CheckElementTextCommand(final String selector, final String expectedText) {
 		super(new HashMap<String, String>() {{
@@ -53,6 +35,23 @@ public class CheckElementTextCommand extends OperationOnWebElement {
 	}
 
 
+	protected class CheckElementText extends AbstractSingleStringCheck {
+		
+		@Override
+		protected void runSingleStringAssertion(StringAssert assertion,
+				String elementText) {
+			
+			assertion
+				.overridingErrorMessage("Expecting inner text of web page element with selector '%s'"
+						+ " to be exactly '%s', but was '%s'", by, expectedText, elementText)
+				.isEqualTo(expectedText);
+		}
+		
+		@Override
+		protected String getStringParam() {
+			return actualInnerText;
+		}
+	}
 	
 	
 	/**
@@ -60,19 +59,17 @@ public class CheckElementTextCommand extends OperationOnWebElement {
 	 * @param webElement 
 	 * @return
 	 */
-	protected AbstractCheck defineCheckLogic(final WebElement webElement) {
+	protected AbstractCheck defineCheckLogic() {
 		
-		return new CheckElementText(webElement.getText());
-	}
-
-	public CheckElementTextCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
+		return new CheckElementText();
 	}
 
 	@Override
 	protected void doOperationOnElement(WebElement elem) {
 		
-		AbstractCheck checkLogic = defineCheckLogic(elem);
+		actualInnerText = elem.getText();
+		
+		AbstractCheck checkLogic = defineCheckLogic();
 		
 		expectedText = parameterMap.get("text");
 		

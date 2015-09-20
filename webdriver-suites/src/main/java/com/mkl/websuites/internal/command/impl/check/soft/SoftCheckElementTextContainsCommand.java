@@ -6,31 +6,32 @@ import org.assertj.core.api.AbstractAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.AbstractCheck;
-import com.mkl.websuites.internal.command.impl.check.CheckElementTextCommand;
+import com.mkl.websuites.internal.command.impl.check.CheckElementTextContainsCommand;
 
 
 
-@CommandDescriptor(name = "softCheckElementText", argumentTypes = {String.class, String.class})
-public class SoftCheckElementTextCommand extends CheckElementTextCommand {
+@CommandDescriptor(name = "softCheckElementTextContains", argumentTypes = {String.class, String.class})
+public class SoftCheckElementTextContainsCommand extends
+		CheckElementTextContainsCommand {
 
-	public SoftCheckElementTextCommand(Map<String, String> parameterMap) {
+	public SoftCheckElementTextContainsCommand(Map<String, String> parameterMap) {
 		super(parameterMap);
 	}
 
-	public SoftCheckElementTextCommand(String selector, String expectedText) {
+	public SoftCheckElementTextContainsCommand(String selector,
+			String expectedText) {
 		super(selector, expectedText);
 	}
-	
-	
-	
+
 	@Override
 	protected AbstractCheck defineCheckLogic() {
-		return new CheckElementText() {
+		
+		return new CheckElementTextContains() {
+			
 			@Override
 			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
 				return soft(args);
 			}
 		};
 	}
-
 }
