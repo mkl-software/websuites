@@ -132,7 +132,7 @@
 		          <version>2.17</version>
 		          <configuration>
 			          <includes>
-				            <include>**/MasterSuite.java</include>
+				            <include>**/TypeCommandTest.java</include>
 			          </includes>
 			          <argLine>-javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar</argLine>
       				  <useSystemClassLoader>true</useSystemClassLoader>
