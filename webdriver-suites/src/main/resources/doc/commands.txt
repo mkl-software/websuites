@@ -8,7 +8,10 @@ Commands to implement:
 // and negated soft (~softCheck...)
 // so 4 versions of all commands below:
 
-( legend: + - implemented normal check, "s" - soft, "~" - negated, | "-" negated soft)
+Legend:
++ - implemented normal check, "s" - soft, "~" - negated, | "-" negated soft
+! - command will not implicitly wait for condition to be met - although it will wait for element with an
+	implicit wait, but the condition will be checked immediately afterwards.
 
 (+s~|)	check					checks if elements exists		
 (+s~|)	checkTitle
@@ -21,10 +24,10 @@ Commands to implement:
 (+s~|)	checkPageSourceContains
 (+s~|)	checkPageSourceMatches
 (+s~|)	checkText				checks if given string exists anywhere on the page
-(+s~|)	checkTextMatching		checks if there is a text anywhere on the page that matches given regex
-(+s~|)	checkElementText				checks if GIVEN element has EXACTLY this text as innerText
-(+s~|)		checkElementTextContains		as above, but contains
-()		checkElementTextMatches			as above, matches
+(+s~|)	checkTextMatching		checks if there is a text anywhere on the page that matches given regex (!)
+(+s~|)	checkElementText				checks if GIVEN element has EXACTLY this text as innerText (!)
+(+s~|)	checkElementTextContains		as above, but contains (!)
+(+s~|)	checkElementTextMatches			as above, matches (!)
 ()		checkInnerHTML				elem.getAttribute("innerHTML") or
 String contents = (String)((JavascriptExecutor)browser).executeScript("return arguments[0].innerHTML;", webElement);
 ()	checkLink					checks if link with given text exists
