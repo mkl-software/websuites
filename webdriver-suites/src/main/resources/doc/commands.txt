@@ -28,7 +28,7 @@ Legend:
 (+s~|)	checkElementText				checks if GIVEN element has EXACTLY this text as innerText (!)
 (+s~|)	checkElementTextContains		as above, but contains (!)
 (+s~|)	checkElementTextMatches			as above, matches (!)
-()		checkInnerHTML				elem.getAttribute("innerHTML") or 
+()		checkInnerHTML				elem.getAttribute("innerHTML") or
 String contents = (String)((JavascriptExecutor)browser).executeScript("return arguments[0].innerHTML;", webElement);
 ()	checkLink					checks if link with given text exists
 ()	checkLinkContaining
