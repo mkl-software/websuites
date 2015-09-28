@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.assertj.core.api.StringAssert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
@@ -59,6 +60,14 @@ public class CheckElementInnerHtmlCommand extends OperationOnWebElement {
 	protected void doOperationOnElement(WebElement elem) {
 		
 		actualInnerHTML = elem.getAttribute("innerHTML");
+		
+		// not all browsers may support innerHTML attribute on WebElement level, so
+		// use Javascript invocation then instead:
+		if (actualInnerHTML == null) {
+			
+			actualInnerHTML = (String)((JavascriptExecutor) browser)
+					.executeScript("return arguments[0].innerHTML;", elem);
+		}
 		
 		AbstractCheck checkLogic = defineCheckLogic();
 		
