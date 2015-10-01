@@ -31,7 +31,7 @@ Legend:
 (+s~|)		checkInnerHTML				elem.getAttribute("innerHTML") or
 String contents = (String)((JavascriptExecutor)browser).executeScript("return arguments[0].innerHTML;", webElement);
 (+s~|)		checkInnerHTMLContains
-()		checkInnerHTMLMatches
+(+s~|)		checkInnerHTMLMatches
 ()	checkLink					checks if link with given text exists
 ()	checkLinkContaining
 ()	checkLinkMatching
