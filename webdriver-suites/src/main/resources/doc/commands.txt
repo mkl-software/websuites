@@ -10,7 +10,7 @@ Commands to implement:
 
 Legend:
 + - implemented normal check, "s" - soft, "~" - negated, | "-" negated soft
-! - command will not implicitly wait for condition to be met - although it will wait for element with an
+! - command will not implicitly wait for condition to be met - although it will wait for elements with an
 	implicit wait, but the condition will be checked immediately afterwards.
 
 (+s~|)	check					checks if elements exists		
@@ -28,13 +28,12 @@ Legend:
 (+s~|)	checkElementText				checks if GIVEN element has EXACTLY this text as innerText (!)
 (+s~|)	checkElementTextContains		as above, but contains (!)
 (+s~|)	checkElementTextMatches			as above, matches (!)
-(+s~|)		checkInnerHTML				elem.getAttribute("innerHTML") or
-String contents = (String)((JavascriptExecutor)browser).executeScript("return arguments[0].innerHTML;", webElement);
-(+s~|)		checkInnerHTMLContains
-(+s~|)		checkInnerHTMLMatches
-()	checkLink					checks if link with given text exists
-()	checkLinkContaining
-()	checkLinkMatching
+(+s~|)		checkInnerHTML				(!)
+(+s~|)		checkInnerHTMLContains		(!)
+(+s~|)		checkInnerHTMLMatches		(!)
+()	checkLinkText					checks if link with given text exists
+()	checkLinkTextContaining
+()	checkLinkTextMatching
 ()	checkLinkHREF				checks of link with given HREF value exists (?? - investigate)
 ()	checkAttr					checks if element has an attribute
 ()	checkAttrValue				checks if element has an attribute with a given value
