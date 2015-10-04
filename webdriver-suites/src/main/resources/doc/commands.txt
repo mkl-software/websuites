@@ -33,7 +33,7 @@ Legend:
 (+s~|)		checkInnerHTMLMatches		(!)
 (+s~|)	checkLinkText					checks if link with given text exists
 (+s~|)	checkLinkTextContaining
-()	checkLinkTextMatching
+(+s~|)	checkLinkTextMatching
 ()	checkLinkHREF				checks of link with given HREF value exists (?? - investigate)
 ()	checkAttr					checks if element has an attribute
 ()	checkAttrValue				checks if element has an attribute with a given value
