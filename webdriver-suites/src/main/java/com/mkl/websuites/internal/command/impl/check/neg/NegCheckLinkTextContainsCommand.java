@@ -3,11 +3,11 @@ package com.mkl.websuites.internal.command.impl.check.neg;
 import org.assertj.core.api.StringAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
-import com.mkl.websuites.internal.command.impl.check.CheckLinkTextContainsCommand;
+import com.mkl.websuites.internal.command.impl.check.CheckLinkTextContaining;
 
 @CommandDescriptor(name = "~checkLinkTextContaining", argumentTypes = {String.class})
 public class NegCheckLinkTextContainsCommand extends
-		CheckLinkTextContainsCommand {
+		CheckLinkTextContaining {
 
 	public NegCheckLinkTextContainsCommand(String expectedLinkText) {
 		super(expectedLinkText);
