@@ -35,6 +35,35 @@ public class WebSuites {
 	}
 	
 	
+	/**
+	 * Runs before all tests are started.
+	 */
+	protected void setUp() {
+		
+	}
+	
+	/**
+	 * Runs after all tests for all browsers are finished and browsers are shut down.
+	 */
+	protected void tearDown() {
+		
+	}
+	
+	/**
+	 * Runs before all tests for given browser are started.
+	 */
+	protected void setUpBeforeBrowser(String currentBrowser) {
+		
+	}
+	
+	/**
+	 * Runs after all tests for given browser are finished.
+	 */
+	protected void tearDownAfterBrowser(String currentBrowser) {
+		
+	}
+	
+	
 
 	public TestSuite defineMasterSuite() throws
 			InstantiationException,
@@ -64,7 +93,7 @@ public class WebSuites {
 		// TODO: refactor it more elegantly
 		if (browsers.length == 1 && browsers[0].equals("none")) {
 			// run for non-browser mode:
-			currentlyDefiningBrowser = "none";
+			currentlyDefiningBrowser = "none"; // TODO: move it to a TestContext
 			TestSuite browserSuite = new TestSuite("Running without any browser");
 			for (Class<? extends Test> testClass : suites) {
 				
@@ -96,6 +125,7 @@ public class WebSuites {
 			}
 			
 			suite.addTest(browserSuite);
+			
 		}
 		
 		if (!config.doNotCloseBrowserAtTheEnd() && !(browsers.length == 1 && browsers[0].equals("none"))) {
