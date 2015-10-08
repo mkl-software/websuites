@@ -28,7 +28,7 @@ public class CheckLinkHrefCommand extends AbstractSingleStringCheck {
 		try {
 			List<WebElement> elements = browser.findElements(By.tagName("a"));
 			for (WebElement elem : elements) {
-				if (expectedLinkText.equals(elem.getAttribute("href"))) {
+				if (predicate(elem.getAttribute("href"))) {
 					actualElement = elem;
 					return "OK";
 				}
@@ -37,6 +37,10 @@ public class CheckLinkHrefCommand extends AbstractSingleStringCheck {
 			return null;
 		}
 		return null;
+	}
+
+	protected boolean predicate(String href) {
+		return expectedLinkText.equals(href);
 	}
 
 	@Override
