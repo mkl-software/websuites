@@ -8,39 +8,34 @@ import org.assertj.core.api.StringAssert;
 import org.openqa.selenium.WebElement;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
-import com.mkl.websuites.internal.command.impl.navigation.OperationOnWebElement;
 import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 
-@CommandDescriptor(name = "checkElementAttr", argumentTypes = {String.class, String.class})
-public class CheckElementAttributeCommand extends OperationOnWebElement {
+@CommandDescriptor(name = "checkElementAttrValue", argumentTypes = {String.class, String.class, String.class})
+public class CheckElementAttributeValueCommand extends
+		CheckElementAttributeCommand {
 
+	protected String expectedAttributeValue;
+	protected static final String ATT_VALUE_PARAM = "attValue";
 	
-	protected static final String ATT_NAME_PARAM = "attName";
-
-	protected String inputAttributeName;
-	
-	protected String actualAttributeValue;
-
-	protected WebElement foundElement;
-	
-	
-	public CheckElementAttributeCommand(Map<String, String> parameterMap) {
+	public CheckElementAttributeValueCommand(Map<String, String> parameterMap) {
 		super(parameterMap);
 	}
 
-
 	@SuppressWarnings("serial")
-	public CheckElementAttributeCommand(final String selector, final String expectedText) {
+	public CheckElementAttributeValueCommand(final String selector,
+			final String attributeName, final String expectedAttributeValue) {
+		
 		super(new HashMap<String, String>() {{
 			put("css", selector);
-			put(ATT_NAME_PARAM, expectedText);
+			put(ATT_NAME_PARAM, attributeName);
+			put(ATT_VALUE_PARAM, expectedAttributeValue);
 		}});
 	}
 	
 	
 	
-	protected class CheckElementAttr extends AbstractSingleStringCheck {
+	protected class CheckElementAttrValue extends AbstractSingleStringCheck {
 		
 		@Override
 		protected void runSingleStringAssertion(StringAssert assertion,
@@ -48,8 +43,8 @@ public class CheckElementAttributeCommand extends OperationOnWebElement {
 			
 			assertion
 				.overridingErrorMessage("Expecting attribute '%s' in the web page element with selector '%s'"
-						+ " to have a value", inputAttributeName, by)
-				.isNotEmpty();
+						+ " to have an exact value '%s'", inputAttributeName, by, expectedAttributeValue)
+				.isEqualTo(expectedAttributeValue);
 		}
 		
 		@Override
@@ -61,35 +56,31 @@ public class CheckElementAttributeCommand extends OperationOnWebElement {
 	
 	
 	@Override
+	protected AbstractCheck defineCheckLogic() {
+		return new CheckElementAttrValue();
+	}
+	
+	
+	@Override
 	protected void doOperationOnElement(WebElement elem) {
 		
-		inputAttributeName = parameterMap.get(ATT_NAME_PARAM);
-		actualAttributeValue = elem.getAttribute(inputAttributeName);
-		foundElement = elem;
+		this.expectedAttributeValue = parameterMap.get(ATT_VALUE_PARAM);
 		
-		AbstractCheck checkLogic = defineCheckLogic();
-		
-		checkLogic.runStandardCommand();
-		
-		
+		super.doOperationOnElement(elem);
 	}
-
 	
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckElementAttr();
-	}
-
-
+	
 	@Override
 	protected List<SchemaValidationRule> defineValidationRules() {
 		
 		List<SchemaValidationRule> parentValidationRules = super.defineValidationRules();
 		
 		for (SchemaValidationRule schemaValidationRule : parentValidationRules) {
-			schemaValidationRule.addMandatoryElements(ATT_NAME_PARAM);
+			schemaValidationRule.addMandatoryElements(ATT_VALUE_PARAM);
 		}
 		
 		return parentValidationRules;
 	}
+
 
 }
