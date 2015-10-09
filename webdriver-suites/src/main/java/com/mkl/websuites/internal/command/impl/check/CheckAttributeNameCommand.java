@@ -33,7 +33,7 @@ public class CheckAttributeNameCommand extends AbstractSingleStringCheck {
 			boolean foundAttribute = (Boolean)((JavascriptExecutor) browser).executeScript(
 							"var items = {};"
 							+ "for (var i = 0; i < arguments[0].attributes.length; ++i) {"
-							+ "    if (arguments[0].attributes[i].name === arguments[1]) return true;"
+							+ "    if (" + getPredicateString() + ") return true;"
 							+ "};"
 							+ "return false;",
 						webElement, attribute);
@@ -44,6 +44,11 @@ public class CheckAttributeNameCommand extends AbstractSingleStringCheck {
 			}
 		}
 		return null;
+	}
+
+
+	protected String getPredicateString() {
+		return "arguments[0].attributes[i].name === arguments[1]";
 	}
 
 	
