@@ -10,8 +10,10 @@ Commands to implement:
 
 Legend:
 + - implemented normal check, "s" - soft, "~" - negated, | "-" negated soft
-! - command will not implicitly wait for condition to be met - although it will wait for elements with an
-	implicit wait, but the condition will be checked immediately afterwards.
+! - command will not implicitly wait for exact condition to be met - although it will wait for some elements with an
+	implicit wait, but the condition will be checked immediately afterwards, so more elements can be loaded
+	
+!! - performance-impaired
 
 (+s~|)	check					checks if elements exists		
 (+s~|)	checkTitle
@@ -28,21 +30,27 @@ Legend:
 (+s~|)	checkElementText				checks if GIVEN element has EXACTLY this text as innerText (!)
 (+s~|)	checkElementTextContains		as above, but contains (!)
 (+s~|)	checkElementTextMatches			as above, matches (!)
-(+s~|)		checkInnerHTML				(!)
-(+s~|)		checkInnerHTMLContains		(!)
-(+s~|)		checkInnerHTMLMatches		(!)
+(+s~|)	checkInnerHTML				(!)
+(+s~|)	checkInnerHTMLContains		(!)
+(+s~|)	checkInnerHTMLMatches		(!)
 (+s~|)	checkLinkText					checks if link with given text exists
 (+s~|)	checkLinkTextContaining
 (+s~|)	checkLinkTextMatching
-()	checkLinkHREF				checks of link with given HREF value exists (?? - investigate)
-()	checkAttr					checks if element has an attribute
-()	checkAttrValue				checks if element has an attribute with a given value
-()	checkAttrValueContaning		checks if element has an attribute with a value matching string
-()	checkAttrMatches			checks if element has an attribute with a value matching regex
+(+s~|)	checkLinkHREF				checks of link with given HREF value exists
+(+s~|)	checkLinkHREFContaining
+(+s~|)	checkLinkHREFMatching
+(+s~|)	checkAttributeName				checks if given attribute exists anywhere on the page with whatever value (!!)
+()	checkAttributeValue					checks if given attribute value exists anywhere on the page
+()	checkAttributeValueContaining		checks if given attribute value containing text exists anywhere on the page
+()	checkAttributeValueMatching			checks if given attribute exists anywhere on the page with value matching text
+()	checkElementAtt						checks if element has an attribute
+()	checkElementAttValue				checks if element has an attribute with a given value
+()	checkElementAttValueContains		checks if element has an attribute with a value containing string
+()	checkElementAttValueMatches			checks if element has an attribute with a value matching regex
 ()	checkSelected				checks if given checkbox is selected
 ()	checkSelectedText			checks if given option in select component is chosen by text
 ()	checkSelectedIdx			checks if given option in select component is chosen by index
-()	checkCssAttrValue			check for given element its CSS attribute value
+()	checkCss					check for given element if its CSS attribute has a given value (e.g. background-color)
 ()	checkCssClass				checks if given element has given CSS class
 ()	checkElementVisible
 ()	checkElementHidden			? - maybe only negated version for the command above, or without negations
@@ -99,6 +107,8 @@ addCookie				name=, value=, domain=, path=, expiry=(date), isSecure=, isHttpOnly
 deleteAllCookies
 deleteCookieNamed
 getCookieValue			name=, target value read into property, e.g. ${cookieValues.#cookieName#}
+
+evaluateJsExpr			evaluates Javascript expression and writes it to a given target property
 
 goto
 back
