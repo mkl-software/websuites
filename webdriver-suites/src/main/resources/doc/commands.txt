@@ -42,8 +42,8 @@ Legend:
 (+s~|)	checkAttributeName				checks if given attribute exists anywhere on the page with whatever value (!!)
 (+s~|)	checkAttributeValue				checks if given attribute value exists anywhere on the page (!!)
 (+s~|)	checkAttributeValueContaining	checks if given attribute value containing text exists anywhere on the page
-()	checkAttributeValueMatching			checks if given attribute exists anywhere on the page with value matching text
-()	checkElementAtt						checks if element has an attribute
+(+s~|)	checkAttributeValueMatching		checks if given attribute exists anywhere on the page with value matching text
+(+s~|)	checkElementAttr				checks if element has an attribute
 ()	checkElementAttValue				checks if element has an attribute with a given value
 ()	checkElementAttValueContains		checks if element has an attribute with a value containing string
 ()	checkElementAttValueMatches			checks if element has an attribute with a value matching regex
