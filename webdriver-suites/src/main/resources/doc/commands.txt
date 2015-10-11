@@ -45,7 +45,7 @@ Legend:
 (+s~|)	checkAttributeValueMatching		checks if given attribute exists anywhere on the page with value matching text
 (+s~|)	checkElementAttr				checks if element has an attribute
 (+s~|)	checkElementAttValue			checks if element has an attribute with a given value
-()	checkElementAttValueContains		checks if element has an attribute with a value containing string
+(+s~|)	checkElementAttValueContains	checks if element has an attribute with a value containing string
 ()	checkElementAttValueMatches			checks if element has an attribute with a value matching regex
 ()	checkSelected				checks if given checkbox is selected
 ()	checkSelectedText			checks if given option in select component is chosen by text
