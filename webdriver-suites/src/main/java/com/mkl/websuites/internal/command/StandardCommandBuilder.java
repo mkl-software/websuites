@@ -137,8 +137,9 @@ public class StandardCommandBuilder implements CommandBuilder {
 		Reflections reflections = new Reflections("com.mkl.websuites.internal.command.impl",
 												  "com.mkl.websuites.test.unit.scenario");
 
+		// honorInherited=true to skip inherited but not annotated classes
 		Set<Class<?>> allCommandsInClasspath = 
-				reflections.getTypesAnnotatedWith(CommandDescriptor.class);
+				reflections.getTypesAnnotatedWith(CommandDescriptor.class, true);
 		
 		log.debug("classpath scanned with reflection for annotated command,"
 				+ " found {} commands", allCommandsInClasspath.size());
