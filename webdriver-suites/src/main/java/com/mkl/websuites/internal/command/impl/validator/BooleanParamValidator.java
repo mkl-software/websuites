@@ -4,8 +4,8 @@ import com.mkl.websuites.WebSuitesException;
 
 public class BooleanParamValidator extends SingleValueValidator {
 
-	public BooleanParamValidator(String string) {
-		super(string);
+	public BooleanParamValidator(String parameterName) {
+		super(parameterName);
 	}
 
 	@Override
@@ -14,7 +14,7 @@ public class BooleanParamValidator extends SingleValueValidator {
 		if (!"false".equalsIgnoreCase(paramValue) && !"true".equalsIgnoreCase(paramValue)) {
 			
 			throw new WebSuitesException("Parameter " + paramName + " with value '" +
-					paramValue + "'must be proper BOOLEAN value");
+					paramValue + "'must be proper BOOLEAN value ('true' or 'false' literals)");
 		}
 	}
 

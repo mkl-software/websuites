@@ -1,6 +1,6 @@
 package com.mkl.websuites.internal.command.impl;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,7 +88,7 @@ public abstract class ParameterizedCommand extends BaseCommand {
 	protected abstract List<SchemaValidationRule> defineValidationRules();
 	
 	protected  List<ParameterValueValidator> defineParameterValueValidators() {
-		return Collections.emptyList();
+		return new ArrayList<>();
 	}
 	
 	

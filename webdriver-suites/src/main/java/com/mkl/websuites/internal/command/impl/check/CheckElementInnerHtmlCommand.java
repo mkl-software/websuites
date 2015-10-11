@@ -16,6 +16,8 @@ import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 @CommandDescriptor(name = "checkElementInnerHTML", argumentTypes = {String.class, String.class})
 public class CheckElementInnerHtmlCommand extends OperationOnWebElement {
 
+	private static final String INNER_HTML_PARAM = "innerHTML";
+
 	protected String expectedInnerHTML;
 	
 	protected String actualInnerHTML;
@@ -30,7 +32,7 @@ public class CheckElementInnerHtmlCommand extends OperationOnWebElement {
 	public CheckElementInnerHtmlCommand(final String selector, final String expectedText) {
 		super(new HashMap<String, String>() {{
 			put("css", selector);
-			put("innerHTML", expectedText);
+			put(INNER_HTML_PARAM, expectedText);
 		}});
 	}
 	
@@ -59,7 +61,7 @@ public class CheckElementInnerHtmlCommand extends OperationOnWebElement {
 	@Override
 	protected void doOperationOnElement(WebElement elem) {
 		
-		actualInnerHTML = elem.getAttribute("innerHTML");
+		actualInnerHTML = elem.getAttribute(INNER_HTML_PARAM);
 		
 		// not all browsers may support innerHTML attribute on WebElement level, so
 		// use Javascript invocation then instead:
@@ -71,7 +73,7 @@ public class CheckElementInnerHtmlCommand extends OperationOnWebElement {
 		
 		AbstractCheck checkLogic = defineCheckLogic();
 		
-		expectedInnerHTML = parameterMap.get("innerHTML");
+		expectedInnerHTML = parameterMap.get(INNER_HTML_PARAM);
 		
 		checkLogic.runStandardCommand();
 		
@@ -90,7 +92,7 @@ public class CheckElementInnerHtmlCommand extends OperationOnWebElement {
 		List<SchemaValidationRule> parentValidationRules = super.defineValidationRules();
 		
 		for (SchemaValidationRule schemaValidationRule : parentValidationRules) {
-			schemaValidationRule.addMandatoryElements("innerHTML");
+			schemaValidationRule.addMandatoryElements(INNER_HTML_PARAM);
 		}
 		
 		return parentValidationRules;

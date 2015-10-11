@@ -30,9 +30,9 @@ Legend:
 (+s~|)	checkElementText				checks if GIVEN element has EXACTLY this text as innerText (!)
 (+s~|)	checkElementTextContains		as above, but contains (!)
 (+s~|)	checkElementTextMatches			as above, matches (!)
-(+s~|)	checkInnerHTML				(!)
-(+s~|)	checkInnerHTMLContains		(!)
-(+s~|)	checkInnerHTMLMatches		(!)
+(+s~|)	checkInnerHTML				(!, !!)
+(+s~|)	checkInnerHTMLContains		(!, !!)
+(+s~|)	checkInnerHTMLMatches		(!, !!)
 (+s~|)	checkLinkText					checks if link with given text exists
 (+s~|)	checkLinkTextContaining
 (+s~|)	checkLinkTextMatching
@@ -46,8 +46,8 @@ Legend:
 (+s~|)	checkElementAttr				checks if element has an attribute
 (+s~|)	checkElementAttValue			checks if element has an attribute with a given value
 (+s~|)	checkElementAttValueContains	checks if element has an attribute with a value containing string
-()	checkElementAttValueMatches			checks if element has an attribute with a value matching regex
-()	checkSelected				checks if given checkbox is selected
+(+s~|)	checkElementAttValueMatches			checks if element has an attribute with a value matching regex
+()	checkChecked				checks if given checkbox is selected
 ()	checkSelectedText			checks if given option in select component is chosen by text
 ()	checkSelectedIdx			checks if given option in select component is chosen by index
 ()	checkCss					check for given element if its CSS attribute has a given value (e.g. background-color)
