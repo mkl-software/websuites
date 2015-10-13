@@ -46,12 +46,18 @@ Legend:
 (+s~|)	checkElementAttr				checks if element has an attribute
 (+s~|)	checkElementAttValue			checks if element has an attribute with a given value
 (+s~|)	checkElementAttValueContains	checks if element has an attribute with a value containing string
-(+s~|)	checkElementAttValueMatches			checks if element has an attribute with a value matching regex
-()	checkChecked				checks if given checkbox is selected
-()	checkSelectedText			checks if given option in select component is chosen by text
-()	checkSelectedIdx			checks if given option in select component is chosen by index
-()	checkCss					check for given element if its CSS attribute has a given value (e.g. background-color)
-()	checkCssClass				checks if given element has given CSS class
+(+s~|)	checkElementAttValueMatches		checks if element has an attribute with a value matching regex
+(+s~|)	checkChecked					checks if given checkbox is selected
+(+s~|)	checkSelectOptionText			checks if given select has an option with given display text
+()	checkSelectOptionTextContaining		checks if given select has an option with given display text
+()	checkSelectOptionTextMatching		checks if given select has an option with given display text
+()	checkSelectedText					checks if given option in select component is chosen by text
+()	checkSelectedTextContains					checks if given option in select component is chosen by text
+()	checkSelectedTextMatches					checks if given option in select component is chosen by text
+()	checkSelectedValue					checks if given option in select component is chosen by index
+()	checkSelectedIndex					checks if given option in select component is chosen by index
+()	checkCss							check for given element if its CSS attribute has a given value (e.g. background-color)
+()	checkCssClass						checks if given element has given CSS class
 ()	checkElementVisible
 ()	checkElementHidden			? - maybe only negated version for the command above, or without negations
 ()	checkHeaderContains			checks HTML page haeder section
@@ -59,12 +65,12 @@ Legend:
 ()	checkElementChildCount		checks number of children in given element
 ()	checkElementSiblingCount	as above for siblings
 
-selectByIdx						selected option in the combobox
+selectByValue					selected option in the combobox
 selectByVisibleText
-deselectByIdx					selected option in the combobox
+deselectByIndex					selected option in the combobox
 deselectByVisibleText
-multiSelect
-multiDeselect
+deselectByValue
+deselectByIndex
 
 // all waits should be Fluent, with params: timeout=n, pollingInterval=m, ingoreNoSuchElementException=true/false
 wait					implemented
@@ -77,6 +83,9 @@ waitUntilTitleIs
 waitUntilAlert
 waitUntilInvisible
 waitUntilFrameAvailable
+
+waitForAll 		consider in next release, waits until all nested commands (mostly "check...") are successful
+				or maybe use this instead of all waits above?
 
 setPageLoadTimeout
 setScriptTimeout

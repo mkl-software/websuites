@@ -47,12 +47,6 @@
 		<scope>test</scope>
 	</dependency>
 	
-<!-- 	<dependency> -->
-<!-- 		<groupId>org.assertj</groupId> -->
-<!-- 		<artifactId>assertj-core</artifactId> -->
-<!-- 		<version>1.7.0</version> -->
-<!-- 	</dependency> -->
-	
 	<dependency>
 	    <groupId>pl.pragmatists</groupId>
 	    <artifactId>JUnitParams</artifactId>
@@ -63,7 +57,7 @@
 	<dependency>
 		<groupId>pl.wkr</groupId>
 		<artifactId>fluent-exception-rule</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 	</dependency>
 	
     
@@ -109,6 +103,16 @@
 		<version>6.0.32</version>
 	</dependency>
 	
+	
+	<!--  explicit dependency for AssertJ to override the one needed by fluent-exception library.
+	Be careful to update version, the Fluent Exceptions lib works with [1.7.2,2.2.0].
+	The problems with SoftAssertions were solved by updating to 2.0.0.
+	 -->
+	<dependency>
+		<groupId>org.assertj</groupId>
+		<artifactId>assertj-core</artifactId>
+		<version>2.2.0</version>
+	</dependency>
 	
     
   </dependencies>
