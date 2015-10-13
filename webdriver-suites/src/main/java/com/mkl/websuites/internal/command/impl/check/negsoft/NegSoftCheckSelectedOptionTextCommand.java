@@ -6,12 +6,12 @@ import org.assertj.core.api.AbstractAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.AbstractCheck;
-import com.mkl.websuites.internal.command.impl.check.neg.NegCheckSelectedOptionTextCommand;
+import com.mkl.websuites.internal.command.impl.check.neg.NegCheckSelectOptionTextCommand;
 
 
 @CommandDescriptor(name = "~softCheckSelectOptionText", argumentTypes = {String.class, String.class})
 public class NegSoftCheckSelectedOptionTextCommand extends
-		NegCheckSelectedOptionTextCommand {
+		NegCheckSelectOptionTextCommand {
 
 	public NegSoftCheckSelectedOptionTextCommand(
 			Map<String, String> parameterMap) {

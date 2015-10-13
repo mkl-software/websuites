@@ -18,7 +18,7 @@ import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 
 @CommandDescriptor(name = "checkSelectOptionText", argumentTypes = {String.class, String.class})
-public class CheckSelectedOptionTextCommand extends OperationOnWebElement {
+public class CheckSelectOptionTextCommand extends OperationOnWebElement {
 
 	private static final String SELECTED_TEXT_PARAM = "text";
 
@@ -30,13 +30,13 @@ public class CheckSelectedOptionTextCommand extends OperationOnWebElement {
 	
 	
 	
-	public CheckSelectedOptionTextCommand(Map<String, String> parameterMap) {
+	public CheckSelectOptionTextCommand(Map<String, String> parameterMap) {
 		super(parameterMap);
 	}
 	
 	
 	@SuppressWarnings("serial")
-	public CheckSelectedOptionTextCommand(final String selector, final String expectedText) {
+	public CheckSelectOptionTextCommand(final String selector, final String expectedText) {
 		super(new HashMap<String, String>() {{
 			put("css", selector);
 			put(SELECTED_TEXT_PARAM, expectedText);

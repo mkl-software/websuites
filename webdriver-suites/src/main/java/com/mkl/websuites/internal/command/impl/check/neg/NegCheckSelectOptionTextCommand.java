@@ -7,18 +7,18 @@ import org.assertj.core.api.ObjectArrayAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.AbstractCheck;
-import com.mkl.websuites.internal.command.impl.check.CheckSelectedOptionTextCommand;
+import com.mkl.websuites.internal.command.impl.check.CheckSelectOptionTextCommand;
 
 
 @CommandDescriptor(name = "~checkSelectOptionText", argumentTypes = {String.class, String.class})
-public class NegCheckSelectedOptionTextCommand extends
-		CheckSelectedOptionTextCommand {
+public class NegCheckSelectOptionTextCommand extends
+		CheckSelectOptionTextCommand {
 
-	public NegCheckSelectedOptionTextCommand(Map<String, String> parameterMap) {
+	public NegCheckSelectOptionTextCommand(Map<String, String> parameterMap) {
 		super(parameterMap);
 	}
 
-	public NegCheckSelectedOptionTextCommand(String selector,
+	public NegCheckSelectOptionTextCommand(String selector,
 			String expectedText) {
 		super(selector, expectedText);
 	}

@@ -6,19 +6,19 @@ import org.assertj.core.api.AbstractAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.AbstractCheck;
-import com.mkl.websuites.internal.command.impl.check.CheckSelectedOptionTextCommand;
+import com.mkl.websuites.internal.command.impl.check.CheckSelectOptionTextCommand;
 
 
 
 @CommandDescriptor(name = "softCheckSelectOptionText", argumentTypes = {String.class, String.class})
-public class SoftCheckSelectedOptionTextCommand extends
-		CheckSelectedOptionTextCommand {
+public class SoftCheckSelectOptionTextCommand extends
+		CheckSelectOptionTextCommand {
 
-	public SoftCheckSelectedOptionTextCommand(Map<String, String> parameterMap) {
+	public SoftCheckSelectOptionTextCommand(Map<String, String> parameterMap) {
 		super(parameterMap);
 	}
 
-	public SoftCheckSelectedOptionTextCommand(String selector,
+	public SoftCheckSelectOptionTextCommand(String selector,
 			String expectedText) {
 		super(selector, expectedText);
 	}
