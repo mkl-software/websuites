@@ -49,8 +49,8 @@ Legend:
 (+s~|)	checkElementAttValueMatches		checks if element has an attribute with a value matching regex
 (+s~|)	checkChecked					checks if given checkbox is selected
 (+s~|)	checkSelectOptionText			checks if given select has an option with given display text
-()	checkSelectOptionTextContaining		checks if given select has an option with given display text
-()	checkSelectOptionTextMatching		checks if given select has an option with given display text
+(+s~|)	checkSelectOptionTextContaining	checks if given select has an option with given display text
+(+s~|)	checkSelectOptionTextMatching	checks if given select has an option with given display text
 ()	checkSelectedText					checks if given option in select component is chosen by text
 ()	checkSelectedTextContains					checks if given option in select component is chosen by text
 ()	checkSelectedTextMatches					checks if given option in select component is chosen by text
@@ -118,6 +118,8 @@ deleteCookieNamed
 getCookieValue			name=, target value read into property, e.g. ${cookieValues.#cookieName#}
 
 evaluateJsExpr			evaluates Javascript expression and writes it to a given target property
+
+basicAuthentication		username	password 	- will type credentials using Java Robot
 
 goto
 back
