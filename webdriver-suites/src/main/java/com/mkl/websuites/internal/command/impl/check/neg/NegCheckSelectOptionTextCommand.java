@@ -24,7 +24,7 @@ public class NegCheckSelectOptionTextCommand extends
 	}
 	
 	
-	protected class NegCheckCheckBox extends CheckCheckBox {
+	protected class NegCheckSelectOptionText extends CheckSelectOptionText {
 
 		@Override
 		protected void runAssertion(AbstractAssert<?, ?> assertion,
@@ -33,14 +33,14 @@ public class NegCheckSelectOptionTextCommand extends
 			((ObjectArrayAssert<?>) assertion)
 				.extracting("text")
 				.overridingErrorMessage("Expecting SELECT element picked by selector '%s'"
-						+ " NOT to have option with text '%s'", by, expectedSelectedText)
-				.doesNotContain(expectedSelectedText);
+						+ " NOT to have option with text '%s'", by, expectedSelectText)
+				.doesNotContain(expectedSelectText);
 		}
 	}
 	
 	
 	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckCheckBox();
+		return new NegCheckSelectOptionText();
 	}
 
 }

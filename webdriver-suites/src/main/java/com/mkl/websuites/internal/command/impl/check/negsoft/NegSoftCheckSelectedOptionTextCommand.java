@@ -25,7 +25,7 @@ public class NegSoftCheckSelectedOptionTextCommand extends
 
 	
 	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckCheckBox() {
+		return new NegCheckSelectOptionText() {
 			@Override
 			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
 				return softly.assertThat(args);

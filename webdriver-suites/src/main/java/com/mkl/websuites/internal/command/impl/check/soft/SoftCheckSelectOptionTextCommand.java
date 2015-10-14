@@ -25,7 +25,7 @@ public class SoftCheckSelectOptionTextCommand extends
 
 	
 	protected AbstractCheck defineCheckLogic() {
-		return new CheckCheckBox() {
+		return new CheckSelectOptionText() {
 			@Override
 			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
 				return softly.assertThat(args);

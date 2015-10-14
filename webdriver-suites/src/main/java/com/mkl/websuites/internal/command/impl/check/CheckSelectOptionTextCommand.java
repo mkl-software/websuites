@@ -22,7 +22,7 @@ public class CheckSelectOptionTextCommand extends OperationOnWebElement {
 
 	private static final String SELECTED_TEXT_PARAM = "text";
 
-	protected String expectedSelectedText;
+	protected String expectedSelectText;
 	
 	protected List<WebElement> selectOptions;
 
@@ -45,7 +45,7 @@ public class CheckSelectOptionTextCommand extends OperationOnWebElement {
 	
 	
 	
-	protected class CheckCheckBox extends AbstractCheck {
+	protected class CheckSelectOptionText extends AbstractCheck {
 
 		@Override
 		protected Object[] getAssertionsParameters() {
@@ -65,8 +65,8 @@ public class CheckSelectOptionTextCommand extends OperationOnWebElement {
 			((ObjectArrayAssert<?>) assertion)
 				.extracting("text")
 				.overridingErrorMessage("Expecting SELECT element picked by selector '%s'"
-						+ " to have text '%s' in one of its options", by, expectedSelectedText)
-				.contains(expectedSelectedText);
+						+ " to have text '%s' in one of its options", by, expectedSelectText)
+				.contains(expectedSelectText);
 		}
 	}
 	
@@ -87,7 +87,7 @@ public class CheckSelectOptionTextCommand extends OperationOnWebElement {
 		
 		AbstractCheck checkLogic = defineCheckLogic();
 		
-		expectedSelectedText = parameterMap.get(SELECTED_TEXT_PARAM);
+		expectedSelectText = parameterMap.get(SELECTED_TEXT_PARAM);
 		
 		checkLogic.runStandardCommand();
 		
@@ -96,7 +96,7 @@ public class CheckSelectOptionTextCommand extends OperationOnWebElement {
 
 	
 	protected AbstractCheck defineCheckLogic() {
-		return new CheckCheckBox();
+		return new CheckSelectOptionText();
 	}
 
 
