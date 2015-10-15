@@ -55,14 +55,16 @@ Legend:
 (+s~|)	checkSelectedTextContains		checks if given option in select component is chosen by text
 (+s~|)	checkSelectedTextMatches		checks if given option in select component is chosen by text
 (+s~|)	checkSelectedValue				checks if given option in select component is chosen by index
-()	checkSelectedIndex					checks if given option in select component is chosen by index
+(+s~|)	checkSelectedIndex					checks if given option in select component is chosen by index
 ()	checkCss							check for given element if its CSS attribute has a given value (e.g. background-color)
 ()	checkCssClass						checks if given element has given CSS class
 ()	checkElementVisible
 ()	checkElementHidden			? - maybe only negated version for the command above, or without negations
 ()	checkHeaderContains			checks HTML page haeder section
 ()	checkHeaderMatches			checks HTML page haeder section
-()	checkElementChildCount		checks number of children in given element
+()	checkElementsCount			checks number of direct children in given element
+()	checkSubelementsCount		checks number of elements under given root element
+()	checkElementChildrenCount	checks number of direct children in given element
 ()	checkElementSiblingCount	as above for siblings
 
 selectByValue					selected option in the combobox
