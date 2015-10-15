@@ -6,19 +6,19 @@ import org.assertj.core.api.AbstractAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.AbstractCheck;
-import com.mkl.websuites.internal.command.impl.check.neg.NegCheckSelectSelectedTextCommand;
+import com.mkl.websuites.internal.command.impl.check.neg.NegCheckSelectSelectedTextContainsCommand;
 
 
-@CommandDescriptor(name = "~softCheckSelectedText", argumentTypes = {String.class, String.class})
-public class NegSoftCheckSelectSelectedTextCommand extends
-		NegCheckSelectSelectedTextCommand {
+@CommandDescriptor(name = "~softCheckSelectedTextContains", argumentTypes = {String.class, String.class})
+public class NegSoftCheckSelectSelectedTextContainsCommand extends
+		NegCheckSelectSelectedTextContainsCommand {
 
-	public NegSoftCheckSelectSelectedTextCommand(
+	public NegSoftCheckSelectSelectedTextContainsCommand(
 			Map<String, String> parameterMap) {
 		super(parameterMap);
 	}
 
-	public NegSoftCheckSelectSelectedTextCommand(String selector,
+	public NegSoftCheckSelectSelectedTextContainsCommand(String selector,
 			String expectedText) {
 		super(selector, expectedText);
 	}
@@ -26,7 +26,7 @@ public class NegSoftCheckSelectSelectedTextCommand extends
 	
 	@Override
 	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckSelectSelectedText() {
+		return new NegCheckSelectSelectedTextContains() {
 			@Override
 			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
 				return soft(args);

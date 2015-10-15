@@ -21,7 +21,7 @@ public class CheckSelectSelectedTextCommand extends CheckSelectOptionTextCommand
 	}
 
 	
-	protected class CheckSelectSelectedTextContaining extends AbstractSingleStringCheck {
+	protected class CheckSelectSelectedText extends AbstractSingleStringCheck {
 
 
 		@Override
@@ -54,6 +54,6 @@ public class CheckSelectSelectedTextCommand extends CheckSelectOptionTextCommand
 	
 	@Override
 	protected AbstractCheck defineCheckLogic() {
-		return new CheckSelectSelectedTextContaining();
+		return new CheckSelectSelectedText();
 	}
 }

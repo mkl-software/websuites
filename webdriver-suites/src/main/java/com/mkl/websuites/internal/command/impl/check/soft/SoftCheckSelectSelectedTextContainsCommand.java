@@ -6,17 +6,19 @@ import org.assertj.core.api.AbstractAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.AbstractCheck;
-import com.mkl.websuites.internal.command.impl.check.CheckSelectSelectedTextCommand;
+import com.mkl.websuites.internal.command.impl.check.CheckSelectSelectedTextContainsCommand;
 
 
-@CommandDescriptor(name = "softCheckSelectedText", argumentTypes = {String.class, String.class})
-public class SoftCheckSelectSelectedTextCommand extends CheckSelectSelectedTextCommand {
+@CommandDescriptor(name = "softCheckSelectedTextContains", argumentTypes = {String.class, String.class})
+public class SoftCheckSelectSelectedTextContainsCommand extends
+		CheckSelectSelectedTextContainsCommand {
 
-	public SoftCheckSelectSelectedTextCommand(Map<String, String> parameterMap) {
+	public SoftCheckSelectSelectedTextContainsCommand(
+			Map<String, String> parameterMap) {
 		super(parameterMap);
 	}
 
-	public SoftCheckSelectSelectedTextCommand(String selector,
+	public SoftCheckSelectSelectedTextContainsCommand(String selector,
 			String expectedText) {
 		super(selector, expectedText);
 	}
@@ -24,11 +26,12 @@ public class SoftCheckSelectSelectedTextCommand extends CheckSelectSelectedTextC
 	
 	@Override
 	protected AbstractCheck defineCheckLogic() {
-		return new CheckSelectSelectedText() {
+		return new CheckSelectSelectedTextContains() {
 			@Override
 			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
 				return soft(args);
 			}
 		};
 	}
+
 }

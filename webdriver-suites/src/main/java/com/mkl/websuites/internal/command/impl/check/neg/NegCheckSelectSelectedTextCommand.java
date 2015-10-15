@@ -21,7 +21,7 @@ public class NegCheckSelectSelectedTextCommand extends CheckSelectSelectedTextCo
 		super(selector, expectedText);
 	}
 
-	protected class NegCheckSelectSelectedTextContaining extends CheckSelectSelectedTextContaining {
+	protected class NegCheckSelectSelectedText extends CheckSelectSelectedText {
 
 		@Override
 		protected void runSingleStringAssertion(StringAssert assertion, String string) {
@@ -36,7 +36,7 @@ public class NegCheckSelectSelectedTextCommand extends CheckSelectSelectedTextCo
 	
 	@Override
 	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckSelectSelectedTextContaining();
+		return new NegCheckSelectSelectedText();
 	}
 	
 }
