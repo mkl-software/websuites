@@ -51,10 +51,10 @@ Legend:
 (+s~|)	checkSelectOptionText			checks if given select has an option with given display text
 (+s~|)	checkSelectOptionTextContaining	checks if given select has an option with given display text
 (+s~|)	checkSelectOptionTextMatching	checks if given select has an option with given display text
-()	checkSelectedText					checks if given option in select component is chosen by text
-()	checkSelectedTextContains					checks if given option in select component is chosen by text
-()	checkSelectedTextMatches					checks if given option in select component is chosen by text
-()	checkSelectedValue					checks if given option in select component is chosen by index
+(+s~|)	checkSelectedText				checks if given option in select component is chosen by text
+(+s~|)	checkSelectedTextContains		checks if given option in select component is chosen by text
+(+s~|)	checkSelectedTextMatches		checks if given option in select component is chosen by text
+(+s~|)	checkSelectedValue				checks if given option in select component is chosen by index
 ()	checkSelectedIndex					checks if given option in select component is chosen by index
 ()	checkCss							check for given element if its CSS attribute has a given value (e.g. background-color)
 ()	checkCssClass						checks if given element has given CSS class

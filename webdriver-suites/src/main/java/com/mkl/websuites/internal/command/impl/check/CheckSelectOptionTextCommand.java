@@ -20,7 +20,7 @@ import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 @CommandDescriptor(name = "checkSelectOptionText", argumentTypes = {String.class, String.class})
 public class CheckSelectOptionTextCommand extends OperationOnWebElement {
 
-	private static final String SELECTED_TEXT_PARAM = "text";
+	protected static String SELECTED_TEXT_PARAM = "text";
 
 	protected String expectedSelectText;
 	

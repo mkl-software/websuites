@@ -27,12 +27,16 @@ public class CheckSelectSelectedTextCommand extends CheckSelectOptionTextCommand
 		@Override
 		protected String getStringParam() {
 			for (WebElement elem : allSelectedOptions) {
-				String text = elem.getText();
+				String text = getOptionString(elem);
 				if (text != null && predicate(text)) {
 					return text;
 				}
 			}
 			return "";
+		}
+
+		protected String getOptionString(WebElement elem) {
+			return elem.getText();
 		}
 
 		protected boolean predicate(String text) {
