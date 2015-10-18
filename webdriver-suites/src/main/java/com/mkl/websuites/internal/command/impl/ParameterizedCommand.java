@@ -22,6 +22,11 @@ public abstract class ParameterizedCommand extends BaseCommand {
 	
 	protected Map<String, String> parameterMap;
 	
+	private boolean propertiesAlreadyPopulated = false;
+	
+	protected Map<String, String> propsBeforeSubstitution;
+
+	
 	
 	public ParameterizedCommand(Map<String, String> parameterMap) {
 		this.parameterMap = parameterMap;
@@ -35,6 +40,7 @@ public abstract class ParameterizedCommand extends BaseCommand {
 		if (parameterMap == null) {
 			
 			super.run();
+			
 		} else {
 			
 			log.debug("running parameterized command " + this.getClass() +
@@ -65,6 +71,17 @@ public abstract class ParameterizedCommand extends BaseCommand {
 	
 	
 	protected void resolvePropertyValuesInParameterMap() {
+		
+		// fix for properties not being able to be resolved after first substitution
+		// in the repeat statement
+		if (!propertiesAlreadyPopulated) {
+			// make a copy to allow substitution on next run:
+			propsBeforeSubstitution = new HashMap<>(parameterMap);
+			propertiesAlreadyPopulated = true;
+		} else {
+			parameterMap = new HashMap<>(propsBeforeSubstitution);
+		}
+		
 		Map<String, String> populatedMap = new HashMap<String, String>();
 		for (String key : parameterMap.keySet()) {
 			

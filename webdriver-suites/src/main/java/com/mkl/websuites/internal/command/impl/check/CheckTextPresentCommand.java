@@ -19,7 +19,7 @@ public class CheckTextPresentCommand extends AbstractCheck {
 	protected String text;
 
 	public CheckTextPresentCommand(String text) {
-		this.text = text;
+		this.text = populateStringWithProperties(text);
 	}
 
 	@Override
