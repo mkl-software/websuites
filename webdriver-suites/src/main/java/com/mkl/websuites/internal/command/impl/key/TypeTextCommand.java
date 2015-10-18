@@ -30,7 +30,6 @@ public class TypeTextCommand extends OperationOnWebElement {
 	@Override
 	protected void doOperationOnElement(WebElement elem) {
 		String text = populateStringWithProperties(textToType);
-		elem.clear();
 		elem.sendKeys(text);
 		
 	}
