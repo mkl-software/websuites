@@ -57,7 +57,7 @@ Legend:
 (+s~|)	checkSelectedValue				checks if given option in select component is chosen by index
 (+s~|)	checkSelectedIndex					checks if given option in select component is chosen by index
 (+s~|)	checkCss							check for given element if its CSS attribute has a given value (e.g. background-color)
-()	checkCssClass						checks if given element has given CSS class
+(+s~|)	checkCssClass						checks if given element has given CSS class
 ()	checkElementVisible
 ()	checkElementHidden			? - maybe only negated version for the command above, or without negations
 ()	checkHeaderContains			checks HTML page haeder section
