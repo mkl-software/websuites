@@ -1,4 +1,4 @@
-package com.mkl.websuites.internal.command.impl.navigation;
+package com.mkl.websuites.internal.command;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,9 +16,11 @@ import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 public abstract class OperationOnWebElement extends ParameterizedCommand {
 
 	
-	protected String element;
+	protected String elementSelector;
 	
 	protected By by;
+	
+	protected WebElement foundElement;
 	
 
 	public OperationOnWebElement(Map<String, String> parameterMap) {
@@ -30,7 +32,7 @@ public abstract class OperationOnWebElement extends ParameterizedCommand {
 	protected void runStandardCommand() {
 			
 		parameterMap = new HashMap<String, String>();
-		parameterMap.put("css", populateStringWithProperties(element));
+		parameterMap.put("css", populateStringWithProperties(elementSelector));
 		runCommandWithParameters();
 	}
 	
@@ -77,6 +79,8 @@ public abstract class OperationOnWebElement extends ParameterizedCommand {
 		try {
 			
 			WebElement elem = browser.findElement(by);
+			
+			foundElement = elem;
 			
 			doOperationOnElement(elem);
 			

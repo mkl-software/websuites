@@ -5,7 +5,7 @@ import java.util.Map;
 import org.openqa.selenium.WebElement;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
-import com.mkl.websuites.internal.command.impl.navigation.OperationOnWebElement;
+import com.mkl.websuites.internal.command.OperationOnWebElement;
 
 
 @CommandDescriptor(name = "type", argumentTypes = {String.class, String.class})
@@ -22,7 +22,7 @@ public class TypeTextCommand extends OperationOnWebElement {
 
 	public TypeTextCommand(String element, String textToType) {
 		super(null);
-		super.element = element;
+		super.elementSelector = element;
 		this.textToType = textToType;
 	}
 

@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
-import com.mkl.websuites.internal.command.impl.navigation.OperationOnWebElement;
+import com.mkl.websuites.internal.command.OperationOnWebElement;
 import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 

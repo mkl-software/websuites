@@ -8,7 +8,7 @@ import org.assertj.core.api.StringAssert;
 import org.openqa.selenium.WebElement;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
-import com.mkl.websuites.internal.command.impl.navigation.OperationOnWebElement;
+import com.mkl.websuites.internal.command.OperationOnWebElement;
 import com.mkl.websuites.internal.command.impl.validator.BooleanParamValidator;
 import com.mkl.websuites.internal.command.impl.validator.ParameterValueValidator;
 import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;

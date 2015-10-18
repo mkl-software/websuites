@@ -8,7 +8,7 @@ import org.assertj.core.api.StringAssert;
 import org.openqa.selenium.WebElement;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
-import com.mkl.websuites.internal.command.impl.navigation.OperationOnWebElement;
+import com.mkl.websuites.internal.command.OperationOnWebElement;
 import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 
@@ -22,8 +22,6 @@ public class CheckElementAttributeCommand extends OperationOnWebElement {
 	
 	protected String actualAttributeValue;
 
-	protected WebElement foundElement;
-	
 	
 	public CheckElementAttributeCommand(Map<String, String> parameterMap) {
 		super(parameterMap);
@@ -65,7 +63,6 @@ public class CheckElementAttributeCommand extends OperationOnWebElement {
 		
 		inputAttributeName = parameterMap.get(ATT_NAME_PARAM);
 		actualAttributeValue = elem.getAttribute(inputAttributeName);
-		foundElement = elem;
 		
 		AbstractCheck checkLogic = defineCheckLogic();
 		
