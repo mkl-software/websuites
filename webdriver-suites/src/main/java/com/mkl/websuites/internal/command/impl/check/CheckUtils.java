@@ -1,5 +1,7 @@
 package com.mkl.websuites.internal.command.impl.check;
 
+import java.util.regex.Pattern;
+
 import org.assertj.core.api.SoftAssertions;
 
 public class CheckUtils {
@@ -10,6 +12,12 @@ public class CheckUtils {
 		softAssertion.assertThat(false)
 			.overridingErrorMessage(message)
 			.isTrue();
+	}
+	
+	
+	public static Pattern patternOf(String text) {
+		
+		return Pattern.compile(text, Pattern.DOTALL);
 	}
 
 }

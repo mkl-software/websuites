@@ -34,10 +34,10 @@ public class CheckHeaderContainsCommand extends AbstractSingleStringCheck {
 
 
 	@Override
-	protected void runSingleStringAssertion(StringAssert assertThatHeader, String title) {
+	protected void runSingleStringAssertion(StringAssert assertThatHeader, String header) {
 		
 		assertThatHeader
-			.overridingErrorMessage("Expecting web page header to contain '%s', but was '%s'", expectedHeader, title)
+			.overridingErrorMessage("Expecting web page header to contain '%s', but was '%s'", expectedHeader, header)
 			.contains(expectedHeader);
 	}
 

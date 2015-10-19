@@ -60,8 +60,8 @@ Legend:
 (+s~|)	checkCssClass					checks if given element has given CSS class
 (+s~|)	checkElementVisible				checks "visibility" CSS property to be "visible"
 (+s~|)	checkElementHidden				checks "display" CSS property to be "none"
-()	checkHeaderContains			checks HTML page haeder section
-()	checkHeaderMatches			checks HTML page haeder section
+(+s~|)	checkHeaderContains				checks HTML page haeder section
+(+s~|)	checkHeaderMatches				checks HTML page haeder section
 ()	checkElementsCount			checks number of direct children in given element
 ()	checkSubelementsCount		checks number of elements under given root element
 ()	checkElementChildrenCount	checks number of direct children in given element
