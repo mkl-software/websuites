@@ -16,10 +16,10 @@ import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 public class CheckCssClassCommand extends OperationOnWebElement {
 
 	
-	protected static final String CSS_CLASS_ATTR = "cssAttr";
+	protected static final String CSS_CLASS_ATTR = "class";
 
 	protected String actualCssClassNames;
-	protected String cssClassName;
+	protected String expectedCssClassName;
 
 	
 	public CheckCssClassCommand(Map<String, String> parameterMap) {
@@ -45,8 +45,8 @@ public class CheckCssClassCommand extends OperationOnWebElement {
 			
 			assertion
 				.overridingErrorMessage("Expecting web page element with selector '%s'"
-						+ " to have a CSS class '%s', but it has classes '%s'", by, cssClassName, actualCssClassNames)
-				.contains(cssClassName);
+						+ " to have a CSS class '%s', but it has classes '%s'", by, expectedCssClassName, actualCssClassNames)
+				.contains(expectedCssClassName);
 		}
 		
 		@Override
@@ -60,7 +60,7 @@ public class CheckCssClassCommand extends OperationOnWebElement {
 	@Override
 	protected void doOperationOnElement(WebElement elem) {
 		
-		cssClassName = parameterMap.get(CSS_CLASS_ATTR);
+		expectedCssClassName = parameterMap.get(CSS_CLASS_ATTR);
 		
 		actualCssClassNames = elem.getAttribute("class");
 		

@@ -55,10 +55,10 @@ Legend:
 (+s~|)	checkSelectedTextContains		checks if given option in select component is chosen by text
 (+s~|)	checkSelectedTextMatches		checks if given option in select component is chosen by text
 (+s~|)	checkSelectedValue				checks if given option in select component is chosen by index
-(+s~|)	checkSelectedIndex					checks if given option in select component is chosen by index
-(+s~|)	checkCss							check for given element if its CSS attribute has a given value (e.g. background-color)
-(+s~|)	checkCssClass						checks if given element has given CSS class
-()	checkElementVisible
+(+s~|)	checkSelectedIndex				checks if given option in select component is chosen by index
+(+s~|)	checkCss						check for given element if its CSS attribute has a given value (e.g. background-color)
+(+s~|)	checkCssClass					checks if given element has given CSS class
+(+s~|)	checkElementVisible
 ()	checkElementHidden			? - maybe only negated version for the command above, or without negations
 ()	checkHeaderContains			checks HTML page haeder section
 ()	checkHeaderMatches			checks HTML page haeder section

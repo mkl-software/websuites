@@ -29,8 +29,8 @@ public class NegCheckCssClassCommand extends CheckCssClassCommand {
 			
 			assertion
 				.overridingErrorMessage("Expecting web page element with selector '%s' NOT to have a CSS class '%s', "
-						+ "but it has classes '%s'", by, cssClassName, actualCssClassNames)
-				.doesNotContain(cssClassName);
+						+ "but it has classes '%s'", by, expectedCssClassName, actualCssClassNames)
+				.doesNotContain(expectedCssClassName);
 		}
 	}
 	
