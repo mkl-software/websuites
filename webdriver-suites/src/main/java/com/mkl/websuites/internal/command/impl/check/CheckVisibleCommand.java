@@ -14,14 +14,9 @@ import com.mkl.websuites.internal.command.OperationOnWebElement;
 public class CheckVisibleCommand extends OperationOnWebElement {
 
 	
-
-	protected boolean isVisible;
-
-	
 	public CheckVisibleCommand(Map<String, String> parameterMap) {
 		super(parameterMap);
 	}
-
 
 	@SuppressWarnings("serial")
 	public CheckVisibleCommand(final String selector) {

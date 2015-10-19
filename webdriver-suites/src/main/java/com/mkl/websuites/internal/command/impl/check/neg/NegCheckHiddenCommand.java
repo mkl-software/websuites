@@ -6,41 +6,41 @@ import org.assertj.core.api.StringAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.AbstractCheck;
-import com.mkl.websuites.internal.command.impl.check.CheckVisibleCommand;
+import com.mkl.websuites.internal.command.impl.check.CheckHiddenCommand;
 
 
-@CommandDescriptor(name = "~checkVisible", argumentTypes = {String.class})
-public class NegCheckVisibleCommand extends CheckVisibleCommand {
+@CommandDescriptor(name = "~checkHidden", argumentTypes = {String.class})
+public class NegCheckHiddenCommand extends CheckHiddenCommand {
 
-	public NegCheckVisibleCommand(Map<String, String> parameterMap) {
+	public NegCheckHiddenCommand(Map<String, String> parameterMap) {
 		super(parameterMap);
 	}
 
-	public NegCheckVisibleCommand(String selector) {
+	public NegCheckHiddenCommand(String selector) {
 		super(selector);
 	}
-
 	
-	protected class NegCheckVisible extends CheckVisible {
+	protected class NegCheckHidden extends CheckHidden {
 		
 		@Override
 		protected void runSingleStringAssertion(StringAssert assertion,
-				String visibilityValue) {
+				String displayValue) {
 			
 			assertion
 				.overridingErrorMessage("Expecting web page element with selector '%s'"
-						+ " NOT to be visible", by)
-				.isEqualTo("hidden");
+						+ " NOT to have property 'display: none;'", by)
+				.isNotEqualTo("none");
 		}
 		
 		@Override
 		protected String getStringParam() {
-			return foundElement.getCssValue("visibility");
+			return foundElement.getCssValue("display");
 		}
 	}
 	
 	
 	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckVisible();
-	}	
+		return new NegCheckHidden();
+	}
+
 }
