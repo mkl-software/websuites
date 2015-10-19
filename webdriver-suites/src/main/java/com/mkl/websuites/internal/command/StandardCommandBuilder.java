@@ -188,7 +188,7 @@ public class StandardCommandBuilder implements CommandBuilder {
 			
 		} catch (NoSuchMethodException | SecurityException e) {
 			
-			throw new WebSuitesException("Cannot find constructor for command + "  +
+			throw new WebSuitesException("Cannot find constructor for command "  +
 					commandName + " with annotated argument list: " + argumentTypes);
 		}
 	}
@@ -257,9 +257,8 @@ public class StandardCommandBuilder implements CommandBuilder {
 				try {
 					argumentValues.add(argType.getMethod("valueOf", String.class).invoke(null, argument));
 				} catch (Exception e) {
-					// will never occur!
-					throw new WebSuitesException("something wrong - cannot cast value of argument "
-					+ argument + " to type " + argType + " with standard valueOf() call");
+					throw new WebSuitesException("Error while converting command parameter: cannot cast value "
+							+ "of argument '" + argument + "' to type " + argType + " with standard valueOf() call");
 				}
 			}
 		}

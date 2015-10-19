@@ -62,7 +62,7 @@ Legend:
 (+s~|)	checkElementHidden				checks "display" CSS property to be "none"
 (+s~|)	checkHeaderContains				checks HTML page haeder section
 (+s~|)	checkHeaderMatches				checks HTML page haeder section
-()	checkElementsCount			checks number of direct children in given element
+(+s~|)	checkElementsCount			checks number of all elements matching given selector
 ()	checkSubelementsCount		checks number of elements under given root element
 ()	checkElementChildrenCount	checks number of direct children in given element
 ()	checkElementSiblingCount	as above for siblings
@@ -110,6 +110,7 @@ ctrlAltClick
 shiftAltClick
 dragAndDrop				from=source, to=target
 
++type
 press					press given key or key combination separated by "+" (use literals for characters)
 keyDown
 keyUp
