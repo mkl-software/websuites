@@ -63,7 +63,7 @@ Legend:
 (+s~|)	checkHeaderContains				checks HTML page haeder section
 (+s~|)	checkHeaderMatches				checks HTML page haeder section
 (+s~|)	checkElementsCount			checks number of all elements matching given selector
-()	checkSubelementsCount		checks number of elements under given root element
+(+s~|)	checkSubelementsCount		checks number of elements under given root element
 ()	checkElementChildrenCount	checks number of direct children in given element
 ()	checkElementSiblingCount	as above for siblings
 
