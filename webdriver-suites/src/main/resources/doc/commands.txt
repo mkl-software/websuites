@@ -62,10 +62,10 @@ Legend:
 (+s~|)	checkElementHidden				checks "display" CSS property to be "none"
 (+s~|)	checkHeaderContains				checks HTML page haeder section
 (+s~|)	checkHeaderMatches				checks HTML page haeder section
-(+s~|)	checkElementsCount			checks number of all elements matching given selector
-(+s~|)	checkSubelementsCount		checks number of elements under given root element
-()	checkElementChildrenCount	checks number of direct children in given element
-()	checkElementSiblingCount	as above for siblings
+(+s~|)	checkElementsCount				checks number of all elements matching given selector
+(+s~|)	checkSubelementsCount			checks number of elements under given root element
+(+s~|)	checkElementChildrenCount		checks number of direct children in given element
+(+s~|)	checkElementSiblingCount	as above for siblings
 
 selectByValue					selected option in the combobox
 selectByVisibleText
