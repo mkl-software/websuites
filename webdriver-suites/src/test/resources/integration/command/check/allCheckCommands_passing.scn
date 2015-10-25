@@ -1,0 +1,568 @@
+
+#  Integrations test for all check commands with all versions. All commands below
+#  should be passing.
+
+
+goto	http://localhost:90/integration/commands/check/allChecks.html
+
+
+check	div.header
+check	#textNode
+check	tagName=select
+check	id=withBolded
+check	xpath=//div
+check	linkText=this is a link
+check	partialLinkText=link
+check	className=bolded
+check	css=input[type=checkbox]
+~check	#non-existing
+~softCheck	.strangeClass
+~softCheck	tagName=h2
+softCheck	div div p
+softCheck	tagName=span
+checkAllSoft
+
+checkTitle	Test title full text
+~checkTitle	it's not a title
+softCheckTitle	Test title full text
+~softCheckTitle	it's not a title
+checkAllSoft
+
+
+checkTitleContains	title
+checkTitleContains	text
+checkTitleContains	Test
+~checkTitleContains	bazaar
+~checkTitleContains	not
+softCheckTitleContains	text
+softCheckTitleContains	Test
+~softCheckTitleContains	not
+~softCheckTitleContains	bazaar
+checkAllSoft
+
+checkTitleMatches	Test.*
+checkTitleMatches	.+text
+checkTitleMatches	T.*t.t.*.t
+~checkTitleMatches	P.*
+~checkTitleMatches	.*e
+softCheckTitleMatches	Test.*
+softCheckTitleMatches	T.*t.t.*.t
+~softCheckTitleMatches	R.*
+~softCheckTitleMatches	.*K
+checkAllSoft
+
+checkText	dynamic
+checkText	parag
+checkText	lorem ipsum
+checkText	text
+checkText	Option 3
+~checkText	Option 5
+~checkText	Test title full text
+softCheckText	Option 2
+softCheckText	custom
+~softCheckText	Test title full text
+checkAllSoft
+
+
+checkUrl	http://localhost:90/integration/commands/check/allChecks.html
+~checkUrl	https://localhost:90/integration/commands/check/allChecks.html
+softCheckUrl	http://localhost:90/integration/commands/check/allChecks.html
+~softCheckUrl	https://localhost:90/integration/commands/check/allChecks.html
+checkAllSoft
+
+
+checkUrlContains	http
+checkUrlContains	allChecks
+checkUrlContains	.html
+~checkUrlContains	ftp
+~checkUrlContains	unit
+~checkUrlContains	.xml
+softCheckUrlContains	integration
+softCheckUrlContains	commands
+softCheckUrlContains	.html
+~softCheckUrlContains	ftp
+~softCheckUrlContains	unit
+~softCheckUrlContains	.xml
+checkAllSoft
+
+
+checkUrlMatches	https?://.*
+checkUrlMatches	.*/integration/.*
+checkUrlMatches	.*\.html
+~checkUrlMatches	.*/unit/.*
+~checkUrlMatches	.*\.xml
+softCheckUrlMatches	https?://.*
+softCheckUrlMatches	.*/integration/.*
+softCheckUrlMatches	.*\.html
+~softCheckUrlMatches	.*/unit/.*
+~softCheckUrlMatches	.*\.xml
+checkAllSoft
+
+checkPageSourceContains	<title>
+checkPageSourceContains	fillIt
+checkPageSourceContains	select
+checkPageSourceContains	function
+checkPageSourceContains	</html>
+softCheckPageSourceContains	Timeout
+softCheckPageSourceContains	ng-sample-att
+~softCheckPageSourceContains	bazaar
+~softCheckPageSourceContains	yoda
+checkAllSoft
+
+
+checkPageSourceMatches	<html>?.*</html>
+checkPageSourceMatches	.*fillIt.*
+checkPageSourceMatches	.*s....t.*
+checkPageSourceMatches	.*</html>
+~checkPageSourceMatches	bazaar.*
+softCheckPageSourceMatches	.*Timeout.*
+softCheckPageSourceMatches	.*id[1-4].*
+~softCheckPageSourceMatches	bazaar.*
+~softCheckPageSourceMatches	\d+
+checkAllSoft
+
+
+checkTextMatching	lorem .*m
+checkTextMatching	Option \d
+~checkTextMatching	Option \D
+~checkTextMatching	Test title full text
+softCheckTextMatching	Option 2
+softCheckTextMatching	custom.*
+~softCheckTextMatching	.*custom
+~softCheckTextMatching	Test title full text
+checkAllSoft
+
+
+checkElementText	xpath=//div/p[1]	text=this is a paragraph
+checkElementText	p#textNode	lorem ipsum
+~checkElementText	option[value=id1]	Option 2
+softCheckElementText	xpath=//div/p[1]	text=this is a paragraph
+softCheckElementText	p#withBolded	bolded text
+~softCheckElementText	option[value=id3]	Option 4
+checkAllSoft
+
+
+checkElementTextContains	xpath=//div/p[1]	text=paragraph
+checkElementTextContains	p#textNode	lorem
+checkElementTextContains	option[value=id1]	Option
+~checkElementTextContains	option[value=id1]	2
+softCheckElementTextContains	xpath=//div/p[1]	text=this is
+softCheckElementTextContains	p#withBolded	bolded
+~softCheckElementTextContains	option[value=id3]	4
+softCheckElementTextContains	option[value=id3]	Option
+checkAllSoft
+
+
+checkElementTextMatches	css=p#textNode	text=.*lorem.*
+~checkElementTextMatches	css=p#textNode	text=.*lorem
+softCheckElementTextMatches	css=p#textNode	text=.*m
+softCheckElementTextMatches	css=p#textNode	text=l.+ 
+~softCheckElementTextMatches	css=p#textNode	text=k.+ 
+softCheckElementTextMatches	select option	Option \d 
+~softCheckElementTextMatches	select option	Option \D 
+checkAllSoft
+
+
+checkElementInnerHTML	#withBolded	<b>bolded text</b>
+~checkElementInnerHTML	#withBolded	bolded text
+softCheckElementInnerHTML	#withBolded	<b>bolded text</b>
+~softCheckElementInnerHTML	#withBolded	bolded text
+softCheckElementInnerHTML	xpath=//option[@value="id1"]	innerHTML=Option 1
+~softCheckElementInnerHTML	input	something
+checkAllSoft
+
+
+checkElementInnerHTMLMatches	#withBolded	<(.+?)>.*</\1>
+checkElementInnerHTMLMatches	div.header	.*<select>?.*</select>.*
+~checkElementInnerHTMLMatches	div.header	.*<h2>?.*</h2>.*
+softCheckElementInnerHTMLMatches	#withBolded	<(.+?)>.*</\1>
+softCheckElementInnerHTMLMatches	#withBolded	<b>.*</b>
+softCheckElementInnerHTMLMatches	#withBolded	.+
+~softCheckElementInnerHTMLContains	#withBolded	test
+~softCheckElementInnerHTMLContains	body	bazaar
+checkAllSoft
+
+
+
+checkLinkText	this is a link
+~checkLinkText	this is not a link
+softCheckLinkText	this is a link
+~softCheckLinkText	this is not a link
+checkAllSoft
+
+
+checkLinkTextContaining	this is a link
+checkLinkTextContaining	a link
+checkLinkTextContaining	is
+~checkLinkTextContaining	isn't
+softCheckLinkTextContaining	this is a link
+softCheckLinkTextContaining	this is a
+~softCheckLinkTextContaining	bazaar
+checkAllSoft
+
+
+checkLinkTextMatching	.*link
+checkLinkTextMatching	this.*
+~checkLinkTextMatching	/d+
+softCheckLinkTextMatching	(\w+ ?)+
+softCheckLinkTextMatching	t..s .. . l..k
+~softCheckLinkTextMatching	bazaar
+checkAllSoft
+
+
+checkLinkHref	http://onet.pl/
+~checkLinkHref	www.wp.pl
+softCheckLinkHref	http://onet.pl/
+~softCheckLinkHref	interia.pl
+checkAllSoft
+
+
+checkLinkHrefContaining	onet
+checkLinkHrefContaining	pl
+checkLinkHrefContaining	http
+~checkLinkHrefContaining	https
+softCheckLinkHrefContaining	one
+softCheckLinkHrefContaining	/
+~softCheckLinkHrefContaining	.xml
+checkAllSoft
+
+
+checkLinkHrefMatching	.*onet.*
+checkLinkHrefMatching	https?.*
+checkLinkHrefMatching	.*\.pl.*
+softCheckLinkHrefMatching	.*/.*/?
+softCheckLinkHrefMatching	....://.*
+~softCheckLinkHrefMatching	ftp://.*/
+checkAllSoft
+
+
+checkAttributeName	ng-sample-att
+checkAttributeName	class
+checkAttributeName	selected
+~checkAttributeName	non-existing
+~checkAttributeName	lang
+softCheckAttributeName	multiple
+softCheckAttributeName	another-att
+~softCheckAttributeName	bazaar
+~softCheckAttributeName	hint
+checkAllSoft
+
+
+checkAttributeValue	sample value
+checkAttributeValue	another value
+checkAttributeValue	checkbox
+~checkAttributeValue	button
+~checkAttributeValue	unselected
+softCheckAttributeValue	id2
+softCheckAttributeValue	header
+~softCheckAttributeValue	bazaar
+~softCheckAttributeValue	textingNode
+checkAllSoft
+
+
+checkAttributeValueContaining	value
+checkAttributeValueContaining	another
+checkAttributeValueContaining	box
+~checkAttributeValueContaining	xxx
+~checkAttributeValueContaining	https
+softCheckAttributeValueContaining	id2
+softCheckAttributeValueContaining	header
+~softCheckAttributeValueContaining	id5
+~softCheckAttributeValueContaining	node
+checkAllSoft
+
+
+checkAttributeValueMatching	.*value
+checkAttributeValueMatching	another.*
+checkAttributeValueMatching	check..x
+~checkAttributeValueMatching	xxx..
+checkAttributeValueMatching	https?://.*
+~checkAttributeValueMatching	https://.*
+softCheckAttributeValueMatching	id\d
+softCheckAttributeValueMatching	head..
+~softCheckAttributeValueMatching	id\D
+~softCheckAttributeValueMatching	fill
+checkAllSoft
+
+
+checkElementAttr	#invisible	style
+checkElementAttr	#ng-elem	ng-sample-att
+checkElementAttr	#ng-elem	another-att
+~checkElementAttr	#ng-elem	att
+~checkElementAttr	a	style
+softCheckElementAttr	#sampleCheckboxChecked	type
+softCheckElementAttr	#sampleCheckboxChecked	checked
+softCheckElementAttr	#selectElement	multiple
+softCheckElementAttr	option	value
+~softCheckElementAttr	option	type
+~checkElementAttr	#ng-elem	non-existing
+checkAllSoft
+
+
+checkElementAttrValue	#invisible	style	visibility: hidden; display: none;
+checkElementAttrValue	#ng-elem	ng-sample-att	sample value
+checkElementAttrValue	#ng-elem	another-att		another value
+~checkElementAttrValue	#ng-elem	another-att		just value
+~checkElementAttrValue	a	href	http://onet.com
+softCheckElementAttrValue	#sampleCheckboxChecked	type	checkbox
+softCheckElementAttrValue	#sampleCheckboxChecked	checked	true
+softCheckElementAttrValue	#selectElement	multiple	true
+softCheckElementAttrValue	xpath=//option[1]	attName=value	attValue=id1
+~softCheckElementAttrValue	option[value=id2]	value	id3
+~checkElementAttrValue	#sampleCheckboxUnchecked	checked		true
+checkAllSoft
+
+
+checkElementAttrValueContains	#invisible	style	visibility
+checkElementAttrValueContains	#ng-elem	ng-sample-att	value
+checkElementAttrValueContains	#ng-elem	another-att		value
+~checkElementAttrValueContains	#ng-elem	another-att		just
+~checkElementAttrValueContains	a	href	interia
+softCheckElementAttrValueContains	#sampleCheckboxChecked	type	box
+softCheckElementAttrValueContains	xpath=//option[1]	attName=value	attValue=id
+softCheckElementAttrValueContains	xpath=//option[1]	attName=value	attValue=1
+~softCheckElementAttrValueContains	xpath=//option[1]	attName=value	attValue=2
+~softCheckElementAttrValueContains	option[value=id2]	value	3
+checkAllSoft
+
+
+checkElementAttrValueMatches	#invisible	style	(.*?: ?.*?; ?)+
+checkElementAttrValueMatches	#ng-elem	ng-sample-att	.*value
+checkElementAttrValueMatches	#ng-elem	another-att		another.*
+~checkElementAttrValueMatches	#ng-elem	another-att		value.*
+~checkElementAttrValueMatches	a	href	https://.*
+softCheckElementAttrValueMatches	#sampleCheckboxChecked	type	.*x
+softCheckElementAttrValueMatches	xpath=//option[1]	attName=value	attValue=id\d
+softCheckElementAttrValueMatches	option[value=id2]	value	..2
+~softCheckElementAttrValueMatches	option[value=id2]	value	..3
+checkAllSoft
+
+
+checkCheckboxSelected	#sampleCheckboxChecked
+~checkCheckboxSelected	#sampleCheckboxUnchecked
+softCheckCheckboxSelected	#sampleCheckboxChecked
+~softCheckCheckboxSelected	#sampleCheckboxUnchecked
+checkAllSoft
+
+
+checkSelectOptionText	#selectElement	Option 1
+checkSelectOptionText	#selectElement	Option 2
+~checkSelectOptionText	#selectElement	Option 5
+softCheckSelectOptionText	#anotherSelect	Option 1
+softCheckSelectOptionText	#anotherSelect	Option 2
+~softCheckSelectOptionText	#anotherSelect	Option 5
+checkAllSoft
+
+
+checkSelectOptionTextContaining	#selectElement	Option
+checkSelectOptionTextContaining	#selectElement	2
+~checkSelectOptionTextContaining	#selectElement	5
+softCheckSelectOptionTextContaining	#anotherSelect	1
+softCheckSelectOptionTextContaining	#anotherSelect	ion
+~softCheckSelectOptionTextContaining	#anotherSelect	7
+checkAllSoft
+
+
+checkSelectOptionTextMatching	#selectElement	Option \d
+checkSelectOptionTextMatching	#selectElement	.*3
+~checkSelectOptionTextMatching	#selectElement	Option \D
+softCheckSelectOptionTextMatching	#anotherSelect	O.*3
+softCheckSelectOptionTextMatching	#anotherSelect	Opti.n \d+
+~softCheckSelectOptionTextMatching	#anotherSelect	Option \W
+checkAllSoft
+
+
+checkSelectedText	#selectElement	Option 1
+checkSelectedText	#selectElement	Option 3
+checkSelectedText	#anotherSelect	Option 2
+~checkSelectedText	#anotherSelect	Option 1
+~checkSelectedText	#selectElement	Option 2
+softCheckSelectedText	#selectElement	Option 1
+softCheckSelectedText	#selectElement	Option 3
+softCheckSelectedText	#anotherSelect	Option 2
+~softCheckSelectedText	#anotherSelect	Option 3
+~softCheckSelectedText	#selectElement	Option 4
+checkAllSoft
+
+
+checkSelectedTextContains	#selectElement	Option 1
+checkSelectedTextContains	#selectElement	3
+checkSelectedTextContains	#anotherSelect	2
+~checkSelectedTextContains	#anotherSelect	3
+~checkSelectedTextContains	#selectElement	Option 2
+softCheckSelectedTextContains	#selectElement	Option
+softCheckSelectedTextContains	#selectElement	3
+~softCheckSelectedTextContains	#anotherSelect	3
+~softCheckSelectedTextContains	#selectElement	4
+checkAllSoft
+
+
+checkSelectedTextMatches	#selectElement	Option \d
+checkSelectedTextMatches	#selectElement	.*3
+checkSelectedTextMatches	#anotherSelect	O.*2
+~checkSelectedTextMatches	#anotherSelect	.*3
+~checkSelectedTextMatches	#selectElement	Option 2
+softCheckSelectedTextMatches	#selectElement	Option 1
+softCheckSelectedTextMatches	#selectElement	.*3
+~softCheckSelectedTextMatches	#anotherSelect	Option /D
+~softCheckSelectedTextMatches	#selectElement	.*4
+checkAllSoft
+
+
+checkSelectedValue	#selectElement	id1
+checkSelectedValue	#selectElement	id3
+checkSelectedValue	#anotherSelect	id2
+~checkSelectedValue	#selectElement	id2
+~checkSelectedValue	#anotherSelect	id1
+softCheckSelectedValue	#selectElement	id1
+softCheckSelectedValue	#selectElement	id3
+~softCheckSelectedValue	#selectElement	id2
+~softCheckSelectedValue	#anotherSelect	id1
+checkAllSoft
+
+
+checkSelectedIndex	#selectElement	0
+checkSelectedIndex	#selectElement	2
+checkSelectedIndex	#anotherSelect	1
+~checkSelectedIndex	#selectElement	1
+~checkSelectedIndex	#anotherSelect	2
+softCheckSelectedIndex	#selectElement	0
+softCheckSelectedIndex	#selectElement	2
+~softCheckSelectedIndex	#selectElement	3
+~softCheckSelectedIndex	#anotherSelect	0
+checkAllSoft
+
+
+# Check mix of checkSelected... commands to test thoroughly parameter field overriding:
+checkSelectedTextMatches	#selectElement	Option \d
+checkSelectedValue	#selectElement	id1
+checkSelectedTextMatches	#selectElement	Option \d
+checkSelectedIndex	#selectElement	0
+checkSelectedValue	#selectElement	id1
+checkSelectedTextMatches	#selectElement	Option \d
+checkSelectedValue	#selectElement	id1
+checkSelectedIndex	#selectElement	0
+checkSelectedIndex	#selectElement	0
+checkSelectedValue	#selectElement	id1
+checkSelectedIndex	#selectElement	0
+checkSelectedTextMatches	#selectElement	Option \d
+checkSelectedIndex	#selectElement	0
+checkSelectedIndex	#selectElement	0
+checkSelectedTextMatches	#selectElement	Option \d
+checkSelectedTextMatches	#selectElement	Option \d
+checkSelectedValue	#selectElement	id1
+checkSelectedValue	#selectElement	id1
+
+checkCss	p#textNode	margin-left	40px
+checkCss	body	padding-bottom	15px
+checkCss	p#textNode	color	rgba(128, 0, 0, 1)
+~checkCss	p#invisible	display	block
+softCheckCss	p#textNode	margin-left	40px
+softCheckCss	p#invisible	margin-left	40px
+softCheckCss	p#textNode	margin-left	40px
+softCheckCss	p#WithBolded	margin-left	40px
+softCheckCss	body	padding-bottom	15px
+softCheckCss	p#textNode	color	rgba(128, 0, 0, 1)
+~softCheckCss	p#invisible	display	block
+checkAllSoft
+
+
+checkCssClass	#textNode	main
+checkCssClass	id=textNode	class=bolded
+checkCssClass	css=#textNode	class=another
+checkCssClass	#textNode	nice
+~checkCssClass	#textNode	italic
+softCheckCssClass	#textNode	main
+softCheckCssClass	id=textNode	class=bolded
+softCheckCssClass	css=#textNode	class=another
+softCheckCssClass	#textNode	nice
+~softCheckCssClass	#textNode	underline
+checkAllSoft
+
+
+checkVisible	#textNode
+checkVisible	id=selectElement
+checkVisible	css=div.header
+~checkVisible	css=#invisible
+softCheckVisible	#textNode
+softCheckVisible	id=selectElement
+softCheckVisible	css=div.header
+~softCheckVisible	css=#invisible
+checkAllSoft
+
+
+checkHidden	#invisible
+~checkHidden	id=selectElement
+~checkHidden	css=div.header
+softCheckHidden	#invisible
+~softCheckHidden	id=selectElement
+~softCheckHidden	css=div.header
+checkAllSoft
+
+
+checkHeaderContains	meta
+checkHeaderContains	setTimeout
+checkHeaderContains	background-color
+~checkHeaderContains	display
+softCheckHeaderContains	meta
+softCheckHeaderContains	setTimeout
+softCheckHeaderContains	background-color
+~softCheckHeaderContains	font
+checkAllSoft
+
+
+checkHeaderMatches	\s*<.*title.*
+~checkHeaderMatches	.*timeout.*
+~checkHeaderMatches	.*dackground.*
+~softCheckHeaderMatches	\s*<.*Title.*
+softCheckHeaderMatches	.*Timeout.*
+~softCheckHeaderMatches	.*dackground.*
+checkAllSoft
+
+
+checkElementsCount	p	4
+checkElementsCount	body	1
+checkElementsCount	span	3
+~checkElementsCount	span	4
+checkElementsCount	css=p.nice	count=1
+softCheckElementsCount	p	4
+softCheckElementsCount	body	1
+~softCheckElementsCount	body	2
+softCheckElementsCount	span	3
+softCheckElementsCount	css=p.nice	count=1
+checkAllSoft
+
+
+checkSubelementsCount	#selectElement	option	4
+checkSubelementsCount	#anotherSelect	option	3
+checkSubelementsCount	div.header	div	1
+~checkSubelementsCount	#selectElement	option	3
+~checkSubelementsCount	#selectElement	option[value=id1]	2
+~checkSubelementsCount	css=head	subElementsCss=script	count=2
+softCheckSubelementsCount	#selectElement	option	4
+softCheckSubelementsCount	#anotherSelect	option	3
+softCheckSubelementsCount	div.header	div	1
+~softCheckSubelementsCount	#selectElement	option	3
+~softCheckSubelementsCount	#selectElement	option[value=id1]	2
+~softCheckSubelementsCount	css=head	subElementsCss=script	count=2
+checkAllSoft
+
+
+checkElementChildrenCount	#selectElement	4
+~checkElementChildrenCount	#anotherSelect	5
+~checkElementChildrenCount	tagName=body	count=2
+~checkElementChildrenCount	div.header	2
+softCheckElementChildrenCount	#selectElement	4
+~softCheckElementChildrenCount	#anotherSelect	5
+~softCheckElementChildrenCount	tagName=body	count=2
+~softCheckElementChildrenCount	div.header	2
+checkAllSoft
+
+
+checkElementSiblingCount	#fillIt	12
+~checkElementSiblingCount	#selectElement option	4
+~checkElementSiblingCount	title	4
+softCheckElementSiblingCount	#fillIt	12
+~softCheckElementSiblingCount	#selectElement option	4
+~softCheckElementSiblingCount	title	4
+checkAllSoft

@@ -29,8 +29,8 @@ public class CheckElementInnerHtmlMatchesCommand extends
 			
 			assertion
 				.overridingErrorMessage("Expecting inner HTML in the web page element with selector '%s'"
-						+ " to match regexp '%s', but it was '%s'", by, expectedInnerHTML, elementText)
-				.matches(expectedInnerHTML);
+						+ " to match regexp '%s', but it was\n%s", by, expectedInnerHTML, elementText)
+				.matches(CheckUtils.patternOf(expectedInnerHTML));
 		}
 	}
 	

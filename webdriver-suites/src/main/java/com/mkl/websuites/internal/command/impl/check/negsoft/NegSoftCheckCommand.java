@@ -18,8 +18,11 @@ public class NegSoftCheckCommand extends NegCheckCommand {
 		super(elemement);
 	}
 	
+	
+	// can't override "fail" method because then in OperationOnWebElement the
+	// fail would be called from here and it can't be soft.
 	@Override
-	protected void fail(String message) {
+	protected void localFail(String message) {
 		CheckUtils.softFail(softly, message);
 	}
 	

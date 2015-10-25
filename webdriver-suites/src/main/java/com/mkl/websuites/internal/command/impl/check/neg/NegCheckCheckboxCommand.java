@@ -9,15 +9,15 @@ import com.mkl.websuites.internal.command.impl.check.AbstractCheck;
 import com.mkl.websuites.internal.command.impl.check.CheckCheckboxCommand;
 
 
-@CommandDescriptor(name = "~checkCheckbox", argumentTypes = {String.class, String.class})
+@CommandDescriptor(name = "~checkCheckboxSelected", argumentTypes = {String.class})
 public class NegCheckCheckboxCommand extends CheckCheckboxCommand {
 
 	public NegCheckCheckboxCommand(Map<String, String> parameterMap) {
 		super(parameterMap);
 	}
 
-	public NegCheckCheckboxCommand(String selector, String expectedText) {
-		super(selector, expectedText);
+	public NegCheckCheckboxCommand(String selector) {
+		super(selector);
 	}
 
 	
@@ -29,8 +29,8 @@ public class NegCheckCheckboxCommand extends CheckCheckboxCommand {
 			
 			assertion
 				.overridingErrorMessage("Expecting checkbox selected by selector '%s'"
-						+ " NOT to be " + (expectedCheckedValue.equalsIgnoreCase("true") ? "checked" : "unchecked"), by)
-				.isNotEqualTo((expectedCheckedValue));
+						+ " to be unchecked (not selected)", by)
+				.isNotEqualTo("true");
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package com.mkl.websuites.internal.command.impl.check;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,17 +16,19 @@ import com.mkl.websuites.internal.command.impl.validator.ParameterValueValidator
 public class CheckSelectSelectedIndexCommand extends
 		CheckSelectSelectedValueCommand {
 
-	static {
-		SELECTED_TEXT_PARAM = "index";
-	}
-	
 	
 	public CheckSelectSelectedIndexCommand(Map<String, String> parameterMap) {
 		super(parameterMap);
 	}
 
-	public CheckSelectSelectedIndexCommand(String selector, String expectedText) {
-		super(selector, expectedText);
+	@SuppressWarnings("serial")
+	public CheckSelectSelectedIndexCommand(final String selector, final String expectedText) {
+		this(new HashMap<String, String>() {{
+			put("css", selector);
+			put("index", expectedText);
+		}
+		});
+		SELECTED_TEXT_PARAM = "index";
 	}
 
 	protected class CheckSelectSelectedIndex extends CheckSelectSelectedValue {

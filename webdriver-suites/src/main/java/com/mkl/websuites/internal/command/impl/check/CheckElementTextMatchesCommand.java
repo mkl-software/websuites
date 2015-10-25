@@ -28,7 +28,7 @@ public class CheckElementTextMatchesCommand extends CheckElementTextCommand {
 			assertion
 				.overridingErrorMessage("Expecting inner text of web page element with selector '%s'"
 						+ " to match regexp '%s', but text was '%s'", by, expectedText, elementText)
-				.matches(expectedText);
+				.matches(CheckUtils.patternOf(expectedText));
 		}
 	}
 	

@@ -6,9 +6,9 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 
 
 @CommandDescriptor(name = "checkHeaderMatches", argumentTypes = {String.class})
-public class CheckHeaderContainsMatches extends CheckHeaderContainsCommand {
+public class CheckHeaderMatchesCommand extends CheckHeaderContainsCommand {
 
-	public CheckHeaderContainsMatches(String expectedHeader) {
+	public CheckHeaderMatchesCommand(String expectedHeader) {
 		super(expectedHeader);
 	}
 

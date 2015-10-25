@@ -12,7 +12,6 @@ Legend:
 + - implemented normal check, "s" - soft, "~" - negated, | "-" negated soft
 ! - command will not implicitly wait for exact condition to be met - although it will wait for some elements with an
 	implicit wait, but the condition will be checked immediately afterwards, so more elements can be loaded
-	
 !! - performance-impaired
 
 (+s~|)	check					checks if elements exists		
@@ -30,9 +29,9 @@ Legend:
 (+s~|)	checkElementText				checks if GIVEN element has EXACTLY this text as innerText (!)
 (+s~|)	checkElementTextContains		as above, but contains (!)
 (+s~|)	checkElementTextMatches			as above, matches (!)
-(+s~|)	checkInnerHTML				(!, !!)
-(+s~|)	checkInnerHTMLContains		(!, !!)
-(+s~|)	checkInnerHTMLMatches		(!, !!)
+(+s~|)	checkElementInnerHTML				(!, !!)
+(+s~|)	checkElementInnerHTMLContains		(!, !!)
+(+s~|)	checkElementInnerHTMLMatches		(!, !!)
 (+s~|)	checkLinkText					checks if link with given text exists
 (+s~|)	checkLinkTextContaining
 (+s~|)	checkLinkTextMatching
@@ -47,7 +46,7 @@ Legend:
 (+s~|)	checkElementAttValue			checks if element has an attribute with a given value
 (+s~|)	checkElementAttValueContains	checks if element has an attribute with a value containing string
 (+s~|)	checkElementAttValueMatches		checks if element has an attribute with a value matching regex
-(+s~|)	checkChecked					checks if given checkbox is selected
+(+s~|)	checkCheckbox					checks if given checkbox is selected
 (+s~|)	checkSelectOptionText			checks if given select has an option with given display text
 (+s~|)	checkSelectOptionTextContaining	checks if given select has an option with given display text
 (+s~|)	checkSelectOptionTextMatching	checks if given select has an option with given display text

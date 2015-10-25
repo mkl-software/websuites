@@ -39,11 +39,12 @@ public class CheckElementAttributeValueCommand extends
 		
 		@Override
 		protected void runSingleStringAssertion(StringAssert assertion,
-				String elementText) {
+				String attributeValue) {
 			
 			assertion
 				.overridingErrorMessage("Expecting attribute '%s' in the web page element with selector '%s'"
-						+ " to have an exact value '%s'", inputAttributeName, by, expectedAttributeValue)
+						+ " to have an exact value '%s' but was '%s'",
+						inputAttributeName, by, expectedAttributeValue, attributeValue)
 				.isEqualTo(expectedAttributeValue);
 		}
 		

@@ -17,9 +17,9 @@ public class CheckPageSourceMatchesCommand extends CheckPageSourceCommand {
 	protected void runSingleStringAssertion(StringAssert assertThatUrl, String currentPageSource) {
 		
 		assertThatUrl
-			.overridingErrorMessage("Page source expected to match '%s', but the actual page source was '%s'",
+			.overridingErrorMessage("Page source expected to match '%s', but the actual page source was\n'%s'",
 					pageSource, currentPageSource)
-			.matches(pageSource);
+			.matches(CheckUtils.patternOf(pageSource));
 	}
 
 }

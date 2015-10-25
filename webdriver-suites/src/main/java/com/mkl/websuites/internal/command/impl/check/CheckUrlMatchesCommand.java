@@ -19,7 +19,7 @@ public class CheckUrlMatchesCommand extends CheckUrlCommand {
 		assertThatUrl
 			.overridingErrorMessage("Page URL expected to match regex '%s', but the URL was '%s'",
 					expectedUrl, currentUrl)
-			.matches(expectedUrl);
+			.matches(CheckUtils.patternOf(expectedUrl));
 	}
 
 }

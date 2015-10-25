@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<title>Test title full text</title>
+		<meta></meta>
+		<script>
+		setTimeout(function() {
+			document.getElementById("fillIt").innerHTML = "dynamic text";
+		}, 3000);
+	</script>
+	<style>
+		body {
+		    background-color: linen;
+		    padding-bottom: 15px;
+		}
+		
+		p {
+		    color: maroon;
+		    margin-left: 40px;
+		} 
+	</style>
+	</head>
+	<body>
+		<div class="header">
+			<div>
+				<p>this is a paragraph</p>
+				<span>some text</span>
+				<b>another</b>
+				<span id="fillIt"></span>
+				<p id="invisible" style="visibility: hidden; display: none;">hidden</p>
+				<p id="textNode" class="main another nice bolded">lorem ipsum</p>
+				<p id="withBolded"><b>bolded text</b></p>
+				<A href="http://onet.pl">this is a link</A>
+				<span ng-sample-att="sample value" id="ng-elem" another-att="another value">custom attributes</span>
+				<input type="checkbox" checked="checked" id="sampleCheckboxChecked"></input>
+				<input type="checkbox" id="sampleCheckboxUnchecked"></input>
+				<select id="selectElement" multiple="multiple">
+					<option value="id1" selected="selected">Option 1</option>
+					<option value="id2">Option 2</option>
+					<option value="id3" selected="selected">Option 3</option>
+					<option value="id4">Option 4</option>
+				</select>
+				<select id="anotherSelect" multiple="multiple">
+					<option value="id1">Option 1</option>
+					<option value="id2" selected="selected">Option 2</option>
+					<option value="id3">Option 3</option>
+				</select>
+			</div>
+		</div>
+	</body>
+	
+</html>

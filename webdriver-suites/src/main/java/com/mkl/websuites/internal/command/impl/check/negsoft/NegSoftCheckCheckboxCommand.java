@@ -9,15 +9,15 @@ import com.mkl.websuites.internal.command.impl.check.AbstractCheck;
 import com.mkl.websuites.internal.command.impl.check.neg.NegCheckCheckboxCommand;
 
 
-@CommandDescriptor(name = "~softCheckCheckbox", argumentTypes = {String.class, String.class})
+@CommandDescriptor(name = "~softCheckCheckboxSelected", argumentTypes = {String.class})
 public class NegSoftCheckCheckboxCommand extends NegCheckCheckboxCommand {
 
 	public NegSoftCheckCheckboxCommand(Map<String, String> parameterMap) {
 		super(parameterMap);
 	}
 
-	public NegSoftCheckCheckboxCommand(String selector, String expectedText) {
-		super(selector, expectedText);
+	public NegSoftCheckCheckboxCommand(String selector) {
+		super(selector);
 	}
 
 	

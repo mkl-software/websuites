@@ -20,7 +20,7 @@ import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 @CommandDescriptor(name = "checkSelectOptionText", argumentTypes = {String.class, String.class})
 public class CheckSelectOptionTextCommand extends OperationOnWebElement {
 
-	protected static String SELECTED_TEXT_PARAM = "text";
+	protected String SELECTED_TEXT_PARAM;
 
 	protected String expectedSelectText;
 	
@@ -39,11 +39,15 @@ public class CheckSelectOptionTextCommand extends OperationOnWebElement {
 	public CheckSelectOptionTextCommand(final String selector, final String expectedText) {
 		super(new HashMap<String, String>() {{
 			put("css", selector);
-			put(SELECTED_TEXT_PARAM, expectedText);
-		}});
+			put("text", expectedText);
+		}
+		});
+		SELECTED_TEXT_PARAM = "text";
 	}
 	
-	
+	protected  String extracted() {
+		return "text";
+	}
 	
 	protected class CheckSelectOptionText extends AbstractCheck {
 

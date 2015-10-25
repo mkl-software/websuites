@@ -19,6 +19,6 @@ public class CheckTitleMatchesCommand extends CheckTitleCommand {
 		assertThatTitle
 			.overridingErrorMessage("Page title expected to match regex '%s', but the title was '%s'",
 					expectedTitle, title)
-			.matches(expectedTitle);
+			.matches(CheckUtils.patternOf(expectedTitle));
 	}
 }

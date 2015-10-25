@@ -11,9 +11,13 @@ public class CheckAllSoftCommand extends BaseCommand {
 
 	@Override
 	protected void runStandardCommand() {
-		softly.assertAll();
-		// reset Soft Assertions for next check
-		softly = new SoftAssertions();
+		try {
+			// can throw AssertionException
+			softly.assertAll();
+		} finally {
+			// reset Soft Assertions for next check
+			softly = new SoftAssertions();
+		}
 	}
 
 }
