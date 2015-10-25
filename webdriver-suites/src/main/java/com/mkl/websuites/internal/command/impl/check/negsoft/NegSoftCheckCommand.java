@@ -3,7 +3,7 @@ package com.mkl.websuites.internal.command.impl.check.negsoft;
 import java.util.Map;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
-import com.mkl.websuites.internal.command.impl.check.CheckUtils;
+import com.mkl.websuites.internal.command.impl.CommandUtils;
 import com.mkl.websuites.internal.command.impl.check.neg.NegCheckCommand;
 
 
@@ -23,7 +23,7 @@ public class NegSoftCheckCommand extends NegCheckCommand {
 	// fail would be called from here and it can't be soft.
 	@Override
 	protected void localFail(String message) {
-		CheckUtils.softFail(softly, message);
+		CommandUtils.softFail(softly, message);
 	}
 	
 

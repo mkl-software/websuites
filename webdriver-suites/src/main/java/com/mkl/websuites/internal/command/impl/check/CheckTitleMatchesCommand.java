@@ -3,6 +3,7 @@ package com.mkl.websuites.internal.command.impl.check;
 import org.assertj.core.api.StringAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.internal.command.impl.CommandUtils;
 
 
 @CommandDescriptor(name = "checkTitleMatches", argumentTypes = {String.class})
@@ -19,6 +20,6 @@ public class CheckTitleMatchesCommand extends CheckTitleCommand {
 		assertThatTitle
 			.overridingErrorMessage("Page title expected to match regex '%s', but the title was '%s'",
 					expectedTitle, title)
-			.matches(CheckUtils.patternOf(expectedTitle));
+			.matches(CommandUtils.patternOf(expectedTitle));
 	}
 }

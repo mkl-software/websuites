@@ -3,8 +3,8 @@ package com.mkl.websuites.internal.command.impl.check.soft;
 import java.util.Map;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.internal.command.impl.CommandUtils;
 import com.mkl.websuites.internal.command.impl.check.CheckCommand;
-import com.mkl.websuites.internal.command.impl.check.CheckUtils;
 
 
 @CommandDescriptor(name = "softCheck", argumentTypes = String.class)
@@ -22,7 +22,7 @@ public class SoftCheckCommand extends CheckCommand {
 	
 	@Override
 	protected void fail(String message) {
-		CheckUtils.softFail(softly, message);
+		CommandUtils.softFail(softly, message);
 	}
 
 }

@@ -5,9 +5,9 @@ import java.util.Map;
 import org.assertj.core.api.StringAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.internal.command.impl.CommandUtils;
 import com.mkl.websuites.internal.command.impl.check.AbstractCheck;
 import com.mkl.websuites.internal.command.impl.check.CheckElementAttributeMatchesCommand;
-import com.mkl.websuites.internal.command.impl.check.CheckUtils;
 
 
 @CommandDescriptor(name = "~checkElementAttrValueMatches", argumentTypes = {String.class, String.class, String.class})
@@ -35,7 +35,7 @@ public class NegCheckElementAttributeMatchesCommand extends
 				.overridingErrorMessage("Expecting value of attribute '%s' in the web page element with selector '%s'"
 						+ " NOT to match regexp '%s', but found '%s'", inputAttributeName, by, expectedAttributeValue,
 						foundElement.getAttribute(inputAttributeName))
-				.doesNotMatch(CheckUtils.patternOf(expectedAttributeValue));
+				.doesNotMatch(CommandUtils.patternOf(expectedAttributeValue));
 		}
 	}
 	

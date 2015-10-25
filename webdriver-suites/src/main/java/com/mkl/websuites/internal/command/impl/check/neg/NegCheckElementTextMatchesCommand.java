@@ -5,9 +5,9 @@ import java.util.Map;
 import org.assertj.core.api.StringAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.internal.command.impl.CommandUtils;
 import com.mkl.websuites.internal.command.impl.check.AbstractCheck;
 import com.mkl.websuites.internal.command.impl.check.CheckElementTextMatchesCommand;
-import com.mkl.websuites.internal.command.impl.check.CheckUtils;
 
 
 @CommandDescriptor(name = "~checkElementTextMatches", argumentTypes = {String.class, String.class})
@@ -33,7 +33,7 @@ public class NegCheckElementTextMatchesCommand extends
 			assertion
 				.overridingErrorMessage("Expecting inner text of web page element with selector '%s'"
 						+ " NOT to match regexp '%s', but text was '%s'", by, expectedText, elementText)
-				.doesNotMatch(CheckUtils.patternOf(expectedText));
+				.doesNotMatch(CommandUtils.patternOf(expectedText));
 		}
 	}
 	

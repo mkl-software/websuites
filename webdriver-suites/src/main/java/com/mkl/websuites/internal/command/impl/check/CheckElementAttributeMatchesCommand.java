@@ -5,6 +5,7 @@ import java.util.Map;
 import org.assertj.core.api.StringAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.internal.command.impl.CommandUtils;
 
 
 @CommandDescriptor(name = "checkElementAttrValueMatches", argumentTypes = {String.class, String.class, String.class})
@@ -32,7 +33,7 @@ public class CheckElementAttributeMatchesCommand extends
 				.overridingErrorMessage("Expecting value of attribute '%s' in the web page element with selector '%s'"
 						+ " to match regexp '%s', but it is '%s'", inputAttributeName, by, expectedAttributeValue,
 						foundElement.getAttribute(inputAttributeName))
-				.matches(CheckUtils.patternOf(expectedAttributeValue));
+				.matches(CommandUtils.patternOf(expectedAttributeValue));
 		}
 	}
 	

@@ -1,4 +1,4 @@
-package com.mkl.websuites.internal.command.impl;
+package com.mkl.websuites.internal.command.impl.misc;
 
 import com.mkl.websuites.internal.command.BaseCommand;
 import com.mkl.websuites.internal.command.CommandDescriptor;

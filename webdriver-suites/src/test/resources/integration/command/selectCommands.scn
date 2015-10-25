@@ -1,0 +1,65 @@
+
+goto	http://localhost:90/integration/commands/check/allChecks.html
+
+# All should be passing:
+
+deselectAll		#selectElement
+~checkSelectedIndex	#selectElement	0
+~checkSelectedIndex	#selectElement	1
+~checkSelectedIndex	#selectElement	2
+~checkSelectedIndex	#selectElement	3
+
+selectAll		#selectElement
+checkSelectedIndex	#selectElement	0
+checkSelectedIndex	#selectElement	1
+checkSelectedIndex	#selectElement	2
+checkSelectedIndex	#selectElement	3
+
+deselectAll		#selectElement
+selectByIndex		#selectElement	1
+checkSelectedIndex	#selectElement	1
+deselectAll		#selectElement
+selectByIndex		css=#selectElement	index=1
+checkSelectedIndex	#selectElement	1
+deselectAll		#selectElement
+selectByValue		#selectElement	id4
+checkSelectedIndex	#selectElement	3
+deselectAll		#selectElement
+selectByValue		css=#selectElement	value=id4
+checkSelectedIndex	#selectElement	3
+deselectAll		#selectElement
+selectByText		#selectElement	Option 1
+checkSelectedIndex	#selectElement	0
+deselectAll		#selectElement
+selectByText		css=#selectElement	text=Option 4
+checkSelectedIndex	#selectElement	3
+
+deselectAll		#selectElement
+selectByTextContaining	#selectElement	2
+selectByTextContaining	#selectElement	3
+checkSelectedIndex	#selectElement	1
+checkSelectedIndex	#selectElement	2
+
+selectAll	#selectElement
+deselectByIndex		#selectElement	0
+deselectByIndex		#selectElement	3
+~checkSelectedIndex	#selectElement	0
+~checkSelectedIndex	#selectElement	3
+
+selectAll	#selectElement
+deselectByValue		#selectElement	id3
+deselectByValue		#selectElement	id4
+~checkSelectedIndex	#selectElement	2
+~checkSelectedIndex	#selectElement	3
+
+selectAll	#selectElement
+deselectByText		#selectElement	Option 2
+deselectByText		#selectElement	Option 3
+~checkSelectedIndex	#selectElement	1
+~checkSelectedIndex	#selectElement	2
+
+selectAll	#selectElement
+deselectByTextContaining		#selectElement	n 1
+deselectByTextContaining		#selectElement	n 4
+~checkSelectedIndex	#selectElement	0
+~checkSelectedIndex	#selectElement	3

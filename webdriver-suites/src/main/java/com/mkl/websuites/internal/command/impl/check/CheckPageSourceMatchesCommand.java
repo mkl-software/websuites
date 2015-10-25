@@ -3,6 +3,7 @@ package com.mkl.websuites.internal.command.impl.check;
 import org.assertj.core.api.StringAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.internal.command.impl.CommandUtils;
 
 
 @CommandDescriptor(name = "checkPageSourceMatches", argumentTypes = String.class)
@@ -19,7 +20,7 @@ public class CheckPageSourceMatchesCommand extends CheckPageSourceCommand {
 		assertThatUrl
 			.overridingErrorMessage("Page source expected to match '%s', but the actual page source was\n'%s'",
 					pageSource, currentPageSource)
-			.matches(CheckUtils.patternOf(pageSource));
+			.matches(CommandUtils.patternOf(pageSource));
 	}
 
 }

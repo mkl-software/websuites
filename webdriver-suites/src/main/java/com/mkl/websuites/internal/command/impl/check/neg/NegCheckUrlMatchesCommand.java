@@ -3,8 +3,8 @@ package com.mkl.websuites.internal.command.impl.check.neg;
 import org.assertj.core.api.StringAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.internal.command.impl.CommandUtils;
 import com.mkl.websuites.internal.command.impl.check.CheckUrlMatchesCommand;
-import com.mkl.websuites.internal.command.impl.check.CheckUtils;
 
 
 @CommandDescriptor(name = "~checkUrlMatches", argumentTypes = String.class)
@@ -21,7 +21,7 @@ public class NegCheckUrlMatchesCommand extends CheckUrlMatchesCommand {
 		assertThatUrl
 			.overridingErrorMessage("Page URL expected NOT to match regex '%s', but the URL was '%s'",
 					expectedUrl, currentUrl)
-			.doesNotMatch(CheckUtils.patternOf(expectedUrl));
+			.doesNotMatch(CommandUtils.patternOf(expectedUrl));
 	}
 
 }

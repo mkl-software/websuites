@@ -3,6 +3,7 @@ package com.mkl.websuites.internal.command.impl.check;
 import org.assertj.core.api.StringAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.internal.command.impl.CommandUtils;
 
 
 @CommandDescriptor(name = "checkUrlMatches", argumentTypes = String.class)
@@ -19,7 +20,7 @@ public class CheckUrlMatchesCommand extends CheckUrlCommand {
 		assertThatUrl
 			.overridingErrorMessage("Page URL expected to match regex '%s', but the URL was '%s'",
 					expectedUrl, currentUrl)
-			.matches(CheckUtils.patternOf(expectedUrl));
+			.matches(CommandUtils.patternOf(expectedUrl));
 	}
 
 }

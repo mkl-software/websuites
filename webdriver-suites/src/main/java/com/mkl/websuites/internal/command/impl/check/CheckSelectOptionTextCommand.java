@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.OperationOnWebElement;
+import com.mkl.websuites.internal.command.impl.CommandUtils;
 import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 
@@ -79,7 +80,7 @@ public class CheckSelectOptionTextCommand extends OperationOnWebElement {
 	@Override
 	protected void doOperationOnElement(WebElement elem) {
 		
-		if (!(elem.getTagName().equalsIgnoreCase("select"))) {
+		if (!CommandUtils.checkIfElementIsSelect(elem)) {
 			fail("Element expected to be a SELECT");
 		}
 		

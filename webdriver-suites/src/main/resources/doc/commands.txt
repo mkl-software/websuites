@@ -67,11 +67,16 @@ Legend:
 (+s~|)	checkElementSiblingCount	as above for siblings
 
 selectByValue					selected option in the combobox
-selectByVisibleText
+selectByIndex
+selectByText
+selectByTextContaining
 deselectByIndex					selected option in the combobox
-deselectByVisibleText
+deselectByText
+deselectByTextContaining
 deselectByValue
 deselectByIndex
+selectAll
+deselectAll
 
 // all waits should be Fluent, with params: timeout=n, pollingInterval=m, ingoreNoSuchElementException=true/false
 wait					implemented

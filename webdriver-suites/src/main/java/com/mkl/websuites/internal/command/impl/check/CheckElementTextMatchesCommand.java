@@ -5,6 +5,7 @@ import java.util.Map;
 import org.assertj.core.api.StringAssert;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.internal.command.impl.CommandUtils;
 
 
 @CommandDescriptor(name = "checkElementTextMatches", argumentTypes = {String.class, String.class})
@@ -28,7 +29,7 @@ public class CheckElementTextMatchesCommand extends CheckElementTextCommand {
 			assertion
 				.overridingErrorMessage("Expecting inner text of web page element with selector '%s'"
 						+ " to match regexp '%s', but text was '%s'", by, expectedText, elementText)
-				.matches(CheckUtils.patternOf(expectedText));
+				.matches(CommandUtils.patternOf(expectedText));
 		}
 	}
 	
