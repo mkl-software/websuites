@@ -6,7 +6,7 @@ import com.mkl.websuites.tests.ScenarioFileTest;
 
 
 @Scenarios({//"src/test/resources/client/scenarioTesting.scn",
-		"src/test/resources/integration/command/check/allCheckCommands_passing.scn"})
+		"src/test/resources/integration/command/check/allCheckCommands_failing.scn"})
 public class SampleSingleScenarioTest extends ScenarioFileTest {
 
 

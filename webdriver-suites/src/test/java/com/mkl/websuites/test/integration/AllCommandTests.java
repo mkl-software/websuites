@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.mkl.websuites.test.integration.command.AllCheckCommandsFailingTest;
 import com.mkl.websuites.test.integration.command.AllCheckCommandsPassingTest;
 import com.mkl.websuites.test.integration.command.CheckCommandTest;
 import com.mkl.websuites.test.integration.command.CheckTitleTest;
@@ -25,6 +26,7 @@ import com.mkl.websuites.test.integration.command.TypeCommandTest;
 	RepeatTimesCommandTest.class,
 	CheckCommandTest.class,
 	CheckTitleTest.class,
-	AllCheckCommandsPassingTest.class
+	AllCheckCommandsPassingTest.class,
+	AllCheckCommandsFailingTest.class
 })
 public class AllCommandTests {}
