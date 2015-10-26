@@ -40,7 +40,7 @@ public class StandardScenarioFileProcessor implements ScenarioFileProcessor {
 			return failToLoadScenario(scenarioFileName);
 		}
 		
-		List<String> preprocessedScenarioFile =
+		List<SourceLine> preprocessedScenarioFile =
 				ServiceFactory.get(ScenarioFilePreprocessor.class).preprocessScenarioFile(scenarioFile);
 		
 		List<Command> parsedCommands = 

@@ -1,6 +1,9 @@
 package com.mkl.websuites.test.unit.scenario;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +16,7 @@ import org.junit.Test;
 import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandBuilder;
+import com.mkl.websuites.internal.scenario.SourceLine;
 import com.mkl.websuites.internal.services.ServiceFactory;
 import com.mkl.websuites.test.core.ServiceBasedTest;
 import com.mkl.websuites.test.unit.scenario.cmd.MultiArgCommand;
@@ -136,7 +140,7 @@ public class CommandBuilderTest extends ServiceBasedTest {
 		
 		CommandBuilder logic = getLogic();
 		
-		Command command = logic.instantiateCommand("sample", new String[] {"command argument"});
+		Command command = logic.instantiateCommand("sample", new String[] {"command argument"}, source());
 		
 		assertNotNull(command);
 		
@@ -152,11 +156,17 @@ public class CommandBuilderTest extends ServiceBasedTest {
 		
 		CommandBuilder logic = getLogic();
 		
-		Command command = logic.instantiateCommand("noArg",	new String[] {});
+		Command command = logic.instantiateCommand("noArg",	new String[] {}, source());
 		
 		assertNotNull(command);
 		
 		assertTrue(command instanceof NoArgCommand);
+	}
+
+
+
+	private SourceLine source() {
+		return new SourceLine("", "", 0);
 	}
 
 
@@ -167,7 +177,7 @@ public class CommandBuilderTest extends ServiceBasedTest {
 		CommandBuilder logic = getLogic();
 		
 		Command command = logic.instantiateCommand("multiArg",
-				new String[] {"string value", "5687", "true", "23"});
+				new String[] {"string value", "5687", "true", "23"}, source());
 		
 		assertNotNull(command);
 		
@@ -185,7 +195,7 @@ public class CommandBuilderTest extends ServiceBasedTest {
 	public void testArgumentErrorWrongArgumentCount() {
 		CommandBuilder logic = getLogic();
 		logic.instantiateCommand("sample simple value", // without tabs
-				new String[] {});
+				new String[] {}, source());
 		fail("command should not be craeted");
 	}
 	
@@ -195,7 +205,7 @@ public class CommandBuilderTest extends ServiceBasedTest {
 	public void testArgumentErrorToManyArguments() {
 		CommandBuilder logic = getLogic();
 		logic.instantiateCommand("sample",
-				new String[] {"param", "another not expected"});
+				new String[] {"param", "another not expected"}, source());
 		fail("command should not be craeted");
 	}
 

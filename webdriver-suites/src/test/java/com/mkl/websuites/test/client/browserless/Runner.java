@@ -7,7 +7,7 @@ import com.mkl.websuites.WebSuitesRunner;
 
 
 @WebSuitesRunner(
-		configurationClass = Config.class,
+		configurationClass = NoBrowserConfig.class,
 		suite = {LocalScenarioTest.class})
 
 public class Runner extends WebSuites {}

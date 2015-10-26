@@ -14,6 +14,7 @@ import org.reflections.Reflections;
 
 import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.internal.command.impl.ParameterizedCommand;
+import com.mkl.websuites.internal.scenario.SourceLine;
 
 
 
@@ -56,7 +57,14 @@ public class StandardCommandBuilder implements CommandBuilder {
 	
 	
 	@Override
-	public Command instantiateCommand(String commandName, String[] arguments) {
+	public Command instantiateCommand(String commandName, String[] arguments, SourceLine sourceLine) {
+		
+		if (!commandTypesMap.containsKey(commandName)) {
+			throw new WebSuitesException(String.format("Command '%s' doesn't have corresponding implementation, "
+					+ "please make sure there is a class annotated with @CommandDescriptor and located in the "
+					+ "command scan path.\nProblem found in source file:\n%s",
+					commandName, sourceLine.printSourceInfo()));
+		}
 		
 		Constructor commandConstructor;
 		

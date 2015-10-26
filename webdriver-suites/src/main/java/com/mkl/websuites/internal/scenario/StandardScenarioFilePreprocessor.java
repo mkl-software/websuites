@@ -30,21 +30,24 @@ public class StandardScenarioFilePreprocessor implements
 	
 	
 	@Override
-	public List<String> preprocessScenarioFile(File scenarioFile) {
+	public List<SourceLine> preprocessScenarioFile(File scenarioFile) {
 		
 			
 		try (BufferedReader br = new BufferedReader(new FileReader(scenarioFile))) {
 			
 			String line;
 			
-			List<String> lines = new ArrayList<String>();
+			List<SourceLine> lines = new ArrayList<SourceLine>();
+			
+			int lineNumber = 0;
 			
 			while((line = br.readLine()) != null) {
 				
+				lineNumber++;
 				line = line.trim();
 				if (!line.isEmpty() && !line.startsWith("#")) {
 					
-					lines .add(line);
+					lines.add(new SourceLine(line, scenarioFile.getAbsolutePath(), lineNumber));
 				}
 			}
 			

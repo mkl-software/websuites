@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.mkl.websuites.internal.scenario.SourceLine;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
 public class StandardCommandParser implements CommandParser {
@@ -21,15 +22,17 @@ public class StandardCommandParser implements CommandParser {
 	
 	@Override
 	public List<Command> parseCommandFromFile(
-			List<String> preprocessedScenarioFile) {
+			List<SourceLine> preprocessedScenarioFile) {
 		
 		List<Command> commands = new ArrayList<>();
 		
-		for (String line : preprocessedScenarioFile) {
+		for (SourceLine sourceLine : preprocessedScenarioFile) {
 			
-			String[] tokens = tokenizeLine(line);
+			Command command = buildCommand(sourceLine);
 			
-			Command command = buildCommand(tokens);
+			if (command instanceof SourceInfoHolder) {
+				((SourceInfoHolder) command).setCommandSourceLine(sourceLine);
+			}
 			
 			commands.add(command);
 		}
@@ -40,7 +43,9 @@ public class StandardCommandParser implements CommandParser {
 	
 	
 	
-	protected Command buildCommand(String[] tokens) {
+	protected Command buildCommand(SourceLine sourceLine) {
+		
+		String[] tokens = tokenizeLine(sourceLine.getLine());
 		
 		CommandBuilder commandManager = ServiceFactory.get(CommandBuilder.class);
 		
@@ -48,7 +53,7 @@ public class StandardCommandParser implements CommandParser {
 		
 		String[] arguments = Arrays.copyOfRange(tokens, 1, tokens.length);
 		
-		Command command = commandManager.instantiateCommand(commandName, arguments);
+		Command command = commandManager.instantiateCommand(commandName, arguments, sourceLine);
 		
 		return command;
 	}

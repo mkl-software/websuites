@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.mkl.websuites.internal.scenario.ScenarioFilePreprocessor;
+import com.mkl.websuites.internal.scenario.SourceLine;
 import com.mkl.websuites.internal.services.ServiceFactory;
 import com.mkl.websuites.test.core.ServiceBasedTest;
 
@@ -33,7 +34,7 @@ public class ScenarioPreprocessingTest extends ServiceBasedTest {
 	public void testEmptyFile() {
 		
 		
-		List<String> lines = ServiceFactory.get(ScenarioFilePreprocessor.class)
+		List<SourceLine> lines = ServiceFactory.get(ScenarioFilePreprocessor.class)
 				.preprocessScenarioFile(
 						new File(BASE_PATH
 								+ "emptyScnFile.scn"));
@@ -47,7 +48,7 @@ public class ScenarioPreprocessingTest extends ServiceBasedTest {
 	public void testSingleFile() {
 		
 		
-		List<String> lines = ServiceFactory.get(ScenarioFilePreprocessor.class)
+		List<SourceLine> lines = ServiceFactory.get(ScenarioFilePreprocessor.class)
 				.preprocessScenarioFile(
 						new File(BASE_PATH + "justLines.scn"));
 		
@@ -61,7 +62,7 @@ public class ScenarioPreprocessingTest extends ServiceBasedTest {
 	public void testPreprocessingEmptyLines() {
 		
 		
-		List<String> lines = ServiceFactory.get(ScenarioFilePreprocessor.class)
+		List<SourceLine> lines = ServiceFactory.get(ScenarioFilePreprocessor.class)
 				.preprocessScenarioFile(
 						new File(BASE_PATH + "someEmptyLines.scn"));
 		
@@ -74,7 +75,7 @@ public class ScenarioPreprocessingTest extends ServiceBasedTest {
 	public void testPreprocessingWithComments() {
 		
 		
-		List<String> lines = ServiceFactory.get(ScenarioFilePreprocessor.class)
+		List<SourceLine> lines = ServiceFactory.get(ScenarioFilePreprocessor.class)
 				.preprocessScenarioFile(
 						new File(BASE_PATH + "someEmptyLinesAndComments.scn"));
 		
@@ -88,13 +89,13 @@ public class ScenarioPreprocessingTest extends ServiceBasedTest {
 	public void testWhiteSpaceTrimming() {
 		
 		
-		List<String> lines = ServiceFactory.get(ScenarioFilePreprocessor.class)
+		List<SourceLine> lines = ServiceFactory.get(ScenarioFilePreprocessor.class)
 				.preprocessScenarioFile(
 						new File(BASE_PATH + "whitespaces.scn"));
 		
 		assertNotNull(lines);
 		assertEquals(4, lines.size());
 		
-		assertEquals("content", lines.get(0));
+		assertEquals("content", lines.get(0).getLine());
 	}
 }

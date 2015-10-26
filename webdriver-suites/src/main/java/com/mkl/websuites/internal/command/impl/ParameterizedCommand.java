@@ -52,7 +52,14 @@ public abstract class ParameterizedCommand extends BaseCommand {
 			
 			populateBrowser();
 			
-			runCommandWithParameters();
+			try {
+				runCommandWithParameters();
+				
+			} catch (Throwable e) {
+				
+				augmentErrorMessageWithCommandSourceFileInfo(e);
+				throw e;
+			}
 		}
 	}
 

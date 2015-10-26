@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import mockit.Deencapsulation;
@@ -16,6 +16,7 @@ import org.junit.runners.MethodSorters;
 
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandParser;
+import com.mkl.websuites.internal.scenario.SourceLine;
 import com.mkl.websuites.internal.services.ServiceFactory;
 import com.mkl.websuites.test.core.ServiceBasedTest;
 import com.mkl.websuites.test.unit.scenario.cmd.MultiArgCommand;
@@ -94,12 +95,11 @@ public class ScenarioFileProcessorTest extends ServiceBasedTest {
 	@Test
 	public void testParseCommandFromFile1() {
 		CommandParser logic = ServiceFactory.get(CommandParser.class);
-		String[] lines = new String[] {
-				
+		List<SourceLine> lines = sourceLineFromStrings(
 				"sample\tsample command one string arg",
 				"noArg\t"
-		};
-		List<Command> parsedCommands = logic.parseCommandFromFile(Arrays.asList(lines));
+		);
+		List<Command> parsedCommands = logic.parseCommandFromFile(lines);
 		assertNotNull(parsedCommands);
 		assertEquals(2, parsedCommands.size());
 		assertThat(parsedCommands.get(0), instanceOf(SampleCommand.class));
@@ -107,11 +107,21 @@ public class ScenarioFileProcessorTest extends ServiceBasedTest {
 	}
 	
 	
+	private List<SourceLine> sourceLineFromStrings(String ... strings) {
+		List<SourceLine> result = new ArrayList<>();
+		for (String string : strings) {
+			result.add(new SourceLine(string, "", 0));
+		}
+		return result;
+	}
+
+
+
+
 	@Test
 	public void testParseCommandFromFile2() {
 		CommandParser logic = ServiceFactory.get(CommandParser.class);
-		String[] lines = new String[] {};
-		List<Command> parsedCommands = logic.parseCommandFromFile(Arrays.asList(lines));
+		List<Command> parsedCommands = logic.parseCommandFromFile(sourceLineFromStrings());
 		assertNotNull(parsedCommands);
 		assertEquals(0, parsedCommands.size());
 	}
@@ -119,13 +129,12 @@ public class ScenarioFileProcessorTest extends ServiceBasedTest {
 	@Test
 	public void testParseCommandFromFile3() {
 		CommandParser logic = ServiceFactory.get(CommandParser.class);
-		String[] lines = new String[] {
-				
+		List<SourceLine> lines = sourceLineFromStrings(
 				"multiArg\tsome strong\t5\ttrue\t3",
 				"noArg\t",
 				"sample\tsample command one string arg"
-		};
-		List<Command> parsedCommands = logic.parseCommandFromFile(Arrays.asList(lines));
+		);
+		List<Command> parsedCommands = logic.parseCommandFromFile(lines);
 		assertNotNull(parsedCommands);
 		assertEquals(3, parsedCommands.size());
 		assertThat(parsedCommands.get(0), instanceOf(MultiArgCommand.class));

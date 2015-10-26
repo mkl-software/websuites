@@ -5,19 +5,23 @@ import java.util.regex.Pattern;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
 
 import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.browser.BrowserController;
+import com.mkl.websuites.internal.scenario.SourceLine;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
 
 @Slf4j
-public abstract class BaseCommand implements Command {
+public abstract class BaseCommand implements Command, SourceInfoHolder {
 
 	
 	protected WebDriver browser;
+
+	private SourceLine sourceLine;
 	
 	protected static SoftAssertions softly = new SoftAssertions();
 
@@ -29,11 +33,31 @@ public abstract class BaseCommand implements Command {
 		
 		log.debug("running " + this.getClass().getName() + " command");
 		
-		runStandardCommand();
+		try {
+			runStandardCommand();
+			
+		} catch (Throwable e) {
+			
+			augmentErrorMessageWithCommandSourceFileInfo(e);
+			throw e;
+		}
 			
 	}
 	
 	
+
+	protected void augmentErrorMessageWithCommandSourceFileInfo(Throwable e) {
+		try {
+			String newMessage = e.getMessage()
+					+ "\n"
+					+ getCommandSourceLine().printSourceInfo();
+			FieldUtils.writeField(e, "detailMessage", newMessage, true);
+		} catch (IllegalArgumentException| IllegalAccessException|  SecurityException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+
 
 	protected abstract void runStandardCommand();
 
@@ -55,4 +79,13 @@ public abstract class BaseCommand implements Command {
 	}
 	
 	
+	@Override
+	public SourceLine getCommandSourceLine() {
+		return sourceLine;
+	}
+	
+	@Override
+	public void setCommandSourceLine(SourceLine sourceLine) {
+		this.sourceLine = sourceLine;
+	}
 }

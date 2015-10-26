@@ -9,4 +9,4 @@ import com.mkl.websuites.WebSuitesConfig;
 	browsers = {"none"}
 	
 )
-public class Config {}
+public class NoBrowserConfig {}
