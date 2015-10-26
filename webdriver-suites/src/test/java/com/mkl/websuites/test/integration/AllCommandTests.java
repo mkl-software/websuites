@@ -12,6 +12,7 @@ import com.mkl.websuites.test.integration.command.ClickCommandTest;
 import com.mkl.websuites.test.integration.command.EmptyCommandIntegrationTest;
 import com.mkl.websuites.test.integration.command.GotoCommandTest;
 import com.mkl.websuites.test.integration.command.RepeatTimesCommandTest;
+import com.mkl.websuites.test.integration.command.SelectCommandsTest;
 import com.mkl.websuites.test.integration.command.TypeCommandTest;
 
 
@@ -27,6 +28,7 @@ import com.mkl.websuites.test.integration.command.TypeCommandTest;
 	CheckCommandTest.class,
 	CheckTitleTest.class,
 	AllCheckCommandsPassingTest.class,
-	AllCheckCommandsFailingTest.class
+	AllCheckCommandsFailingTest.class,
+	SelectCommandsTest.class
 })
 public class AllCommandTests {}

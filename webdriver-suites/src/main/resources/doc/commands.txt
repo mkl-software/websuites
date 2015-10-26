@@ -24,24 +24,24 @@ Legend:
 (+s~|)	checkPageSource
 (+s~|)	checkPageSourceContains
 (+s~|)	checkPageSourceMatches
-(+s~|)	checkText				checks if given string exists anywhere on the page
-(+s~|)	checkTextMatching		checks if there is a text anywhere on the page that matches given regex (!)
+(c+s~|)	checkText				checks if given string exists anywhere on the page
+(c+s~|)	checkTextMatching		checks if there is a text anywhere on the page that matches given regex (!)
 (+s~|)	checkElementText				checks if GIVEN element has EXACTLY this text as innerText (!)
 (+s~|)	checkElementTextContains		as above, but contains (!)
 (+s~|)	checkElementTextMatches			as above, matches (!)
 (+s~|)	checkElementInnerHTML				(!, !!)
 (+s~|)	checkElementInnerHTMLContains		(!, !!)
 (+s~|)	checkElementInnerHTMLMatches		(!, !!)
-(+s~|)	checkLinkText					checks if link with given text exists
-(+s~|)	checkLinkTextContaining
-(+s~|)	checkLinkTextMatching
-(+s~|)	checkLinkHREF				checks of link with given HREF value exists
-(+s~|)	checkLinkHREFContaining
-(+s~|)	checkLinkHREFMatching
-(+s~|)	checkAttributeName				checks if given attribute exists anywhere on the page with whatever value (!!)
-(+s~|)	checkAttributeValue				checks if given attribute value exists anywhere on the page (!!)
-(+s~|)	checkAttributeValueContaining	checks if given attribute value containing text exists anywhere on the page
-(+s~|)	checkAttributeValueMatching		checks if given attribute exists anywhere on the page with value matching text
+(c+s~|)	checkLinkText					checks if link with given text exists
+(c+s~|)	checkLinkTextContaining
+(c+s~|)	checkLinkTextMatching
+(c+s~|)	checkLinkHREF				checks of link with given HREF value exists
+(c+s~|)	checkLinkHREFContaining
+(c+s~|)	checkLinkHREFMatching
+(c+s~|)	checkAttributeName				checks if given attribute exists anywhere on the page with whatever value (!!)
+(c+s~|)	checkAttributeValue				checks if given attribute value exists anywhere on the page (!!)
+(c+s~|)	checkAttributeValueContaining	checks if given attribute value containing text exists anywhere on the page
+(c+s~|)	checkAttributeValueMatching		checks if given attribute exists anywhere on the page with value matching text
 (+s~|)	checkElementAttr				checks if element has an attribute
 (+s~|)	checkElementAttValue			checks if element has an attribute with a given value
 (+s~|)	checkElementAttValueContains	checks if element has an attribute with a value containing string
@@ -66,17 +66,17 @@ Legend:
 (+s~|)	checkElementChildrenCount		checks number of direct children in given element
 (+s~|)	checkElementSiblingCount	as above for siblings
 
-selectByValue					selected option in the combobox
-selectByIndex
-selectByText
-selectByTextContaining
-deselectByIndex					selected option in the combobox
-deselectByText
-deselectByTextContaining
-deselectByValue
-deselectByIndex
-selectAll
-deselectAll
++selectByValue					selected option in the combobox
++selectByIndex
++selectByText
++selectByTextContaining
++deselectByIndex					selected option in the combobox
++deselectByText
++deselectByTextContaining
++deselectByValue
++deselectByIndex
++selectAll
++deselectAll
 
 // all waits should be Fluent, with params: timeout=n, pollingInterval=m, ingoreNoSuchElementException=true/false
 wait					implemented
@@ -98,23 +98,20 @@ setScriptTimeout
 setImplicitWait			globally sets the wait time until throwing exception for missing element
 restoreDefaultWait		restores what is configurad on WebSuitesConfig level
 
-click
-clickLink				click <a> link with text
-clickLinkContaining
-clickLinkMatching
-clickText
-clickTextContaining		if more than one element matches, pick first one
-clickTextMatching		as above
++click
+// all clicks from "check..." commands with "c" marker
 doubleClick				(like clicks above)
-ctrlClick
+ctrlClick		maybe just add "modifier" param
 shiftClick
 altClick
 ctrlShiftClick
 ctrlAltClick
 shiftAltClick
+
 dragAndDrop				from=source, to=target
 
 +type
+clearInput
 press					press given key or key combination separated by "+" (use literals for characters)
 keyDown
 keyUp
