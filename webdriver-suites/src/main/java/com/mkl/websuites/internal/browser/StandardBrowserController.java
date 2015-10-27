@@ -73,13 +73,12 @@ public class StandardBrowserController implements BrowserController {
 		
 		Browser[] browsers = browsersConfiguration.browsers();
 		
-		// populate default FF browser in case it's not existing int the browser config annotation:
+		// populate default browsers config:
 		BrowsersConfiguration defaultConfig =
 				DefaultBrowserConfig.class.getAnnotation(BrowsersConfiguration.class);
 		browsers = ArrayUtils.addAll(defaultConfig.browsers(), browsers);
-//		driverClassMap.put("ff", FirefoxDriver.class);
-//		browserDisplayNameMap.put("ff", "Firefox");
-		// if it's existing it will overwritten in next loop
+		
+		// if specified explicitly, the config will get overwritten in this loop:
 		
 		for (Browser browser : browsers) {
 			

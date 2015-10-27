@@ -1,15 +1,11 @@
 package com.mkl.websuites.internal.browser;
 
 import junit.framework.TestCase;
-import lombok.extern.slf4j.Slf4j;
-
-import org.openqa.selenium.WebDriver;
 
 import com.mkl.websuites.internal.services.ServiceFactory;
 
 
-@Slf4j
-public class SwitchBrowserTest extends TestCase {
+public class TearDownBrowserTest extends TestCase {
 
 	
 	
@@ -21,7 +17,7 @@ public class SwitchBrowserTest extends TestCase {
 	
 	
 	
-	public SwitchBrowserTest(String browser, RunnableForBrowser runnableForBrowser) {
+	public TearDownBrowserTest(String browser, RunnableForBrowser runnableForBrowser) {
 		this.browserName = browser;
 		this.runnableForBrowser = runnableForBrowser;
 	}
@@ -38,7 +34,7 @@ public class SwitchBrowserTest extends TestCase {
 			displayName = "Not configured!";
 		}
 		
-		return "Initializing browser: " + displayName;
+		return "Finalizing tests for browser: " + displayName;
 	}
 	
 	
@@ -46,19 +42,6 @@ public class SwitchBrowserTest extends TestCase {
 	protected void runTest() throws Throwable {
 		
 		runnableForBrowser.runForBrowser(browserName);
-		
-		WebDriver driver = browserController.getWebDriver();
-		
-		// check if first test, then nothing to close yet, otherwise close:
-		if (driver != null) {
-			driver.quit();
-		}
-		
-		String closedBrowser = browserController.removeCurrentBrowser();
-		
-		log.debug("removing browser [ " + closedBrowser + "] from list of browsers to run");
-		
-		browserController.setNextWebDriver();
 	}
 	
 }

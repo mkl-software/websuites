@@ -16,7 +16,9 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 public abstract class WebSuitesResultCheck extends JettyBasedTest {
 
 	
-	protected static final int CORRECT_TEST_COUNT_FOR_SINGLE_TEST = 3;
+	public static final int BASE_RUN_COUNT_FOR_BROWSER_TEST = 5;
+	
+	public static final int BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST = 2;
 	
 	
 	protected Result checkWebTestResult(Class<? extends WebSuites> localRunner) throws Throwable {

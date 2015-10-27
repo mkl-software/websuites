@@ -59,7 +59,7 @@ public class CheckCommandTest extends WebSuitesResultCheck {
 		
 		Result testResult = super.checkWebTestResult(LocalRunnerExistingElemCssId.class);
 		
-		checkRunCount(CORRECT_TEST_COUNT_FOR_SINGLE_TEST, testResult);
+		checkRunCount(BASE_RUN_COUNT_FOR_BROWSER_TEST, testResult);
 		
 		checkIfNoFailures(testResult);
 	}
@@ -71,7 +71,7 @@ public class CheckCommandTest extends WebSuitesResultCheck {
 		
 		Result testResult = super.checkWebTestResult(LocalRunnerNotExistingElemCssId.class);
 		
-		checkRunCount(CORRECT_TEST_COUNT_FOR_SINGLE_TEST, testResult);
+		checkRunCount(BASE_RUN_COUNT_FOR_BROWSER_TEST, testResult);
 
 		Assert.assertEquals(1, testResult.getFailureCount());
 		
@@ -91,7 +91,7 @@ public class CheckCommandTest extends WebSuitesResultCheck {
 		
 		Result testResult = super.checkWebTestResult(LocalRunnerForIdParam.class);
 		
-		checkRunCount(CORRECT_TEST_COUNT_FOR_SINGLE_TEST, testResult);
+		checkRunCount(BASE_RUN_COUNT_FOR_BROWSER_TEST, testResult);
 		
 		Assert.assertEquals(1, testResult.getFailureCount()); // exactly 1, firtst test OK
 		
@@ -110,7 +110,7 @@ public class CheckCommandTest extends WebSuitesResultCheck {
 		
 		Result testResult = super.checkWebTestResult(LocalRunnerForXpathParam.class);
 		
-		checkRunCount(CORRECT_TEST_COUNT_FOR_SINGLE_TEST, testResult);
+		checkRunCount(BASE_RUN_COUNT_FOR_BROWSER_TEST, testResult);
 		
 		checkIfNoFailures(testResult);
 		

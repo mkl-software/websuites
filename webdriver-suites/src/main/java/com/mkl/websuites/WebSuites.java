@@ -10,8 +10,11 @@ import org.junit.runner.RunWith;
 
 import com.mkl.websuites.internal.ConfigurationManager;
 import com.mkl.websuites.internal.browser.BrowserController;
-import com.mkl.websuites.internal.browser.CleanupBrowsersTest;
+import com.mkl.websuites.internal.browser.RunnableForBrowser;
+import com.mkl.websuites.internal.browser.SetUpAllTest;
+import com.mkl.websuites.internal.browser.TearDownAllTest;
 import com.mkl.websuites.internal.browser.SwitchBrowserTest;
+import com.mkl.websuites.internal.browser.TearDownBrowserTest;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
@@ -39,28 +42,28 @@ public class WebSuites {
 	 * Runs before all tests are started.
 	 */
 	protected void setUp() {
-		
+		log.debug("set up all tests (default impl");
 	}
 	
 	/**
 	 * Runs after all tests for all browsers are finished and browsers are shut down.
 	 */
 	protected void tearDown() {
-		
+		log.debug("tear down all tests (default impl)");
 	}
 	
 	/**
 	 * Runs before all tests for given browser are started.
 	 */
 	protected void setUpBeforeBrowser(String currentBrowser) {
-		
+		log.debug("set up before browser '{}' (default impl)", currentBrowser);
 	}
 	
 	/**
 	 * Runs after all tests for given browser are finished.
 	 */
 	protected void tearDownAfterBrowser(String currentBrowser) {
-		
+		log.debug("tear down after browser '{}' (default impl)", currentBrowser);
 	}
 	
 	
@@ -77,64 +80,128 @@ public class WebSuites {
 		
 		WebSuitesRunner runner = runningClass.getAnnotation(WebSuitesRunner.class);
 		
-		Class<? extends Test>[] suites = runner.suite();
+		Class<? extends Test>[] tests = runner.suite();
 		
 		WebSuitesConfig config = runner.configurationClass().
 				getAnnotation(WebSuitesConfig.class);
 		
 		ServiceFactory.get(ConfigurationManager.class).setConfiguration(config);
 		
-		BrowserController browserController = ServiceFactory.get(BrowserController.class);
-		
-		browserController.initializeBrowsersEnvironment(config);
+		ServiceFactory.get(BrowserController.class).initializeBrowsersEnvironment(config);
 		
 		String[] browsers = config.browsers();
 		
-		// TODO: refactor it more elegantly
+		addSetUpSuite(suite);
+		
+		
+		// check if run for non-browser mode:
 		if (browsers.length == 1 && browsers[0].equals("none")) {
-			// run for non-browser mode:
-			currentlyDefiningBrowser = "none"; // TODO: move it to a TestContext
-			TestSuite browserSuite = new TestSuite("Running without any browser");
-			for (Class<? extends Test> testClass : suites) {
-				
-				Test dynamicTest = testClass.newInstance();
-				browserSuite.addTest(dynamicTest);
-			}
-			suite.addTest(browserSuite);
+			configureSingleNonBrowserSuite(suite, tests);
 		}
 		
 		for (String browser : browsers) {
 			
 			if (browser.equals("none")) {
+				log.warn("No-browser found among browser tests - skipping no-browser. Please use a config"
+						+ " with only ONE browser set to 'none' if you want to run tests without any browser");
 				continue;
 			}
 			
-			currentlyDefiningBrowser = browser;
+			TestSuite browserSuite = buildBrowserSuite(browser);
 			
-			browserController.addBrowser(browser);
-		
-			TestSuite browserSuite = new TestSuite("Running for [" + browser + "]");
-			
-			browserSuite.addTest(new SwitchBrowserTest(browser));
-			
-			for (Class<? extends Test> testClass : suites) {
-				
-				Test dynamicTest = testClass.newInstance();
-				
-				browserSuite.addTest(dynamicTest);
-			}
+			addTestsToBrowserSuite(tests, browserSuite);
 			
 			suite.addTest(browserSuite);
 			
-		}
-		
-		if (!config.doNotCloseBrowserAtTheEnd() && !(browsers.length == 1 && browsers[0].equals("none"))) {
+			addTearDownForBrowser(browserSuite, browser);
 			
-			suite.addTest(new CleanupBrowsersTest());
 		}
 		
+		addTearDownSuite(suite);
 		
 		return suite;
+	}
+
+	
+	
+	
+	
+	private void addTearDownForBrowser(TestSuite browserSuite, String browser) {
+		
+		browserSuite.addTest(new TearDownBrowserTest(browser, new RunnableForBrowser() {
+
+			@Override
+			public void runForBrowser(String browserId) {
+				tearDownAfterBrowser(browserId);
+			}
+		}));
+	}
+
+	
+	
+	protected void configureSingleNonBrowserSuite(TestSuite suite,
+			Class<? extends Test>[] suites) throws InstantiationException,
+			IllegalAccessException {
+		currentlyDefiningBrowser = "none"; // TODO: move it to a TestContext
+		TestSuite browserSuite = new TestSuite("Running without any browser");
+		addTestsToBrowserSuite(suites, browserSuite);
+		suite.addTest(browserSuite);
+	}
+
+	
+	
+	
+	
+	protected TestSuite buildBrowserSuite(String browser) {
+		
+		currentlyDefiningBrowser = browser;
+		
+		ServiceFactory.get(BrowserController.class).addBrowser(browser);
+
+		TestSuite browserSuite = new TestSuite("Running for [" + browser + "]");
+		
+		browserSuite.addTest(new SwitchBrowserTest(browser, new RunnableForBrowser() {
+
+			@Override
+			public void runForBrowser(String browserId) {
+				setUpBeforeBrowser(browserId);
+			}
+		}));
+		return browserSuite;
+	}
+
+	
+	
+	protected void addTearDownSuite(TestSuite suite) {
+		suite.addTest(new TearDownAllTest(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				tearDown();
+			}
+		}));
+	}
+
+	protected void addSetUpSuite(TestSuite suite) {
+		suite.addTest(new SetUpAllTest(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				setUp();
+			}
+		}));
+	}
+
+	private void addTestsToBrowserSuite(Class<? extends Test>[] tests,
+			TestSuite browserSuite) throws InstantiationException,
+			IllegalAccessException {
+		for (Class<? extends Test> testClass : tests) {
+			
+			Test dynamicTest = testClass.newInstance();
+			browserSuite.addTest(dynamicTest);
+		}
 	}
 
 	

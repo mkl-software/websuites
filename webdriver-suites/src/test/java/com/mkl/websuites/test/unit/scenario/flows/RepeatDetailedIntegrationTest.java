@@ -2,6 +2,7 @@ package com.mkl.websuites.test.unit.scenario.flows;
 
 import static com.mkl.websuites.test.core.TestUtils.checkIfNoFailures;
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.mkl.websuites.test.core.WebSuitesResultCheck.BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST;
 
 import java.lang.annotation.Annotation;
 
@@ -51,7 +52,7 @@ public class RepeatDetailedIntegrationTest {
 		//then
 		checkIfNoFailures(result);
 		
-		assertThat(result.getRunCount()).isEqualTo(1);
+		assertThat(result.getRunCount()).isEqualTo(BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 1);
 		
 		commandVerifier.checkRemaining();
 	}
@@ -79,7 +80,7 @@ public class RepeatDetailedIntegrationTest {
 		//then
 		checkIfNoFailures(result);
 		
-		assertThat(result.getRunCount()).isEqualTo(1);
+		assertThat(result.getRunCount()).isEqualTo(BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 1);
 		
 		commandVerifier.checkRemaining();
 	}
@@ -107,7 +108,7 @@ public class RepeatDetailedIntegrationTest {
 		//then
 		checkIfNoFailures(result);
 		
-		assertThat(result.getRunCount()).isEqualTo(1);
+		assertThat(result.getRunCount()).isEqualTo(BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 1);
 		
 		commandVerifier.checkRemaining();
 	}
@@ -132,7 +133,7 @@ public class RepeatDetailedIntegrationTest {
 		//then
 		checkIfNoFailures(result);
 		
-		assertThat(result.getRunCount()).isEqualTo(1);
+		assertThat(result.getRunCount()).isEqualTo(BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 1);
 		
 		commandVerifier.checkRemaining();
 	}
@@ -158,7 +159,7 @@ public class RepeatDetailedIntegrationTest {
 		//then
 		checkIfNoFailures(result);
 		
-		assertThat(result.getRunCount()).isEqualTo(1);
+		assertThat(result.getRunCount()).isEqualTo(BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 1);
 		
 		commandVerifier.checkRemaining();
 	}
@@ -184,7 +185,7 @@ public class RepeatDetailedIntegrationTest {
 		//then
 		checkIfNoFailures(result);
 		
-		assertThat(result.getRunCount()).isEqualTo(1);
+		assertThat(result.getRunCount()).isEqualTo(BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 1);
 		
 		commandVerifier.checkRemaining();
 	}
@@ -209,7 +210,7 @@ public class RepeatDetailedIntegrationTest {
 		//then
 		checkIfNoFailures(result);
 		
-		assertThat(result.getRunCount()).isEqualTo(1);
+		assertThat(result.getRunCount()).isEqualTo(BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 1);
 		
 		commandVerifier.checkRemaining();
 	}
@@ -237,7 +238,7 @@ public class RepeatDetailedIntegrationTest {
 		//then
 		checkIfNoFailures(result);
 		
-		assertThat(result.getRunCount()).isEqualTo(4); // 4 param cases
+		assertThat(result.getRunCount()).isEqualTo(BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 4); // 4 param cases
 		
 		commandVerifier.checkRemaining();
 	}
@@ -261,7 +262,7 @@ public class RepeatDetailedIntegrationTest {
 		//then
 		checkIfNoFailures(result);
 		
-		assertThat(result.getRunCount()).isEqualTo(2); // 1 for command before + one param case
+		assertThat(result.getRunCount()).isEqualTo(BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 2); // 1 for command before + one param case
 		
 		commandVerifier.checkRemaining();
 	}
@@ -287,7 +288,7 @@ public class RepeatDetailedIntegrationTest {
 		//then
 		checkIfNoFailures(result);
 		
-		assertThat(result.getRunCount()).isEqualTo(3); // 2 param case + 1 for command after
+		assertThat(result.getRunCount()).isEqualTo(BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 3); // 2 param case + 1 for command after
 		
 		commandVerifier.checkRemaining();
 	}
@@ -315,7 +316,7 @@ public class RepeatDetailedIntegrationTest {
 		//then
 		checkIfNoFailures(result);
 		
-		assertThat(result.getRunCount()).isEqualTo(5); // 1 for command before + 3 param case + 1 command after
+		assertThat(result.getRunCount()).isEqualTo(BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 5); // 1 for command before + 3 param case + 1 command after
 		
 		commandVerifier.checkRemaining();
 	}
@@ -342,7 +343,7 @@ public class RepeatDetailedIntegrationTest {
 		//then
 		checkIfNoFailures(result);
 		
-		assertThat(result.getRunCount()).isEqualTo(4); // 4 param test cases
+		assertThat(result.getRunCount()).isEqualTo(BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 4); // 4 param test cases
 		
 		commandVerifier.checkRemaining();
 	}
@@ -381,7 +382,7 @@ public class RepeatDetailedIntegrationTest {
 		//then
 		checkIfNoFailures(result);
 		
-		assertThat(result.getRunCount()).isEqualTo(13); 
+		assertThat(result.getRunCount()).isEqualTo(BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 13); 
 		
 		commandVerifier.checkRemaining();
 	}

@@ -36,7 +36,7 @@ public class CheckTitleTest extends WebSuitesResultCheck {
 		//when
 		Result testResult = checkWebTestResult(LocalRunnerForTitleCheckOK.class);
 		//then
-		checkRunCount(CORRECT_TEST_COUNT_FOR_SINGLE_TEST, testResult);
+		checkRunCount(BASE_RUN_COUNT_FOR_BROWSER_TEST, testResult);
 		
 		checkIfNoFailures(testResult);
 	}
@@ -47,7 +47,7 @@ public class CheckTitleTest extends WebSuitesResultCheck {
 		//when
 		Result testResult = checkWebTestResult(LocalRunnerForTitleCheckFail.class);
 		//then
-		checkRunCount(CORRECT_TEST_COUNT_FOR_SINGLE_TEST, testResult);
+		checkRunCount(BASE_RUN_COUNT_FOR_BROWSER_TEST, testResult);
 		
 		assertThat(testResult.getFailureCount()).isEqualTo(1);
 		assertThat(testResult.getFailures().get(0).getMessage()).contains("Not expected title");

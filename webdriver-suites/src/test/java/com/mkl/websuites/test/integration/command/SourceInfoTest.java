@@ -60,7 +60,7 @@ public class SourceInfoTest extends WebSuitesResultCheck {
 		
 		Result testResult = super.checkWebTestResult(LocalRunnerErrorInCommand2.class);
 		
-		checkRunCount(1, testResult); // 1 because it's browserless config
+		checkRunCount(BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 1, testResult);
 		
 		assertThat(testResult.getFailureCount()).isEqualTo(1);
 		

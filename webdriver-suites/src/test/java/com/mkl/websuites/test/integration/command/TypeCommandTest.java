@@ -55,7 +55,7 @@ public class TypeCommandTest extends WebSuitesResultCheck {
 		
 		Result testResult = super.checkWebTestResult(LocalRunner.class);
 		
-		checkRunCount(CORRECT_TEST_COUNT_FOR_SINGLE_TEST + 1, testResult); // +1 for TypeTextCheckTest
+		checkRunCount(BASE_RUN_COUNT_FOR_BROWSER_TEST + 1, testResult); // +1 for TypeTextCheckTest
 		
 		checkIfNoFailures(testResult);
 	}

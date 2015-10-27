@@ -1,6 +1,7 @@
 package com.mkl.websuites.test.integration.nonweb;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.mkl.websuites.test.core.WebSuitesResultCheck.BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST;
 
 import java.lang.annotation.Annotation;
 
@@ -48,7 +49,7 @@ public class FolderedScenarioFilesTest {
 		//when
 		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
 		//then
-		TestUtils.checkCorrectResultRunsCount(result, 4);
+		TestUtils.checkCorrectResultRunsCount(result, BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 4);
 		commandVerifier.checkRemaining();
 	}
 	
@@ -65,7 +66,7 @@ public class FolderedScenarioFilesTest {
 		//when
 		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
 		//then
-		TestUtils.checkCorrectResultRunsCount(result, 5);
+		TestUtils.checkCorrectResultRunsCount(result, BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 5);
 		commandVerifier.checkRemaining();
 	}
 	
@@ -85,7 +86,7 @@ public class FolderedScenarioFilesTest {
 		//then
 		TestUtils.checkIfNoFailures(result);
 		commandVerifier.checkRemaining();
-		assertThat(result.getRunCount()).isEqualTo(2);
+		assertThat(result.getRunCount()).isEqualTo(BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 2);
 	}
 	
 	
@@ -101,7 +102,7 @@ public class FolderedScenarioFilesTest {
 		//when
 		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
 		//then
-		TestUtils.checkCorrectResultRunsCount(result, 1);
+		TestUtils.checkCorrectResultRunsCount(result, BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 1);
 		commandVerifier.checkRemaining();
 	}
 	
@@ -121,7 +122,7 @@ public class FolderedScenarioFilesTest {
 		//when
 		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
 		//then
-		TestUtils.checkCorrectResultRunsCount(result, 3);
+		TestUtils.checkCorrectResultRunsCount(result, BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 3);
 		commandVerifier.checkRemaining();
 	}
 	
@@ -137,7 +138,7 @@ public class FolderedScenarioFilesTest {
 		//when
 		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
 		//then
-		TestUtils.checkCorrectResultRunsCount(result, 0);
+		TestUtils.checkCorrectResultRunsCount(result, BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST);
 		commandVerifier.checkRemaining();
 	}
 	

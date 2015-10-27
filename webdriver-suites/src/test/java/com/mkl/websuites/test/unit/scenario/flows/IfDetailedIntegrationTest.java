@@ -1,5 +1,7 @@
 package com.mkl.websuites.test.unit.scenario.flows;
 
+import static com.mkl.websuites.test.core.WebSuitesResultCheck.BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST;
+
 import java.lang.annotation.Annotation;
 
 import mockit.Mock;
@@ -51,7 +53,7 @@ public class IfDetailedIntegrationTest {
 		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
 		
 		//then
-		TestUtils.checkCorrectResultRunsCount(result, 1);
+		TestUtils.checkCorrectResultRunsCount(result, BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 1);
 		commandVerifier.checkRemaining();
 	}
 	
@@ -71,7 +73,7 @@ public class IfDetailedIntegrationTest {
 		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
 		
 		//then
-		TestUtils.checkCorrectResultRunsCount(result, 1);
+		TestUtils.checkCorrectResultRunsCount(result, BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 1);
 		commandVerifier.checkRemaining();
 	}
 	
@@ -91,7 +93,7 @@ public class IfDetailedIntegrationTest {
 		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
 		
 		//then
-		TestUtils.checkCorrectResultRunsCount(result, 1);
+		TestUtils.checkCorrectResultRunsCount(result, BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 1);
 		commandVerifier.checkRemaining();
 	}
 	
@@ -114,7 +116,7 @@ public class IfDetailedIntegrationTest {
 		Result result = new JUnitCore().run(new InternalWebSuitesRunner(Runner.class));
 		
 		//then
-		TestUtils.checkCorrectResultRunsCount(result, 1);
+		TestUtils.checkCorrectResultRunsCount(result, BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST + 1);
 		commandVerifier.checkRemaining();
 	}
 

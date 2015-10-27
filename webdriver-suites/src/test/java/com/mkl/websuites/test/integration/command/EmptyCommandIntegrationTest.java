@@ -45,7 +45,7 @@ public class EmptyCommandIntegrationTest extends WebSuitesResultCheck {
 		
 		Result testResult = super.checkWebTestResult(LocalRunner.class);
 		
-		checkRunCount(3, testResult);
+		checkRunCount(BASE_RUN_COUNT_FOR_BROWSER_TEST, testResult);
 		
 	}
 	

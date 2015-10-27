@@ -58,7 +58,7 @@ public class AllCheckCommandsFailingTest extends WebSuitesResultCheck {
 		
 		Result testResult = super.checkWebTestResult(LocalRunnerAllCheckCommandsPassing.class);
 		
-		checkRunCount(CORRECT_TEST_COUNT_FOR_SINGLE_TEST, testResult);
+		checkRunCount(BASE_RUN_COUNT_FOR_BROWSER_TEST, testResult);
 
 		assertThat(testResult.getFailureCount()).isEqualTo(1);
 		
