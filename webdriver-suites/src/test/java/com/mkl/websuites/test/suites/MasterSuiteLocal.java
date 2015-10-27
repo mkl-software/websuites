@@ -5,15 +5,18 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 
-
+/**
+ * Should work also in HTMLUnit for quick web tests.
+ * @author klosinskim
+ *
+ */
 @RunWith(Suite.class)
 @SuiteClasses(
 		{
 			NonWebTests.class,
 			WebTests.class,
-			LongRunningTestsForRealBrowsers.class
 		}
 )
-public class MasterSuite {
+public class MasterSuiteLocal {
 
 }

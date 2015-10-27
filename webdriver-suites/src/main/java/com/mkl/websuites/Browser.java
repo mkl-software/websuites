@@ -15,6 +15,7 @@ public @interface Browser {
 		FIREFOX,
 		SAFARI,
 		OPERA,
+		HTML,
 		NONE
 	}
 

@@ -1,4 +1,4 @@
-package com.mkl.websuites.test.unit;
+package com.mkl.websuites.test.suites;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

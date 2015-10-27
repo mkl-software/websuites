@@ -4,17 +4,17 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.mkl.websuites.test.unit.ServiceFactoryTest;
+import com.mkl.websuites.test.unit.core.NormalizePathTest;
+import com.mkl.websuites.test.unit.core.PropertiesTest;
 
 
 
 @RunWith(Suite.class)
 @SuiteClasses({
-		ServiceFactoryTest.class,
-		ScenarioTests.class,
-		CoreTests.class,
-		AllUnitTests.class
+	
+	NormalizePathTest.class,
+	PropertiesTest.class
 })
-public class NonWebTests {
+public class CoreTests {
 
 }

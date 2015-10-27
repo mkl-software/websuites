@@ -24,6 +24,13 @@ public @interface BrowsersConfiguration {
 			localId = "none",
 			displayName = "None",
 			webDriverPath = ""
+		),
+		
+		@Browser(
+			browserType = BrowserType.HTML,
+			localId = "html",
+			displayName = "HTML Unit",
+			webDriverPath = ""
 		)
 	};
 }

@@ -8,13 +8,14 @@ import java.util.concurrent.TimeUnit;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.mkl.websuites.Browser;
-import com.mkl.websuites.Browser.BrowserType;
 import com.mkl.websuites.BrowsersConfiguration;
 import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesException;
@@ -51,8 +52,8 @@ public class StandardBrowserController implements BrowserController {
 		return instance;
 	}
 
-	
-	
+	@BrowsersConfiguration
+	private static class DefaultBrowserConfig {}
 	
 	
 	@Override
@@ -73,8 +74,11 @@ public class StandardBrowserController implements BrowserController {
 		Browser[] browsers = browsersConfiguration.browsers();
 		
 		// populate default FF browser in case it's not existing int the browser config annotation:
-		driverClassMap.put("ff", FirefoxDriver.class);
-		browserDisplayNameMap.put("ff", "Firefox");
+		BrowsersConfiguration defaultConfig =
+				DefaultBrowserConfig.class.getAnnotation(BrowsersConfiguration.class);
+		browsers = ArrayUtils.addAll(defaultConfig.browsers(), browsers);
+//		driverClassMap.put("ff", FirefoxDriver.class);
+//		browserDisplayNameMap.put("ff", "Firefox");
 		// if it's existing it will overwritten in next loop
 		
 		for (Browser browser : browsers) {
@@ -90,6 +94,15 @@ public class StandardBrowserController implements BrowserController {
 				break;
 			case INTERNET_EXPLORER:
 				configureBrowser("webdriver.ie.driver", browser, InternetExplorerDriver.class);
+				break;
+			case HTML:
+				configureBrowser("", browser, HtmlUnitDriver.class);
+				break;
+			case OPERA:
+				break;
+			case SAFARI:
+				break;
+			default:
 				break;
 			
 			}
@@ -164,6 +177,10 @@ public class StandardBrowserController implements BrowserController {
 		try {
 			webDriver = (WebDriver) driverClass.newInstance();
 			webDriver.manage().timeouts().implicitlyWait(globalTimeout, TimeUnit.SECONDS);
+			
+			if (webDriver instanceof HtmlUnitDriver) {
+				((HtmlUnitDriver) webDriver).setJavascriptEnabled(true);
+			}
 			
 		} catch (InstantiationException | IllegalAccessException e) {
 			
