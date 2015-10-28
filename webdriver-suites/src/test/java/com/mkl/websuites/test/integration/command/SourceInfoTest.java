@@ -8,9 +8,9 @@ import org.junit.runner.Result;
 
 import pl.wkr.fluentrule.api.FluentExpectedException;
 
-import com.mkl.websuites.WebSuites;
-import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.WebSuitesException;
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.test.client.browserless.NoBrowserConfig;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
 import com.mkl.websuites.tests.ScenarioFileTest;
@@ -26,14 +26,14 @@ public class SourceInfoTest extends WebSuitesResultCheck {
 	public static class ErrorInCommandScenario2 extends ScenarioFileTest {}
 	
 	
-	@WebSuitesRunner(configurationClass = NoBrowserConfig.class,
+	@WebSuites(configurationClass = NoBrowserConfig.class,
 			suite = ErrorInCommandScenario1.class)
-	public static class LocalRunnerErrorInCommand1  extends WebSuites {}
+	public static class LocalRunnerErrorInCommand1  extends WebSuitesRunner {}
 	
 	
-	@WebSuitesRunner(configurationClass = NoBrowserConfig.class,
+	@WebSuites(configurationClass = NoBrowserConfig.class,
 			suite = ErrorInCommandScenario2.class)
-	public static class LocalRunnerErrorInCommand2  extends WebSuites {}
+	public static class LocalRunnerErrorInCommand2  extends WebSuitesRunner {}
 	
 	
 	

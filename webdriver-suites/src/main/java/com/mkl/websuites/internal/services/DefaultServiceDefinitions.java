@@ -28,10 +28,6 @@ import com.mkl.websuites.internal.services.ServiceDefinition.Service;
 	),
 	
 	@Service(
-			service = ConfigurationManager.class,
-			implementation = StandardConfigurationManager.class
-	),
-	@Service(
 			service = ScenarioFileProcessor.class,
 			implementation = StandardScenarioFileProcessor.class
 	),
@@ -54,7 +50,12 @@ import com.mkl.websuites.internal.services.ServiceDefinition.Service;
 	@Service(
 			service = CommandTestConverter.class,
 			implementation = StandardCommandTestConverter.class
-	)
+	),
+	
+	@Service(
+			service = ConfigurationManager.class,
+			implementation = StandardConfigurationManager.class
+	),
 })
 public class DefaultServiceDefinitions {
 

@@ -17,7 +17,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.mkl.websuites.Browser;
 import com.mkl.websuites.BrowsersConfiguration;
-import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.WebSuitesConfig_rename;
 import com.mkl.websuites.WebSuitesException;
 
 
@@ -57,7 +57,7 @@ public class StandardBrowserController implements BrowserController {
 	
 	
 	@Override
-	public void initializeBrowsersEnvironment(WebSuitesConfig config) {
+	public void initializeBrowsersEnvironment(WebSuitesConfig_rename config) {
 		
 		BrowsersConfiguration browsersConfiguration =
 				config.browsersConfiguration().getAnnotation(BrowsersConfiguration.class);

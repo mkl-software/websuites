@@ -2,14 +2,14 @@ package com.mkl.websuites.test.integration.bugs;
 
 import org.junit.Assert;
 
-import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.WebSuitesConfig_rename;
 import com.mkl.websuites.test.BrowsersConfig;
 import com.mkl.websuites.tests.WebSuiteStandaloneTest;
 
 public class TestIE80 extends WebSuiteStandaloneTest {
 
 	
-	@WebSuitesConfig(
+	@WebSuitesConfig_rename(
 		browsers = {"ie"},
 		host = "google.com",
 		browsersConfiguration = BrowsersConfig.class

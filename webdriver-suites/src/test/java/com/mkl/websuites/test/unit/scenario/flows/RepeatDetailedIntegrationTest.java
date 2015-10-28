@@ -10,9 +10,9 @@ import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
-import com.mkl.websuites.WebSuites;
-import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.WebSuitesConfig_rename;
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 import com.mkl.websuites.test.core.TestUtils;
 import com.mkl.websuites.test.unit.scenario.CommandInvocationVerifier;
@@ -29,11 +29,11 @@ public class RepeatDetailedIntegrationTest {
 	@Scenarios("src/test/resources/integration/non-web/repeat/11.scn")
 	public static class ScenarioFile extends ScenarioFileTest {}
 	
-	@WebSuitesConfig(browsers = "none")
+	@WebSuitesConfig_rename(browsers = "none")
 	public static class LocalConfig {}
 	
-	@WebSuitesRunner(suite = ScenarioFile.class, configurationClass = LocalConfig.class)
-	public static class Runner extends WebSuites {}
+	@WebSuites(suite = ScenarioFile.class, configurationClass = LocalConfig.class)
+	public static class Runner extends WebSuitesRunner {}
 	
 	
 	@Test

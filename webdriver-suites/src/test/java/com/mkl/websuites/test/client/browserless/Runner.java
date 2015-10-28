@@ -1,13 +1,13 @@
 package com.mkl.websuites.test.client.browserless;
 
-import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.WebSuites;
 
 
 
 
-@WebSuitesRunner(
+@WebSuites(
 		configurationClass = NoBrowserConfig.class,
 		suite = {LocalScenarioTest.class})
 
-public class Runner extends WebSuites {}
+public class Runner extends WebSuitesRunner {}

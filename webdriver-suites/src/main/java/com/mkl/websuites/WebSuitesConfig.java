@@ -1,39 +1,25 @@
 package com.mkl.websuites;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
-import com.mkl.websuites.ext.Customization;
+import lombok.extern.slf4j.Slf4j;
 
 
+/**
+ * Main configuration storage.
+ * @author Marcin Klosinski
+ *
+ */
+@Slf4j
+public class WebSuitesConfig {
 
-@Retention(RetentionPolicy.RUNTIME)
-public @interface WebSuitesConfig {
+	private static WebSuites config;
+
+	public static void initializeWebsuitesConfig(Class<? extends WebSuitesRunner> runningClass) {
+		config = runningClass.getAnnotation(WebSuites.class);
+		log.debug("config class: " + config);
+		
+	}
 	
-	
-	@Customization
-	public static class EmptyServiceOverrideDefinition {}
-
-
-	@BrowsersConfiguration
-	public static class DefaultBrowserConfig {}
-
-	String host() default "localhost";
-
-	int port() default 80;
-
-	String basePath() default "/";
-
-	String[] browsers();
-	
-	Class<?> browsersConfiguration() default DefaultBrowserConfig.class;
-
-	int waitTimeout() default 30;
-	
-	boolean doNotCloseBrowserAtTheEnd() default false;
-	
-	String[] scenarioFileExtensions() default {"scn"};
-
-	Class<?> serviceOverrides() default EmptyServiceOverrideDefinition.class;
-
+	public static WebSuites get() {
+		return config;
+	}
 }

@@ -5,8 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.junit.runner.Result;
 
-import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
 import com.mkl.websuites.tests.ScenarioFileTest;
 import com.mkl.websuites.tests.Scenarios;
@@ -20,14 +20,14 @@ public class CheckTitleTest extends WebSuitesResultCheck {
 	@Scenarios("src/test/resources/integration/command/check/checkTitleFail.scn")
 	public static class ScenarioWithTitleCheckResultFail extends ScenarioFileTest {}
 
-	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class,
+	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
 			suite = CheckTitleTest.ScenarioWithTitleCheckResultOK.class)
-	public static class LocalRunnerForTitleCheckOK  extends WebSuites {}
+	public static class LocalRunnerForTitleCheckOK  extends WebSuitesRunner {}
 	
 	
-	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class,
+	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
 			suite = CheckTitleTest.ScenarioWithTitleCheckResultFail.class)
-	public static class LocalRunnerForTitleCheckFail  extends WebSuites {}
+	public static class LocalRunnerForTitleCheckFail  extends WebSuitesRunner {}
 	
 	
 	

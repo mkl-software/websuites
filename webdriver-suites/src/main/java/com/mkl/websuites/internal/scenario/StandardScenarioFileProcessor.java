@@ -7,7 +7,6 @@ import java.util.List;
 import junit.framework.Test;
 import junit.framework.TestCase;
 
-import com.mkl.websuites.internal.ConfigurationManager;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandParser;
 import com.mkl.websuites.internal.command.CommandPostProcessor;
@@ -18,8 +17,6 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 
 public class StandardScenarioFileProcessor implements ScenarioFileProcessor {
 
-	
-	protected ConfigurationManager config = ServiceFactory.get(ConfigurationManager.class);
 	
 	
 	private static ScenarioFileProcessor instance = new StandardScenarioFileProcessor();

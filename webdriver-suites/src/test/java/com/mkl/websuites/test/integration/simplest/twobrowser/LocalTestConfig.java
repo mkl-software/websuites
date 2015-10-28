@@ -1,14 +1,14 @@
 package com.mkl.websuites.test.integration.simplest.twobrowser;
 
-import com.mkl.websuites.WebSuites;
-import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.WebSuitesConfig_rename;
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.test.BrowsersConfig;
 import com.mkl.websuites.test.core.JettyBasedTest;
 
 public class LocalTestConfig {
 
-	@WebSuitesConfig(
+	@WebSuitesConfig_rename(
 			basePath = "/integration/simple/titleOnly.html",
 			browsers = {"ff", "ff"},
 			host = "http://localhost",
@@ -20,10 +20,10 @@ public class LocalTestConfig {
 
 	
 	
-	@WebSuitesRunner(
+	@WebSuites(
 			configurationClass = Config.class,
 			suite = {TwoBrowserTitleOnlyTest.class}
 	)
-	public static class Runner extends WebSuites {}
+	public static class Runner extends WebSuitesRunner {}
 	
 }

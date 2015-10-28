@@ -3,8 +3,8 @@ package com.mkl.websuites.test.integration.command;
 import org.junit.Test;
 import org.junit.runner.Result;
 
-import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
 import com.mkl.websuites.tests.ScenarioFileTest;
 import com.mkl.websuites.tests.Scenarios;
@@ -21,9 +21,9 @@ public class AllCheckCommandsPassingTest extends WebSuitesResultCheck {
 	public static class AllCheckCommandsScenarioFile extends ScenarioFileTest {}
 	
 	
-	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class,
+	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
 			suite = AllCheckCommandsScenarioFile.class)
-	public static class LocalRunnerAllCheckCommandsPassing  extends WebSuites {}
+	public static class LocalRunnerAllCheckCommandsPassing  extends WebSuitesRunner {}
 	
 	
 	

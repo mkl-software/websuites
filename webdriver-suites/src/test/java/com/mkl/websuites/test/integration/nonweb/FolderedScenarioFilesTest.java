@@ -9,9 +9,9 @@ import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
-import com.mkl.websuites.WebSuites;
-import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.WebSuitesConfig_rename;
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 import com.mkl.websuites.test.core.TestUtils;
 import com.mkl.websuites.test.unit.scenario.CommandInvocationVerifier;
@@ -31,11 +31,11 @@ public class FolderedScenarioFilesTest {
 	@Folders(path = "src/test/resources/integration/non-web/folderedScenarios/4", ignoreSubfolders = false)
 	public static class FolderTest extends ScenarioFolderTest {}
 	
-	@WebSuitesConfig(browsers = "none")
+	@WebSuitesConfig_rename(browsers = "none")
 	public static class LocalConfig {}
 	
-	@WebSuitesRunner(suite = FolderTest.class, configurationClass = LocalConfig.class)
-	public static class Runner extends WebSuites {}
+	@WebSuites(suite = FolderTest.class, configurationClass = LocalConfig.class)
+	public static class Runner extends WebSuitesRunner {}
 	
 	
 	@Test

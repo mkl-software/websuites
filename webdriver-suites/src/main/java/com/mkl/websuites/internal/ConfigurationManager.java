@@ -1,12 +1,12 @@
 package com.mkl.websuites.internal;
 
-import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.WebSuitesConfig_rename;
 
 public interface ConfigurationManager {
 
-	void setConfiguration(WebSuitesConfig configuration);
+	void setConfiguration(WebSuitesConfig_rename configuration);
 
-	WebSuitesConfig getConfiguration();
+	WebSuitesConfig_rename getConfiguration();
 
 	
 }

@@ -4,8 +4,8 @@ import org.junit.Test;
 import org.junit.runner.Result;
 import org.openqa.selenium.Alert;
 
-import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
 import com.mkl.websuites.tests.ScenarioFileTest;
 import com.mkl.websuites.tests.Scenarios;
@@ -44,10 +44,10 @@ class ClickCommandTestConfig {
 public class ClickCommandTest extends WebSuitesResultCheck {
 
 	
-	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class,
+	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
 			suite = {ClickCommandTestConfig.LocalUnderlyingClickTest.class,
 		             ClickCommandTestConfig.ClickCheckTest.class})
-	public static class LocalRunner  extends WebSuites {}
+	public static class LocalRunner  extends WebSuitesRunner {}
 	
 	
 	@Test

@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.WebSuitesConfig_rename;
 import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
@@ -16,7 +16,7 @@ public abstract class MultiBrowserTestCase extends TestCase {
 	
 	private  BrowserController browserController = ServiceFactory.get(BrowserController.class);
 
-	protected WebSuitesConfig configuration = ServiceFactory.get(ConfigurationManager.class).getConfiguration();
+	protected WebSuitesConfig_rename configuration = ServiceFactory.get(ConfigurationManager.class).getConfiguration();
 	
 	protected String currentBrowser;
 	

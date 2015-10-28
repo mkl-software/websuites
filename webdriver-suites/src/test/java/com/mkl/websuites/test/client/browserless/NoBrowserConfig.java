@@ -1,10 +1,10 @@
 package com.mkl.websuites.test.client.browserless;
 
-import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.WebSuitesConfig_rename;
 
 
 
-@WebSuitesConfig(
+@WebSuitesConfig_rename(
 		
 	browsers = {"none"}
 	

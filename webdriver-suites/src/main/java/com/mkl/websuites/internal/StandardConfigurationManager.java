@@ -3,14 +3,14 @@ package com.mkl.websuites.internal;
 import lombok.Getter;
 import lombok.Setter;
 
-import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.WebSuitesConfig_rename;
 
 
 
 public class StandardConfigurationManager implements ConfigurationManager {
 
 	
-	private @Getter @Setter WebSuitesConfig configuration;
+	private @Getter @Setter WebSuitesConfig_rename configuration;
 
 	
 	private StandardConfigurationManager() {}

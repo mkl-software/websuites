@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
 import com.mkl.websuites.tests.ScenarioFileTest;
 import com.mkl.websuites.tests.Scenarios;
@@ -34,21 +34,21 @@ class CheckCommandTestConfig {
 public class CheckCommandTest extends WebSuitesResultCheck {
 
 	
-	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class,
+	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
 			suite = CheckCommandTestConfig.ScenarioWithExistingElemByCssId.class)
-	public static class LocalRunnerExistingElemCssId  extends WebSuites {}
+	public static class LocalRunnerExistingElemCssId  extends WebSuitesRunner {}
 	
-	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class,
+	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
 			suite = CheckCommandTestConfig.ScenarioWithNonExistingElemByCssId.class)
-	public static class LocalRunnerNotExistingElemCssId  extends WebSuites {}
+	public static class LocalRunnerNotExistingElemCssId  extends WebSuitesRunner {}
 	
-	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class,
+	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
 			suite = CheckCommandTestConfig.ScenarioForIdParam.class)
-	public static class LocalRunnerForIdParam  extends WebSuites {}
+	public static class LocalRunnerForIdParam  extends WebSuitesRunner {}
 	
-	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class,
+	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
 			suite = CheckCommandTestConfig.ScenarioForXpathParam.class)
-	public static class LocalRunnerForXpathParam  extends WebSuites {}
+	public static class LocalRunnerForXpathParam  extends WebSuitesRunner {}
 	
 	
 	

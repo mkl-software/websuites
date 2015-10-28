@@ -7,9 +7,9 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.WebSuitesConfig_rename;
 import com.mkl.websuites.WebSuitesException;
-import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.ext.Customization;
 import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.browser.StandardBrowserController;
@@ -57,13 +57,13 @@ public class ServiceFactoryTest {
 	public static class LocalCustomizationTest2 {}
 	
 	
-	@WebSuitesConfig(
+	@WebSuitesConfig_rename(
 		basePath = "", browsers = {}, host = "",
 		serviceOverrides = LocalCustomizationTest2.class
 	)
 	public static class LocalConfigTest2 {}
 	
-	@WebSuitesRunner(
+	@WebSuites(
 		configurationClass = LocalConfigTest2.class,
 		suite = {}
 	)

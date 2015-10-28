@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.assertj.core.util.VisibleForTesting;
 
-import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.internal.command.impl.flow.ControlFlowHandler;
 import com.mkl.websuites.internal.command.impl.flow.RepeatControlFlowHandler;
 import com.mkl.websuites.internal.command.impl.flow.Subtestable;
@@ -221,7 +221,7 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 		
 		List<Test> tests = new ArrayList<Test>();
 		
-		final String currentlyDefiningBrowser = WebSuites.getCurrentlyDefiningBrowser();
+		final String currentlyDefiningBrowser = WebSuitesRunner.getCurrentlyDefiningBrowser();
 		
 		final String testName = new String(masterScenarioFileName) +
 				" [" + currentlyDefiningBrowser + "]";

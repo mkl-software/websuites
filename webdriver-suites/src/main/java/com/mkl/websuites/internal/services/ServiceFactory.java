@@ -7,9 +7,9 @@ import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 
-import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.WebSuitesConfig_rename;
 import com.mkl.websuites.WebSuitesException;
-import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.ext.Customization;
 import com.mkl.websuites.internal.services.ServiceDefinition.Service;
 
@@ -65,10 +65,10 @@ public class ServiceFactory {
 	
 	private static void applyServiceOverridesFrom(Class<?> runnerClass) {
 		
-		WebSuitesConfig config = runnerClass
-				.getAnnotation(WebSuitesRunner.class)
+		WebSuitesConfig_rename config = runnerClass
+				.getAnnotation(WebSuites.class)
 				.configurationClass()
-				.getAnnotation(WebSuitesConfig.class);
+				.getAnnotation(WebSuitesConfig_rename.class);
 		
 		Class<?> overridesDef = config.serviceOverrides();
 		

@@ -2,8 +2,8 @@ package com.mkl.websuites.internal.browser;
 
 import junit.framework.TestCase;
 
-import com.mkl.websuites.WebSuites;
-import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.WebSuitesConfig_rename;
 import com.mkl.websuites.internal.ConfigurationManager;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
@@ -25,9 +25,9 @@ public class TearDownAllTest extends TestCase {
 	@Override
 	protected void runTest() throws Throwable {
 		
-		WebSuitesConfig config = ServiceFactory.get(ConfigurationManager.class).getConfiguration();
+		WebSuitesConfig_rename config = ServiceFactory.get(ConfigurationManager.class).getConfiguration();
 		
-		String currentBrowser = WebSuites.getCurrentlyDefiningBrowser();
+		String currentBrowser = WebSuitesRunner.getCurrentlyDefiningBrowser();
 		
 		if (!config.doNotCloseBrowserAtTheEnd() && !currentBrowser.equals("none")) {
 			

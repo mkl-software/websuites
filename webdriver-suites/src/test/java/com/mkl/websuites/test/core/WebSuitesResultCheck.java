@@ -9,7 +9,7 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
@@ -21,7 +21,7 @@ public abstract class WebSuitesResultCheck extends JettyBasedTest {
 	public static final int BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST = 2;
 	
 	
-	protected Result checkWebTestResult(Class<? extends WebSuites> localRunner) throws Throwable {
+	protected Result checkWebTestResult(Class<? extends WebSuitesRunner> localRunner) throws Throwable {
 		
 		Result result = new JUnitCore().run(new InternalWebSuitesRunner(localRunner));
 		

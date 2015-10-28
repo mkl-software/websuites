@@ -3,8 +3,8 @@ package com.mkl.websuites.test.integration.command;
 import org.junit.Test;
 import org.junit.runner.Result;
 
-import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
 import com.mkl.websuites.test.integration.command.GotoCommandTestConfig.GotoCheckTest;
 import com.mkl.websuites.tests.ScenarioFileTest;
@@ -40,9 +40,9 @@ class GotoCommandTestConfig {
 public class GotoCommandTest extends WebSuitesResultCheck {
 
 	
-	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class,
+	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
 			suite = {GotoCommandTestConfig.LocalUnderlyingGotoTest.class, GotoCheckTest.class})
-	public static class LocalRunner  extends WebSuites {}
+	public static class LocalRunner  extends WebSuitesRunner {}
 	
 	
 	@Test

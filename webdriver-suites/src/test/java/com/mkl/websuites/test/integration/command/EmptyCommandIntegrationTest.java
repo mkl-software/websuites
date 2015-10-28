@@ -7,8 +7,8 @@ import mockit.MockUp;
 import org.junit.Test;
 import org.junit.runner.Result;
 
-import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
 import com.mkl.websuites.test.integration.command.EmptyCommandIntegrationTestConfig.LocalEmptyCommandIntegrationTest;
 import com.mkl.websuites.test.unit.scenario.cmd.SampleCommand;
@@ -25,8 +25,8 @@ class EmptyCommandIntegrationTestConfig {
 
 public class EmptyCommandIntegrationTest extends WebSuitesResultCheck {
 
-	@WebSuitesRunner(configurationClass = LocalConfigForCommandTests.class, suite = LocalEmptyCommandIntegrationTest.class)
-	public static class LocalRunner  extends WebSuites {}
+	@WebSuites(configurationClass = LocalConfigForCommandTests.class, suite = LocalEmptyCommandIntegrationTest.class)
+	public static class LocalRunner  extends WebSuitesRunner {}
 	
 	
 	
