@@ -4,13 +4,13 @@ import org.junit.Test;
 import org.junit.runner.Result;
 import org.openqa.selenium.By;
 
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.internal.config.ScenarioFile;
-import com.mkl.websuites.internal.config.TestClass;
-import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.config.ScenarioFile;
+import com.mkl.websuites.config.TestClass;
+import com.mkl.websuites.internal.tests.WebSuiteStandaloneTest;
 import com.mkl.websuites.test.BrowsersConfig;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
-import com.mkl.websuites.tests.WebSuiteStandaloneTest;
 
 
 	

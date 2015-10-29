@@ -1,12 +1,14 @@
-package com.mkl.websuites;
+package com.mkl.websuites.config;
 
 import lombok.extern.slf4j.Slf4j;
 
-import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.WebSuitesRunner;
 
 
 /**
  * Main configuration storage.
+ * Using this class you can access system configuration
  * @author Marcin Klosinski
  *
  */

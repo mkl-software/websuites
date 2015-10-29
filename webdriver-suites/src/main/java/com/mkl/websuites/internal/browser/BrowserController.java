@@ -2,7 +2,7 @@ package com.mkl.websuites.internal.browser;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.WebSuites;
 
 public interface BrowserController {
 

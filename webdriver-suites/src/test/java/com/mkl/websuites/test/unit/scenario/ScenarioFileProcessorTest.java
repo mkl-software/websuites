@@ -25,6 +25,7 @@ import com.mkl.websuites.test.unit.scenario.cmd.SampleCommand;
 
 
 
+@SuppressWarnings("rawtypes")
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ScenarioFileProcessorTest extends ServiceBasedTest {
 

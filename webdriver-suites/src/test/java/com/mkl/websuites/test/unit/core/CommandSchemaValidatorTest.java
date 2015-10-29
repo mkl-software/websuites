@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
 
 import pl.wkr.fluentrule.api.FluentExpectedException;
 
-import com.mkl.websuites.WebSuitesException;
+import com.mkl.websuites.internal.WebSuitesException;
 import com.mkl.websuites.internal.command.impl.validator.CommandSchemaValidator;
 import com.mkl.websuites.internal.command.impl.validator.IntegerNumberParamValidator;
 import com.mkl.websuites.internal.command.impl.validator.ParameterValueValidator;

@@ -8,9 +8,9 @@ import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.internal.config.ScenarioFile;
-import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.config.ScenarioFile;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 import com.mkl.websuites.test.core.TestUtils;
 import com.mkl.websuites.test.unit.scenario.CommandInvocationVerifier;

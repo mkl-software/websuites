@@ -1,11 +1,14 @@
 package com.mkl.websuites.test.client;
 
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.internal.config.ScenarioFile;
-import com.mkl.websuites.internal.config.SiteConfig;
-import com.mkl.websuites.internal.config.TestClass;
-import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.config.Extension;
+import com.mkl.websuites.config.SiteConfig;
+import com.mkl.websuites.config.TestClass;
+import com.mkl.websuites.internal.browser.BrowserController;
+import com.mkl.websuites.internal.services.ServiceDefinition.Service;
 import com.mkl.websuites.test.BrowsersConfig;
+import com.mkl.websuites.test.client.ext.MyBrowserController;
 
 
 
@@ -21,6 +24,11 @@ import com.mkl.websuites.test.BrowsersConfig;
 		basePath = "/",
 		waitTimeout = 5,
 		doNotCloseBrowserAtTheEnd = false
+	),
+	extension = @Extension(serviceOverrides = @Service(
+			service = BrowserController.class,
+			implementation = MyBrowserController.class
+			)
 	)
 )
 public class Runner extends WebSuitesRunner {}

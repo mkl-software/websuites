@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import com.mkl.websuites.internal.WebSuitesException;
+
 
 
 public class WebSuitesUserProperties {

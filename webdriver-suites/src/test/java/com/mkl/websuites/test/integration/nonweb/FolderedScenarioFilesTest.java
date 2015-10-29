@@ -14,14 +14,14 @@ import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.internal.config.Folder;
-import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.config.Folder;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
+import com.mkl.websuites.internal.tests.ScenarioFolderTest;
+import com.mkl.websuites.internal.tests.SortingStrategy;
 import com.mkl.websuites.test.core.TestUtils;
 import com.mkl.websuites.test.unit.scenario.CommandInvocationVerifier;
-import com.mkl.websuites.tests.ScenarioFolderTest;
-import com.mkl.websuites.tests.SortingStrategy;
 
 public class FolderedScenarioFilesTest {
 

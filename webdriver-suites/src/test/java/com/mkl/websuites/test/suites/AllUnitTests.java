@@ -12,7 +12,6 @@ import com.mkl.websuites.internal.command.impl.flow.repeat.InlineDataProviderTes
 import com.mkl.websuites.internal.command.impl.validator.BooleanParamValidatorTest;
 import com.mkl.websuites.internal.command.impl.validator.DataProviderParamValidatorTest;
 import com.mkl.websuites.test.unit.core.CommandSchemaValidatorTest;
-import com.mkl.websuites.tests.ScenarioFolderTestTest;
 
 
 

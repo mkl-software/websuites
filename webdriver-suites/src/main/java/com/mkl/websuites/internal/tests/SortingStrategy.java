@@ -1,4 +1,4 @@
-package com.mkl.websuites.tests;
+package com.mkl.websuites.internal.tests;
 
 public enum SortingStrategy {
 

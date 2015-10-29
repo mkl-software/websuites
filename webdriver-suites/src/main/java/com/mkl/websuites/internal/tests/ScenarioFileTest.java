@@ -1,11 +1,10 @@
-package com.mkl.websuites.tests;
+package com.mkl.websuites.internal.tests;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.Test;
 
-import com.mkl.websuites.internal.MultiBrowserSuite;
 import com.mkl.websuites.internal.scenario.ScenarioFileProcessor;
 import com.mkl.websuites.internal.services.ServiceFactory;
 

@@ -1,4 +1,4 @@
-package com.mkl.websuites.internal.config;
+package com.mkl.websuites.config;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

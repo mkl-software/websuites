@@ -1,9 +1,6 @@
 package com.mkl.websuites.test.unit.scenario.flows;
 
 import static com.mkl.websuites.test.core.WebSuitesResultCheck.BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST;
-
-import java.lang.annotation.Annotation;
-
 import mockit.Mock;
 import mockit.MockUp;
 
@@ -11,17 +8,13 @@ import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.WebSuitesConfig_rename;
-import com.mkl.websuites.WebSuites_toRemove;
 import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.browser.StandardBrowserController;
-import com.mkl.websuites.internal.config.WebSuites;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 import com.mkl.websuites.test.core.TestUtils;
 import com.mkl.websuites.test.unit.scenario.CommandInvocationVerifier;
-import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.Scenarios;
 
 public class IfDetailedIntegrationTest {
 
@@ -31,7 +24,7 @@ public class IfDetailedIntegrationTest {
 
 
 	
-	@WebSuites(scenarios = @com.mkl.websuites.internal.config.ScenarioFile(""),
+	@WebSuites(scenarios = @com.mkl.websuites.config.ScenarioFile(""),
 			browsers = "none")
 	public static class Runner extends WebSuitesRunner {}
 	

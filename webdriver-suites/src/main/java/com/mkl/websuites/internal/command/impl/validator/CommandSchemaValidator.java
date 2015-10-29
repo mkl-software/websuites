@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.mkl.websuites.WebSuitesException;
+import com.mkl.websuites.internal.WebSuitesException;
 
 
 

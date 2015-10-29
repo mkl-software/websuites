@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.reflections.Reflections;
 
-import com.mkl.websuites.WebSuitesException;
+import com.mkl.websuites.internal.WebSuitesException;
 import com.mkl.websuites.internal.command.impl.ParameterizedCommand;
 import com.mkl.websuites.internal.scenario.SourceLine;
 

@@ -1,13 +1,13 @@
-package com.mkl.websuites.internal;
+package com.mkl.websuites.internal.tests;
 
 import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.config.WebSuitesConfig;
 import com.mkl.websuites.internal.browser.BrowserController;
-import com.mkl.websuites.internal.config.WebSuites;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
 

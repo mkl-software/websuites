@@ -1,9 +1,14 @@
-package com.mkl.websuites.internal.config;
+package com.mkl.websuites;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import com.mkl.websuites.BrowserConifg;
+import com.mkl.websuites.config.BrowserConifg;
+import com.mkl.websuites.config.Extension;
+import com.mkl.websuites.config.Folder;
+import com.mkl.websuites.config.ScenarioFile;
+import com.mkl.websuites.config.SiteConfig;
+import com.mkl.websuites.config.TestClass;
 
 
 @Retention(RetentionPolicy.RUNTIME)
@@ -19,7 +24,7 @@ public @interface WebSuites {
 	
 	TestClass[] classes() default {};
 	
-	String properies() default "";
+	String properties() default "";
 	
 	SiteConfig site() default @SiteConfig;
 	

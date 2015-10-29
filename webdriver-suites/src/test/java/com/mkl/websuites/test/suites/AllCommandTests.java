@@ -4,7 +4,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.mkl.websuites.test.integration.command.CheckCommandTest;
 import com.mkl.websuites.test.integration.command.CheckTitleTest;
 import com.mkl.websuites.test.integration.command.EmptyCommandIntegrationTest;
 import com.mkl.websuites.test.integration.command.GotoCommandTest;

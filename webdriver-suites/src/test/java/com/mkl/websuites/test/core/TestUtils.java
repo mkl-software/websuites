@@ -16,7 +16,7 @@ import mockit.MockUp;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-import com.mkl.websuites.tests.ScenarioFileTest;
+import com.mkl.websuites.internal.tests.ScenarioFileTest;
 
 public class TestUtils {
 

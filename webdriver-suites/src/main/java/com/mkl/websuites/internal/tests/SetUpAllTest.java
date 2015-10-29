@@ -1,4 +1,4 @@
-package com.mkl.websuites.internal.browser;
+package com.mkl.websuites.internal.tests;
 
 import junit.framework.TestCase;
 

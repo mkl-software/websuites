@@ -1,12 +1,16 @@
-package com.mkl.websuites;
+package com.mkl.websuites.config;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import com.mkl.websuites.BrowserConifg.BrowserType;
+import com.mkl.websuites.config.BrowserConifg.BrowserType;
 
 
-
+/**
+ * Default definitions for browsers that don't need any additional drivers and come OOTB.
+ * @author Marcin Klosinski
+ *
+ */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface BrowsersDefinition {
 

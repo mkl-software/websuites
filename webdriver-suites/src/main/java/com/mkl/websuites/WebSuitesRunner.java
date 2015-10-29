@@ -10,21 +10,22 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.junit.runner.RunWith;
 
+import com.mkl.websuites.config.Folder;
+import com.mkl.websuites.config.ScenarioFile;
+import com.mkl.websuites.config.TestClass;
+import com.mkl.websuites.config.WebSuitesConfig;
 import com.mkl.websuites.internal.CommonUtils;
+import com.mkl.websuites.internal.WebSuitesException;
 import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.browser.RunnableForBrowser;
-import com.mkl.websuites.internal.browser.SetUpAllTest;
 import com.mkl.websuites.internal.browser.SwitchBrowserTest;
-import com.mkl.websuites.internal.browser.TearDownAllTest;
 import com.mkl.websuites.internal.browser.TearDownBrowserTest;
-import com.mkl.websuites.internal.config.Folder;
-import com.mkl.websuites.internal.config.ScenarioFile;
-import com.mkl.websuites.internal.config.TestClass;
-import com.mkl.websuites.internal.config.WebSuites;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 import com.mkl.websuites.internal.services.ServiceFactory;
-import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.ScenarioFolderTest;
+import com.mkl.websuites.internal.tests.ScenarioFileTest;
+import com.mkl.websuites.internal.tests.ScenarioFolderTest;
+import com.mkl.websuites.internal.tests.SetUpAllTest;
+import com.mkl.websuites.internal.tests.TearDownAllTest;
 
 
 

@@ -2,11 +2,11 @@ package com.mkl.websuites.test.integration.regression;
 
 import org.junit.Assert;
 
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.internal.config.SiteConfig;
-import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.config.SiteConfig;
+import com.mkl.websuites.internal.tests.WebSuiteStandaloneTest;
 import com.mkl.websuites.test.BrowsersConfig;
-import com.mkl.websuites.tests.WebSuiteStandaloneTest;
 
 public class TestIEPort80 extends WebSuiteStandaloneTest {
 

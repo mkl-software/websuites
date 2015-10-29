@@ -16,6 +16,7 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 import com.mkl.websuites.test.core.ServiceBasedTest;
 
 
+@SuppressWarnings("rawtypes")
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ScenarioPreprocessingTest extends ServiceBasedTest {
 

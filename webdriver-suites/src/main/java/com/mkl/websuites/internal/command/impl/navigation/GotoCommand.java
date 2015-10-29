@@ -1,6 +1,6 @@
 package com.mkl.websuites.internal.command.impl.navigation;
 
-import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.config.WebSuitesConfig;
 import com.mkl.websuites.internal.command.BaseCommand;
 import com.mkl.websuites.internal.command.CommandDescriptor;
 

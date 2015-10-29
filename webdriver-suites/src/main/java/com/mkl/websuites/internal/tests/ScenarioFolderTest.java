@@ -1,4 +1,4 @@
-package com.mkl.websuites.tests;
+package com.mkl.websuites.internal.tests;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -10,7 +10,6 @@ import java.util.List;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.mkl.websuites.internal.MultiBrowserSuite;
 import com.mkl.websuites.internal.scenario.ScenarioFileProcessor;
 import com.mkl.websuites.internal.services.ServiceFactory;
 

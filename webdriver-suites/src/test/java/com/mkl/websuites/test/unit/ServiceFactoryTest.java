@@ -11,13 +11,13 @@ import org.junit.runners.MethodSorters;
 
 import pl.wkr.fluentrule.api.FluentExpectedException;
 
-import com.mkl.websuites.WebSuitesConfig;
-import com.mkl.websuites.WebSuitesException;
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.config.Extension;
+import com.mkl.websuites.config.WebSuitesConfig;
+import com.mkl.websuites.internal.WebSuitesException;
 import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.browser.StandardBrowserController;
-import com.mkl.websuites.internal.config.Extension;
-import com.mkl.websuites.internal.config.WebSuites;
 import com.mkl.websuites.internal.services.DefaultServiceDefinitions;
 import com.mkl.websuites.internal.services.ServiceDefinition;
 import com.mkl.websuites.internal.services.ServiceDefinition.Service;

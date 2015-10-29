@@ -1,13 +1,14 @@
-package com.mkl.websuites.tests;
+package com.mkl.websuites.config;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import junit.framework.Test;
 
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Scenarios {
+public @interface TestClass {
 
-	String[] value();
-
+	
+	Class<? extends Test> value();
 }

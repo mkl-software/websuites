@@ -15,10 +15,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
-import com.mkl.websuites.BrowserConifg;
-import com.mkl.websuites.BrowsersDefinition;
-import com.mkl.websuites.WebSuitesException;
-import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.config.BrowserConifg;
+import com.mkl.websuites.config.BrowsersDefinition;
+import com.mkl.websuites.internal.WebSuitesException;
 
 
 

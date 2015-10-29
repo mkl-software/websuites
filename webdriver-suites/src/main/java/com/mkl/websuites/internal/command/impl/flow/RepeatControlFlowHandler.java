@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.WebSuitesUserProperties;
+import com.mkl.websuites.internal.WebSuitesException;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.flow.repeat.InlineDataProvider;

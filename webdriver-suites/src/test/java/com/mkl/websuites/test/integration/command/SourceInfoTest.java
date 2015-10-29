@@ -8,10 +8,10 @@ import org.junit.runner.Result;
 
 import pl.wkr.fluentrule.api.FluentExpectedException;
 
-import com.mkl.websuites.WebSuitesException;
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.internal.config.ScenarioFile;
-import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.config.ScenarioFile;
+import com.mkl.websuites.internal.WebSuitesException;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
 
 public class SourceInfoTest extends WebSuitesResultCheck {

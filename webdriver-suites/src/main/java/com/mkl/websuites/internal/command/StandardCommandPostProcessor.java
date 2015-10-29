@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import com.mkl.websuites.WebSuitesException;
+import com.mkl.websuites.internal.WebSuitesException;
 import com.mkl.websuites.internal.command.impl.flow.ControlFlowHandler;
 import com.mkl.websuites.internal.command.impl.flow.EndControlFlowHandler;
 

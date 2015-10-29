@@ -1,8 +1,8 @@
 package com.mkl.websuites.test;
 
-import com.mkl.websuites.BrowserConifg;
-import com.mkl.websuites.BrowserConifg.BrowserType;
-import com.mkl.websuites.BrowsersDefinition;
+import com.mkl.websuites.config.BrowserConifg;
+import com.mkl.websuites.config.BrowsersDefinition;
+import com.mkl.websuites.config.BrowserConifg.BrowserType;
 
 
 @BrowsersDefinition(browsers = {

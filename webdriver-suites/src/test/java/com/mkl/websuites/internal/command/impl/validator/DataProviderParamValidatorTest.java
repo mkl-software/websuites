@@ -3,7 +3,7 @@ package com.mkl.websuites.internal.command.impl.validator;
 import org.junit.Rule;
 import org.junit.Test;
 
-import com.mkl.websuites.WebSuitesException;
+import com.mkl.websuites.internal.WebSuitesException;
 
 import pl.wkr.fluentrule.api.FluentExpectedException;
 

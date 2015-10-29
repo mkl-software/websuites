@@ -5,9 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.junit.runner.Result;
 
+import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.internal.config.ScenarioFile;
-import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.config.ScenarioFile;
 import com.mkl.websuites.test.BrowsersConfig;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
 

@@ -1,7 +1,7 @@
 package com.mkl.websuites.test.client;
 
-import com.mkl.websuites.AnnotatedSuite;
-import com.mkl.websuites.StandaloneSuite;
+import com.mkl.websuites.internal.tests.AnnotatedSuite;
+import com.mkl.websuites.internal.tests.StandaloneSuite;
 
 
 
