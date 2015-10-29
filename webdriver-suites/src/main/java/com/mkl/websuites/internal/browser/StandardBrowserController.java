@@ -15,10 +15,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
-import com.mkl.websuites.Browser;
-import com.mkl.websuites.BrowsersConfiguration;
-import com.mkl.websuites.WebSuitesConfig_rename;
+import com.mkl.websuites.BrowserConifg;
+import com.mkl.websuites.BrowsersDefinition;
 import com.mkl.websuites.WebSuitesException;
+import com.mkl.websuites.internal.config.WebSuites;
 
 
 
@@ -52,54 +52,69 @@ public class StandardBrowserController implements BrowserController {
 		return instance;
 	}
 
-	@BrowsersConfiguration
+	@BrowsersDefinition
 	private static class DefaultBrowserConfig {}
 	
 	
 	@Override
-	public void initializeBrowsersEnvironment(WebSuitesConfig_rename config) {
+	public void initializeBrowsersEnvironment(WebSuites config) {
 		
-		BrowsersConfiguration browsersConfiguration =
-				config.browsersConfiguration().getAnnotation(BrowsersConfiguration.class);
+		globalTimeout = config.site().waitTimeout();
 		
-		if (browsersConfiguration == null) {
-			
-			log.error("empty browser configuration");
-			throw new WebSuitesException("Empty browser configuration, please fill properly "
-					+ "the BrowserConfiguration section in the configuration");
-		}
 		
-		globalTimeout = config.waitTimeout();
 		
-		Browser[] browsers = browsersConfiguration.browsers();
 		
 		// populate default browsers config:
-		BrowsersConfiguration defaultConfig =
-				DefaultBrowserConfig.class.getAnnotation(BrowsersConfiguration.class);
-		browsers = ArrayUtils.addAll(defaultConfig.browsers(), browsers);
+		BrowsersDefinition defaultDefinition =
+				DefaultBrowserConfig.class.getAnnotation(BrowsersDefinition.class);
+		
+		BrowserConifg[] defaultBrowsers = defaultDefinition.browsers();
+		
+		BrowserConifg[] reusableBrowsers = new BrowserConifg[] {};
+		
+		if (config.browserResusableConfiguration().isAnnotationPresent(BrowsersDefinition.class)) {
+			reusableBrowsers = config
+					.browserResusableConfiguration()
+					.getAnnotation(BrowsersDefinition.class)
+					.browsers();
+		}
+		
+		BrowserConifg[] userBrowsers = config.browserConfiguration();
+		
+		/*
+		 *  Browser configuration order (each next overwrites previous one):
+		 *  	1. Default configuration
+		 *  	2. Configuration from browserReusableConifugration class
+		 *  	3. Explicit configuration on browserConfiguration annotation
+		 */
+		
+		BrowserConifg[] browsers = ArrayUtils.addAll(defaultBrowsers, reusableBrowsers);
+		browsers = ArrayUtils.addAll(browsers, userBrowsers);
 		
 		// if specified explicitly, the config will get overwritten in this loop:
 		
-		for (Browser browser : browsers) {
+		for (BrowserConifg browserConfig : browsers) {
 			
-			browserDisplayNameMap.put(browser.localId(), browser.displayName());
+			browserDisplayNameMap.put(browserConfig.id(), browserConfig.displayName());
 			
-			switch (browser.browserType()) {
+			switch (browserConfig.browserType()) {
 			case CHROME:
-				configureBrowser("webdriver.chrome.driver", browser, ChromeDriver.class);
+				configureBrowser("webdriver.chrome.driver", browserConfig, ChromeDriver.class);
 				break;
 			case FIREFOX:
-				configureBrowser("", browser, FirefoxDriver.class);
+				configureBrowser("", browserConfig, FirefoxDriver.class);
 				break;
 			case INTERNET_EXPLORER:
-				configureBrowser("webdriver.ie.driver", browser, InternetExplorerDriver.class);
+				configureBrowser("webdriver.ie.driver", browserConfig, InternetExplorerDriver.class);
 				break;
 			case HTML:
-				configureBrowser("", browser, HtmlUnitDriver.class);
+				configureBrowser("", browserConfig, HtmlUnitDriver.class);
 				break;
 			case OPERA:
+				// TODO: implement it
 				break;
 			case SAFARI:
+				// TODO: implement it
 				break;
 			default:
 				break;
@@ -114,12 +129,12 @@ public class StandardBrowserController implements BrowserController {
 
 
 
-	protected void configureBrowser(String envKey, Browser browser, Class<?> driverClass) {
+	protected void configureBrowser(String envKey, BrowserConifg browser, Class<?> driverClass) {
 		
 		if (!envKey.isEmpty()) {
 			System.setProperty(envKey, browser.webDriverPath());
 		}
-		driverClassMap.put(browser.localId(), driverClass);
+		driverClassMap.put(browser.id(), driverClass);
 	}
 	
 	

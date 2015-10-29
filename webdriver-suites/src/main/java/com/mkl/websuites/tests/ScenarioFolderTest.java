@@ -10,7 +10,6 @@ import java.util.List;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.mkl.websuites.WebSuitesException;
 import com.mkl.websuites.internal.MultiBrowserSuite;
 import com.mkl.websuites.internal.scenario.ScenarioFileProcessor;
 import com.mkl.websuites.internal.services.ServiceFactory;
@@ -23,27 +22,29 @@ public class ScenarioFolderTest extends MultiBrowserSuite {
 
 
 
+	public ScenarioFolderTest(String path, boolean ignoreSubfolders,
+			SortingStrategy sortingStrategy) {
+		
+		super(path, ignoreSubfolders, sortingStrategy);
+	}
+
+
+
+
 	@Override
 	protected List<Test> defineTests() {
-		
-		Folders folderConfig = this.getClass().getAnnotation(Folders.class);
-		
-		if (folderConfig == null) {
-			throw new WebSuitesException("Missing com.mkl.websuites.tests.Folders annotation");
-		}
-		
-		ignoreSubfolders = folderConfig.ignoreSubfolders();
+
+		String path = (String) genericParams[0];
+		ignoreSubfolders = (boolean) genericParams[1];
+//		SortingStrategy sortingStrategy = (SortingStrategy) genericParams[2];
 		
 		List<Test> topLevelFolderSuites = new ArrayList<Test>();
 		
-		for (String path : folderConfig.path()) {
-			
-			TestSuite topLeveLFolderSuite = new TestSuite(path);
-			
-			processRecursivelyFolder(path, topLeveLFolderSuite);
-			
-			topLevelFolderSuites.add(topLeveLFolderSuite);
-		}
+		TestSuite topLeveLFolderSuite = new TestSuite(path);
+		
+		processRecursivelyFolder(path, topLeveLFolderSuite);
+		
+		topLevelFolderSuites.add(topLeveLFolderSuite);
 		
 		return topLevelFolderSuites;
 	}

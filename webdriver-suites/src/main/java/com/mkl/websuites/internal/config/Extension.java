@@ -1,7 +1,12 @@
 package com.mkl.websuites.internal.config;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 import com.mkl.websuites.internal.services.ServiceDefinition.Service;
 
+
+@Retention(RetentionPolicy.RUNTIME)
 public @interface Extension {
 
 	String[] commandExtensionPackages() default {};

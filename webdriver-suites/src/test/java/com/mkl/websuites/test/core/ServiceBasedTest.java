@@ -18,7 +18,7 @@ public abstract class ServiceBasedTest<T> {
 	public static void init() {
 		
 		try {
-			ServiceFactory.init(null);
+			ServiceFactory.init();
 		} catch (Exception e) {
 			log.debug("ServiceFactory already initialized, ignoring, not a problem");
 		}

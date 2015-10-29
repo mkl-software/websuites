@@ -15,7 +15,7 @@ public @interface WebSuitesConfig_rename {
 	public static class EmptyServiceOverrideDefinition {}
 
 
-	@BrowsersConfiguration
+	@BrowsersDefinition
 	public static class DefaultBrowserConfig {}
 
 	String host() default "localhost";

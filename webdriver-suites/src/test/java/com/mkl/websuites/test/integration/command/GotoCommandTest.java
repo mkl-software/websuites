@@ -4,20 +4,20 @@ import org.junit.Test;
 import org.junit.runner.Result;
 
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.internal.config.ScenarioFile;
+import com.mkl.websuites.internal.config.TestClass;
+import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.test.BrowsersConfig;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
-import com.mkl.websuites.test.integration.command.GotoCommandTestConfig.GotoCheckTest;
-import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.Scenarios;
 import com.mkl.websuites.tests.WebSuiteStandaloneTest;
 
 
-
-class GotoCommandTestConfig {
+	
 	
 
-	@Scenarios("src/test/resources/integration/command/gotoLocalAddress.scn")
-	public static class LocalUnderlyingGotoTest extends ScenarioFileTest {}
+public class GotoCommandTest extends WebSuitesResultCheck {
+
+	
 	
 	public static class GotoCheckTest extends WebSuiteStandaloneTest {
 
@@ -34,14 +34,12 @@ class GotoCommandTestConfig {
 		
 	}
 	
-	
-}
-
-public class GotoCommandTest extends WebSuitesResultCheck {
-
-	
-	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
-			suite = {GotoCommandTestConfig.LocalUnderlyingGotoTest.class, GotoCheckTest.class})
+	@WebSuites(
+		browsers = "${env.testBrowser}",
+		scenarios = @ScenarioFile("src/test/resources/integration/command/gotoLocalAddress.scn"),
+		classes = @TestClass(GotoCheckTest.class),
+		browserResusableConfiguration = BrowsersConfig.class
+	)
 	public static class LocalRunner  extends WebSuitesRunner {}
 	
 	

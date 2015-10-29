@@ -13,10 +13,10 @@ import org.junit.Test;
 import org.junit.runner.Result;
 
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.internal.config.ScenarioFile;
+import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.test.BrowsersConfig;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
-import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.Scenarios;
 
 
 
@@ -28,13 +28,12 @@ public class AllCheckCommandsFailingTest extends WebSuitesResultCheck {
 			"src/test/resources/integration/command/check/allCheckCommands_failing.scn";
 	
 
-	@Scenarios(AllCheckCommandsFailingTest.FAILING_SOFT_COMMANDS_SCENARIO_FILE)
-	public static class AllCheckCommandsScenarioFile extends ScenarioFileTest {}
 
-	
-	
-	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
-			suite = AllCheckCommandsScenarioFile.class)
+	@WebSuites(
+		browsers = "${env.testBrowser}",
+		scenarios = @ScenarioFile(FAILING_SOFT_COMMANDS_SCENARIO_FILE),
+		browserResusableConfiguration = BrowsersConfig.class
+	)
 	public static class LocalRunnerAllCheckCommandsPassing  extends WebSuitesRunner {}
 	
 	

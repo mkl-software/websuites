@@ -6,27 +6,28 @@ import org.junit.Test;
 import org.junit.runner.Result;
 
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.internal.config.ScenarioFile;
+import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.test.BrowsersConfig;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
-import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.Scenarios;
 
 public class CheckTitleTest extends WebSuitesResultCheck {
 
 	
-	@Scenarios("src/test/resources/integration/command/check/titleOK.scn")
-	public static class ScenarioWithTitleCheckResultOK extends ScenarioFileTest {}
-	
-	@Scenarios("src/test/resources/integration/command/check/checkTitleFail.scn")
-	public static class ScenarioWithTitleCheckResultFail extends ScenarioFileTest {}
 
-	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
-			suite = CheckTitleTest.ScenarioWithTitleCheckResultOK.class)
+	@WebSuites(
+		browsers = "${env.testBrowser}",
+		scenarios = @ScenarioFile("src/test/resources/integration/command/check/titleOK.scn"),
+		browserResusableConfiguration = BrowsersConfig.class
+	)
 	public static class LocalRunnerForTitleCheckOK  extends WebSuitesRunner {}
 	
 	
-	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
-			suite = CheckTitleTest.ScenarioWithTitleCheckResultFail.class)
+	@WebSuites(
+			browsers = "${env.testBrowser}",
+		scenarios = @ScenarioFile("src/test/resources/integration/command/check/checkTitleFail.scn"),
+		browserResusableConfiguration = BrowsersConfig.class
+	)
 	public static class LocalRunnerForTitleCheckFail  extends WebSuitesRunner {}
 	
 	

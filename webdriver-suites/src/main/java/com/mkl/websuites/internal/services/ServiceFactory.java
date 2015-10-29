@@ -7,10 +7,8 @@ import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 
-import com.mkl.websuites.WebSuitesConfig_rename;
+import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesException;
-import com.mkl.websuites.WebSuites;
-import com.mkl.websuites.ext.Customization;
 import com.mkl.websuites.internal.services.ServiceDefinition.Service;
 
 
@@ -29,7 +27,7 @@ public class ServiceFactory {
 	
 	
 	
-	public static void init(Class<?> jUnitRunnerClass) {
+	public static void init() {
 		
 		if (isInitialized) {
 			//throw new WebSuitesException("Cannot initialize ServiceFactory more than once.");
@@ -50,9 +48,8 @@ public class ServiceFactory {
 			instanceMap.put(service.service(), service.implementation());
 		}
 		
-		if (jUnitRunnerClass != null) {
-			applyServiceOverridesFrom(jUnitRunnerClass);
-		}
+		
+		applyServiceOverridesFrom();
 		
 		log.debug("service factory initialized");
 	}
@@ -63,34 +60,16 @@ public class ServiceFactory {
 	
 	
 	
-	private static void applyServiceOverridesFrom(Class<?> runnerClass) {
+	private static void applyServiceOverridesFrom() {
 		
-		WebSuitesConfig_rename config = runnerClass
-				.getAnnotation(WebSuites.class)
-				.configurationClass()
-				.getAnnotation(WebSuitesConfig_rename.class);
+		Service[] serviceOverrides = WebSuitesConfig.get().extension().serviceOverrides();
 		
-		Class<?> overridesDef = config.serviceOverrides();
-		
-		if (overridesDef != null) {
-			
-			Customization customization = overridesDef.getAnnotation(Customization.class);
-			
-			if (customization == null) {
-				log.error("customization class must be annotated with Customization annotation");
-				throw new WebSuitesException("customization class must be "
-						+ "annotated with Customization annotation");
-			}
-			
-			Service[] serviceOverrides = customization.serviceOverrides();
-			
-			for (Service override  : serviceOverrides) {
-				log.debug("applied service definition override for " + override.service()
-						+ " with impl: " + override.implementation());
-				instanceMap.put (override.service(), override.implementation());
-			}
-			
+		for (Service override  : serviceOverrides) {
+			log.debug("applied service definition override for " + override.service()
+					+ " with impl: " + override.implementation());
+			instanceMap.put (override.service(), override.implementation());
 		}
+			
 	}
 
 

@@ -13,9 +13,10 @@ import org.junit.runner.Result;
 
 import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.WebSuitesConfig_rename;
-import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.WebSuites_toRemove;
 import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.browser.StandardBrowserController;
+import com.mkl.websuites.internal.config.WebSuites;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 import com.mkl.websuites.test.core.TestUtils;
 import com.mkl.websuites.test.unit.scenario.CommandInvocationVerifier;
@@ -29,13 +30,9 @@ public class IfDetailedIntegrationTest {
 	private final CommandInvocationVerifier commandVerifier = CommandInvocationVerifier.getInstance();
 
 
-	@Scenarios(SCN_DIR + "04.scn")
-	public static class ScenarioFile extends ScenarioFileTest {}
 	
-	@WebSuitesConfig_rename(browsers = "none")
-	public static class LocalConfig {}
-	
-	@WebSuites(suite = ScenarioFile.class, configurationClass = LocalConfig.class)
+	@WebSuites(scenarios = @com.mkl.websuites.internal.config.ScenarioFile(""),
+			browsers = "none")
 	public static class Runner extends WebSuitesRunner {}
 	
 	
@@ -136,21 +133,7 @@ public class IfDetailedIntegrationTest {
 		
 	private void overrideScenarioFileNameAnnotation(final String scenarioName) throws Throwable {
 		
-		Annotation newValue = new Scenarios() {
-			
-			
-			@Override
-			public String[] value() {
-				return new String[] {scenarioName};
-			}
-
-			@Override
-			public Class<? extends Annotation> annotationType() {
-				return ((Scenarios) ScenarioFile.class.getAnnotation(Scenarios.class)).annotationType();
-			}
-		};
-		
-		TestUtils.overrideScenarioFileNameAnnotation(ScenarioFile.class, Scenarios.class, newValue);
+		TestUtils.prepareMockScenarioFileName(scenarioName);
 	}
 	
 	

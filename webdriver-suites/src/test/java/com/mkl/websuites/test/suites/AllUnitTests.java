@@ -24,7 +24,7 @@ import com.mkl.websuites.tests.ScenarioFolderTestTest;
 			DataProviderParamValidatorTest.class,
 			RepeatControlFlowHandlerTest.class,
 			InlineDataProviderTest.class,
-			ScenarioFolderTestTest.class,
+//			ScenarioFolderTestTest.class,
 			IfControlFlowHandlerTest.class,
 			BrowserSetConditionTest.class,
 			BooleanParamValidatorTest.class

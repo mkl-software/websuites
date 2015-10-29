@@ -7,7 +7,7 @@ import junit.framework.Test;
 
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface WebSuites {
+public @interface WebSuites_toRemove {
 
 	Class<?> configurationClass();
 

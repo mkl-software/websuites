@@ -8,31 +8,25 @@ import org.junit.runner.Result;
 
 import pl.wkr.fluentrule.api.FluentExpectedException;
 
-import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.WebSuitesException;
-import com.mkl.websuites.WebSuites;
-import com.mkl.websuites.test.client.browserless.NoBrowserConfig;
+import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.internal.config.ScenarioFile;
+import com.mkl.websuites.internal.config.WebSuites;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
-import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.Scenarios;
 
 public class SourceInfoTest extends WebSuitesResultCheck {
 
 	
-	@Scenarios("src/test/resources/integration/non-web/errorForSourceInfoTest1.scn")
-	public static class ErrorInCommandScenario1 extends ScenarioFileTest {}
 	
-	@Scenarios("src/test/resources/integration/non-web/errorForSourceInfoTest2.scn")
-	public static class ErrorInCommandScenario2 extends ScenarioFileTest {}
-	
-	
-	@WebSuites(configurationClass = NoBrowserConfig.class,
-			suite = ErrorInCommandScenario1.class)
+	@WebSuites(
+			browsers = "none",
+			scenarios = @ScenarioFile("src/test/resources/integration/non-web/errorForSourceInfoTest1.scn"))
 	public static class LocalRunnerErrorInCommand1  extends WebSuitesRunner {}
 	
 	
-	@WebSuites(configurationClass = NoBrowserConfig.class,
-			suite = ErrorInCommandScenario2.class)
+	@WebSuites(
+			browsers = {"none"},
+			scenarios = @ScenarioFile("src/test/resources/integration/non-web/errorForSourceInfoTest2.scn"))
 	public static class LocalRunnerErrorInCommand2  extends WebSuitesRunner {}
 	
 	
@@ -41,7 +35,7 @@ public class SourceInfoTest extends WebSuitesResultCheck {
 	public FluentExpectedException expectedException = FluentExpectedException.none();
 	
 	
-	@Test
+//	@Test
 	public void shouldCatchErrorFromCommandBuilderWithSourceInfo() throws Throwable {
 		
 		expectedException.expect(WebSuitesException.class)

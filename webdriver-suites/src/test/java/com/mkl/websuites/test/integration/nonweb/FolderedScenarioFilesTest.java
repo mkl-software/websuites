@@ -1,24 +1,26 @@
 package com.mkl.websuites.test.integration.nonweb;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.mkl.websuites.test.core.WebSuitesResultCheck.BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import java.lang.annotation.Annotation;
+import java.util.List;
+
+import mockit.Deencapsulation;
+import mockit.Invocation;
+import mockit.Mock;
+import mockit.MockUp;
 
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.WebSuitesConfig_rename;
-import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.internal.config.Folder;
+import com.mkl.websuites.internal.config.WebSuites;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 import com.mkl.websuites.test.core.TestUtils;
 import com.mkl.websuites.test.unit.scenario.CommandInvocationVerifier;
-import com.mkl.websuites.test.unit.scenario.flows.RepeatDetailedIntegrationTest.ScenarioFile;
-import com.mkl.websuites.tests.Folders;
 import com.mkl.websuites.tests.ScenarioFolderTest;
-import com.mkl.websuites.tests.Scenarios;
 import com.mkl.websuites.tests.SortingStrategy;
 
 public class FolderedScenarioFilesTest {
@@ -27,14 +29,12 @@ public class FolderedScenarioFilesTest {
 	
 	private final CommandInvocationVerifier commandVerifier = CommandInvocationVerifier.getInstance();
 
-
-	@Folders(path = "src/test/resources/integration/non-web/folderedScenarios/4", ignoreSubfolders = false)
-	public static class FolderTest extends ScenarioFolderTest {}
 	
-	@WebSuitesConfig_rename(browsers = "none")
-	public static class LocalConfig {}
 	
-	@WebSuites(suite = FolderTest.class, configurationClass = LocalConfig.class)
+	@WebSuites(
+		folders = @Folder(path = ""), // will be set dynamically
+		browsers = "none"
+	)
 	public static class Runner extends WebSuitesRunner {}
 	
 	
@@ -149,30 +149,16 @@ public class FolderedScenarioFilesTest {
 	private void overrideFolderAnnotation(final String folderPath, final boolean ignoreSubFolders)
 			throws Throwable {
 		
-		Annotation newValue = new Folders() {
+		new MockUp<ScenarioFolderTest>() {
 			
-			
-			@Override
-			public String[] path() {
-				return new String[] {folderPath};
-			}
-
-			@Override
-			public Class<? extends Annotation> annotationType() {
-				return ((Scenarios) ScenarioFile.class.getAnnotation(Scenarios.class)).annotationType();
-			}
-
-			@Override
-			public boolean ignoreSubfolders() {
-				return ignoreSubFolders;
-			}
-
-			@Override
-			public SortingStrategy sortingStrategy() {
-				return SortingStrategy.APLHABETICAL;
+			@Mock
+			List<junit.framework.Test> defineTests(Invocation invocation) {
+				
+				Deencapsulation.setField(invocation.getInvokedInstance(),
+						"genericParams", new Object[] {folderPath, ignoreSubFolders, SortingStrategy.APLHABETICAL});
+				
+				return invocation.proceed();
 			}
 		};
-		
-		TestUtils.overrideScenarioFileNameAnnotation(FolderTest.class, Folders.class, newValue);
 	}
 }

@@ -1,23 +1,19 @@
 package com.mkl.websuites.test.unit.scenario.flows;
 
 import static com.mkl.websuites.test.core.TestUtils.checkIfNoFailures;
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.mkl.websuites.test.core.WebSuitesResultCheck.BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST;
-
-import java.lang.annotation.Annotation;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.WebSuitesConfig_rename;
-import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.internal.config.ScenarioFile;
+import com.mkl.websuites.internal.config.WebSuites;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 import com.mkl.websuites.test.core.TestUtils;
 import com.mkl.websuites.test.unit.scenario.CommandInvocationVerifier;
-import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.Scenarios;
 
 public class RepeatDetailedIntegrationTest {
 
@@ -26,13 +22,11 @@ public class RepeatDetailedIntegrationTest {
 	private final CommandInvocationVerifier commandVerifier = CommandInvocationVerifier.getInstance();
 
 
-	@Scenarios("src/test/resources/integration/non-web/repeat/11.scn")
-	public static class ScenarioFile extends ScenarioFileTest {}
 	
-	@WebSuitesConfig_rename(browsers = "none")
-	public static class LocalConfig {}
 	
-	@WebSuites(suite = ScenarioFile.class, configurationClass = LocalConfig.class)
+	@WebSuites(
+			scenarios = @ScenarioFile(""), // will be set dynamically
+			browsers = "none")
 	public static class Runner extends WebSuitesRunner {}
 	
 	
@@ -40,7 +34,7 @@ public class RepeatDetailedIntegrationTest {
 	public void shouldPassSimplestCaseScn00() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation(SCN_DIR + "00.scn");
+		overrideAnnotatedScenarioFileName(SCN_DIR + "00.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -62,7 +56,7 @@ public class RepeatDetailedIntegrationTest {
 	public void shouldRepeat7TimesScn01() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation(SCN_DIR + "01.scn");
+		overrideAnnotatedScenarioFileName(SCN_DIR + "01.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -92,7 +86,7 @@ public class RepeatDetailedIntegrationTest {
 	public void shouldRepeat5TimesWithDefaultCounterScn02() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation(SCN_DIR + "02.scn");
+		overrideAnnotatedScenarioFileName(SCN_DIR + "02.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -118,7 +112,7 @@ public class RepeatDetailedIntegrationTest {
 	public void shouldRepeat5TimesWithNamedCounterScn03() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation(SCN_DIR + "03.scn");
+		overrideAnnotatedScenarioFileName(SCN_DIR + "03.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -144,7 +138,7 @@ public class RepeatDetailedIntegrationTest {
 	public void shouldRepeatWithInlineDataOneParamScn04() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation(SCN_DIR + "04.scn");
+		overrideAnnotatedScenarioFileName(SCN_DIR + "04.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -170,7 +164,7 @@ public class RepeatDetailedIntegrationTest {
 	public void shouldRepeatWithInlineDataThreeParamsScn05() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation(SCN_DIR + "05.scn");
+		overrideAnnotatedScenarioFileName(SCN_DIR + "05.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -196,7 +190,7 @@ public class RepeatDetailedIntegrationTest {
 	public void shouldRepeatWithInlineDataNamesParamsScn06() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation(SCN_DIR + "06.scn");
+		overrideAnnotatedScenarioFileName(SCN_DIR + "06.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -223,7 +217,7 @@ public class RepeatDetailedIntegrationTest {
 		
 		//given
 		// bug with commands before subtest repeat are not executed
-		overrideScenarioFileNameAnnotation(SCN_DIR + "07.scn");
+		overrideAnnotatedScenarioFileName(SCN_DIR + "07.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -249,7 +243,7 @@ public class RepeatDetailedIntegrationTest {
 	public void shouldRunCommandsBeforeSubtestRepeatScn08() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation(SCN_DIR + "08.scn");
+		overrideAnnotatedScenarioFileName(SCN_DIR + "08.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -274,7 +268,7 @@ public class RepeatDetailedIntegrationTest {
 	public void shouldRunCommandsAfterSubtestRepeatScn09() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation(SCN_DIR + "09.scn");
+		overrideAnnotatedScenarioFileName(SCN_DIR + "09.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -300,7 +294,7 @@ public class RepeatDetailedIntegrationTest {
 	public void shouldRunCommandsBeforeAndAfterSubtestRepeatScn10() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation(SCN_DIR + "10.scn");
+		overrideAnnotatedScenarioFileName(SCN_DIR + "10.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -328,7 +322,7 @@ public class RepeatDetailedIntegrationTest {
 	public void shouldRun4ConsecutiveSubtestRepeatsScn11() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation(SCN_DIR + "11.scn");
+		overrideAnnotatedScenarioFileName(SCN_DIR + "11.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -354,7 +348,7 @@ public class RepeatDetailedIntegrationTest {
 	public void shouldRunRepeatsWithCommandsCombinationScn12() throws Throwable {
 		
 		//given
-		overrideScenarioFileNameAnnotation(SCN_DIR + "12.scn");
+		overrideAnnotatedScenarioFileName(SCN_DIR + "12.scn");
 		
 		commandVerifier.clearVerificationQueue();
 		
@@ -389,23 +383,9 @@ public class RepeatDetailedIntegrationTest {
 	
 	
 	
-	private void overrideScenarioFileNameAnnotation(final String scenarioName) throws Throwable {
+	private void overrideAnnotatedScenarioFileName(final String scenarioName) throws Throwable {
 		
-		Annotation newValue = new Scenarios() {
-			
-			
-			@Override
-			public String[] value() {
-				return new String[] {scenarioName};
-			}
-
-			@Override
-			public Class<? extends Annotation> annotationType() {
-				return ((Scenarios) ScenarioFile.class.getAnnotation(Scenarios.class)).annotationType();
-			}
-		};
-		
-		TestUtils.overrideScenarioFileNameAnnotation(ScenarioFile.class, Scenarios.class, newValue);
+		TestUtils.prepareMockScenarioFileName(scenarioName);
 	}
 	
 	

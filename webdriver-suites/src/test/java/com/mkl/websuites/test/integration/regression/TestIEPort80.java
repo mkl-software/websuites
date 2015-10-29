@@ -1,20 +1,22 @@
-package com.mkl.websuites.test.integration.bugs;
+package com.mkl.websuites.test.integration.regression;
 
 import org.junit.Assert;
 
-import com.mkl.websuites.WebSuitesConfig_rename;
+import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.internal.config.SiteConfig;
+import com.mkl.websuites.internal.config.WebSuites;
 import com.mkl.websuites.test.BrowsersConfig;
 import com.mkl.websuites.tests.WebSuiteStandaloneTest;
 
-public class TestIE80 extends WebSuiteStandaloneTest {
+public class TestIEPort80 extends WebSuiteStandaloneTest {
 
 	
-	@WebSuitesConfig_rename(
+	@WebSuites(
 		browsers = {"ie"},
-		host = "google.com",
-		browsersConfiguration = BrowsersConfig.class
+		browserResusableConfiguration = BrowsersConfig.class,
+		site = @SiteConfig(host = "google.com")
 	)
-	public static class Config {}
+	public static class LocalRunner extends WebSuitesRunner {}
 	
 	
 	

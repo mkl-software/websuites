@@ -1,7 +1,5 @@
 package com.mkl.websuites.internal.services;
 
-import com.mkl.websuites.internal.ConfigurationManager;
-import com.mkl.websuites.internal.StandardConfigurationManager;
 import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.browser.StandardBrowserController;
 import com.mkl.websuites.internal.command.CommandBuilder;
@@ -50,12 +48,7 @@ import com.mkl.websuites.internal.services.ServiceDefinition.Service;
 	@Service(
 			service = CommandTestConverter.class,
 			implementation = StandardCommandTestConverter.class
-	),
-	
-	@Service(
-			service = ConfigurationManager.class,
-			implementation = StandardConfigurationManager.class
-	),
+	)
 })
 public class DefaultServiceDefinitions {
 

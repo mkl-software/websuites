@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.webapp.WebAppContext;
 
+import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
 
@@ -32,6 +33,9 @@ public class JettyBasedTest {
 		
 		// reset underlying ServiceFactory
 		Deencapsulation.setField(ServiceFactory.class, "isInitialized", false);
+		
+		// reset WSUP:
+		Deencapsulation.setField(WebSuitesUserProperties.class, "instance", null);
 		
 		server = new Server(PORT_NUMER);
 		

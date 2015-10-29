@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Browser {
+public @interface BrowserConifg {
 
 	public enum BrowserType {
 		
@@ -21,7 +21,7 @@ public @interface Browser {
 
 	BrowserType browserType();
 	
-	String localId();
+	String id();
 	
 	String displayName();
 	

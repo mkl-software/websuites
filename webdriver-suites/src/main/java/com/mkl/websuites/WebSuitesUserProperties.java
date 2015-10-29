@@ -12,10 +12,15 @@ public class WebSuitesUserProperties {
 
 	
 	
-	private static WebSuitesUserProperties instance = new WebSuitesUserProperties();
+	private static WebSuitesUserProperties instance;
 	
 	public static WebSuitesUserProperties get() {
+		// late initialization + must be able to be rest for unit tests
+		if (instance == null) {
+			instance = new WebSuitesUserProperties();
+		}
 		return instance;
+		
 	}
 	
 	
@@ -23,6 +28,14 @@ public class WebSuitesUserProperties {
 	private  Map<String, String> globalProperties = new HashMap<String, String>();
 	
 	
+	
+	public WebSuitesUserProperties() {
+		// populate system properties:
+		Properties properties = System.getProperties();
+		for (Object key : properties.keySet()) {
+			globalProperties.put("env." + key, properties.getProperty(key.toString()));
+		}
+	}
 	
 	
 	public void load(InputStream source) {

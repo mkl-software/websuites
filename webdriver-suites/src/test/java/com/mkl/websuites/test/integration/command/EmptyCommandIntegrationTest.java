@@ -8,24 +8,21 @@ import org.junit.Test;
 import org.junit.runner.Result;
 
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.internal.config.ScenarioFile;
+import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.test.BrowsersForWebTests;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
-import com.mkl.websuites.test.integration.command.EmptyCommandIntegrationTestConfig.LocalEmptyCommandIntegrationTest;
 import com.mkl.websuites.test.unit.scenario.cmd.SampleCommand;
-import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.Scenarios;
 
 
-class EmptyCommandIntegrationTestConfig {
 	
-	@Scenarios("src/test/resources/unit/scenarios/running/oneSampleCommand.scn")
-	public static class LocalEmptyCommandIntegrationTest extends ScenarioFileTest {}
-}
 
 
-public class EmptyCommandIntegrationTest extends WebSuitesResultCheck {
+	public class EmptyCommandIntegrationTest extends WebSuitesResultCheck {
 
-	@WebSuites(configurationClass = LocalConfigForCommandTests.class, suite = LocalEmptyCommandIntegrationTest.class)
+	@WebSuites(
+			scenarios = @ScenarioFile("src/test/resources/unit/scenarios/running/oneSampleCommand.scn"),
+			browsers = "html")
 	public static class LocalRunner  extends WebSuitesRunner {}
 	
 	

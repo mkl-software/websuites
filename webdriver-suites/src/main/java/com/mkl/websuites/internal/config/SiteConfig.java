@@ -1,7 +1,10 @@
 package com.mkl.websuites.internal.config;
 
-import com.mkl.websuites.WebSuitesConfig_rename.DefaultBrowserConfig;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
+
+@Retention(RetentionPolicy.RUNTIME)
 public @interface SiteConfig {
 
 	String host() default "localhost";
@@ -9,10 +12,8 @@ public @interface SiteConfig {
 	int port() default 8080;
 
 	String basePath() default "/";
-	
-	Class<?> browsersConfiguration() default DefaultBrowserConfig.class;
 
-	int waitTimeout() default 30;
+	int waitTimeout() default 10;
 	
 	boolean doNotCloseBrowserAtTheEnd() default false;
 }

@@ -4,10 +4,10 @@ import org.junit.Test;
 import org.junit.runner.Result;
 
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.internal.config.ScenarioFile;
+import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.test.BrowsersConfig;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
-import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.Scenarios;
 
 
 
@@ -17,12 +17,13 @@ import com.mkl.websuites.tests.Scenarios;
 public class SelectCommandsTest extends WebSuitesResultCheck {
 
 	
-	@Scenarios("src/test/resources/integration/command/selectCommands.scn")
-	public static class SelectCommandsScenarioFile extends ScenarioFileTest {}
 	
 	
-	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
-			suite = SelectCommandsScenarioFile.class)
+	@WebSuites(
+		browsers = "${env.testBrowser}",
+		scenarios = @ScenarioFile("src/test/resources/integration/command/selectCommands.scn"),
+		browserResusableConfiguration = BrowsersConfig.class
+	)
 	public static class LocalRunnerSelectCommands  extends WebSuitesRunner {}
 	
 	

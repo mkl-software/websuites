@@ -1,7 +1,12 @@
 package com.mkl.websuites.internal.config;
 
-import com.mkl.websuites.Browser;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
+import com.mkl.websuites.BrowserConifg;
+
+
+@Retention(RetentionPolicy.RUNTIME)
 public @interface WebSuites {
 
 	String[] browsers() default {};
@@ -18,7 +23,9 @@ public @interface WebSuites {
 	
 	SiteConfig site() default @SiteConfig;
 	
-	Browser[] browserConfiguration() default {};
+	BrowserConifg[] browserConfiguration() default {};
+	
+	Class<?> browserResusableConfiguration() default Object.class;
 	
 	Extension extension() default @Extension;
 	

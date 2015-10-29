@@ -5,10 +5,18 @@ import static org.junit.Assert.fail;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
+
+import mockit.Deencapsulation;
+import mockit.Invocation;
+import mockit.Mock;
+import mockit.MockUp;
 
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
+
+import com.mkl.websuites.tests.ScenarioFileTest;
 
 public class TestUtils {
 
@@ -81,5 +89,21 @@ public class TestUtils {
 		final Annotation originalAnnotation = annotatedClass.getAnnotation(annotationClass);
 		
 		return originalAnnotation;
+	}
+	
+	
+	public static void prepareMockScenarioFileName(final String scenarioName) throws Throwable {
+		
+		new MockUp<ScenarioFileTest>() {
+			
+			@Mock
+			List<junit.framework.Test> defineTests(Invocation invocation) {
+				
+				Deencapsulation.setField(invocation.getInvokedInstance(),
+						"genericParams", new Object[] {scenarioName});
+				
+				return invocation.proceed();
+			}
+		};
 	}
 }

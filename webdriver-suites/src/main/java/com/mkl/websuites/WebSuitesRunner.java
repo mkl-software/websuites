@@ -1,6 +1,8 @@
 package com.mkl.websuites;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -8,15 +10,21 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.junit.runner.RunWith;
 
-import com.mkl.websuites.internal.ConfigurationManager;
+import com.mkl.websuites.internal.CommonUtils;
 import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.browser.RunnableForBrowser;
 import com.mkl.websuites.internal.browser.SetUpAllTest;
-import com.mkl.websuites.internal.browser.TearDownAllTest;
 import com.mkl.websuites.internal.browser.SwitchBrowserTest;
+import com.mkl.websuites.internal.browser.TearDownAllTest;
 import com.mkl.websuites.internal.browser.TearDownBrowserTest;
+import com.mkl.websuites.internal.config.Folder;
+import com.mkl.websuites.internal.config.ScenarioFile;
+import com.mkl.websuites.internal.config.TestClass;
+import com.mkl.websuites.internal.config.WebSuites;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
 import com.mkl.websuites.internal.services.ServiceFactory;
+import com.mkl.websuites.tests.ScenarioFileTest;
+import com.mkl.websuites.tests.ScenarioFolderTest;
 
 
 
@@ -25,7 +33,6 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 public class WebSuitesRunner {
 
 	
-	private Class<? extends WebSuitesRunner> runningClass;
 	
 	private static String currentlyDefiningBrowser;
 	
@@ -33,8 +40,9 @@ public class WebSuitesRunner {
 	
 	public WebSuitesRunner(Class<? extends WebSuitesRunner> klass) {
 		
-		ServiceFactory.init(klass);
-		runningClass = klass;
+		WebSuitesConfig.initializeWebsuitesConfig(klass);
+		
+		ServiceFactory.init();
 	}
 	
 	
@@ -68,6 +76,10 @@ public class WebSuitesRunner {
 	
 	
 
+	
+	
+	
+	
 	public TestSuite defineMasterSuite() throws
 			InstantiationException,
 			IllegalAccessException, NoSuchMethodException, SecurityException,
@@ -75,30 +87,22 @@ public class WebSuitesRunner {
 
 		log.debug("master suite method");
 		
-		WebSuitesConfig.initializeWebsuitesConfig(runningClass);
+		WebSuites config = WebSuitesConfig.get();
 		
 		TestSuite suite = new TestSuite();
 		suite.setName("Multi-browser test suite");
 		
-		WebSuites runner = runningClass.getAnnotation(WebSuites.class);
-		
-		Class<? extends Test>[] tests = runner.suite();
-		
-		WebSuitesConfig_rename config = runner.configurationClass().
-				getAnnotation(WebSuitesConfig_rename.class);
-		
-		ServiceFactory.get(ConfigurationManager.class).setConfiguration(config);
 		
 		ServiceFactory.get(BrowserController.class).initializeBrowsersEnvironment(config);
 		
-		String[] browsers = config.browsers();
+		String[] browsers = clobberPropertiesInBrowserIds(config);
 		
 		addSetUpSuite(suite);
 		
 		
 		// check if run for non-browser mode:
 		if (browsers.length == 1 && browsers[0].equals("none")) {
-			configureSingleNonBrowserSuite(suite, tests);
+			configureSingleNonBrowserSuite(suite, buildAllTests(config));
 		}
 		
 		for (String browser : browsers) {
@@ -111,7 +115,9 @@ public class WebSuitesRunner {
 			
 			TestSuite browserSuite = buildBrowserSuite(browser);
 			
-			addTestsToBrowserSuite(tests, browserSuite);
+			List<Test> allTestsToRun = buildAllTests(config);
+			
+			addTestsToBrowserSuite(allTestsToRun, browserSuite);
 			
 			suite.addTest(browserSuite);
 			
@@ -124,10 +130,59 @@ public class WebSuitesRunner {
 		return suite;
 	}
 
+	private String[] clobberPropertiesInBrowserIds(WebSuites config) {
+		String[] origBrowserIds = config.browsers();
+		String[] processedIds = new String[origBrowserIds.length];
+		for (int i = 0; i < origBrowserIds.length; i++) {
+			String id = origBrowserIds[i];
+			id = CommonUtils.populateStringWithProperties(id);
+			if (id.startsWith("$")) {
+				id = "chrome"; // TODO: default, TEMP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			}
+			processedIds[i] = id;
+		}
+		return processedIds;
+	}
+
 	
 	
 	
 	
+	private List<Test> buildAllTests(WebSuites config) {
+	
+		// TODO: with new apprach there's a a big concern - how to
+		// retain the order from test declaration in the annotation???
+		
+		List<Test> result = new ArrayList<>();
+		
+		ScenarioFile[] scenarios = config.scenarios();
+		for (int i = 0; i < scenarios.length; i++) {
+			ScenarioFile scenarioFile = scenarios[i];
+			String filePath = scenarioFile.value();
+			result.add(new ScenarioFileTest(filePath));
+		}
+		
+		Folder[] folders = config.folders();
+		for (int i = 0; i < folders.length; i++) {
+			Folder folder = folders[i];
+			result.add(new ScenarioFolderTest(
+					folder.path(), folder.ignoreSubfolders(), folder.sortingStrategy()));
+		}
+		
+		TestClass[] testClasses = config.classes();
+		for (int i = 0; i < testClasses.length; i++) {
+			TestClass testDefinition = testClasses[i];
+			Class<? extends Test> test = testDefinition.value();
+			try {
+				result.add(test.newInstance());
+			} catch (InstantiationException | IllegalAccessException e) {
+				throw new WebSuitesException("Cannot create an instance of test class " + test, e);
+			}
+		}
+		
+		return result;
+	}
+
 	private void addTearDownForBrowser(TestSuite browserSuite, String browser) {
 		
 		browserSuite.addTest(new TearDownBrowserTest(browser, new RunnableForBrowser() {
@@ -141,12 +196,11 @@ public class WebSuitesRunner {
 
 	
 	
-	private void configureSingleNonBrowserSuite(TestSuite suite,
-			Class<? extends Test>[] suites) throws InstantiationException,
-			IllegalAccessException {
+	private void configureSingleNonBrowserSuite(TestSuite suite, List<Test> tests) {
+		
 		currentlyDefiningBrowser = "none"; // TODO: move it to a TestContext
 		TestSuite browserSuite = new TestSuite("Running without any browser");
-		addTestsToBrowserSuite(suites, browserSuite);
+		addTestsToBrowserSuite(tests, browserSuite);
 		suite.addTest(browserSuite);
 	}
 
@@ -196,13 +250,13 @@ public class WebSuitesRunner {
 		}));
 	}
 
-	private void addTestsToBrowserSuite(Class<? extends Test>[] tests,
-			TestSuite browserSuite) throws InstantiationException,
-			IllegalAccessException {
-		for (Class<? extends Test> testClass : tests) {
+	private void addTestsToBrowserSuite(List<Test> tests,
+			TestSuite browserSuite) {
+
+		for (Test test : tests) {
 			
-			Test dynamicTest = testClass.newInstance();
-			browserSuite.addTest(dynamicTest);
+//			Test dynamicTest = testClass.newInstance();
+			browserSuite.addTest(test);
 		}
 	}
 

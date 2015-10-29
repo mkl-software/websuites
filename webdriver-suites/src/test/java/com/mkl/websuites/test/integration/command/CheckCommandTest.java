@@ -7,47 +7,41 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.internal.config.ScenarioFile;
+import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.test.BrowsersConfig;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
-import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.Scenarios;
 
-
-
-class CheckCommandTestConfig {
-	
-	@Scenarios("src/test/resources/integration/command/check1.scn")
-	public static class ScenarioWithExistingElemByCssId extends ScenarioFileTest {}
-	
-	@Scenarios("src/test/resources/integration/command/check2.scn")
-	public static class ScenarioWithNonExistingElemByCssId extends ScenarioFileTest {}
-	
-	
-	@Scenarios("src/test/resources/integration/command/check3.scn")
-	public static class ScenarioForIdParam extends ScenarioFileTest {}
-	
-	@Scenarios("src/test/resources/integration/command/check4.scn")
-	public static class ScenarioForXpathParam extends ScenarioFileTest {}
-	
-}
 
 public class CheckCommandTest extends WebSuitesResultCheck {
 
 	
-	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
-			suite = CheckCommandTestConfig.ScenarioWithExistingElemByCssId.class)
+	@WebSuites(
+		browsers = "${env.testBrowser}",
+		scenarios = @ScenarioFile("src/test/resources/integration/command/check1.scn"),
+		browserResusableConfiguration = BrowsersConfig.class
+	)
 	public static class LocalRunnerExistingElemCssId  extends WebSuitesRunner {}
 	
-	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
-			suite = CheckCommandTestConfig.ScenarioWithNonExistingElemByCssId.class)
+	@WebSuites(
+		browsers = "${env.testBrowser}",
+		scenarios = @ScenarioFile("src/test/resources/integration/command/check2.scn"),
+		browserResusableConfiguration = BrowsersConfig.class
+	)
 	public static class LocalRunnerNotExistingElemCssId  extends WebSuitesRunner {}
 	
-	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
-			suite = CheckCommandTestConfig.ScenarioForIdParam.class)
+	@WebSuites(
+		browsers = "${env.testBrowser}",
+		scenarios = @ScenarioFile("src/test/resources/integration/command/check3.scn"),
+		browserResusableConfiguration = BrowsersConfig.class
+	)
 	public static class LocalRunnerForIdParam  extends WebSuitesRunner {}
 	
-	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
-			suite = CheckCommandTestConfig.ScenarioForXpathParam.class)
+	@WebSuites(
+		browsers = "${env.testBrowser}",
+		scenarios = @ScenarioFile("src/test/resources/integration/command/check4.scn"),
+		browserResusableConfiguration = BrowsersConfig.class
+		)
 	public static class LocalRunnerForXpathParam  extends WebSuitesRunner {}
 	
 	

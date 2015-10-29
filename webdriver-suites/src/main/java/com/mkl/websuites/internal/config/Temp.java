@@ -5,7 +5,7 @@ import com.mkl.websuites.internal.MultiBrowserTestCase;
 
 @WebSuites(
 		browsers = "ff",
-		folders = @Folder("/somepath"),
+		folders = @Folder(path = "/somepath"),
 		scenarios = @ScenarioFile("file.scn"),
 		classes = @TestClass(MultiBrowserTestCase.class),
 		site = @SiteConfig(host = "myhost.com"),

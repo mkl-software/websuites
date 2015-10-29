@@ -5,10 +5,11 @@ import org.junit.runner.Result;
 import org.openqa.selenium.Alert;
 
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.internal.config.ScenarioFile;
+import com.mkl.websuites.internal.config.TestClass;
+import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.test.BrowsersConfig;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
-import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.Scenarios;
 import com.mkl.websuites.tests.WebSuiteStandaloneTest;
 
 
@@ -17,8 +18,6 @@ class ClickCommandTestConfig {
 	
 	
 
-	@Scenarios("src/test/resources/integration/command/clickTest1.scn")
-	public static class LocalUnderlyingClickTest extends ScenarioFileTest {}
 	
 	public static class ClickCheckTest extends WebSuiteStandaloneTest {
 
@@ -44,9 +43,12 @@ class ClickCommandTestConfig {
 public class ClickCommandTest extends WebSuitesResultCheck {
 
 	
-	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
-			suite = {ClickCommandTestConfig.LocalUnderlyingClickTest.class,
-		             ClickCommandTestConfig.ClickCheckTest.class})
+	@WebSuites(
+		browsers = "${env.testBrowser}",
+		scenarios = @ScenarioFile("src/test/resources/integration/command/clickTest1.scn"),
+		classes = @TestClass(ClickCommandTestConfig.ClickCheckTest.class),
+		browserResusableConfiguration = BrowsersConfig.class
+	)
 	public static class LocalRunner  extends WebSuitesRunner {}
 	
 	

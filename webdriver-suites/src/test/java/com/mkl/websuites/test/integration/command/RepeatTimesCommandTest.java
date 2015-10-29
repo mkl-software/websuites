@@ -5,20 +5,18 @@ import org.junit.runner.Result;
 import org.openqa.selenium.By;
 
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.internal.config.ScenarioFile;
+import com.mkl.websuites.internal.config.TestClass;
+import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.test.BrowsersConfig;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
-import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.Scenarios;
 import com.mkl.websuites.tests.WebSuiteStandaloneTest;
 
 
-
-class RepeatTimesCommandTestConfig {
-	
 	
 
-	@Scenarios("src/test/resources/integration/command/repeatTimes.scn")
-	public static class LocalUnderlyingRepeatTest extends ScenarioFileTest {}
+public class RepeatTimesCommandTest extends WebSuitesResultCheck {
+
 	
 	public static class RepeatCheckTest extends WebSuiteStandaloneTest {
 
@@ -40,19 +38,21 @@ class RepeatTimesCommandTestConfig {
 	}
 	
 	
-}
-
-public class RepeatTimesCommandTest extends WebSuitesResultCheck {
-
 	
-	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
-			suite = {RepeatTimesCommandTestConfig.LocalUnderlyingRepeatTest.class,
-		RepeatTimesCommandTestConfig.RepeatCheckTest.class})
+	@WebSuites(
+		browsers = "${env.testBrowser}",
+		scenarios = @ScenarioFile("src/test/resources/integration/command/repeatTimes.scn"),
+		classes = @TestClass(RepeatCheckTest.class),
+		browserResusableConfiguration = BrowsersConfig.class
+	)
 	public static class LocalRunner  extends WebSuitesRunner {}
 	
 	
+	
+	
+	
 	@Test
-	public void testClick() throws Throwable {
+	public void testSimpleRepeat() throws Throwable {
 		
 		Result testResult = super.checkWebTestResult(LocalRunner.class);
 		

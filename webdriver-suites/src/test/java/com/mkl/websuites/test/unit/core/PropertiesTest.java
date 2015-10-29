@@ -1,7 +1,14 @@
 package com.mkl.websuites.test.unit.core;
 
+import static junitparams.JUnitParamsRunner.$;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,15 +20,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.mkl.websuites.WebSuitesConfig;
+import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.WebSuitesUserProperties;
+import com.mkl.websuites.internal.CommonUtils;
 import com.mkl.websuites.internal.command.Command;
-import com.mkl.websuites.internal.command.impl.ParameterizedCommand;
-import com.mkl.websuites.internal.command.impl.check.CheckCommand;
 import com.mkl.websuites.internal.command.impl.misc.SetPropCommand;
+import com.mkl.websuites.internal.config.WebSuites;
 import com.mkl.websuites.internal.services.ServiceFactory;
-
-import static org.junit.Assert.*;
-import static junitparams.JUnitParamsRunner.$;
 
 
 
@@ -29,10 +35,14 @@ import static junitparams.JUnitParamsRunner.$;
 public class PropertiesTest {
 
 
+	@WebSuites
+	public static class MockRunner extends WebSuitesRunner {}
+	
 	@BeforeClass
 	public static void init() {
 		Deencapsulation.setField(ServiceFactory.class, "isInitialized", false);
-		ServiceFactory.init(null);
+		WebSuitesConfig.initializeWebsuitesConfig(MockRunner.class);
+		ServiceFactory.init();
 	}
 	
 	
@@ -94,9 +104,22 @@ public class PropertiesTest {
 		WebSuitesUserProperties globalProps = WebSuitesUserProperties.get();
 		globalProps.clear();
 		globalProps.populateFrom(props);
-		ParameterizedCommand command = new CheckCommand("");
-		String result = Deencapsulation.invoke(command, "populateStringWithProperties", line);
+		String result =  CommonUtils.populateStringWithProperties(line);
 		assertEquals(expectedLine, result);
+	}
+	
+	
+	
+	@Test
+	public void shouldContainSystemProperties() {
+		//given
+		Deencapsulation.setField(WebSuitesUserProperties.class, "instance", null);
+		WebSuitesUserProperties props = WebSuitesUserProperties.get();
+		//then
+		System.getProperties().list(new PrintStream(System.out));
+		assertThat(props.isSet("env.user.home")).isTrue();
+		assertThat(props.isSet("env.java.home")).isTrue();
+		assertThat(props.isSet("env.file.encoding")).isTrue();
 	}
 	
 	

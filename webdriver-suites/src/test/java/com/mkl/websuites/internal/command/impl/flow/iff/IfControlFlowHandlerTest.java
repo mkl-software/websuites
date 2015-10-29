@@ -22,11 +22,14 @@ import org.junit.runner.RunWith;
 
 import pl.wkr.fluentrule.api.FluentExpectedException;
 
+import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.WebSuitesException;
+import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.internal.browser.StandardBrowserController;
 import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.impl.ParameterizedCommand;
+import com.mkl.websuites.internal.config.WebSuites;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
 
@@ -42,6 +45,9 @@ public class IfControlFlowHandlerTest {
 	public FluentExpectedException expectedException = FluentExpectedException.none();
 
 
+	@WebSuites
+	public static class MockRunner extends WebSuitesRunner {}
+	
 	
 	@Before
 	public void init() {
@@ -51,7 +57,8 @@ public class IfControlFlowHandlerTest {
 			void populateBrowser() {}
 		};
 		
-		ServiceFactory.init(null);
+		WebSuitesConfig.initializeWebsuitesConfig(MockRunner.class);
+		ServiceFactory.init();
 	}
 	
 	

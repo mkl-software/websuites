@@ -1,10 +1,8 @@
 package com.mkl.websuites.internal.command.impl.navigation;
 
-import com.mkl.websuites.WebSuitesConfig_rename;
-import com.mkl.websuites.internal.ConfigurationManager;
+import com.mkl.websuites.WebSuitesConfig;
 import com.mkl.websuites.internal.command.BaseCommand;
 import com.mkl.websuites.internal.command.CommandDescriptor;
-import com.mkl.websuites.internal.services.ServiceFactory;
 
 
 @CommandDescriptor(name = "goto", argumentTypes = {String.class})
@@ -22,9 +20,8 @@ public class GotoCommand extends BaseCommand {
 		
 		if (address.startsWith("/")) {
 			// relative address:
-			WebSuitesConfig_rename config = ServiceFactory.get(ConfigurationManager.class).getConfiguration();
 			// TODO: use a service to apply normalizePath logic
-			address = config.basePath() + address;
+			address = WebSuitesConfig.get().site().basePath() + address;
 			
 		} else {
 			if (!address.startsWith("http:")) {

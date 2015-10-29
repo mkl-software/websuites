@@ -8,9 +8,11 @@ import junit.framework.TestSuite;
 
 public abstract class MultiBrowserSuite extends TestSuite {
 
-	
+	protected Object[] genericParams;
 
-	public MultiBrowserSuite() {
+	public MultiBrowserSuite(Object ... params) {
+		
+		genericParams = params;
 		
 		for (Test test : defineTests()) {
 			

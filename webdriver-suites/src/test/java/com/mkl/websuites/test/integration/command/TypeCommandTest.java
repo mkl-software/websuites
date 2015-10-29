@@ -5,20 +5,26 @@ import org.junit.runner.Result;
 import org.openqa.selenium.Alert;
 
 import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.internal.config.ScenarioFile;
+import com.mkl.websuites.internal.config.TestClass;
+import com.mkl.websuites.internal.config.WebSuites;
+import com.mkl.websuites.test.BrowsersConfig;
 import com.mkl.websuites.test.core.WebSuitesResultCheck;
-import com.mkl.websuites.tests.ScenarioFileTest;
-import com.mkl.websuites.tests.Scenarios;
 import com.mkl.websuites.tests.WebSuiteStandaloneTest;
 
 
 
-class TypeCommandTestConfig {
 	
 	
 
-	@Scenarios("src/test/resources/integration/command/typeTextTest1.scn")
-	public static class LocalUnderlyingTypeTest extends ScenarioFileTest {}
+	
+	
+	
+	
+
+public class TypeCommandTest extends WebSuitesResultCheck {
+
+	
 	
 	public static class TypeTextCheckTest extends WebSuiteStandaloneTest {
 
@@ -38,16 +44,17 @@ class TypeCommandTestConfig {
 		
 	}
 	
-	
-}
-
-public class TypeCommandTest extends WebSuitesResultCheck {
-
-	
-	@WebSuites(configurationClass = LocalConfigForCommandTests.class,
-			suite = {TypeCommandTestConfig.LocalUnderlyingTypeTest.class,
-					TypeCommandTestConfig.TypeTextCheckTest.class})
+	@WebSuites(
+			browsers = "${env.testBrowser}",
+			scenarios = @ScenarioFile("src/test/resources/integration/command/typeTextTest1.scn"),
+			classes = @TestClass(TypeTextCheckTest.class),
+			browserResusableConfiguration = BrowsersConfig.class
+		)
 	public static class LocalRunner  extends WebSuitesRunner {}
+	
+	
+	
+	
 	
 	
 	@Test

@@ -2,11 +2,11 @@ package com.mkl.websuites.internal.browser;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mkl.websuites.WebSuitesConfig_rename;
+import com.mkl.websuites.internal.config.WebSuites;
 
 public interface BrowserController {
 
-	public abstract void initializeBrowsersEnvironment(WebSuitesConfig_rename config);
+	public abstract void initializeBrowsersEnvironment(WebSuites config);
 
 	public abstract void addBrowser(String browser);
 
