@@ -24,16 +24,20 @@ public class StandardCommandBuilder implements CommandBuilder {
 
 	
 	
-	private static StandardCommandBuilder instance = new StandardCommandBuilder();
+	private static StandardCommandBuilder instance;
 	
 	private Map<String, Constructor> commandConstructorMap;
 	private Map<String, Constructor> parameterizedCommandConstructorMap;
 
 	private Map<String, List<Class>> commandTypesMap;
 
-	
+	// exposed (via deencapsulation) to unit tests
+	private static String[] customScanPathPackages = {"com.mkl.websuites.itests.cmd"};
 	
 	public static StandardCommandBuilder getInstance() {
+		if (instance == null) {
+			instance = new StandardCommandBuilder();
+		}
 		return instance ;
 	}
 	
@@ -141,9 +145,16 @@ public class StandardCommandBuilder implements CommandBuilder {
 
 	protected Set<Class<?>> scanClasspathForCommands() {
 		
-		// TODO: remove test reference and configure additional scan path on the unit test side
-		Reflections reflections = new Reflections("com.mkl.websuites.internal.command.impl",
-												  "com.mkl.websuites.test.unit.scenario");
+		String defaultScanPackage = "com.mkl.websuites.internal.command.impl";
+		
+		List<Object> scanPathElements = new ArrayList<>();
+		
+		scanPathElements.add(defaultScanPackage);
+		
+		for (Object packageElement : customScanPathPackages) {
+			scanPathElements.add(packageElement);
+		}
+		Reflections reflections = new Reflections(scanPathElements.toArray());
 
 		// honorInherited=true to skip inherited but not annotated classes
 		Set<Class<?>> allCommandsInClasspath = 

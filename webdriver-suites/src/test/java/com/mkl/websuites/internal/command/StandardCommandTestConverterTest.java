@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.mkl.websuites.internal.command.impl.flow.RepeatControlFlowHandler;
-import com.mkl.websuites.test.unit.scenario.cmd.SampleCommand;
+import com.mkl.websuites.itests.cmd.SampleCommand;
 
 
 @RunWith(JUnitParamsRunner.class)
