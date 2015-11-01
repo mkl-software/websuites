@@ -34,14 +34,25 @@ import com.mkl.websuites.internal.tests.TearDownAllTest;
 public class WebSuitesRunner {
 
 	
+	@WebSuites
+	public static class DefaultConfiguration extends WebSuitesRunner {}
+	
 	
 	private static String currentlyDefiningBrowser;
 	
 	public WebSuitesRunner() {}
 	
-	public WebSuitesRunner(Class<? extends WebSuitesRunner> klass) {
+	public WebSuitesRunner(Class<? extends WebSuitesRunner> runningClass) {
 		
-		WebSuitesConfig.initializeWebsuitesConfig(klass);
+		Class<? extends WebSuitesRunner> configClass;
+		
+		if (runningClass.isAnnotationPresent(WebSuites.class)) {
+			configClass = runningClass;
+		} else {
+			configClass = DefaultConfiguration.class;
+			
+		}
+		WebSuitesConfig.initializeWebsuitesConfig(configClass);
 		
 		ServiceFactory.init();
 	}

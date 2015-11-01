@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.mkl.websuites.WebSuitesRunnerTest;
 import com.mkl.websuites.WebSuitesUserPropertiesTest;
 import com.mkl.websuites.internal.command.OperationOnWebElementTest;
 import com.mkl.websuites.internal.command.StandardCommandBuilderTest;
@@ -31,6 +32,7 @@ import com.mkl.websuites.internal.tests.ScenarioFolderTestTest;
 @RunWith(Suite.class)
 @SuiteClasses(
 		{
+			WebSuitesRunnerTest.class,
 			OperationOnWebElementTest.class,
 			StandardCommandBuilderTest.class,
 			StandardCommandParserTest.class,

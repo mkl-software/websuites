@@ -8,7 +8,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,9 +19,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.mkl.websuites.WebSuites;
-import com.mkl.websuites.WebSuitesRunner;
-import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.config.WebSuitesConfig;
 import com.mkl.websuites.internal.CommonUtils;
 import com.mkl.websuites.internal.command.Command;
@@ -116,7 +112,6 @@ public class WebSuitesUserPropertiesTest {
 		Deencapsulation.setField(WebSuitesUserProperties.class, "instance", null);
 		WebSuitesUserProperties props = WebSuitesUserProperties.get();
 		//then
-		System.getProperties().list(new PrintStream(System.out));
 		assertThat(props.isSet("env.user.home")).isTrue();
 		assertThat(props.isSet("env.java.home")).isTrue();
 		assertThat(props.isSet("env.file.encoding")).isTrue();

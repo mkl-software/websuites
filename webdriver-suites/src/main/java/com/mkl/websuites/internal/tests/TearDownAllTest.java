@@ -30,7 +30,7 @@ public class TearDownAllTest extends TestCase {
 		
 		String currentBrowser = WebSuitesRunner.getCurrentlyDefiningBrowser();
 		
-		if (!config.site().doNotCloseBrowserAtTheEnd() && !currentBrowser.equals("none")) {
+		if (!config.site().doNotCloseBrowserAtTheEnd() && currentBrowser != null && !"none".equals(currentBrowser)) {
 			
 			ServiceFactory.get(BrowserController.class).getWebDriver().quit();
 		}

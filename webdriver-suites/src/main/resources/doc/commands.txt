@@ -78,6 +78,9 @@ Legend:
 +selectAll
 +deselectAll
 
+selectCheckbox
+deselctCheckbox
+
 // all waits should be Fluent, with params: timeout=n, pollingInterval=m, ingoreNoSuchElementException=true/false
 wait					implemented
 waitFor					waits until element is present (timeout=n)
