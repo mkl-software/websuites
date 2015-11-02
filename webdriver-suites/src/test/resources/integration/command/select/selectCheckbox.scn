@@ -1,4 +1,3 @@
-
 goto	http://localhost:90/integration/commands/check/allChecks.html
 
 ~checkCheckboxSelected	#sampleCheckboxUnchecked

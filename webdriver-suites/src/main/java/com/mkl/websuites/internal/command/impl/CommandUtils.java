@@ -26,4 +26,12 @@ public class CommandUtils {
 		return Pattern.compile(text, Pattern.DOTALL);
 	}
 
+
+	public static boolean checkIfElementIsCheckBox(WebElement element) {
+		String checkedAtt = element.getAttribute("type");
+		return element.getTagName().equalsIgnoreCase("input") &&
+				checkedAtt != null &&
+				checkedAtt.equals("checkbox");
+	}
+
 }

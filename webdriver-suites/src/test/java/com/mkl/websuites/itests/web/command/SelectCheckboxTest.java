@@ -14,26 +14,25 @@ import com.mkl.websuites.itests.web.core.WebSuitesResultCheck;
 
 
 
-public class SelectCommandsTest extends WebSuitesResultCheck {
+public class SelectCheckboxTest extends WebSuitesResultCheck {
 
 	
 	
 	
 	@WebSuites(
 		browsers = "${env.testBrowser}",
-		scenarios = @ScenarioFile("src/test/resources/integration/command/select/selectCommands.scn"),
+		scenarios = @ScenarioFile("src/test/resources/integration/command/select/selectCheckbox.scn"),
 		browserResusableConfiguration = BrowsersConfig.class
 	)
-	public static class LocalRunnerSelectCommands  extends WebSuitesRunner {}
-	
+	public static class LocalRunnerSelectCheckboxCommands  extends WebSuitesRunner {}
 	
 	
 	
 	
 	@Test
-	public void shouldRunSelectCommandsAllPassing() throws Throwable {
+	public void shouldRunSelectCheckboxCommandsAllPassing() throws Throwable {
 		
-		Result testResult = super.checkWebTestResult(LocalRunnerSelectCommands.class);
+		Result testResult = super.checkWebTestResult(LocalRunnerSelectCheckboxCommands.class);
 		
 		checkRunCount(BASE_RUN_COUNT_FOR_BROWSER_TEST, testResult);
 		
