@@ -6,6 +6,7 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
 
+import com.mkl.websuites.config.WebSuitesConfig;
 import com.mkl.websuites.internal.CommonUtils;
 import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.scenario.SourceLine;
@@ -19,6 +20,8 @@ public abstract class BaseCommand implements Command, SourceInfoHolder {
 	protected WebDriver browser;
 
 	private SourceLine sourceLine;
+
+	protected int webElementWaitTimeout = WebSuitesConfig.get().site().waitTimeout();
 	
 	protected static SoftAssertions softly = new SoftAssertions();
 

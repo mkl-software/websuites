@@ -17,7 +17,7 @@ public class CheckCommand extends OperationOnWebElement {
 	}
 	
 	public CheckCommand(String elemement) {
-		super(null);
+		super(elemement);
 		super.elementSelector = elemement;
 	}
 

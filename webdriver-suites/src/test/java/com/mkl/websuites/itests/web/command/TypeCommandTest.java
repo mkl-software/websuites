@@ -14,13 +14,6 @@ import com.mkl.websuites.itests.web.core.WebSuitesResultCheck;
 
 
 
-	
-	
-
-	
-	
-	
-	
 
 public class TypeCommandTest extends WebSuitesResultCheck {
 
@@ -58,7 +51,7 @@ public class TypeCommandTest extends WebSuitesResultCheck {
 	
 	
 	@Test
-	public void testClick() throws Throwable {
+	public void testType() throws Throwable {
 		
 		Result testResult = super.checkWebTestResult(LocalRunner.class);
 		

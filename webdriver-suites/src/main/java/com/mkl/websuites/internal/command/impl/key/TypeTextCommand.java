@@ -21,7 +21,7 @@ public class TypeTextCommand extends OperationOnWebElement {
 
 
 	public TypeTextCommand(String element, String textToType) {
-		super(null);
+		super(element);
 		super.elementSelector = element;
 		this.textToType = textToType;
 	}

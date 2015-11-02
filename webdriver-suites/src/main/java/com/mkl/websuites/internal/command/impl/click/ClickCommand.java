@@ -19,7 +19,7 @@ public class ClickCommand extends OperationOnWebElement {
 	}
 	
 	public ClickCommand(String elemement) {
-		super(null);
+		super(elemement);
 		this.elementSelector = elemement;
 	}
 

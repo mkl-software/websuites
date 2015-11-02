@@ -22,11 +22,18 @@ public abstract class OperationOnWebElement extends ParameterizedCommand {
 	
 	protected WebElement foundElement;
 	
-
 	public OperationOnWebElement(Map<String, String> parameterMap) {
 		super(parameterMap);
 	}
 
+	
+	@SuppressWarnings("serial")
+	public OperationOnWebElement(final String selector) {
+		this(new HashMap<String, String>() {{
+			put("css", selector);
+		}
+		});
+	}
 
 	@Override
 	protected void runStandardCommand() {
