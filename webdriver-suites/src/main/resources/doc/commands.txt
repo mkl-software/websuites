@@ -24,17 +24,17 @@ Legend:
 (+s~|)	checkPageSource
 (+s~|)	checkPageSourceContains
 (+s~|)	checkPageSourceMatches
-(c+s~|)	checkText				checks if given string exists anywhere on the page
-(c+s~|)	checkTextMatching		checks if there is a text anywhere on the page that matches given regex (!)
+(C+s~|)	checkText				checks if given string exists anywhere on the page
+(C+s~|)	checkTextMatching		checks if there is a text anywhere on the page that matches given regex (!)
 (+s~|)	checkElementText				checks if GIVEN element has EXACTLY this text as innerText (!)
 (+s~|)	checkElementTextContains		as above, but contains (!)
 (+s~|)	checkElementTextMatches			as above, matches (!)
 (+s~|)	checkElementInnerHTML				(!, !!)
 (+s~|)	checkElementInnerHTMLContains		(!, !!)
 (+s~|)	checkElementInnerHTMLMatches		(!, !!)
-(c+s~|)	checkLinkText					checks if link with given text exists
-(c+s~|)	checkLinkTextContaining
-(c+s~|)	checkLinkTextMatching
+(C+s~|)	checkLinkText					checks if link with given text exists
+(C+s~|)	checkLinkTextContaining
+(C+s~|)	checkLinkTextMatching
 (c+s~|)	checkLinkHREF				checks of link with given HREF value exists
 (c+s~|)	checkLinkHREFContaining
 (c+s~|)	checkLinkHREFMatching
@@ -64,7 +64,10 @@ Legend:
 (+s~|)	checkElementsCount				checks number of all elements matching given selector
 (+s~|)	checkSubelementsCount			checks number of elements under given root element
 (+s~|)	checkElementChildrenCount		checks number of direct children in given element
-(+s~|)	checkElementSiblingCount	as above for siblings
+(+s~|)	checkElementSiblingCount		as above for siblings
+()	checkTexbox							check text box entered text. For now check attribute "value" would work
+()	checkTexboxContains					
+()	checkTexboxMatches					
 
 +selectByValue					selected option in the combobox
 +selectByIndex
@@ -124,8 +127,8 @@ evaluateJsExpr			evaluates Javascript expression and writes it to a given target
 
 basicAuthentication		username	password 	- will type credentials using Java Robot
 
-goto
-back
++goto
++back
 forward
 refresh
 switchToWindow			switch to window with name

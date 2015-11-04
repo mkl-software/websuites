@@ -2,7 +2,15 @@
 	<head>
 		<title>Test title full text</title>
 		<meta></meta>
-		<script>
+		<script type="text/javascript" src="/js/jquery.js"></script>
+		<script type="text/javascript">
+		
+		$(document).ready(function() {
+		$( "p" ).click(function(event) {
+		    $("#verificationText").text(event.target.innerText);
+		});
+		});
+		
 		setTimeout(function() {
 			document.getElementById("fillIt").innerHTML = "dynamic text";
 		}, 3000);
@@ -45,6 +53,9 @@
 					<option value="id3">Option 3</option>
 				</select>
 				<input type="button" onclick="alert('this is alert');"></input>
+				<input type="text" id="textbox"></input>
+				<span id="verificationText"></span>
+				<a href="http://localhost:90/integration/commands/gotoLocalAddress.html">open local page</a>
 			</div>
 		</div>
 	</body>

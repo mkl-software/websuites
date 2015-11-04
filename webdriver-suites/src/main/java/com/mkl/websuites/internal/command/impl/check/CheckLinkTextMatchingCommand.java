@@ -28,6 +28,7 @@ public class CheckLinkTextMatchingCommand extends CheckLinkTextCommand {
 			for (WebElement webElement : elements) {
 				if (webElement.getText().matches(expectedLinkText)) {
 					actualLinkText = webElement.getText();
+					foundElem = webElement;
 					return "OK";
 				}
 			}

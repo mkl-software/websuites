@@ -7,7 +7,6 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.mkl.websuites.itests.web.command.AllCheckCommandsFailingTest;
 import com.mkl.websuites.itests.web.command.AllCheckCommandsPassingTest;
 import com.mkl.websuites.itests.web.command.CheckCommandTest;
-import com.mkl.websuites.itests.web.command.ClickCommandTest;
 import com.mkl.websuites.itests.web.command.TypeCommandTest;
 
 
@@ -16,7 +15,6 @@ import com.mkl.websuites.itests.web.command.TypeCommandTest;
 	AllCheckCommandsPassingTest.class,
 	AllCheckCommandsFailingTest.class,
 	TypeCommandTest.class,
-	ClickCommandTest.class,
 	CheckCommandTest.class,
 })
 public class LongRunningTestsForRealBrowsers {

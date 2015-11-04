@@ -24,6 +24,8 @@ public class CheckTextMatchingCommand extends AbstractCheck {
 
 
 	protected String regex;
+	
+	protected WebElement foundElem;
 
 	public CheckTextMatchingCommand(String regex) {
 		this.regex = regex;
@@ -38,6 +40,7 @@ public class CheckTextMatchingCommand extends AbstractCheck {
 			String text = webElement.getText();
 			if (text.matches(regex)) {
 				isMatch = true;
+				foundElem = webElement;
 				break;
 			}
 		}

@@ -1,0 +1,30 @@
+
+goto	http://localhost:90/integration/commands/check/allChecks.html
+
+
+click	#textNode
+checkElementText	#verificationText	lorem ipsum
+
+clickText	bolded
+checkElementText	#verificationText	bolded text
+
+
+clickTextMatching	l.*um
+checkElementText	#verificationText	lorem ipsum
+
+clickLinkText	open local page
+checkTitle	Goto test local web
+back
+checkTitle	Test title full text
+
+
+clickLinkTextContaining	page
+checkTitle	Goto test local web
+back
+checkTitle	Test title full text
+
+
+clickLinkTextMatching	o..n.*al ?pag[ae]
+checkTitle	Goto test local web
+back
+checkTitle	Test title full text

@@ -1,7 +1,7 @@
 
 goto	http://localhost:90/integration/commands/check/allChecks.html
 
-setImplicitWaitTimeout	100
-restoreImplicitWaitTimeout
 
-check	#newElem
+clickText	bolded
+
+checkElementText	#verificationText	bolded text

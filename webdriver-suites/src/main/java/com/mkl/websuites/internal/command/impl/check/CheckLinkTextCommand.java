@@ -3,6 +3,7 @@ package com.mkl.websuites.internal.command.impl.check;
 import org.assertj.core.api.StringAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 
 import com.mkl.websuites.internal.command.CommandDescriptor;
 
@@ -11,6 +12,8 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 public class CheckLinkTextCommand extends AbstractSingleStringCheck {
 
 	protected String expectedLinkText;
+	
+	protected WebElement foundElem;
 	
 
 	public CheckLinkTextCommand(String expectedLinkText) {
@@ -24,11 +27,11 @@ public class CheckLinkTextCommand extends AbstractSingleStringCheck {
 	protected String getStringParam() {
 		
 		try {
-			browser.findElement(By.linkText(expectedLinkText));
+			foundElem = browser.findElement(By.linkText(expectedLinkText));
 		} catch (NoSuchElementException e) {
 			return null;
 		}
-		
+				
 		return "OK";
 	}
 

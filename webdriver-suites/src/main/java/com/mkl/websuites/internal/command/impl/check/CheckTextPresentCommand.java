@@ -17,6 +17,8 @@ public class CheckTextPresentCommand extends AbstractCheck {
 
 	
 	protected String text;
+	
+	protected WebElement foundElem;
 
 	public CheckTextPresentCommand(String text) {
 		this.text = populateStringWithProperties(text);
@@ -25,6 +27,9 @@ public class CheckTextPresentCommand extends AbstractCheck {
 	@Override
 	protected Object[] getAssertionsParameters() {
 		List<WebElement> list = browser.findElements(By.xpath("//body//*[contains(text(),'" + text + "')]"));
+		if (!list.isEmpty()) {
+			foundElem = list.get(0);
+		}
 		return new Object[] {list};
 	}
 

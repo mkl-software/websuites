@@ -18,14 +18,15 @@ public class CheckLinkTextContaining extends CheckLinkTextCommand {
 	
 	
 	protected String actualLinkText;
+	protected WebElement foundElem;
 	
 	
 	@Override
 	protected String getStringParam() {
 		
 		try {
-			WebElement element = browser.findElement(By.partialLinkText(expectedLinkText));
-			actualLinkText = element.getText();
+			foundElem = browser.findElement(By.partialLinkText(expectedLinkText));
+			actualLinkText = foundElem.getText();
 		} catch (NoSuchElementException e) {
 			return null;
 		}
