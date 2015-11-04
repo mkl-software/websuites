@@ -41,7 +41,7 @@ public class AllCheckCommandsFailingTest extends WebSuitesResultCheck {
 	
 	
 	@Test
-	public void shouldRunAllCheckCommandsAllVersionsAllPassing() throws Throwable {
+	public void shouldRunAllCheckCommandsAllVersionsAllSoftFailing() throws Throwable {
 		
 		List<String> lines = Files.readAllLines(FileSystems.getDefault().getPath(FAILING_SOFT_COMMANDS_SCENARIO_FILE),
 				StandardCharsets.UTF_8);
@@ -61,7 +61,7 @@ public class AllCheckCommandsFailingTest extends WebSuitesResultCheck {
 
 		assertThat(testResult.getFailureCount()).isEqualTo(1);
 		
-		assertThat(testResult.getFailures().get(0).getMessage())
+		assertThat(testResult.getFailures().get(0).getMessage().substring(0, 100)) //only begining of soft check msg
 			.contains("The following " + expectedNumberOfSoftChecks + " assertions failed");
 	}
 	

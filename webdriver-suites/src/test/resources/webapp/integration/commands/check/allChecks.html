@@ -6,12 +6,11 @@
 		<script type="text/javascript">
 		
 		$(document).ready(function() {
-		$( "p" ).click(function(event) {
-		    $("#verificationText").text(event.target.innerText);
-		});
-		$( "#ng-elem" ).click(function(event) {
-		    $("#verificationText").text(event.target.innerText);
-		});
+			var clickFunction = function(event) {
+			    $("#verificationText").text($(event.target).text());
+			};
+			$( "p" ).click(clickFunction);
+			$( "#ng-elem" ).click(clickFunction);
 		});
 		
 		setTimeout(function() {
