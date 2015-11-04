@@ -21,13 +21,17 @@ public abstract class BaseCommand implements Command, SourceInfoHolder {
 
 	private SourceLine sourceLine;
 
-	protected int webElementWaitTimeout = WebSuitesConfig.get().site().waitTimeout();
+	protected static int webElementWaitTimeout = Integer.MIN_VALUE;
 	
 	protected static SoftAssertions softly = new SoftAssertions();
 
 
 	@Override
 	public void run() {
+		
+		if (webElementWaitTimeout == Integer.MIN_VALUE) {
+			webElementWaitTimeout = WebSuitesConfig.get().site().waitTimeout();
+		}
 		
 		browser = ServiceFactory.get(BrowserController.class).getWebDriver();
 		
