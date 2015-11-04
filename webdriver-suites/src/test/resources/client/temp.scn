@@ -1,4 +1,12 @@
 
 goto	http://localhost:90/integration/commands/check/allChecks.html
 
-waitUntilAlert
+waitForAll	retryCount=-1	retryTimeout=-1	retryPause=1000
+	checkSelectedIndex	#selectElement	0
+	checkSelectedIndex	#selectElement	1
+	checkSelectedIndex	#selectElement	2
+	checkSelectedIndex	#selectElement	3
+	checkSelectedIndex	#anotherSelect	0
+	checkSelectedIndex	#anotherSelect	1
+	checkSelectedIndex	#anotherSelect	2
+end

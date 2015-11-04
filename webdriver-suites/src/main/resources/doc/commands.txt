@@ -78,22 +78,18 @@ Legend:
 +selectAll
 +deselectAll
 
-selectCheckbox
-deselctCheckbox
++selectCheckbox
++deselctCheckbox
 
 // all waits should be Fluent, with params: timeout=n, pollingInterval=m, ingoreNoSuchElementException=true/false
-wait					implemented
++wait					implemented
 waitFor					waits until element is present (timeout=n)
-waitUntilVisible		waits until element is visible (timeout=n)
-waitUntilClickable
-waitUntilTextInElem
-waitUntilSelected
-waitUntilTitleIs
-waitUntilAlert
++waitUntilVisible		waits until element is visible (timeout=n)
++waitUntilClickable
++waitUntilAlert
 waitUntilInvisible
-waitUntilFrameAvailable
 
-waitForAll 		consider in next release, waits until all nested commands (mostly "check...") are successful
++waitForAll 		consider in next release, waits until all nested commands (mostly "check...") are successful
 				or maybe use this instead of all waits above?
 
 setPageLoadTimeout

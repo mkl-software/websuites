@@ -98,9 +98,13 @@ public class ServiceFactory {
 			log.error("cannot make instance for service: " + serviceClass.getName() +
 					", error: " + e.getLocalizedMessage());
 			
+			if (e.getCause() instanceof WebSuitesException) {
+				throw (WebSuitesException) e.getCause();
+			}
+			
 			throw new WebSuitesException("Cannot instantiate service: " + serviceClass.getName() +
 					", error: " + e.getLocalizedMessage() +
-					". Make sure the service has public static getInstance() method.");
+					". Make sure the service has public static getInstance() method.", e);
 			
 		} catch (Exception e) {
 			
