@@ -94,8 +94,8 @@ waitUntilInvisible
 
 setPageLoadTimeout
 setScriptTimeout
-setImplicitWait			globally sets the wait time until throwing exception for missing element
-restoreDefaultWait		restores what is configurad on WebSuitesConfig level
++setImplicitWait			globally sets the wait time until throwing exception for missing element
++restoreDefaultWait		restores what is configurad on WebSuitesConfig level
 
 +click
 // all clicks from "check..." commands with "c" marker

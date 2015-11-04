@@ -10,7 +10,7 @@ import com.mkl.websuites.itests.web.BrowsersConfig;
 
 
 @WebSuites(
-	browsers = "${env.testBrowser}",
+	browsers = "ff",
 	scenarios = @ScenarioFile("src/test/resources/client/temp.scn"),
 //	classes = @TestClass(SampleStandaloneTest.class),
 	browserResusableConfiguration = BrowsersConfig.class,

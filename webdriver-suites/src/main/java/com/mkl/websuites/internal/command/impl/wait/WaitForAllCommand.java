@@ -29,17 +29,23 @@ import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 @CommandDescriptor(name = "waitForAll")
 public class WaitForAllCommand extends ControlFlowHandler {
 
+	
+	private static final String RETRY_TIMEOUT = "retryTimeout";
+	private static final String RETRY_PAUSE = "retryPause";
+	private static final String RETRY_COUNT = "retryCount";
+	
 	private static final int MAX_VALUE = 10000000;
 	private static final int DEFAUL_RETRY_COUNT = 10;
 	private static final int DEFAUL_RETRY_PAUSE = 1000;
 	
 	
+	
 	@SuppressWarnings("serial")
 	public WaitForAllCommand() {
 		super(new HashMap<String, String>(){{
-			put("retryTimeout", WebSuitesConfig.get().site().waitTimeout() + "");
-			put("retryCount", DEFAUL_RETRY_COUNT + "");
-			put("retryPause", DEFAUL_RETRY_PAUSE + "");
+			put(RETRY_TIMEOUT, WebSuitesConfig.get().site().waitTimeout() + "");
+			put(RETRY_COUNT, DEFAUL_RETRY_COUNT + "");
+			put(RETRY_PAUSE, DEFAUL_RETRY_PAUSE + "");
 		}});
 	}
 	
@@ -53,9 +59,22 @@ public class WaitForAllCommand extends ControlFlowHandler {
 	@Override
 	protected void runCommandWithParameters() {
 		
-		int retryMaxCount = Integer.valueOf(parameterMap.get("retryCount"));
-		int retryPause = Integer.valueOf(parameterMap.get("retryPause"));
-		int retryTimeout = Integer.valueOf(parameterMap.get("retryTimeout"));
+		int retryMaxCount;
+		try {
+			retryMaxCount = Integer.valueOf(parameterMap.get(RETRY_COUNT));
+		} catch (NumberFormatException e2) {
+			retryMaxCount = DEFAUL_RETRY_COUNT;
+		}
+		
+		int retryPause;
+		try {
+			retryPause = Integer.valueOf(parameterMap.get(RETRY_PAUSE));
+		} catch (NumberFormatException e2) {
+			retryPause = DEFAUL_RETRY_PAUSE;
+		}
+		
+		int retryTimeout = Integer.valueOf(parameterMap.get(RETRY_TIMEOUT));
+		
 		int retryCount = 0;
 		long elapsedTime;
 		
@@ -91,17 +110,17 @@ public class WaitForAllCommand extends ControlFlowHandler {
 
 	@Override
 	protected List<SchemaValidationRule> defineValidationRules() {
-		return Arrays.asList(new SchemaValidationRule("retryTimeout")
-				.addOptionalElements("retryCount")
-				.addOptionalElements("retryPause"));
+		return Arrays.asList(new SchemaValidationRule(RETRY_TIMEOUT)
+				.addOptionalElements(RETRY_COUNT)
+				.addOptionalElements(RETRY_PAUSE));
 	}
 	
 	
 	@Override
 	protected List<ParameterValueValidator> defineParameterValueValidators() {
 		return Arrays.asList((ParameterValueValidator)
-				new IntegerNumberParamValidator("retryCount", -1, MAX_VALUE),
-				new IntegerNumberParamValidator("retryTimeout", -1, MAX_VALUE),
+				new IntegerNumberParamValidator(RETRY_COUNT, -1, MAX_VALUE),
+				new IntegerNumberParamValidator(RETRY_TIMEOUT, -1, MAX_VALUE),
 				new IntegerNumberParamValidator("retrypPause", 0, MAX_VALUE));
 	}
 
