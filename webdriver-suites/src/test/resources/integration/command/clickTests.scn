@@ -28,3 +28,33 @@ clickLinkTextMatching	o..n.*al ?pag[ae]
 checkTitle	Goto test local web
 back
 checkTitle	Test title full text
+
+clickLinkHref	http://localhost:90/integration/commands/gotoLocalAddress.html
+checkTitle	Goto test local web
+back
+checkTitle	Test title full text
+
+
+clickLinkHrefContaining		gotoLocal
+checkTitle	Goto test local web
+back
+checkTitle	Test title full text
+
+
+clickLinkHrefMatching		https?://.*/goto.*\.html
+checkTitle	Goto test local web
+back
+checkTitle	Test title full text
+
+
+clickAttributeNamed	ng-sample-att
+checkElementText	#verificationText	custom attributes
+
+clickAttributeValue	textNode
+checkElementText	#verificationText	lorem ipsum
+
+clickAttributeValueContaining	with
+checkElementText	#verificationText	bolded text
+
+clickAttributeValueMatching		another.*e
+checkElementText	#verificationText	custom attributes

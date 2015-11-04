@@ -35,13 +35,13 @@ Legend:
 (C+s~|)	checkLinkText					checks if link with given text exists
 (C+s~|)	checkLinkTextContaining
 (C+s~|)	checkLinkTextMatching
-(c+s~|)	checkLinkHREF				checks of link with given HREF value exists
-(c+s~|)	checkLinkHREFContaining
-(c+s~|)	checkLinkHREFMatching
-(c+s~|)	checkAttributeName				checks if given attribute exists anywhere on the page with whatever value (!!)
-(c+s~|)	checkAttributeValue				checks if given attribute value exists anywhere on the page (!!)
-(c+s~|)	checkAttributeValueContaining	checks if given attribute value containing text exists anywhere on the page
-(c+s~|)	checkAttributeValueMatching		checks if given attribute exists anywhere on the page with value matching text
+(C+s~|)	checkLinkHREF				checks of link with given HREF value exists
+(C+s~|)	checkLinkHREFContaining
+(C+s~|)	checkLinkHREFMatching
+(C+s~|)	checkAttributeName				checks if given attribute exists anywhere on the page with whatever value (!!)
+(C+s~|)	checkAttributeValue				checks if given attribute value exists anywhere on the page (!!)
+(C+s~|)	checkAttributeValueContaining	checks if given attribute value containing text exists anywhere on the page
+(C+s~|)	checkAttributeValueMatching		checks if given attribute exists anywhere on the page with value matching text
 (+s~|)	checkElementAttr				checks if element has an attribute
 (+s~|)	checkElementAttValue			checks if element has an attribute with a given value
 (+s~|)	checkElementAttValueContains	checks if element has an attribute with a value containing string

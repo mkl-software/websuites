@@ -5,7 +5,6 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.mkl.websuites.itests.web.command.CheckTitleTest;
-import com.mkl.websuites.itests.web.command.ClickCommandTest;
 import com.mkl.websuites.itests.web.command.EmptyCommandIntegrationTest;
 import com.mkl.websuites.itests.web.command.GotoCommandTest;
 import com.mkl.websuites.itests.web.command.RepeatTimesCommandTest;
@@ -27,7 +26,6 @@ import com.mkl.websuites.itests.web.command.SourceInfoTest;
 	RepeatTimesCommandTest.class,
 	CheckTitleTest.class,
 	SelectCommandsTest.class,
-	SelectCheckboxTest.class,
-	ClickCommandTest.class
+	SelectCheckboxTest.class
 })
 public class CommandQuickTests {}
