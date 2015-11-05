@@ -253,7 +253,7 @@ softCheckAttributeName	hint
 ~softCheckAttributeValue	sample value
 ~softCheckAttributeValue	another value
 ~softCheckAttributeValue	checkbox
-softCheckAttributeValue	button
+softCheckAttributeValue		definitely-non-existing
 softCheckAttributeValue	unselected
 ~softCheckAttributeValue	id2
 ~softCheckAttributeValue	header
@@ -524,13 +524,13 @@ softCheckHeaderMatches	.*dackground.*
 
 ~softCheckElementsCount	p	4
 ~softCheckElementsCount	body	1
-~softCheckElementsCount	span	3
-softCheckElementsCount	span	4
+~softCheckElementsCount	span	4
+softCheckElementsCount	span	5
 ~softCheckElementsCount	css=p.nice	count=1
 ~softCheckElementsCount	p	4
 ~softCheckElementsCount	body	1
 softCheckElementsCount	body	2
-~softCheckElementsCount	span	3
+~softCheckElementsCount	span	4
 ~softCheckElementsCount	css=p.nice	count=1
 
 
@@ -540,13 +540,13 @@ softCheckElementsCount	body	2
 ~softCheckSubelementsCount	div.header	div	1
 softCheckSubelementsCount	#selectElement	option	3
 softCheckSubelementsCount	#selectElement	option[value=id1]	2
-softCheckSubelementsCount	css=head	subElementsCss=script	count=2
+softCheckSubelementsCount	css=head	subElementsCss=script	count=3
 ~softCheckSubelementsCount	#selectElement	option	4
 ~softCheckSubelementsCount	#anotherSelect	option	3
 ~softCheckSubelementsCount	div.header	div	1
 softCheckSubelementsCount	#selectElement	option	3
 softCheckSubelementsCount	#selectElement	option[value=id1]	2
-softCheckSubelementsCount	css=head	subElementsCss=script	count=2
+softCheckSubelementsCount	css=head	subElementsCss=script	count=1
 
 
 
@@ -561,12 +561,12 @@ softCheckElementChildrenCount	div.header	2
 
 
 
-~softCheckElementSiblingCount	#fillIt	12
+~softCheckElementSiblingCount	#fillIt	16
 softCheckElementSiblingCount	#selectElement option	4
-softCheckElementSiblingCount	title	4
-~softCheckElementSiblingCount	#fillIt	12
+softCheckElementSiblingCount	title	1
+~softCheckElementSiblingCount	#fillIt	16
 softCheckElementSiblingCount	#selectElement option	4
-softCheckElementSiblingCount	title	4
+softCheckElementSiblingCount	title	2
 
 
 # Finally check all commands:
