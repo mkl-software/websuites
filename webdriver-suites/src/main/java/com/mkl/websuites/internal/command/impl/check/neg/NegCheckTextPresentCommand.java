@@ -10,17 +10,16 @@ import com.mkl.websuites.internal.command.impl.check.CheckTextPresentCommand;
 @CommandDescriptor(name = "~checkText", argumentTypes = String.class)
 public class NegCheckTextPresentCommand extends CheckTextPresentCommand {
 
-	public NegCheckTextPresentCommand(String text) {
-		super(text);
-	}
-	
-	
-	@Override
-	protected void runAssertion(AbstractAssert<?, ?> assertion, Object... args) {
-		
-		((ListAssert<?>) assertion)
-			.overridingErrorMessage("Text '%s' was found on the page, but was not expected" , text)
-			.isEmpty();
-	}
+    public NegCheckTextPresentCommand(String text) {
+        super(text);
+    }
+
+
+    @Override
+    protected void runAssertion(AbstractAssert<?, ?> assertion, Object... args) {
+
+        ((ListAssert<?>) assertion).overridingErrorMessage("Text '%s' was found on the page, but was not expected",
+                text).isEmpty();
+    }
 
 }

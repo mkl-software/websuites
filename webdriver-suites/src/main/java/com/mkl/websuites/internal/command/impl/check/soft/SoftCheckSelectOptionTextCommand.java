@@ -11,25 +11,23 @@ import com.mkl.websuites.internal.command.impl.check.CheckSelectOptionTextComman
 
 
 @CommandDescriptor(name = "softCheckSelectOptionText", argumentTypes = {String.class, String.class})
-public class SoftCheckSelectOptionTextCommand extends
-		CheckSelectOptionTextCommand {
+public class SoftCheckSelectOptionTextCommand extends CheckSelectOptionTextCommand {
 
-	public SoftCheckSelectOptionTextCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public SoftCheckSelectOptionTextCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public SoftCheckSelectOptionTextCommand(String selector,
-			String expectedText) {
-		super(selector, expectedText);
-	}
+    public SoftCheckSelectOptionTextCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
 
-	
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckSelectOptionText() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return softly.assertThat(args);
-			}
-		};
-	}
+
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckSelectOptionText() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return softly.assertThat(args);
+            }
+        };
+    }
 }

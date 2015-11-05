@@ -9,13 +9,13 @@ import com.mkl.websuites.internal.command.impl.check.CheckAttributeValueCommand;
 @CommandDescriptor(name = "softCheckAttributeValue", argumentTypes = {String.class})
 public class SoftCheckAttributeValueCommand extends CheckAttributeValueCommand {
 
-	public SoftCheckAttributeValueCommand(String attribute) {
-		super(attribute);
-	}
+    public SoftCheckAttributeValueCommand(String attribute) {
+        super(attribute);
+    }
 
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
 }

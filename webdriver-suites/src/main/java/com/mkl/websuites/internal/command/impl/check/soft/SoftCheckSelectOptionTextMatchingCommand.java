@@ -10,27 +10,24 @@ import com.mkl.websuites.internal.command.impl.check.CheckSelectOptionTextMatchi
 
 
 @CommandDescriptor(name = "softCheckSelectOptionTextMatching", argumentTypes = {String.class, String.class})
-public class SoftCheckSelectOptionTextMatchingCommand extends
-		CheckSelectOptionTextMatchingCommand {
+public class SoftCheckSelectOptionTextMatchingCommand extends CheckSelectOptionTextMatchingCommand {
 
-	public SoftCheckSelectOptionTextMatchingCommand(
-			Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public SoftCheckSelectOptionTextMatchingCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public SoftCheckSelectOptionTextMatchingCommand(String selector,
-			String expectedText) {
-		super(selector, expectedText);
-	}
+    public SoftCheckSelectOptionTextMatchingCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
 
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckSelectOptionTextMatching() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckSelectOptionTextMatching() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 }

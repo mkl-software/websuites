@@ -15,17 +15,12 @@ import com.mkl.websuites.itests.web.command.SourceInfoTest;
 
 /**
  * Command tests that can be run with HTMLUnit browser to quickly test in IDe.
+ * 
  * @author klosinskim
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({
-	EmptyCommandIntegrationTest.class,
-	SourceInfoTest.class,
-	GotoCommandTest.class,
-	RepeatTimesCommandTest.class,
-	CheckTitleTest.class,
-	SelectCommandsTest.class,
-	SelectCheckboxTest.class
-})
-public class CommandQuickTests {}
+@SuiteClasses({EmptyCommandIntegrationTest.class, SourceInfoTest.class, GotoCommandTest.class,
+        RepeatTimesCommandTest.class, CheckTitleTest.class, SelectCommandsTest.class, SelectCheckboxTest.class})
+public class CommandQuickTests {
+}

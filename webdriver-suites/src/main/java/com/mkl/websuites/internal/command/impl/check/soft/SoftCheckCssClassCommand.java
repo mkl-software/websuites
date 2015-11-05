@@ -12,22 +12,22 @@ import com.mkl.websuites.internal.command.impl.check.CheckCssClassCommand;
 @CommandDescriptor(name = "softCheckCssClass", argumentTypes = {String.class, String.class})
 public class SoftCheckCssClassCommand extends CheckCssClassCommand {
 
-	public SoftCheckCssClassCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public SoftCheckCssClassCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public SoftCheckCssClassCommand(String selector, String cssClassName) {
-		super(selector, cssClassName);
-	}
-	
-	
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckCssClass() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+    public SoftCheckCssClassCommand(String selector, String cssClassName) {
+        super(selector, cssClassName);
+    }
+
+
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckCssClass() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 
 }

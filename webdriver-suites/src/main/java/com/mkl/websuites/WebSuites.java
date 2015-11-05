@@ -14,24 +14,24 @@ import com.mkl.websuites.config.TestClass;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface WebSuites {
 
-	String[] browsers() default {};
-	
-	String browsersProperty() default "";
-	
-	Folder[] folders() default {};
-	
-	ScenarioFile[] scenarios() default {};
-	
-	TestClass[] classes() default {};
-	
-	String properties() default "";
-	
-	SiteConfig site() default @SiteConfig;
-	
-	BrowserConifg[] browserConfiguration() default {};
-	
-	Class<?> browserResusableConfiguration() default Object.class;
-	
-	Extension extension() default @Extension;
-	
+    String[] browsers() default {};
+
+    String browsersProperty() default ""; 
+
+    Folder[] folders() default {};
+
+    ScenarioFile[] scenarios() default {};
+
+    TestClass[] classes() default {};
+
+    String properties() default "";
+
+    SiteConfig site() default @SiteConfig;
+
+    BrowserConifg[] browserConfiguration() default {};
+
+    Class<?> browserResusableConfiguration() default Object.class;
+
+    Extension extension() default @Extension;
+
 }

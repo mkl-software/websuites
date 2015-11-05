@@ -6,4 +6,5 @@ import com.mkl.websuites.internal.tests.StandaloneSuite;
 
 
 @StandaloneSuite(suite = {SampleStandaloneTest.class})
-public class MySuite extends AnnotatedSuite {}
+public class MySuite extends AnnotatedSuite {
+}

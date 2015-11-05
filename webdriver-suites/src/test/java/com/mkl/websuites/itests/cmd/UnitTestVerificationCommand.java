@@ -8,24 +8,24 @@ import com.mkl.websuites.itests.web.core.CommandInvocationVerifier;
 @CommandDescriptor(name = "internal-test", argumentTypes = String.class)
 public class UnitTestVerificationCommand extends BaseCommand {
 
-	private String message;
-	
-	public UnitTestVerificationCommand(String message) {
-		super();
-		this.message = message;
-	}
+    private String message;
 
-	@Override
-	protected void runStandardCommand() {
-		
-		CommandInvocationVerifier.getInstance().verifyInvocation(populateStringWithProperties(message));
+    public UnitTestVerificationCommand(String message) {
+        super();
+        this.message = message;
+    }
 
-	}
-	
-	
-	@Override
-	public String toString() {
-		return "internal-test (" + message + ")";
-	}
+    @Override
+    protected void runStandardCommand() {
+
+        CommandInvocationVerifier.getInstance().verifyInvocation(populateStringWithProperties(message));
+
+    }
+
+
+    @Override
+    public String toString() {
+        return "internal-test (" + message + ")";
+    }
 
 }

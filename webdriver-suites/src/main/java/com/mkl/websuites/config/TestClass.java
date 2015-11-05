@@ -9,6 +9,6 @@ import junit.framework.Test;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TestClass {
 
-	
-	Class<? extends Test> value();
+
+    Class<? extends Test> value();
 }

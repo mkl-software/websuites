@@ -9,15 +9,14 @@ import com.mkl.websuites.internal.command.impl.check.CheckLinkTextMatchingComman
 @CommandDescriptor(name = "clickLinkTextMatching", argumentTypes = {String.class})
 public class ClickLinkTextMatchingCommand extends CheckLinkTextMatchingCommand {
 
-	public ClickLinkTextMatchingCommand(String expectedLinkText) {
-		super(expectedLinkText);
-	}
+    public ClickLinkTextMatchingCommand(String expectedLinkText) {
+        super(expectedLinkText);
+    }
 
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertion,
-			String string) {
-		super.runSingleStringAssertion(assertion, string);
-		foundElem.click();
-	}
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertion, String string) {
+        super.runSingleStringAssertion(assertion, string);
+        foundElem.click();
+    }
 }

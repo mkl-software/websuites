@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface CommandPostProcessor {
 
-	List<Command> postProcessCommands(List<Command> parsedCommands);
+    List<Command> postProcessCommands(List<Command> parsedCommands);
 
 }

@@ -16,70 +16,68 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 @Slf4j
 public abstract class BaseCommand implements Command, SourceInfoHolder {
 
-	
-	protected WebDriver browser;
 
-	private SourceLine sourceLine;
+    protected WebDriver browser;
 
-	protected static int webElementWaitTimeout = Integer.MIN_VALUE;
-	
-	protected static SoftAssertions softly = new SoftAssertions();
+    private SourceLine sourceLine;
+
+    protected static int webElementWaitTimeout = Integer.MIN_VALUE;
+
+    protected static SoftAssertions softly = new SoftAssertions();
 
 
-	@Override
-	public void run() {
-		
-		if (webElementWaitTimeout == Integer.MIN_VALUE) {
-			webElementWaitTimeout = WebSuitesConfig.get().site().waitTimeout();
-		}
-		
-		browser = ServiceFactory.get(BrowserController.class).getWebDriver();
-		
-		log.debug("running " + this.getClass().getName() + " command");
-		
-		try {
-			runStandardCommand();
-			
-		} catch (Throwable e) {
-			
-			augmentErrorMessageWithCommandSourceFileInfo(e);
-			throw e;
-		}
-			
-	}
-	
-	
+    @Override
+    public void run() {
 
-	protected void augmentErrorMessageWithCommandSourceFileInfo(Throwable e) {
-		try {
-			String newMessage = e.getMessage()
-					+ "\n"
-					+ getCommandSourceLine().printSourceInfo();
-			FieldUtils.writeField(e, "detailMessage", newMessage, true);
-		} catch (IllegalArgumentException| IllegalAccessException|  SecurityException e1) {
-			e1.printStackTrace();
-		}
-	}
+        if (webElementWaitTimeout == Integer.MIN_VALUE) {
+            webElementWaitTimeout = WebSuitesConfig.get().site().waitTimeout();
+        }
+
+        browser = ServiceFactory.get(BrowserController.class).getWebDriver();
+
+        log.debug("running " + this.getClass().getName() + " command");
+
+        try {
+            runStandardCommand();
+
+        } catch (Throwable e) {
+
+            augmentErrorMessageWithCommandSourceFileInfo(e);
+            throw e;
+        }
+
+    }
 
 
 
-	protected abstract void runStandardCommand();
+    protected void augmentErrorMessageWithCommandSourceFileInfo(Throwable e) {
+        try {
+            String newMessage = e.getMessage() + "\n" + getCommandSourceLine().printSourceInfo();
+            FieldUtils.writeField(e, "detailMessage", newMessage, true);
+        } catch (IllegalArgumentException | IllegalAccessException | SecurityException e1) {
+            e1.printStackTrace();
+        }
+    }
 
 
 
-	protected String populateStringWithProperties(String origValue) {
+    protected abstract void runStandardCommand();
 
-		return CommonUtils.populateStringWithProperties(origValue);
-	}
-	
-	
-	@Override
-	public SourceLine getCommandSourceLine() {
-		return sourceLine;
-	}
-	
-	@Override
-	public void setCommandSourceLine(SourceLine sourceLine) {
-		this.sourceLine = sourceLine;
-	}
+
+
+    protected String populateStringWithProperties(String origValue) {
+
+        return CommonUtils.populateStringWithProperties(origValue);
+    }
+
+
+    @Override
+    public SourceLine getCommandSourceLine() {
+        return sourceLine;
+    }
+
+    @Override
+    public void setCommandSourceLine(SourceLine sourceLine) {
+        this.sourceLine = sourceLine;
+    }
 }

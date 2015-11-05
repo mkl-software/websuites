@@ -7,16 +7,15 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckLinkHrefContain
 
 
 @CommandDescriptor(name = "~softCheckLinkHrefContaining", argumentTypes = String.class)
-public class NegSoftCheckLinkHrefContainingCommand extends
-		NegCheckLinkHrefContainingCommand {
+public class NegSoftCheckLinkHrefContainingCommand extends NegCheckLinkHrefContainingCommand {
 
-	public NegSoftCheckLinkHrefContainingCommand(String expectedLinkText) {
-		super(expectedLinkText);
-	}
+    public NegSoftCheckLinkHrefContainingCommand(String expectedLinkText) {
+        super(expectedLinkText);
+    }
 
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
 }

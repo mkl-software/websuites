@@ -11,36 +11,33 @@ import com.mkl.websuites.internal.command.impl.check.CheckSelectOptionTextComman
 
 
 @CommandDescriptor(name = "~checkSelectOptionText", argumentTypes = {String.class, String.class})
-public class NegCheckSelectOptionTextCommand extends
-		CheckSelectOptionTextCommand {
+public class NegCheckSelectOptionTextCommand extends CheckSelectOptionTextCommand {
 
-	public NegCheckSelectOptionTextCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public NegCheckSelectOptionTextCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public NegCheckSelectOptionTextCommand(String selector,
-			String expectedText) {
-		super(selector, expectedText);
-	}
-	
-	
-	protected class NegCheckSelectOptionText extends CheckSelectOptionText {
+    public NegCheckSelectOptionTextCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
 
-		@Override
-		protected void runAssertion(AbstractAssert<?, ?> assertion,
-				Object... args) {
 
-			((ObjectArrayAssert<?>) assertion)
-				.extracting("text")
-				.overridingErrorMessage("Expecting SELECT element picked by selector '%s'"
-						+ " NOT to have option with text '%s'", by, expectedSelectText)
-				.doesNotContain(expectedSelectText);
-		}
-	}
-	
-	
-	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckSelectOptionText();
-	}
+    protected class NegCheckSelectOptionText extends CheckSelectOptionText {
+
+        @Override
+        protected void runAssertion(AbstractAssert<?, ?> assertion, Object... args) {
+
+            ((ObjectArrayAssert<?>) assertion)
+                    .extracting("text")
+                    .overridingErrorMessage(
+                            "Expecting SELECT element picked by selector '%s'" + " NOT to have option with text '%s'",
+                            by, expectedSelectText).doesNotContain(expectedSelectText);
+        }
+    }
+
+
+    protected AbstractCheck defineCheckLogic() {
+        return new NegCheckSelectOptionText();
+    }
 
 }

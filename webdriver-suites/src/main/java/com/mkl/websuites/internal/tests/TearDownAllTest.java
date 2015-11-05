@@ -10,32 +10,32 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 
 public class TearDownAllTest extends TestCase {
 
-	private Runnable tearDownLogic;
+    private Runnable tearDownLogic;
 
 
-	public TearDownAllTest(Runnable tearDownLogic) {
-		this.tearDownLogic = tearDownLogic;
-	}
-	
-	@Override
-	public String getName() {
-		return "Finalize all tests";
-	}
-	
-	
-	@Override
-	protected void runTest() throws Throwable {
-		
-		WebSuites config = WebSuitesConfig.get();
-		
-		String currentBrowser = WebSuitesRunner.getCurrentlyDefiningBrowser();
-		
-		if (!config.site().doNotCloseBrowserAtTheEnd() && currentBrowser != null && !"none".equals(currentBrowser)) {
-			
-			ServiceFactory.get(BrowserController.class).getWebDriver().quit();
-		}
-		
-		tearDownLogic.run();
-	}
-	
+    public TearDownAllTest(Runnable tearDownLogic) {
+        this.tearDownLogic = tearDownLogic;
+    }
+
+    @Override
+    public String getName() {
+        return "Finalize all tests";
+    }
+
+
+    @Override
+    protected void runTest() throws Throwable {
+
+        WebSuites config = WebSuitesConfig.get();
+
+        String currentBrowser = WebSuitesRunner.getCurrentlyDefiningBrowser();
+
+        if (!config.site().doNotCloseBrowserAtTheEnd() && currentBrowser != null && !"none".equals(currentBrowser)) {
+
+            ServiceFactory.get(BrowserController.class).getWebDriver().quit();
+        }
+
+        tearDownLogic.run();
+    }
+
 }

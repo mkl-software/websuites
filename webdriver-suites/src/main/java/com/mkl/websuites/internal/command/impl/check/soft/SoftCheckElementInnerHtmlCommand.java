@@ -10,26 +10,25 @@ import com.mkl.websuites.internal.command.impl.check.CheckElementInnerHtmlComman
 
 
 @CommandDescriptor(name = "softCheckElementInnerHTML", argumentTypes = {String.class, String.class})
-public class SoftCheckElementInnerHtmlCommand extends
-		CheckElementInnerHtmlCommand {
+public class SoftCheckElementInnerHtmlCommand extends CheckElementInnerHtmlCommand {
 
-	public SoftCheckElementInnerHtmlCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public SoftCheckElementInnerHtmlCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public SoftCheckElementInnerHtmlCommand(String selector, String expectedText) {
-		super(selector, expectedText);
-	}
-	
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckElementInnerHTML() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+    public SoftCheckElementInnerHtmlCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
+
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckElementInnerHTML() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 
 }

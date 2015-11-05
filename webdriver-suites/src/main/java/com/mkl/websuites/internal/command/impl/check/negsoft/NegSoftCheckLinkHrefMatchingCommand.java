@@ -8,16 +8,15 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckLinkHrefMatchin
 
 
 @CommandDescriptor(name = "~softCheckLinkHrefMatching", argumentTypes = String.class)
-public class NegSoftCheckLinkHrefMatchingCommand extends
-		NegCheckLinkHrefMatchingCommand {
+public class NegSoftCheckLinkHrefMatchingCommand extends NegCheckLinkHrefMatchingCommand {
 
-	public NegSoftCheckLinkHrefMatchingCommand(String expectedLinkText) {
-		super(expectedLinkText);
-	}
+    public NegSoftCheckLinkHrefMatchingCommand(String expectedLinkText) {
+        super(expectedLinkText);
+    }
 
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
 }

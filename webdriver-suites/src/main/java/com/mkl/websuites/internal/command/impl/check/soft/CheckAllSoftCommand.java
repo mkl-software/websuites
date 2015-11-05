@@ -9,15 +9,15 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 @CommandDescriptor(name = "checkAllSoft")
 public class CheckAllSoftCommand extends BaseCommand {
 
-	@Override
-	protected void runStandardCommand() {
-		try {
-			// can throw AssertionException
-			softly.assertAll();
-		} finally {
-			// reset Soft Assertions for next check
-			softly = new SoftAssertions();
-		}
-	}
+    @Override
+    protected void runStandardCommand() {
+        try {
+            // can throw AssertionException
+            softly.assertAll();
+        } finally {
+            // reset Soft Assertions for next check
+            softly = new SoftAssertions();
+        }
+    }
 
 }

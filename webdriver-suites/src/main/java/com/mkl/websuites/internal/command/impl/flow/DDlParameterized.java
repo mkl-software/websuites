@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface DDlParameterized {
 
-	
-	List<String> getSubTestCaseNames();
-	
-	void runForDDlParam(int paramIndex);
+
+    List<String> getSubTestCaseNames();
+
+    void runForDDlParam(int paramIndex);
 }

@@ -7,19 +7,17 @@ import com.mkl.websuites.internal.command.impl.check.CheckAttributeValueMatching
 
 
 @CommandDescriptor(name = "clickAttributeValueMatching", argumentTypes = {String.class})
-public class ClickAttributeValueMatchingCommand extends
-		CheckAttributeValueMatchingCommand {
+public class ClickAttributeValueMatchingCommand extends CheckAttributeValueMatchingCommand {
 
-	public ClickAttributeValueMatchingCommand(String attribute) {
-		super(attribute);
-	}
+    public ClickAttributeValueMatchingCommand(String attribute) {
+        super(attribute);
+    }
 
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertion,
-			String string) {
-		super.runSingleStringAssertion(assertion, string);
-		
-		elementWithAttribute.click();
-	}
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertion, String string) {
+        super.runSingleStringAssertion(assertion, string);
+
+        elementWithAttribute.click();
+    }
 }

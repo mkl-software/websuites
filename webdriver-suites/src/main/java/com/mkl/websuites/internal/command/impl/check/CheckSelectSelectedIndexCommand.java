@@ -13,57 +13,57 @@ import com.mkl.websuites.internal.command.impl.validator.ParameterValueValidator
 
 
 @CommandDescriptor(name = "checkSelectedIndex", argumentTypes = {String.class, String.class})
-public class CheckSelectSelectedIndexCommand extends
-		CheckSelectSelectedValueCommand {
-
-	
-	public CheckSelectSelectedIndexCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
-
-	@SuppressWarnings("serial")
-	public CheckSelectSelectedIndexCommand(final String selector, final String expectedText) {
-		this(new HashMap<String, String>() {{
-			put("css", selector);
-			put("index", expectedText);
-		}
-		});
-		SELECTED_TEXT_PARAM = "index";
-	}
-
-	protected class CheckSelectSelectedIndex extends CheckSelectSelectedValue {
+public class CheckSelectSelectedIndexCommand extends CheckSelectSelectedValueCommand {
 
 
-		protected String getOptionString(WebElement elem) {
-			return elem.getAttribute("index");
-		}
+    public CheckSelectSelectedIndexCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
+
+    @SuppressWarnings("serial")
+    public CheckSelectSelectedIndexCommand(final String selector, final String expectedText) {
+        this(new HashMap<String, String>() {
+            {
+                put("css", selector);
+                put("index", expectedText);
+            }
+        });
+        SELECTED_TEXT_PARAM = "index";
+    }
+
+    protected class CheckSelectSelectedIndex extends CheckSelectSelectedValue {
 
 
-		@Override
-		protected void runSingleStringAssertion(StringAssert assertion, String string) {
-			
-			assertion
-				.overridingErrorMessage("Expecting option at index '%s' to be selected  in the SELECT element picked "
-						+ "by selector '%s'", expectedSelectText, by)
-				.isNotEmpty();
-		}
-	}
-	
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckSelectSelectedIndex();
-	}
-	
-	
-	
-	@Override
-	protected List<ParameterValueValidator> defineParameterValueValidators() {
-		
-		List<ParameterValueValidator> parentValidators = super.defineParameterValueValidators();
-		
-		parentValidators.add(new IntegerNumberParamValidator("index"));
-		
-		return parentValidators;
-	}
+        protected String getOptionString(WebElement elem) {
+            return elem.getAttribute("index");
+        }
+
+
+        @Override
+        protected void runSingleStringAssertion(StringAssert assertion, String string) {
+
+            assertion
+                    .overridingErrorMessage(
+                            "Expecting option at index '%s' to be selected  in the SELECT element picked "
+                                    + "by selector '%s'", expectedSelectText, by).isNotEmpty();
+        }
+    }
+
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckSelectSelectedIndex();
+    }
+
+
+
+    @Override
+    protected List<ParameterValueValidator> defineParameterValueValidators() {
+
+        List<ParameterValueValidator> parentValidators = super.defineParameterValueValidators();
+
+        parentValidators.add(new IntegerNumberParamValidator("index"));
+
+        return parentValidators;
+    }
 }

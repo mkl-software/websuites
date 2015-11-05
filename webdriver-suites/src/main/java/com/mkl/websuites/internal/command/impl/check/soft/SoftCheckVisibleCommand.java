@@ -12,22 +12,22 @@ import com.mkl.websuites.internal.command.impl.check.CheckVisibleCommand;
 @CommandDescriptor(name = "softCheckVisible", argumentTypes = {String.class})
 public class SoftCheckVisibleCommand extends CheckVisibleCommand {
 
-	public SoftCheckVisibleCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public SoftCheckVisibleCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public SoftCheckVisibleCommand(String selector) {
-		super(selector);
-	}
+    public SoftCheckVisibleCommand(String selector) {
+        super(selector);
+    }
 
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckVisible() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckVisible() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 }

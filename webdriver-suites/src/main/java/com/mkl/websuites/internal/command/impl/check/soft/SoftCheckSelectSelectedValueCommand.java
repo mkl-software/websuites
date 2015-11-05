@@ -10,26 +10,24 @@ import com.mkl.websuites.internal.command.impl.check.CheckSelectSelectedValueCom
 
 
 @CommandDescriptor(name = "softCheckSelectedValue", argumentTypes = {String.class, String.class})
-public class SoftCheckSelectSelectedValueCommand extends
-		CheckSelectSelectedValueCommand {
+public class SoftCheckSelectSelectedValueCommand extends CheckSelectSelectedValueCommand {
 
-	public SoftCheckSelectSelectedValueCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public SoftCheckSelectSelectedValueCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public SoftCheckSelectSelectedValueCommand(String selector,
-			String expectedText) {
-		super(selector, expectedText);
-	}
+    public SoftCheckSelectSelectedValueCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
 
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckSelectSelectedValue() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckSelectSelectedValue() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 }

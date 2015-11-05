@@ -10,28 +10,25 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckElementTextMatc
 
 
 @CommandDescriptor(name = "~softCheckElementTextMatches", argumentTypes = {String.class, String.class})
-public class NegSoftCheckElementTextMatchesCommand extends
-		NegCheckElementTextMatchesCommand {
+public class NegSoftCheckElementTextMatchesCommand extends NegCheckElementTextMatchesCommand {
 
-	public NegSoftCheckElementTextMatchesCommand(
-			Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public NegSoftCheckElementTextMatchesCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public NegSoftCheckElementTextMatchesCommand(String selector,
-			String expectedText) {
-		super(selector, expectedText);
-	}
-	
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckElementTextMatches() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+    public NegSoftCheckElementTextMatchesCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
+
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new NegCheckElementTextMatches() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 
 }

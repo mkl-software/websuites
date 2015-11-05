@@ -17,33 +17,33 @@ import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 public class SetPropCommand extends ParameterizedCommand {
 
 
-	public SetPropCommand() {
-		this (new HashMap<String, String>());
-	}
-	
-	
-	public SetPropCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
-
-	@Override
-	protected void runCommandWithParameters() {
-
-		WebSuitesUserProperties.get().populateFrom(parameterMap);
-	}
-
-	@Override
-	protected void runStandardCommand() {
-		
-		log.warn("no properties to set in this command");
-
-	}
+    public SetPropCommand() {
+        this(new HashMap<String, String>());
+    }
 
 
-	@Override
-	protected List<SchemaValidationRule> defineValidationRules() {
-		
-		return SchemaValidationRule.emptyValidationRules();
-	}
+    public SetPropCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
+
+    @Override
+    protected void runCommandWithParameters() {
+
+        WebSuitesUserProperties.get().populateFrom(parameterMap);
+    }
+
+    @Override
+    protected void runStandardCommand() {
+
+        log.warn("no properties to set in this command");
+
+    }
+
+
+    @Override
+    protected List<SchemaValidationRule> defineValidationRules() {
+
+        return SchemaValidationRule.emptyValidationRules();
+    }
 
 }

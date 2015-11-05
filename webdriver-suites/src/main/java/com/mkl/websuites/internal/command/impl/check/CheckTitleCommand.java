@@ -8,29 +8,28 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 @CommandDescriptor(name = "checkTitle", argumentTypes = {String.class})
 public class CheckTitleCommand extends AbstractSingleStringCheck {
 
-	
-	protected String expectedTitle;
-	
-	
-	public CheckTitleCommand(String expectedTitle) {
-		super();
-		this.expectedTitle = expectedTitle;
-	}
+
+    protected String expectedTitle;
 
 
-	@Override
-	protected String getStringParam() {
-		return browser.getTitle();
-	}
+    public CheckTitleCommand(String expectedTitle) {
+        super();
+        this.expectedTitle = expectedTitle;
+    }
 
 
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertThatTitle, String title) {
-		
-		assertThatTitle
-			.overridingErrorMessage("Expecting web page title to be '%s', but was '%s'", expectedTitle, title)
-			.isEqualTo(expectedTitle);
-	}
+    @Override
+    protected String getStringParam() {
+        return browser.getTitle();
+    }
+
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertThatTitle, String title) {
+
+        assertThatTitle.overridingErrorMessage("Expecting web page title to be '%s', but was '%s'", expectedTitle,
+                title).isEqualTo(expectedTitle);
+    }
 
 
 }

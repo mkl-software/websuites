@@ -13,19 +13,19 @@ public class DeselectCheckboxCommand extends SelectCheckboxCommand {
 
 
 
-	public DeselectCheckboxCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
-	
-	public DeselectCheckboxCommand(final String selector) {
-		super(selector);
-	}
-	
-	@Override
-	protected void selectCheckbox(WebElement elem) {
-		if (elem.isSelected()) {
-			elem.click();
-		}
-	}
-	
+    public DeselectCheckboxCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
+
+    public DeselectCheckboxCommand(final String selector) {
+        super(selector);
+    }
+
+    @Override
+    protected void selectCheckbox(WebElement elem) {
+        if (elem.isSelected()) {
+            elem.click();
+        }
+    }
+
 }

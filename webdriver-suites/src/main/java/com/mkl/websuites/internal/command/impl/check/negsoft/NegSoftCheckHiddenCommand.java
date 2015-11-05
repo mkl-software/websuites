@@ -12,22 +12,22 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckHiddenCommand;
 @CommandDescriptor(name = "~softCheckHidden", argumentTypes = {String.class})
 public class NegSoftCheckHiddenCommand extends NegCheckHiddenCommand {
 
-	public NegSoftCheckHiddenCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public NegSoftCheckHiddenCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public NegSoftCheckHiddenCommand(String selector) {
-		super(selector);
-	}
+    public NegSoftCheckHiddenCommand(String selector) {
+        super(selector);
+    }
 
-	
-	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckHidden() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+
+    protected AbstractCheck defineCheckLogic() {
+        return new NegCheckHidden() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 
 }

@@ -8,19 +8,18 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 @CommandDescriptor(name = "checkPageSourceContains", argumentTypes = String.class)
 public class CheckPageSourceContainsCommand extends CheckPageSourceCommand {
 
-	public CheckPageSourceContainsCommand(String pageSource) {
-		super(pageSource);
-	}
-	
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertThatUrl, String currentPageSource) {
-		
-		assertThatUrl
-			.overridingErrorMessage("Page source expected to contain '%s', but the actual page source was '%s'",
-					pageSource, currentPageSource)
-			.contains(pageSource);
-	}
+    public CheckPageSourceContainsCommand(String pageSource) {
+        super(pageSource);
+    }
+
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertThatUrl, String currentPageSource) {
+
+        assertThatUrl.overridingErrorMessage(
+                "Page source expected to contain '%s', but the actual page source was '%s'", pageSource,
+                currentPageSource).contains(pageSource);
+    }
 
 
 }

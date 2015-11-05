@@ -8,16 +8,15 @@ import com.mkl.websuites.internal.command.impl.check.CheckAttributeValueContaini
 
 
 @CommandDescriptor(name = "softCheckAttributeValueContaining", argumentTypes = {String.class})
-public class SoftCheckAttributeValueContainingCommand extends
-		CheckAttributeValueContainingCommand {
+public class SoftCheckAttributeValueContainingCommand extends CheckAttributeValueContainingCommand {
 
-	public SoftCheckAttributeValueContainingCommand(String attribute) {
-		super(attribute);
-	}
+    public SoftCheckAttributeValueContainingCommand(String attribute) {
+        super(attribute);
+    }
 
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
 }

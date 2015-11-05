@@ -7,17 +7,17 @@ import com.mkl.websuites.internal.command.impl.check.CheckUrlContainsCommand;
 
 
 @CommandDescriptor(name = "softCheckUrlContains", argumentTypes = String.class)
-public class SoftCheckUrlContainsCommand extends CheckUrlContainsCommand{
+public class SoftCheckUrlContainsCommand extends CheckUrlContainsCommand {
 
-	public SoftCheckUrlContainsCommand(String expectedUrl) {
-		super(expectedUrl);
-	}
-	
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
-	
+    public SoftCheckUrlContainsCommand(String expectedUrl) {
+        super(expectedUrl);
+    }
+
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
+
 
 }

@@ -10,32 +10,30 @@ import com.mkl.websuites.internal.command.impl.check.CheckSelectSelectedValueCom
 
 
 @CommandDescriptor(name = "~checkSelectedValue", argumentTypes = {String.class, String.class})
-public class NegCheckSelectSelectedValueCommand extends
-		CheckSelectSelectedValueCommand {
+public class NegCheckSelectSelectedValueCommand extends CheckSelectSelectedValueCommand {
 
-	public NegCheckSelectSelectedValueCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public NegCheckSelectSelectedValueCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public NegCheckSelectSelectedValueCommand(String selector,
-			String expectedText) {
-		super(selector, expectedText);
-	}
+    public NegCheckSelectSelectedValueCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
 
-	
-	protected class NegCheckSelectSelectedValue extends CheckSelectSelectedValue {
 
-		@Override
-		protected void runSingleStringAssertion(StringAssert assertion, String string) {
-			
-			assertion
-				.overridingErrorMessage("Expecting option with id '%s' NOT to be selected in the SELECT element picked "
-					+ "by selector '%s'", expectedSelectText, by)
-				.isEmpty();
-		}
-	}
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckSelectSelectedValue();
-	}
+    protected class NegCheckSelectSelectedValue extends CheckSelectSelectedValue {
+
+        @Override
+        protected void runSingleStringAssertion(StringAssert assertion, String string) {
+
+            assertion.overridingErrorMessage(
+                    "Expecting option with id '%s' NOT to be selected in the SELECT element picked "
+                            + "by selector '%s'", expectedSelectText, by).isEmpty();
+        }
+    }
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new NegCheckSelectSelectedValue();
+    }
 }

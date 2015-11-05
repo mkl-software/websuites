@@ -12,15 +12,15 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckTextPresentComm
 @CommandDescriptor(name = "~softCheckText", argumentTypes = String.class)
 public class NegSoftCheckTextPresentCommand extends NegCheckTextPresentCommand {
 
-	public NegSoftCheckTextPresentCommand(String text) {
-		super(text);
-	}
-	
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return softly.assertThat((List<WebElement>) args[0]);
-	}
+    public NegSoftCheckTextPresentCommand(String text) {
+        super(text);
+    }
+
+
+    @SuppressWarnings("unchecked")
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return softly.assertThat((List<WebElement>) args[0]);
+    }
 
 }

@@ -8,9 +8,9 @@ package com.mkl.websuites.internal.tests;
  */
 public abstract class WebSuiteStandaloneTest extends MultiBrowserTestCase {
 
-	
-	protected void goTo(String address) {
-		browser.get(address);
-	}
+
+    protected void goTo(String address) {
+        browser.get(address);
+    }
 
 }

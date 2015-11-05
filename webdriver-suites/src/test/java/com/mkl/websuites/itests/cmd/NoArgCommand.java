@@ -8,10 +8,10 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 @CommandDescriptor(name = "noArg", argumentTypes = {})
 public class NoArgCommand implements Command {
 
-	
-	@Override
-	public void run() {
 
-	}
+    @Override
+    public void run() {
+
+    }
 
 }

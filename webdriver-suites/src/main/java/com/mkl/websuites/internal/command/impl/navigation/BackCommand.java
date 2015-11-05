@@ -7,11 +7,11 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 @CommandDescriptor(name = "back")
 public class BackCommand extends BaseCommand {
 
-	
-	@Override
-	protected void runStandardCommand() {
 
-		browser.navigate().back();
-	}
+    @Override
+    protected void runStandardCommand() {
+
+        browser.navigate().back();
+    }
 
 }

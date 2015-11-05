@@ -8,9 +8,9 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CommandDescriptor {
 
-	String name();
+    String name();
 
-	@SuppressWarnings("rawtypes")
-	Class[] argumentTypes() default {};
+    @SuppressWarnings("rawtypes")
+    Class[] argumentTypes() default {};
 
 }

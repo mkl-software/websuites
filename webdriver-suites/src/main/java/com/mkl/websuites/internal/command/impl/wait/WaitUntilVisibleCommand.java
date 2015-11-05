@@ -13,22 +13,22 @@ import com.mkl.websuites.internal.command.OperationOnWebElement;
 @CommandDescriptor(name = "waitUntilVisible", argumentTypes = {String.class})
 public class WaitUntilVisibleCommand extends OperationOnWebElement {
 
-	public WaitUntilVisibleCommand(String selector) {
-		super(selector);
-	}
+    public WaitUntilVisibleCommand(String selector) {
+        super(selector);
+    }
 
 
 
-	public WaitUntilVisibleCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
-	
-	
+    public WaitUntilVisibleCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	@Override
-	protected void doOperationOnElement(WebElement elem) {
-		WebDriverWait wait = new WebDriverWait(browser, webElementWaitTimeout);
-		wait.until(ExpectedConditions.visibilityOf((elem)));
-	}
+
+
+    @Override
+    protected void doOperationOnElement(WebElement elem) {
+        WebDriverWait wait = new WebDriverWait(browser, webElementWaitTimeout);
+        wait.until(ExpectedConditions.visibilityOf((elem)));
+    }
 
 }

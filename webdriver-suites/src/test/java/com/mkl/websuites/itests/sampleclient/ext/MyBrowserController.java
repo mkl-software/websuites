@@ -8,17 +8,17 @@ import com.mkl.websuites.internal.browser.StandardBrowserController;
 @Slf4j
 public class MyBrowserController extends StandardBrowserController {
 
-	private static MyBrowserController instance = new MyBrowserController();
+    private static MyBrowserController instance = new MyBrowserController();
 
-	public static MyBrowserController getInstance() {
-		return instance ;
-	}
-	
-	
-	@Override
-	public String getBrowserDisplayName(String currentBrowser) {
-		log.debug("custom getDisplayName()");
-		return "{custo} " + super.getBrowserDisplayName(currentBrowser);
-	}
-	
+    public static MyBrowserController getInstance() {
+        return instance;
+    }
+
+
+    @Override
+    public String getBrowserDisplayName(String currentBrowser) {
+        log.debug("custom getDisplayName()");
+        return "{custo} " + super.getBrowserDisplayName(currentBrowser);
+    }
+
 }

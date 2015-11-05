@@ -10,19 +10,19 @@ import com.mkl.websuites.internal.command.impl.check.CheckCommand;
 @CommandDescriptor(name = "softCheck", argumentTypes = String.class)
 public class SoftCheckCommand extends CheckCommand {
 
-	public SoftCheckCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public SoftCheckCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public SoftCheckCommand(String elemement) {
-		super(elemement);
-		parameterMap = null;
-	}
-	
-	
-	@Override
-	protected void fail(String message) {
-		CommandUtils.softFail(softly, message);
-	}
+    public SoftCheckCommand(String elemement) {
+        super(elemement);
+        parameterMap = null;
+    }
+
+
+    @Override
+    protected void fail(String message) {
+        CommandUtils.softFail(softly, message);
+    }
 
 }

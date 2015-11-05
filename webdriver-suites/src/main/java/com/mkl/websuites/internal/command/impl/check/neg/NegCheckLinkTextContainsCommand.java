@@ -6,22 +6,18 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.CheckLinkTextContaining;
 
 @CommandDescriptor(name = "~checkLinkTextContaining", argumentTypes = {String.class})
-public class NegCheckLinkTextContainsCommand extends
-		CheckLinkTextContaining {
+public class NegCheckLinkTextContainsCommand extends CheckLinkTextContaining {
 
-	public NegCheckLinkTextContainsCommand(String expectedLinkText) {
-		super(expectedLinkText);
-	}
-	
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertion,
-			String string) {
-		
-		assertion
-			.overridingErrorMessage("Expecting link containing text '%s'"
-					+ " NOT to exist, but found link: '%s'", expectedLinkText, actualLinkText)
-			.isNull();
-	}
+    public NegCheckLinkTextContainsCommand(String expectedLinkText) {
+        super(expectedLinkText);
+    }
+
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertion, String string) {
+
+        assertion.overridingErrorMessage("Expecting link containing text '%s'" + " NOT to exist, but found link: '%s'",
+                expectedLinkText, actualLinkText).isNull();
+    }
 
 }

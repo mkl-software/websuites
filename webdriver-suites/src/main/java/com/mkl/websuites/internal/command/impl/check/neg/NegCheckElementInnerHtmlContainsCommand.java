@@ -11,35 +11,31 @@ import com.mkl.websuites.internal.command.impl.check.CheckElementInnerHtmlContai
 
 
 @CommandDescriptor(name = "~checkElementInnerHTMLContains", argumentTypes = {String.class, String.class})
-public class NegCheckElementInnerHtmlContainsCommand extends
-		CheckElementInnerHtmlContainsCommand {
+public class NegCheckElementInnerHtmlContainsCommand extends CheckElementInnerHtmlContainsCommand {
 
-	public NegCheckElementInnerHtmlContainsCommand(
-			Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public NegCheckElementInnerHtmlContainsCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public NegCheckElementInnerHtmlContainsCommand(String selector,
-			String expectedText) {
-		super(selector, expectedText);
-	}
+    public NegCheckElementInnerHtmlContainsCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
 
-	
-	protected class NegCheckElementInnerHtmlContains extends CheckElementInnerHtmlContains {
-		
-		@Override
-		protected void runSingleStringAssertion(StringAssert assertion,
-				String elementText) {
-			
-			assertion
-				.overridingErrorMessage("Expecting inner HTML in the web page element with selector '%s'"
-						+ " NOT to contain '%s', but it was '%s'", by, expectedInnerHTML, elementText)
-				.doesNotContain(expectedInnerHTML);
-		}
-	}
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckElementInnerHtmlContains();
-	}
+
+    protected class NegCheckElementInnerHtmlContains extends CheckElementInnerHtmlContains {
+
+        @Override
+        protected void runSingleStringAssertion(StringAssert assertion, String elementText) {
+
+            assertion.overridingErrorMessage(
+                    "Expecting inner HTML in the web page element with selector '%s'"
+                            + " NOT to contain '%s', but it was '%s'", by, expectedInnerHTML, elementText)
+                    .doesNotContain(expectedInnerHTML);
+        }
+    }
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new NegCheckElementInnerHtmlContains();
+    }
 }

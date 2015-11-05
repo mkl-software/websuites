@@ -7,16 +7,15 @@ import com.mkl.websuites.internal.command.impl.check.CheckLinkHrefMatchingComman
 
 
 @CommandDescriptor(name = "softCheckLinkHrefMatching", argumentTypes = String.class)
-public class SoftCheckLinkHrefMatchingCommand extends
-		CheckLinkHrefMatchingCommand {
+public class SoftCheckLinkHrefMatchingCommand extends CheckLinkHrefMatchingCommand {
 
-	public SoftCheckLinkHrefMatchingCommand(String expectedLinkText) {
-		super(expectedLinkText);
-	}
+    public SoftCheckLinkHrefMatchingCommand(String expectedLinkText) {
+        super(expectedLinkText);
+    }
 
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
 }

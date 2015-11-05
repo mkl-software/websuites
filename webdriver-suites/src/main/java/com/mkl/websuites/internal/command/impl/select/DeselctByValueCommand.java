@@ -10,17 +10,17 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 @CommandDescriptor(name = "deselectByValue", argumentTypes = {String.class, String.class})
 public class DeselctByValueCommand extends SelectByValueCommand {
 
-	public DeselctByValueCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public DeselctByValueCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public DeselctByValueCommand(String selector, String value) {
-		super(selector, value);
-	}
+    public DeselctByValueCommand(String selector, String value) {
+        super(selector, value);
+    }
 
-	
-	@Override
-	protected void doSelect(String value, Select select) {
-		select.deselectByValue(value);
-	}
+
+    @Override
+    protected void doSelect(String value, Select select) {
+        select.deselectByValue(value);
+    }
 }

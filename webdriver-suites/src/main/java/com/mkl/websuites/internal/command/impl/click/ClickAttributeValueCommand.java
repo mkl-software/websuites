@@ -9,16 +9,15 @@ import com.mkl.websuites.internal.command.impl.check.CheckAttributeValueCommand;
 @CommandDescriptor(name = "clickAttributeValue", argumentTypes = {String.class})
 public class ClickAttributeValueCommand extends CheckAttributeValueCommand {
 
-	public ClickAttributeValueCommand(String attribute) {
-		super(attribute);
-	}
+    public ClickAttributeValueCommand(String attribute) {
+        super(attribute);
+    }
 
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertion,
-			String string) {
-		super.runSingleStringAssertion(assertion, string);
-		
-		elementWithAttribute.click();
-	}
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertion, String string) {
+        super.runSingleStringAssertion(assertion, string);
+
+        elementWithAttribute.click();
+    }
 }

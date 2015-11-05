@@ -10,27 +10,24 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckElementAttribut
 
 
 @CommandDescriptor(name = "~softCheckElementAttrValue", argumentTypes = {String.class, String.class, String.class})
-public class NegSoftCheckElementAttributeValueCommand extends
-		NegCheckElementAttributeValueCommand {
+public class NegSoftCheckElementAttributeValueCommand extends NegCheckElementAttributeValueCommand {
 
-	public NegSoftCheckElementAttributeValueCommand(
-			Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public NegSoftCheckElementAttributeValueCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public NegSoftCheckElementAttributeValueCommand(String selector,
-			String attributeName, String expectedAttributeValue) {
-		super(selector, attributeName, expectedAttributeValue);
-	}
+    public NegSoftCheckElementAttributeValueCommand(String selector, String attributeName, String expectedAttributeValue) {
+        super(selector, attributeName, expectedAttributeValue);
+    }
 
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckElementAttrValue() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new NegCheckElementAttrValue() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 }

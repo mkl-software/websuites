@@ -4,14 +4,14 @@ import com.mkl.websuites.internal.command.impl.flow.iff.IfCondition;
 
 public class IfConditionParamValidation extends ClassParameterValidator {
 
-	@Override
-	public String getParamName() {
-		return "condition";
-	}
+    @Override
+    public String getParamName() {
+        return "condition";
+    }
 
-	@Override
-	protected Class<?> getTargetClassForInstantiation() {
-		return IfCondition.class;
-	}
+    @Override
+    protected Class<?> getTargetClassForInstantiation() {
+        return IfCondition.class;
+    }
 
 }

@@ -26,32 +26,18 @@ import com.mkl.websuites.internal.tests.ScenarioFolderTestTest;
 
 /**
  * For IDE runner, Maven will gather all unit tests automatically...
+ * 
  * @author klosinskim
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses(
-		{
-			WebSuitesRunnerTest.class,
-			OperationOnWebElementTest.class,
-			StandardCommandBuilderTest.class,
-			StandardCommandParserTest.class,
-			StandardCommandPostProcessorTest.class,
-			StandardCommandTestConverterTest.class,
-			DataProviderParamValidatorTest.class,
-			RepeatControlFlowHandlerTest.class,
-			InlineDataProviderTest.class,
-			IfControlFlowHandlerTest.class,
-			BrowserSetConditionTest.class,
-			BooleanParamValidatorTest.class,
-			CommandSchemaValidatorTest.class,
-			StandardScenarioFilePreprocessorTest.class,
-			ServiceFactoryTest.class,
-			MultiBrowserTestCaseTest.class,
-			ScenarioFolderTestTest.class,
-			WebSuitesUserPropertiesTest.class
-		}
-)
+@SuiteClasses({WebSuitesRunnerTest.class, OperationOnWebElementTest.class, StandardCommandBuilderTest.class,
+        StandardCommandParserTest.class, StandardCommandPostProcessorTest.class,
+        StandardCommandTestConverterTest.class, DataProviderParamValidatorTest.class,
+        RepeatControlFlowHandlerTest.class, InlineDataProviderTest.class, IfControlFlowHandlerTest.class,
+        BrowserSetConditionTest.class, BooleanParamValidatorTest.class, CommandSchemaValidatorTest.class,
+        StandardScenarioFilePreprocessorTest.class, ServiceFactoryTest.class, MultiBrowserTestCaseTest.class,
+        ScenarioFolderTestTest.class, WebSuitesUserPropertiesTest.class})
 public class AllUnitTests {
 
 }

@@ -12,31 +12,31 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 @CommandDescriptor(name = "wait", argumentTypes = Integer.class)
 public class WaitCommand extends BaseCommand {
 
-	
-	private int time;
-	
-	
-	public WaitCommand(Integer time) {
-		this.time = time;
-	}
+
+    private int time;
 
 
-	@Override
-	protected void runStandardCommand() {
-		log.debug("test command run");
-		try {
-			Thread.sleep(time);
-			
-		} catch (InterruptedException e) {
-			Assert.fail("Wait command interrupted.");
-		}
-	}
-	
-	
-	@Override
-	public String toString() {
-		return "wait (" + time + ")";
-	}
+    public WaitCommand(Integer time) {
+        this.time = time;
+    }
+
+
+    @Override
+    protected void runStandardCommand() {
+        log.debug("test command run");
+        try {
+            Thread.sleep(time);
+
+        } catch (InterruptedException e) {
+            Assert.fail("Wait command interrupted.");
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return "wait (" + time + ")";
+    }
 
 
 }

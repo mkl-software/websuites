@@ -10,17 +10,17 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 @CommandDescriptor(name = "deselectByText", argumentTypes = {String.class, String.class})
 public class DeselectByTextCommand extends SelectByTextCommand {
 
-	public DeselectByTextCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public DeselectByTextCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public DeselectByTextCommand(String selector, String text) {
-		super(selector, text);
-	}
+    public DeselectByTextCommand(String selector, String text) {
+        super(selector, text);
+    }
 
-	
-	@Override
-	protected void doSelect(String text, Select select) {
-		select.deselectByVisibleText(text);
-	}
+
+    @Override
+    protected void doSelect(String text, Select select) {
+        select.deselectByVisibleText(text);
+    }
 }

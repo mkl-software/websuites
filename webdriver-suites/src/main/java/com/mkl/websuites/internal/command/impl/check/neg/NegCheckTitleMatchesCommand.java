@@ -9,18 +9,16 @@ import com.mkl.websuites.internal.command.impl.check.CheckTitleMatchesCommand;
 @CommandDescriptor(name = "~checkTitleMatches", argumentTypes = {String.class})
 public class NegCheckTitleMatchesCommand extends CheckTitleMatchesCommand {
 
-	public NegCheckTitleMatchesCommand(String titleFragment) {
-		super(titleFragment);
-	}
-	
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertThatTitle, String title) {
-		
-		assertThatTitle
-			.overridingErrorMessage("Page title expected NOT to match regex '%s', but the title was '%s'",
-					expectedTitle, title)
-			.doesNotMatch(CommandUtils.patternOf(expectedTitle));
-	}
+    public NegCheckTitleMatchesCommand(String titleFragment) {
+        super(titleFragment);
+    }
+
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertThatTitle, String title) {
+
+        assertThatTitle.overridingErrorMessage("Page title expected NOT to match regex '%s', but the title was '%s'",
+                expectedTitle, title).doesNotMatch(CommandUtils.patternOf(expectedTitle));
+    }
 
 }

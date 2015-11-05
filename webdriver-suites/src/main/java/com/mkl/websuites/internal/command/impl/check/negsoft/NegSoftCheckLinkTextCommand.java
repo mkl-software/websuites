@@ -10,14 +10,14 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckLinkTextCommand
 @CommandDescriptor(name = "~softCheckLinkText", argumentTypes = {String.class})
 public class NegSoftCheckLinkTextCommand extends NegCheckLinkTextCommand {
 
-	public NegSoftCheckLinkTextCommand(String expectedLinkText) {
-		super(expectedLinkText);
-	}
-	
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
+    public NegSoftCheckLinkTextCommand(String expectedLinkText) {
+        super(expectedLinkText);
+    }
+
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
 
 }

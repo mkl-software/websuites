@@ -10,25 +10,23 @@ import com.mkl.websuites.internal.command.impl.check.CheckElementChildrenCountCo
 
 
 @CommandDescriptor(name = "softCheckElementChildrenCount", argumentTypes = {String.class, Integer.class})
-public class SoftCheckElementChildrenCountCommand extends
-		CheckElementChildrenCountCommand {
+public class SoftCheckElementChildrenCountCommand extends CheckElementChildrenCountCommand {
 
-	public SoftCheckElementChildrenCountCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public SoftCheckElementChildrenCountCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public SoftCheckElementChildrenCountCommand(String selector,
-			Integer expectedNumberOfElements) {
-		super(selector, expectedNumberOfElements);
-	}
+    public SoftCheckElementChildrenCountCommand(String selector, Integer expectedNumberOfElements) {
+        super(selector, expectedNumberOfElements);
+    }
 
-	
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckChildrenCount() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckChildrenCount() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 }

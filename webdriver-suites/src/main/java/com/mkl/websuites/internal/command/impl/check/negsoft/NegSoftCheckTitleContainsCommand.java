@@ -9,13 +9,13 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckTitleContainsCo
 @CommandDescriptor(name = "~softCheckTitleContains", argumentTypes = String.class)
 public class NegSoftCheckTitleContainsCommand extends NegCheckTitleContainsCommand {
 
-	public NegSoftCheckTitleContainsCommand(String titleFragment) {
-		super(titleFragment);
-	}
+    public NegSoftCheckTitleContainsCommand(String titleFragment) {
+        super(titleFragment);
+    }
 
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
 }

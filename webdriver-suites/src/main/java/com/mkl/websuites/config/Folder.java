@@ -9,9 +9,9 @@ import com.mkl.websuites.internal.tests.SortingStrategy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Folder {
 
-	String path();
-	
-	SortingStrategy sortingStrategy() default SortingStrategy.APLHABETICAL;
-	
-	boolean ignoreSubfolders() default false;
+    String path();
+
+    SortingStrategy sortingStrategy() default SortingStrategy.APLHABETICAL;
+
+    boolean ignoreSubfolders() default false;
 }

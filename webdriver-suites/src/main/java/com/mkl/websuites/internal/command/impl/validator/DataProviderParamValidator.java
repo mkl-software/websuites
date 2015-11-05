@@ -5,14 +5,14 @@ import com.mkl.websuites.internal.command.impl.flow.repeat.RepeatDataProvider;
 
 public class DataProviderParamValidator extends ClassParameterValidator {
 
-	@Override
-	public String getParamName() {
-		return "dataProvider";
-	}
+    @Override
+    public String getParamName() {
+        return "dataProvider";
+    }
 
-	@Override
-	protected Class<?> getTargetClassForInstantiation() {
-		return RepeatDataProvider.class;
-	}
+    @Override
+    protected Class<?> getTargetClassForInstantiation() {
+        return RepeatDataProvider.class;
+    }
 
 }

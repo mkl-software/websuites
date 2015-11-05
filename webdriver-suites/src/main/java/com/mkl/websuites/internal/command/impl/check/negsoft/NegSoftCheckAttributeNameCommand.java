@@ -7,17 +7,16 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckAttributeNameCo
 
 
 @CommandDescriptor(name = "~softCheckAttributeName", argumentTypes = {String.class})
-public class NegSoftCheckAttributeNameCommand extends
-		NegCheckAttributeNameCommand {
+public class NegSoftCheckAttributeNameCommand extends NegCheckAttributeNameCommand {
 
-	public NegSoftCheckAttributeNameCommand(String attribute) {
-		super(attribute);
-	}
-	
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
+    public NegSoftCheckAttributeNameCommand(String attribute) {
+        super(attribute);
+    }
+
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
 
 }

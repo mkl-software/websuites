@@ -9,18 +9,16 @@ import com.mkl.websuites.internal.command.impl.check.CheckTitleContainsCommand;
 @CommandDescriptor(name = "~checkTitleContains", argumentTypes = String.class)
 public class NegCheckTitleContainsCommand extends CheckTitleContainsCommand {
 
-	public NegCheckTitleContainsCommand(String titleFragment) {
-		super(titleFragment);
-	}
+    public NegCheckTitleContainsCommand(String titleFragment) {
+        super(titleFragment);
+    }
 
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertThatTitle, String title) {
-		
-		assertThatTitle
-			.overridingErrorMessage("Page title expected NOT to contain '%s', but the title was '%s'",
-					expectedTitle, title)
-			.doesNotContain(expectedTitle);
-	}
-	
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertThatTitle, String title) {
+
+        assertThatTitle.overridingErrorMessage("Page title expected NOT to contain '%s', but the title was '%s'",
+                expectedTitle, title).doesNotContain(expectedTitle);
+    }
+
 }

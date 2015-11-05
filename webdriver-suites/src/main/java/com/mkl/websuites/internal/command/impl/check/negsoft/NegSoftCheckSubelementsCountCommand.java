@@ -10,24 +10,23 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckSubelementsCoun
 
 
 @CommandDescriptor(name = "~softCheckSubelementsCount", argumentTypes = {String.class, String.class, Integer.class})
-public class NegSoftCheckSubelementsCountCommand extends
-		NegCheckSubelementsCountCommand {
+public class NegSoftCheckSubelementsCountCommand extends NegCheckSubelementsCountCommand {
 
-	public NegSoftCheckSubelementsCountCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public NegSoftCheckSubelementsCountCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public NegSoftCheckSubelementsCountCommand(String selector,
-			String subElementSelector, Integer expectedNumberOfElements) {
-		super(selector, subElementSelector, expectedNumberOfElements);
-	}
+    public NegSoftCheckSubelementsCountCommand(String selector, String subElementSelector,
+            Integer expectedNumberOfElements) {
+        super(selector, subElementSelector, expectedNumberOfElements);
+    }
 
-	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckSubelementsCount() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+    protected AbstractCheck defineCheckLogic() {
+        return new NegCheckSubelementsCount() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 }

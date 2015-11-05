@@ -9,13 +9,13 @@ import com.mkl.websuites.internal.command.impl.check.CheckTextMatchingCommand;
 @CommandDescriptor(name = "softCheckTextMatching", argumentTypes = String.class)
 public class SoftCheckTextMatchingCommand extends CheckTextMatchingCommand {
 
-	public SoftCheckTextMatchingCommand(String regex) {
-		super(regex);
-	}
+    public SoftCheckTextMatchingCommand(String regex) {
+        super(regex);
+    }
 
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return softly.assertThat((Boolean) args[0]);
-	}
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return softly.assertThat((Boolean) args[0]);
+    }
 }

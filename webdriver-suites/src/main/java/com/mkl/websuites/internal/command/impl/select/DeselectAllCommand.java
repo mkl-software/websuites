@@ -15,31 +15,31 @@ public class DeselectAllCommand extends OperationOnWebElement {
 
 
 
-	public DeselectAllCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
-	
-	@SuppressWarnings("serial")
-	public DeselectAllCommand(final String selector) {
-		super(new HashMap<String, String>() {{
-			put("css", selector);
-		}
-		});
-	}
-	
-	
-	@Override
-	protected void doOperationOnElement(WebElement elem) {
-		
-		if (!CommandUtils.checkIfElementIsSelect(elem)){
-			fail(String.format("Element picked by selector '%s' must be a SELECT, but is '%s'",
-					by, elem.getTagName()));
-		}
-		
-		Select select = new Select(elem);
-		
-		select.deselectAll();
-	}
-	
-	
+    public DeselectAllCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
+
+    @SuppressWarnings("serial")
+    public DeselectAllCommand(final String selector) {
+        super(new HashMap<String, String>() {
+            {
+                put("css", selector);
+            }
+        });
+    }
+
+
+    @Override
+    protected void doOperationOnElement(WebElement elem) {
+
+        if (!CommandUtils.checkIfElementIsSelect(elem)) {
+            fail(String.format("Element picked by selector '%s' must be a SELECT, but is '%s'", by, elem.getTagName()));
+        }
+
+        Select select = new Select(elem);
+
+        select.deselectAll();
+    }
+
+
 }

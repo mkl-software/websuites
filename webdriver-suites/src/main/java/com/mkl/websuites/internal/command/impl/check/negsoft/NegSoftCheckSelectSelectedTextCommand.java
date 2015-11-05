@@ -10,27 +10,24 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckSelectSelectedT
 
 
 @CommandDescriptor(name = "~softCheckSelectedText", argumentTypes = {String.class, String.class})
-public class NegSoftCheckSelectSelectedTextCommand extends
-		NegCheckSelectSelectedTextCommand {
+public class NegSoftCheckSelectSelectedTextCommand extends NegCheckSelectSelectedTextCommand {
 
-	public NegSoftCheckSelectSelectedTextCommand(
-			Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public NegSoftCheckSelectSelectedTextCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public NegSoftCheckSelectSelectedTextCommand(String selector,
-			String expectedText) {
-		super(selector, expectedText);
-	}
+    public NegSoftCheckSelectSelectedTextCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
 
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckSelectSelectedText() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new NegCheckSelectSelectedText() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 }

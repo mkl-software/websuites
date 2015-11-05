@@ -10,27 +10,25 @@ import com.mkl.websuites.internal.command.impl.check.CheckElementTextMatchesComm
 
 
 @CommandDescriptor(name = "softCheckElementTextMatches", argumentTypes = {String.class, String.class})
-public class SoftCheckElementTextMatchesCommand extends
-		CheckElementTextMatchesCommand {
+public class SoftCheckElementTextMatchesCommand extends CheckElementTextMatchesCommand {
 
-	public SoftCheckElementTextMatchesCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public SoftCheckElementTextMatchesCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public SoftCheckElementTextMatchesCommand(String selector,
-			String expectedText) {
-		super(selector, expectedText);
-	}
-	
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckElementTextMatches() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+    public SoftCheckElementTextMatchesCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
+
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckElementTextMatches() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 
 }

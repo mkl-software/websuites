@@ -9,14 +9,14 @@ import com.mkl.websuites.internal.command.impl.check.CheckPageSourceCommand;
 @CommandDescriptor(name = "softCheckPageSource", argumentTypes = String.class)
 public class SoftCheckPageSourceCommand extends CheckPageSourceCommand {
 
-	public SoftCheckPageSourceCommand(String pageSource) {
-		super(pageSource);
-	}
-	
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
+    public SoftCheckPageSourceCommand(String pageSource) {
+        super(pageSource);
+    }
+
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
 
 }

@@ -10,15 +10,14 @@ import com.mkl.websuites.internal.command.impl.check.CheckLinkHrefCommand;
 @CommandDescriptor(name = "clickLinkHref", argumentTypes = String.class)
 public class ClickLinkHrefCommand extends CheckLinkHrefCommand {
 
-	public ClickLinkHrefCommand(String expectedLinkText) {
-		super(expectedLinkText);
-	}
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertion,
-			String string) {
-		super.runSingleStringAssertion(assertion, string);
-		actualElement.click();
-	}
+    public ClickLinkHrefCommand(String expectedLinkText) {
+        super(expectedLinkText);
+    }
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertion, String string) {
+        super.runSingleStringAssertion(assertion, string);
+        actualElement.click();
+    }
 
 }

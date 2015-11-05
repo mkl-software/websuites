@@ -10,25 +10,23 @@ import com.mkl.websuites.internal.command.impl.check.CheckElementSiblingCountCom
 
 
 @CommandDescriptor(name = "softCheckElementSiblingCount", argumentTypes = {String.class, Integer.class})
-public class SoftCheckElementSiblingCountCommand extends
-		CheckElementSiblingCountCommand {
+public class SoftCheckElementSiblingCountCommand extends CheckElementSiblingCountCommand {
 
-	public SoftCheckElementSiblingCountCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public SoftCheckElementSiblingCountCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public SoftCheckElementSiblingCountCommand(String selector,
-			Integer expectedNumberOfElements) {
-		super(selector, expectedNumberOfElements);
-	}
+    public SoftCheckElementSiblingCountCommand(String selector, Integer expectedNumberOfElements) {
+        super(selector, expectedNumberOfElements);
+    }
 
-	
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckSiblingCount() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckSiblingCount() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 }

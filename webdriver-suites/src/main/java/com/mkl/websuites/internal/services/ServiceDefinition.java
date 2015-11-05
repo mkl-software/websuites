@@ -8,16 +8,16 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ServiceDefinition {
 
-	
-	@Retention(RetentionPolicy.RUNTIME)
-	public static @interface Service {
 
-		Class<?> service();
+    @Retention(RetentionPolicy.RUNTIME)
+    public static @interface Service {
 
-		Class<?> implementation();
+        Class<?> service();
 
-		
-	}
+        Class<?> implementation();
 
-	Service[] value();
+
+    }
+
+    Service[] value();
 }

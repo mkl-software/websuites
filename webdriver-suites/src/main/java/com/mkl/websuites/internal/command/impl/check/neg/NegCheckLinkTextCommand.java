@@ -9,19 +9,16 @@ import com.mkl.websuites.internal.command.impl.check.CheckLinkTextCommand;
 @CommandDescriptor(name = "~checkLinkText", argumentTypes = {String.class})
 public class NegCheckLinkTextCommand extends CheckLinkTextCommand {
 
-	public NegCheckLinkTextCommand(String expectedLinkText) {
-		super(expectedLinkText);
-	}
-	
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertion,
-			String string) {
-		
-		assertion
-			.overridingErrorMessage("Expecting link with display text '%s'"
-					+ " NOT to exist", expectedLinkText)
-			.isNull();
-	}
+    public NegCheckLinkTextCommand(String expectedLinkText) {
+        super(expectedLinkText);
+    }
+
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertion, String string) {
+
+        assertion.overridingErrorMessage("Expecting link with display text '%s'" + " NOT to exist", expectedLinkText)
+                .isNull();
+    }
 
 }

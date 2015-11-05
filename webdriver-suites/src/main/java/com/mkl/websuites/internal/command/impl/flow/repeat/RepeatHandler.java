@@ -6,6 +6,6 @@ import com.mkl.websuites.internal.command.Command;
 
 public interface RepeatHandler {
 
-	
-	void doRepeat(List<Command> nestedCommands);
+
+    void doRepeat(List<Command> nestedCommands);
 }

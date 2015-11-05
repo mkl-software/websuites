@@ -13,44 +13,44 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 public class CheckSelectSelectedValueCommand extends CheckSelectSelectedTextCommand {
 
 
-	
-	public CheckSelectSelectedValueCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
 
-	@SuppressWarnings("serial")
-	public CheckSelectSelectedValueCommand(final String selector, final String expectedText) {
-		this(new HashMap<String, String>() {{
-			put("css", selector);
-			put("value", expectedText);
-		}
-		});
-		SELECTED_TEXT_PARAM = "value";
-	}
+    public CheckSelectSelectedValueCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	
-	protected class CheckSelectSelectedValue extends CheckSelectSelectedText {
+    @SuppressWarnings("serial")
+    public CheckSelectSelectedValueCommand(final String selector, final String expectedText) {
+        this(new HashMap<String, String>() {
+            {
+                put("css", selector);
+                put("value", expectedText);
+            }
+        });
+        SELECTED_TEXT_PARAM = "value";
+    }
 
 
-		protected String getOptionString(WebElement elem) {
-			return elem.getAttribute("value");
-		}
+    protected class CheckSelectSelectedValue extends CheckSelectSelectedText {
 
 
-		@Override
-		protected void runSingleStringAssertion(StringAssert assertion, String string) {
-			
-			assertion
-				.overridingErrorMessage("Expecting option with id '%s' to be selected  in the SELECT element picked "
-						+ "by selector '%s'", expectedSelectText, by)
-				.isNotEmpty();
-		}
-	}
-	
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckSelectSelectedValue();
-	}
-	
+        protected String getOptionString(WebElement elem) {
+            return elem.getAttribute("value");
+        }
+
+
+        @Override
+        protected void runSingleStringAssertion(StringAssert assertion, String string) {
+
+            assertion.overridingErrorMessage(
+                    "Expecting option with id '%s' to be selected  in the SELECT element picked " + "by selector '%s'",
+                    expectedSelectText, by).isNotEmpty();
+        }
+    }
+
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckSelectSelectedValue();
+    }
+
 }

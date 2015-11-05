@@ -13,23 +13,23 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class EndControlFlowHandler extends ControlFlowHandler {
 
-	
-	public EndControlFlowHandler() {}
-	
-	public EndControlFlowHandler(Map<String, String> parameterMap) {
-		log.warn("\"end\" statement doesn't take any parameters, any existign will be ignored.");
-	}
-	
-	
-	@Override
-	protected void runCommandWithParameters() {
 
-	}
+    public EndControlFlowHandler() {}
 
-	@Override
-	protected List<SchemaValidationRule> defineValidationRules() {
-		
-		return SchemaValidationRule.emptyValidationRules();
-	}
+    public EndControlFlowHandler(Map<String, String> parameterMap) {
+        log.warn("\"end\" statement doesn't take any parameters, any existign will be ignored.");
+    }
+
+
+    @Override
+    protected void runCommandWithParameters() {
+
+    }
+
+    @Override
+    protected List<SchemaValidationRule> defineValidationRules() {
+
+        return SchemaValidationRule.emptyValidationRules();
+    }
 
 }

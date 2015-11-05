@@ -14,8 +14,9 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 
 
 /**
- * IMPORTANT: this command will not wait for the element with the explicit timeout,
- * it will check the elements that are visible/existing on the page in the moment of its execution.
+ * IMPORTANT: this command will not wait for the element with the explicit timeout, it will check
+ * the elements that are visible/existing on the page in the moment of its execution.
+ * 
  * @author klosinskim
  *
  */
@@ -23,43 +24,42 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 public class CheckTextMatchingCommand extends AbstractCheck {
 
 
-	protected String regex;
-	
-	protected WebElement foundElem;
+    protected String regex;
 
-	public CheckTextMatchingCommand(String regex) {
-		this.regex = regex;
-	}
-	
-	@Override
-	protected Object[] getAssertionsParameters() {
-		// select all text nodes:
-		List<WebElement> pageElements = browser.findElements(By.xpath("//body//*"));
-		boolean isMatch = false;
-		for (WebElement webElement : pageElements) {
-			String text = webElement.getText();
-			if (text.matches(regex)) {
-				isMatch = true;
-				foundElem = webElement;
-				break;
-			}
-		}
-		return new Object[] {isMatch};
-	}
-	
-	@Override
-	protected void runAssertion(AbstractAssert<?, ?> assertion, Object... args) {
-		
-		((BooleanAssert) assertion)
-			.overridingErrorMessage("The regular expression '%s' does not match any text in any of the "
-					+ "currently visible elements on the page" , regex)
-			.isTrue();
-	}
+    protected WebElement foundElem;
+
+    public CheckTextMatchingCommand(String regex) {
+        this.regex = regex;
+    }
+
+    @Override
+    protected Object[] getAssertionsParameters() {
+        // select all text nodes:
+        List<WebElement> pageElements = browser.findElements(By.xpath("//body//*"));
+        boolean isMatch = false;
+        for (WebElement webElement : pageElements) {
+            String text = webElement.getText();
+            if (text.matches(regex)) {
+                isMatch = true;
+                foundElem = webElement;
+                break;
+            }
+        }
+        return new Object[] {isMatch};
+    }
+
+    @Override
+    protected void runAssertion(AbstractAssert<?, ?> assertion, Object... args) {
+
+        ((BooleanAssert) assertion).overridingErrorMessage(
+                "The regular expression '%s' does not match any text in any of the "
+                        + "currently visible elements on the page", regex).isTrue();
+    }
 
 
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		boolean isMatch = (boolean) args[0];
-		return assertThat(isMatch);
-	}
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        boolean isMatch = (boolean) args[0];
+        return assertThat(isMatch);
+    }
 }

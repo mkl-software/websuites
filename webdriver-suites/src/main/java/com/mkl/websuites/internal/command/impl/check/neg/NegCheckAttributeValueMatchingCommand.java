@@ -7,23 +7,20 @@ import com.mkl.websuites.internal.command.impl.check.CheckAttributeValueMatching
 
 
 @CommandDescriptor(name = "~checkAttributeValueMatching", argumentTypes = {String.class})
-public class NegCheckAttributeValueMatchingCommand extends
-		CheckAttributeValueMatchingCommand {
+public class NegCheckAttributeValueMatchingCommand extends CheckAttributeValueMatchingCommand {
 
-	public NegCheckAttributeValueMatchingCommand(String attribute) {
-		super(attribute);
-	}
+    public NegCheckAttributeValueMatchingCommand(String attribute) {
+        super(attribute);
+    }
 
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertion,
-			String string) {
 
-		String elemDesc = elementWithAttribute != null ? elementWithAttribute.getAttribute("outerHTML") : "";
-		
-		assertion
-			.overridingErrorMessage("The attribute with value matching '%s' is expected NOT to appear in any "
-					+ "element on the page but was found in the fragmet '%s'", attribute, elemDesc)
-			.isNull();
-	}
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertion, String string) {
+
+        String elemDesc = elementWithAttribute != null ? elementWithAttribute.getAttribute("outerHTML") : "";
+
+        assertion.overridingErrorMessage(
+                "The attribute with value matching '%s' is expected NOT to appear in any "
+                        + "element on the page but was found in the fragmet '%s'", attribute, elemDesc).isNull();
+    }
 }

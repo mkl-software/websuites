@@ -6,6 +6,6 @@ import junit.framework.Test;
 
 public interface CommandTestConverter {
 
-	List<Test> convertCommandsToTests(List<Command> parsedCommands, String scenarioFileName);
+    List<Test> convertCommandsToTests(List<Command> parsedCommands, String scenarioFileName);
 
 }

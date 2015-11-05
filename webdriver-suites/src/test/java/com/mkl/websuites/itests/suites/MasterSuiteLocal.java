@@ -9,19 +9,15 @@ import com.mkl.websuites.itests.nonweb.flow.RepeatDetailedIntegrationTest;
 
 
 /**
- * Should work also in HTMLUnit for quick web tests.
- * If run with "-DtestBrowser=ff" will also run for
- * the real browser.
+ * Should work also in HTMLUnit for quick web tests. If run with "-DtestBrowser=ff" will also run
+ * for the real browser.
+ * 
  * @author klosinskim
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({
-		AllUnitTests.class,
-		CommandQuickTests.class,
-		RepeatDetailedIntegrationTest.class,
-		IfDetailedIntegrationTest.class
-})
+@SuiteClasses({AllUnitTests.class, CommandQuickTests.class, RepeatDetailedIntegrationTest.class,
+        IfDetailedIntegrationTest.class})
 public class MasterSuiteLocal {
 
 }

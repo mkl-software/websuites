@@ -17,62 +17,62 @@ import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 @CommandDescriptor(name = "selectByIndex", argumentTypes = {String.class, Integer.class})
 public class SelectByIndexCommand extends OperationOnWebElement {
 
-	private static final String INDEX_PARAM = "index";
+    private static final String INDEX_PARAM = "index";
 
 
-	public SelectByIndexCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
-	
-	@SuppressWarnings("serial")
-	public SelectByIndexCommand(final String selector,final Integer index) {
-		super(new HashMap<String, String>() {{
-			put("css", selector);
-			put(INDEX_PARAM, index + "");
-		}
-		});
-	}
-	
-	@Override
-	protected void doOperationOnElement(WebElement elem) {
-		
-		if (!CommandUtils.checkIfElementIsSelect(elem)){
-			fail(String.format("Element picked by selector '%s' must be a SELECT, but is '%s'",
-					by, elem.getTagName()));
-		}
-		
-		int index = Integer.valueOf(parameterMap.get(INDEX_PARAM));
-		
-		Select select = new Select(elem);
-		
-		doSelect(index, select);
-	}
+    public SelectByIndexCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	protected void doSelect(int index, Select select) {
-		select.selectByIndex(index);
-	}
+    @SuppressWarnings("serial")
+    public SelectByIndexCommand(final String selector, final Integer index) {
+        super(new HashMap<String, String>() {
+            {
+                put("css", selector);
+                put(INDEX_PARAM, index + "");
+            }
+        });
+    }
 
-	
-	@Override
-	protected List<SchemaValidationRule> defineValidationRules() {
-		
-		List<SchemaValidationRule> parentValidationRules = super.defineValidationRules();
-		
-		for (SchemaValidationRule schemaValidationRule : parentValidationRules) {
-			schemaValidationRule.addMandatoryElements(INDEX_PARAM);
-		}
-		
-		return parentValidationRules;
-	}
-	
+    @Override
+    protected void doOperationOnElement(WebElement elem) {
 
-	@Override
-	protected List<ParameterValueValidator> defineParameterValueValidators() {
-		
-		List<ParameterValueValidator> parentValidators = super.defineParameterValueValidators();
-		
-		parentValidators.add(new IntegerNumberParamValidator(INDEX_PARAM));
-		
-		return parentValidators;
-	}
+        if (!CommandUtils.checkIfElementIsSelect(elem)) {
+            fail(String.format("Element picked by selector '%s' must be a SELECT, but is '%s'", by, elem.getTagName()));
+        }
+
+        int index = Integer.valueOf(parameterMap.get(INDEX_PARAM));
+
+        Select select = new Select(elem);
+
+        doSelect(index, select);
+    }
+
+    protected void doSelect(int index, Select select) {
+        select.selectByIndex(index);
+    }
+
+
+    @Override
+    protected List<SchemaValidationRule> defineValidationRules() {
+
+        List<SchemaValidationRule> parentValidationRules = super.defineValidationRules();
+
+        for (SchemaValidationRule schemaValidationRule : parentValidationRules) {
+            schemaValidationRule.addMandatoryElements(INDEX_PARAM);
+        }
+
+        return parentValidationRules;
+    }
+
+
+    @Override
+    protected List<ParameterValueValidator> defineParameterValueValidators() {
+
+        List<ParameterValueValidator> parentValidators = super.defineParameterValueValidators();
+
+        parentValidators.add(new IntegerNumberParamValidator(INDEX_PARAM));
+
+        return parentValidators;
+    }
 }

@@ -4,8 +4,8 @@ import com.mkl.websuites.internal.scenario.SourceLine;
 
 public interface SourceInfoHolder {
 
-	SourceLine getCommandSourceLine();
-	
-	void setCommandSourceLine(SourceLine sourceLine);
-	
+    SourceLine getCommandSourceLine();
+
+    void setCommandSourceLine(SourceLine sourceLine);
+
 }

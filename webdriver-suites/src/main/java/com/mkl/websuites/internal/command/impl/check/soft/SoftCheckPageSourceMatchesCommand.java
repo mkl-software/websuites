@@ -7,17 +7,16 @@ import com.mkl.websuites.internal.command.impl.check.CheckPageSourceMatchesComma
 
 
 @CommandDescriptor(name = "softCheckPageSourceMatches", argumentTypes = String.class)
-public class SoftCheckPageSourceMatchesCommand extends
-		CheckPageSourceMatchesCommand {
+public class SoftCheckPageSourceMatchesCommand extends CheckPageSourceMatchesCommand {
 
-	public SoftCheckPageSourceMatchesCommand(String pageSource) {
-		super(pageSource);
-	}
-	
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
+    public SoftCheckPageSourceMatchesCommand(String pageSource) {
+        super(pageSource);
+    }
+
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
 
 }

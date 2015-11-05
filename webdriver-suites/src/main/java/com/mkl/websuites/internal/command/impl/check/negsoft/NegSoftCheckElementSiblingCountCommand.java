@@ -10,26 +10,23 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckElementSiblingC
 
 
 @CommandDescriptor(name = "~softCheckElementSiblingCount", argumentTypes = {String.class, Integer.class})
-public class NegSoftCheckElementSiblingCountCommand extends
-		NegCheckElementSiblingCountCommand {
+public class NegSoftCheckElementSiblingCountCommand extends NegCheckElementSiblingCountCommand {
 
-	public NegSoftCheckElementSiblingCountCommand(
-			Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public NegSoftCheckElementSiblingCountCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public NegSoftCheckElementSiblingCountCommand(String selector,
-			Integer expectedNumberOfElements) {
-		super(selector, expectedNumberOfElements);
-	}
+    public NegSoftCheckElementSiblingCountCommand(String selector, Integer expectedNumberOfElements) {
+        super(selector, expectedNumberOfElements);
+    }
 
-	
-	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckSiblingCount() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+
+    protected AbstractCheck defineCheckLogic() {
+        return new NegCheckSiblingCount() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 }

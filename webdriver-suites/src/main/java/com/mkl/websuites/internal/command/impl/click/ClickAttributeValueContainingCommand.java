@@ -7,20 +7,18 @@ import com.mkl.websuites.internal.command.impl.check.CheckAttributeValueContaini
 
 
 @CommandDescriptor(name = "clickAttributeValueContaining", argumentTypes = {String.class})
-public class ClickAttributeValueContainingCommand extends
-		CheckAttributeValueContainingCommand {
+public class ClickAttributeValueContainingCommand extends CheckAttributeValueContainingCommand {
 
-	public ClickAttributeValueContainingCommand(String attribute) {
-		super(attribute);
-	}
+    public ClickAttributeValueContainingCommand(String attribute) {
+        super(attribute);
+    }
 
-	
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertion,
-			String string) {
-		super.runSingleStringAssertion(assertion, string);
-		
-		elementWithAttribute.click();
-	}
+
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertion, String string) {
+        super.runSingleStringAssertion(assertion, string);
+
+        elementWithAttribute.click();
+    }
 }

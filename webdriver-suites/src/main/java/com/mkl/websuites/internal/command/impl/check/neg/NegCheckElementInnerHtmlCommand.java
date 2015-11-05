@@ -10,35 +10,32 @@ import com.mkl.websuites.internal.command.impl.check.CheckElementInnerHtmlComman
 
 
 @CommandDescriptor(name = "~checkElementInnerHTML", argumentTypes = {String.class, String.class})
-public class NegCheckElementInnerHtmlCommand extends
-		CheckElementInnerHtmlCommand {
+public class NegCheckElementInnerHtmlCommand extends CheckElementInnerHtmlCommand {
 
-	public NegCheckElementInnerHtmlCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public NegCheckElementInnerHtmlCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public NegCheckElementInnerHtmlCommand(String selector, String expectedText) {
-		super(selector, expectedText);
-	}
-	
-	
-	protected class NegCheckElementInnerHTML extends CheckElementInnerHTML {
-		
-		@Override
-		protected void runSingleStringAssertion(StringAssert assertion,
-				String elementText) {
-			
-			assertion
-				.overridingErrorMessage("Expecting inner HTML in the web page element with selector '%s'"
-						+ " NOT to be '%s'", by, expectedInnerHTML)
-				.isNotEqualTo(expectedInnerHTML);
-		}
-	}
-	
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckElementInnerHTML();
-	}
+    public NegCheckElementInnerHtmlCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
+
+
+    protected class NegCheckElementInnerHTML extends CheckElementInnerHTML {
+
+        @Override
+        protected void runSingleStringAssertion(StringAssert assertion, String elementText) {
+
+            assertion.overridingErrorMessage(
+                    "Expecting inner HTML in the web page element with selector '%s'" + " NOT to be '%s'", by,
+                    expectedInnerHTML).isNotEqualTo(expectedInnerHTML);
+        }
+    }
+
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new NegCheckElementInnerHTML();
+    }
 
 }

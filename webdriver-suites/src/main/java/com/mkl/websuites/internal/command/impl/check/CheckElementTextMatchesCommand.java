@@ -11,30 +11,29 @@ import com.mkl.websuites.internal.command.impl.CommandUtils;
 @CommandDescriptor(name = "checkElementTextMatches", argumentTypes = {String.class, String.class})
 public class CheckElementTextMatchesCommand extends CheckElementTextCommand {
 
-	public CheckElementTextMatchesCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public CheckElementTextMatchesCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public CheckElementTextMatchesCommand(String selector, String expectedText) {
-		super(selector, expectedText);
-	}
+    public CheckElementTextMatchesCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
 
-	
-	protected class CheckElementTextMatches extends CheckElementText {
-		
-		@Override
-		protected void runSingleStringAssertion(StringAssert assertion,
-				String elementText) {
-			
-			assertion
-				.overridingErrorMessage("Expecting inner text of web page element with selector '%s'"
-						+ " to match regexp '%s', but text was '%s'", by, expectedText, elementText)
-				.matches(CommandUtils.patternOf(expectedText));
-		}
-	}
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckElementTextMatches();
-	}
+
+    protected class CheckElementTextMatches extends CheckElementText {
+
+        @Override
+        protected void runSingleStringAssertion(StringAssert assertion, String elementText) {
+
+            assertion.overridingErrorMessage(
+                    "Expecting inner text of web page element with selector '%s'"
+                            + " to match regexp '%s', but text was '%s'", by, expectedText, elementText).matches(
+                    CommandUtils.patternOf(expectedText));
+        }
+    }
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckElementTextMatches();
+    }
 }

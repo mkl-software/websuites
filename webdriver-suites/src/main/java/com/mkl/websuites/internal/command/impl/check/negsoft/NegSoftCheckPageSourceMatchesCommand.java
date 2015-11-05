@@ -7,16 +7,15 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckPageSourceMatch
 
 
 @CommandDescriptor(name = "~softCheckPageSourceMatches", argumentTypes = String.class)
-public class NegSoftCheckPageSourceMatchesCommand extends
-		NegCheckPageSourceMatchesCommand {
+public class NegSoftCheckPageSourceMatchesCommand extends NegCheckPageSourceMatchesCommand {
 
-	public NegSoftCheckPageSourceMatchesCommand(String pageSource) {
-		super(pageSource);
-	}
+    public NegSoftCheckPageSourceMatchesCommand(String pageSource) {
+        super(pageSource);
+    }
 
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
 }

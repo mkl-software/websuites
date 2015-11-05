@@ -7,17 +7,16 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckTitleMatchesCom
 
 
 @CommandDescriptor(name = "~softCheckTitleMatches", argumentTypes = {String.class})
-public class NegSoftCheckTitleMatchesCommand extends
-		NegCheckTitleMatchesCommand {
+public class NegSoftCheckTitleMatchesCommand extends NegCheckTitleMatchesCommand {
 
-	public NegSoftCheckTitleMatchesCommand(String titleFragment) {
-		super(titleFragment);
-	}
+    public NegSoftCheckTitleMatchesCommand(String titleFragment) {
+        super(titleFragment);
+    }
 
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
-	
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
+
 }

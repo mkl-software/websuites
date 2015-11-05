@@ -10,26 +10,24 @@ import com.mkl.websuites.internal.command.impl.check.CheckSelectSelectedIndexCom
 
 
 @CommandDescriptor(name = "softCheckSelectedIndex", argumentTypes = {String.class, String.class})
-public class SoftCheckSelectSelectedIndexCommand extends
-		CheckSelectSelectedIndexCommand {
+public class SoftCheckSelectSelectedIndexCommand extends CheckSelectSelectedIndexCommand {
 
-	public SoftCheckSelectSelectedIndexCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public SoftCheckSelectSelectedIndexCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public SoftCheckSelectSelectedIndexCommand(String selector,
-			String expectedText) {
-		super(selector, expectedText);
-	}
+    public SoftCheckSelectSelectedIndexCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
 
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckSelectSelectedIndex() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckSelectSelectedIndex() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 }

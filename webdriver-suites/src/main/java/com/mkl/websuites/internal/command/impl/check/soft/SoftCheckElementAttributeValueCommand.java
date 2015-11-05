@@ -10,28 +10,25 @@ import com.mkl.websuites.internal.command.impl.check.CheckElementAttributeValueC
 
 
 @CommandDescriptor(name = "softCheckElementAttrValue", argumentTypes = {String.class, String.class, String.class})
-public class SoftCheckElementAttributeValueCommand extends
-		CheckElementAttributeValueCommand {
+public class SoftCheckElementAttributeValueCommand extends CheckElementAttributeValueCommand {
 
-	public SoftCheckElementAttributeValueCommand(
-			Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public SoftCheckElementAttributeValueCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public SoftCheckElementAttributeValueCommand(String selector,
-			String attributeName, String expectedAttributeValue) {
-		super(selector, attributeName, expectedAttributeValue);
-	}
-	
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckElementAttrValue() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+    public SoftCheckElementAttributeValueCommand(String selector, String attributeName, String expectedAttributeValue) {
+        super(selector, attributeName, expectedAttributeValue);
+    }
+
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckElementAttrValue() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 
 }

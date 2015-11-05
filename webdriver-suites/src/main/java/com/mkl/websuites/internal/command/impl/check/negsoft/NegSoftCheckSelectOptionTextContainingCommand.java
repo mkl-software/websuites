@@ -10,27 +10,24 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckSelectOptionTex
 
 
 @CommandDescriptor(name = "~softCheckSelectOptionTextContaining", argumentTypes = {String.class, String.class})
-public class NegSoftCheckSelectOptionTextContainingCommand extends
-		NegCheckSelectOptionTextContainingCommand {
+public class NegSoftCheckSelectOptionTextContainingCommand extends NegCheckSelectOptionTextContainingCommand {
 
-	public NegSoftCheckSelectOptionTextContainingCommand(
-			Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public NegSoftCheckSelectOptionTextContainingCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public NegSoftCheckSelectOptionTextContainingCommand(String selector,
-			String expectedText) {
-		super(selector, expectedText);
-	}
+    public NegSoftCheckSelectOptionTextContainingCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
 
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckSelectOptionTextContaining() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new NegCheckSelectOptionTextContaining() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 }

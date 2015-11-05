@@ -9,15 +9,15 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckTitleCommand;
 @CommandDescriptor(name = "~softCheckTitle", argumentTypes = String.class)
 public class NegSoftCheckTitleCommand extends NegCheckTitleCommand {
 
-	public NegSoftCheckTitleCommand(String expectedTitle) {
-		super(expectedTitle);
-	}
+    public NegSoftCheckTitleCommand(String expectedTitle) {
+        super(expectedTitle);
+    }
 
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
-	
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
+
 
 }

@@ -7,23 +7,20 @@ import com.mkl.websuites.internal.command.impl.check.CheckLinkTextMatchingComman
 
 
 @CommandDescriptor(name = "~checkLinkTextMatching", argumentTypes = {String.class})
-public class NegCheckLinkTextMatchingCommand extends
-		CheckLinkTextMatchingCommand {
+public class NegCheckLinkTextMatchingCommand extends CheckLinkTextMatchingCommand {
 
-	public NegCheckLinkTextMatchingCommand(String expectedLinkText) {
-		super(expectedLinkText);
-	}
-	
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertion,
-			String string) {
-		
-		assertion
-			.overridingErrorMessage("Expecting link with display text '%s'"
-					+ " NOT to exist, but found link text '%s'", expectedLinkText, actualLinkText)
-			.isNull();
-	}
-	
+    public NegCheckLinkTextMatchingCommand(String expectedLinkText) {
+        super(expectedLinkText);
+    }
+
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertion, String string) {
+
+        assertion.overridingErrorMessage(
+                "Expecting link with display text '%s'" + " NOT to exist, but found link text '%s'", expectedLinkText,
+                actualLinkText).isNull();
+    }
+
 
 }

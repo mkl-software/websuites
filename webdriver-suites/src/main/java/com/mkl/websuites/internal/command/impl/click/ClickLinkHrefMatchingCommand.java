@@ -9,16 +9,15 @@ import com.mkl.websuites.internal.command.impl.check.CheckLinkHrefMatchingComman
 @CommandDescriptor(name = "clickLinkHrefMatching", argumentTypes = String.class)
 public class ClickLinkHrefMatchingCommand extends CheckLinkHrefMatchingCommand {
 
-	public ClickLinkHrefMatchingCommand(String expectedLinkText) {
-		super(expectedLinkText);
-	}
+    public ClickLinkHrefMatchingCommand(String expectedLinkText) {
+        super(expectedLinkText);
+    }
 
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertion,
-			String string) {
-		super.runSingleStringAssertion(assertion, string);
-		
-		actualElement.click();
-	}
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertion, String string) {
+        super.runSingleStringAssertion(assertion, string);
+
+        actualElement.click();
+    }
 }

@@ -9,19 +9,19 @@ import com.mkl.websuites.internal.tests.MultiBrowserTestCase;
 public class SampleStandaloneTest extends MultiBrowserTestCase {
 
 
-	@Override
-	protected void runLocally() {
-		browser.get("http://google.com");
-		WebElement queryBox = browser.findElement(By.id("lst-ib"));
-		queryBox.sendKeys("selenium\n");
-		new CheckTextPresentCommand("Selenium - Web Browser Automation").run();
-	}
+    @Override
+    protected void runLocally() {
+        browser.get("http://google.com");
+        WebElement queryBox = browser.findElement(By.id("lst-ib"));
+        queryBox.sendKeys("selenium\n");
+        new CheckTextPresentCommand("Selenium - Web Browser Automation").run();
+    }
 
-	@Override
-	protected String getTestName() {
-		return this.getClass().getName();
-	}
+    @Override
+    protected String getTestName() {
+        return this.getClass().getName();
+    }
 
-	
+
 
 }

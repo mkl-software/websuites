@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface ScenarioFilePreprocessor {
 
-	List<SourceLine> preprocessScenarioFile(File scenarioFile);
+    List<SourceLine> preprocessScenarioFile(File scenarioFile);
 
 }

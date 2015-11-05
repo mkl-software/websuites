@@ -10,27 +10,25 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckElementInnerHtm
 
 
 @CommandDescriptor(name = "~softCheckElementInnerHTML", argumentTypes = {String.class, String.class})
-public class NegSoftCheckElementInnerHtmlCommand extends
-		NegCheckElementInnerHtmlCommand {
+public class NegSoftCheckElementInnerHtmlCommand extends NegCheckElementInnerHtmlCommand {
 
-	public NegSoftCheckElementInnerHtmlCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public NegSoftCheckElementInnerHtmlCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public NegSoftCheckElementInnerHtmlCommand(String selector,
-			String expectedText) {
-		super(selector, expectedText);
-	}
-	
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckElementInnerHTML() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+    public NegSoftCheckElementInnerHtmlCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
+
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new NegCheckElementInnerHTML() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 
 }

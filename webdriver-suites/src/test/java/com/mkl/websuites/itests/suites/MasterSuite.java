@@ -8,16 +8,12 @@ import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * Complete test case suite.
+ * 
  * @author klosinskim
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses(
-		{
-			MasterSuiteLocal.class,
-			LongRunningTestsForRealBrowsers.class
-		}
-)
+@SuiteClasses({MasterSuiteLocal.class, LongRunningTestsForRealBrowsers.class})
 public class MasterSuite {
 
 }

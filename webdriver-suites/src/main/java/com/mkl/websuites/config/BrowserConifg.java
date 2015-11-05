@@ -8,22 +8,16 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface BrowserConifg {
 
-	public enum BrowserType {
-		
-		INTERNET_EXPLORER,
-		CHROME,
-		FIREFOX,
-		SAFARI,
-		OPERA,
-		HTML,
-		NONE
-	}
+    public enum BrowserType {
 
-	BrowserType browserType();
-	
-	String id();
-	
-	String displayName();
-	
-	String webDriverPath() default "";
+        INTERNET_EXPLORER, CHROME, FIREFOX, SAFARI, OPERA, HTML, NONE
+    }
+
+    BrowserType browserType();
+
+    String id();
+
+    String displayName();
+
+    String webDriverPath() default "";
 }

@@ -6,6 +6,6 @@ import com.mkl.websuites.internal.scenario.SourceLine;
 
 public interface CommandParser {
 
-	List<Command> parseCommandFromFile(List<SourceLine> preprocessedScenarioFile);
+    List<Command> parseCommandFromFile(List<SourceLine> preprocessedScenarioFile);
 
 }

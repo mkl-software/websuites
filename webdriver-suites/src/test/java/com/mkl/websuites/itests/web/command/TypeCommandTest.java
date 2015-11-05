@@ -14,51 +14,45 @@ import com.mkl.websuites.itests.web.core.WebSuitesResultCheck;
 
 
 
-
 public class TypeCommandTest extends WebSuitesResultCheck {
 
-	
-	
-	public static class TypeTextCheckTest extends WebSuiteStandaloneTest {
 
-		@Override
-		protected void runLocally() {
-			
-			Alert alert = browser.switchTo().alert();
-			String text = alert.getText();
-			assertEquals("typed text from scn file", text);
-			alert.accept();
-		}
 
-		@Override
-		protected String getTestName() {
-			return "Type text and click to check alert text";
-		}
-		
-	}
-	
-	@WebSuites(
-			browsers = "${env.testBrowser}",
-			scenarios = @ScenarioFile("src/test/resources/integration/command/typeTextTest1.scn"),
-			classes = @TestClass(TypeTextCheckTest.class),
-			browserResusableConfiguration = BrowsersConfig.class
-		)
-	public static class LocalRunner  extends WebSuitesRunner {}
-	
-	
-	
-	
-	
-	
-	@Test
-	public void testType() throws Throwable {
-		
-		Result testResult = super.checkWebTestResult(LocalRunner.class);
-		
-		checkRunCount(BASE_RUN_COUNT_FOR_BROWSER_TEST + 1, testResult); // +1 for TypeTextCheckTest
-		
-		checkIfNoFailures(testResult);
-	}
-	
+    public static class TypeTextCheckTest extends WebSuiteStandaloneTest {
+
+        @Override
+        protected void runLocally() {
+
+            Alert alert = browser.switchTo().alert();
+            String text = alert.getText();
+            assertEquals("typed text from scn file", text);
+            alert.accept();
+        }
+
+        @Override
+        protected String getTestName() {
+            return "Type text and click to check alert text";
+        }
+
+    }
+
+    @WebSuites(browsers = "${env.testBrowser}",
+            scenarios = @ScenarioFile("src/test/resources/integration/command/typeTextTest1.scn"),
+            classes = @TestClass(TypeTextCheckTest.class), browserResusableConfiguration = BrowsersConfig.class)
+    public static class LocalRunner extends WebSuitesRunner {
+    }
+
+
+
+    @Test
+    public void testType() throws Throwable {
+
+        Result testResult = super.checkWebTestResult(LocalRunner.class);
+
+        checkRunCount(BASE_RUN_COUNT_FOR_BROWSER_TEST + 1, testResult); // +1 for TypeTextCheckTest
+
+        checkIfNoFailures(testResult);
+    }
+
 
 }

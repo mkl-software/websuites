@@ -11,6 +11,6 @@ import junit.framework.Test;
 public @interface StandaloneSuite {
 
 
-	Class<? extends Test>[] suite() default {};
+    Class<? extends Test>[] suite() default {};
 
 }

@@ -13,38 +13,36 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 @CommandDescriptor(name = "checkLinkTextMatching", argumentTypes = {String.class})
 public class CheckLinkTextMatchingCommand extends CheckLinkTextCommand {
 
-	public CheckLinkTextMatchingCommand(String expectedLinkText) {
-		super(expectedLinkText);
-	}
-	
-	
-	protected String actualLinkText;
-	
-	@Override
-	protected String getStringParam() {
-		
-		try {
-			List<WebElement> elements = browser.findElements(By.tagName("a"));
-			for (WebElement webElement : elements) {
-				if (webElement.getText().matches(expectedLinkText)) {
-					actualLinkText = webElement.getText();
-					foundElem = webElement;
-					return "OK";
-				}
-			}
-		} catch (NoSuchElementException e) {
-		}
-		return null;
-	}
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertion,
-			String string) {
-		
-		assertion
-			.overridingErrorMessage("Expecting link with display text matching regexp'%s'"
-					+ " to exist", expectedLinkText)
-			.isNotNull();
-	}
+    public CheckLinkTextMatchingCommand(String expectedLinkText) {
+        super(expectedLinkText);
+    }
+
+
+    protected String actualLinkText;
+
+    @Override
+    protected String getStringParam() {
+
+        try {
+            List<WebElement> elements = browser.findElements(By.tagName("a"));
+            for (WebElement webElement : elements) {
+                if (webElement.getText().matches(expectedLinkText)) {
+                    actualLinkText = webElement.getText();
+                    foundElem = webElement;
+                    return "OK";
+                }
+            }
+        } catch (NoSuchElementException e) {
+            return null;
+        }
+        return null;
+    }
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertion, String string) {
+
+        assertion.overridingErrorMessage("Expecting link with display text matching regexp'%s'" + " to exist",
+                expectedLinkText).isNotNull();
+    }
 
 }

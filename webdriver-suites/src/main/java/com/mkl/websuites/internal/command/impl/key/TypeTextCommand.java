@@ -11,28 +11,28 @@ import com.mkl.websuites.internal.command.OperationOnWebElement;
 @CommandDescriptor(name = "type", argumentTypes = {String.class, String.class})
 public class TypeTextCommand extends OperationOnWebElement {
 
-	
-	private String textToType;
-	
-	
-	public TypeTextCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+
+    private String textToType;
 
 
-	public TypeTextCommand(String element, String textToType) {
-		super(element);
-		super.elementSelector = element;
-		this.textToType = textToType;
-	}
+    public TypeTextCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
 
-	@Override
-	protected void doOperationOnElement(WebElement elem) {
-		String text = populateStringWithProperties(textToType);
-		elem.sendKeys(text);
-		
-	}
+    public TypeTextCommand(String element, String textToType) {
+        super(element);
+        super.elementSelector = element;
+        this.textToType = textToType;
+    }
+
+
+    @Override
+    protected void doOperationOnElement(WebElement elem) {
+        String text = populateStringWithProperties(textToType);
+        elem.sendKeys(text);
+
+    }
 
 
 

@@ -9,16 +9,15 @@ import com.mkl.websuites.internal.command.impl.check.CheckPageSourceCommand;
 @CommandDescriptor(name = "~checkPageSource", argumentTypes = String.class)
 public class NegCheckPageSourceCommand extends CheckPageSourceCommand {
 
-	public NegCheckPageSourceCommand(String pageSource) {
-		super(pageSource);
-	}
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertThatUrl, String currentPageSource) {
-		
-		assertThatUrl
-			.overridingErrorMessage("Page source expected NOT to be '%s'", pageSource)
-			.isNotEqualTo(pageSource);
-	}
+    public NegCheckPageSourceCommand(String pageSource) {
+        super(pageSource);
+    }
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertThatUrl, String currentPageSource) {
+
+        assertThatUrl.overridingErrorMessage("Page source expected NOT to be '%s'", pageSource)
+                .isNotEqualTo(pageSource);
+    }
 
 }

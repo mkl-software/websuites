@@ -10,28 +10,25 @@ import com.mkl.websuites.internal.command.impl.check.CheckSelectOptionTextContai
 
 
 @CommandDescriptor(name = "softCheckSelectOptionTextContaining", argumentTypes = {String.class, String.class})
-public class SoftCheckSelectOptionTextContainingCommand extends
-		CheckSelectOptionTextContainingCommand {
+public class SoftCheckSelectOptionTextContainingCommand extends CheckSelectOptionTextContainingCommand {
 
-	public SoftCheckSelectOptionTextContainingCommand(
-			Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public SoftCheckSelectOptionTextContainingCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public SoftCheckSelectOptionTextContainingCommand(String selector,
-			String expectedText) {
-		super(selector, expectedText);
-	}
+    public SoftCheckSelectOptionTextContainingCommand(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
 
-	
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckSelectOptionTextContaining() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckSelectOptionTextContaining() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 }

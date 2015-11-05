@@ -11,29 +11,27 @@ import com.mkl.websuites.itests.web.core.WebSuitesResultCheck;
 
 
 
-
 public class ClickCommandTest extends WebSuitesResultCheck {
 
-	
-	@WebSuites(
-		browsers = "${env.testBrowser}",
-		scenarios = @ScenarioFile("src/test/resources/integration/command/clickTests.scn"),
-		browserResusableConfiguration = BrowsersConfig.class
-	)
-	public static class LocalRunner  extends WebSuitesRunner {}
-	
-	
-	@Test
-	public void testClick() throws Throwable {
-		
-		Result testResult = super.checkWebTestResult(LocalRunner.class);
-		
-		checkRunCount(BASE_RUN_COUNT_FOR_BROWSER_TEST, testResult);
-		
-		checkIfNoFailures(testResult);
-		
-	}
-	
+
+    @WebSuites(browsers = "${env.testBrowser}",
+            scenarios = @ScenarioFile("src/test/resources/integration/command/clickTests.scn"),
+            browserResusableConfiguration = BrowsersConfig.class)
+    public static class LocalRunner extends WebSuitesRunner {
+    }
+
+
+    @Test
+    public void testClick() throws Throwable {
+
+        Result testResult = super.checkWebTestResult(LocalRunner.class);
+
+        checkRunCount(BASE_RUN_COUNT_FOR_BROWSER_TEST, testResult);
+
+        checkIfNoFailures(testResult);
+
+    }
+
 
 
 }

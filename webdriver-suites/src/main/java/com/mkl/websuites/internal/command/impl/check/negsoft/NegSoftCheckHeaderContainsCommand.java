@@ -7,16 +7,15 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckHeaderContainsC
 
 
 @CommandDescriptor(name = "~softCheckHeaderContains", argumentTypes = {String.class})
-public class NegSoftCheckHeaderContainsCommand extends
-		NegCheckHeaderContainsCommand {
+public class NegSoftCheckHeaderContainsCommand extends NegCheckHeaderContainsCommand {
 
-	public NegSoftCheckHeaderContainsCommand(String expectedHeader) {
-		super(expectedHeader);
-	}
+    public NegSoftCheckHeaderContainsCommand(String expectedHeader) {
+        super(expectedHeader);
+    }
 
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
 }

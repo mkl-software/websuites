@@ -5,41 +5,39 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 
 public class BrowserCondition implements IfCondition {
 
-	
-	protected String requiredBrowser;
-	
-	protected boolean negate;
-	
-	
-	
-	
-	public BrowserCondition(String requiredBrowser) {
-		this(requiredBrowser, false);
-	}
-	
-	
-	public BrowserCondition(String requiredBrowser, boolean reverseCondition) {
-		this.requiredBrowser = requiredBrowser;
-		this.negate = reverseCondition;
-	}
+
+    protected String requiredBrowser;
+
+    protected boolean negate;
 
 
 
-
-	@Override
-	public boolean isConditionMet() {
-		
-		String curentBrowser = currentBrowser();
-		
-		boolean browsersOK = requiredBrowser.equals(curentBrowser);
-		
-		return negate ? !browsersOK : browsersOK;
-		
-	}
+    public BrowserCondition(String requiredBrowser) {
+        this(requiredBrowser, false);
+    }
 
 
-	protected String currentBrowser() {
-		return ServiceFactory.get(BrowserController.class).currentBrowser();
-	}
+    public BrowserCondition(String requiredBrowser, boolean reverseCondition) {
+        this.requiredBrowser = requiredBrowser;
+        this.negate = reverseCondition;
+    }
+
+
+
+    @Override
+    public boolean isConditionMet() {
+
+        String curentBrowser = currentBrowser();
+
+        boolean browsersOK = requiredBrowser.equals(curentBrowser);
+
+        return negate ? !browsersOK : browsersOK;
+
+    }
+
+
+    protected String currentBrowser() {
+        return ServiceFactory.get(BrowserController.class).currentBrowser();
+    }
 
 }

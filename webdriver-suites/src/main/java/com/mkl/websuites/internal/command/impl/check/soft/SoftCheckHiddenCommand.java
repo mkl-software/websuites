@@ -12,22 +12,22 @@ import com.mkl.websuites.internal.command.impl.check.CheckHiddenCommand;
 @CommandDescriptor(name = "softCheckHidden", argumentTypes = {String.class})
 public class SoftCheckHiddenCommand extends CheckHiddenCommand {
 
-	public SoftCheckHiddenCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public SoftCheckHiddenCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public SoftCheckHiddenCommand(String selector) {
-		super(selector);
-	}
-	
-	
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckHidden() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+    public SoftCheckHiddenCommand(String selector) {
+        super(selector);
+    }
+
+
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckHidden() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 
 }

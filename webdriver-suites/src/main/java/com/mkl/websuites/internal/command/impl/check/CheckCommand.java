@@ -11,21 +11,21 @@ import com.mkl.websuites.internal.command.OperationOnWebElement;
 @CommandDescriptor(name = "check", argumentTypes = String.class)
 public class CheckCommand extends OperationOnWebElement {
 
-	
-	public CheckCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
-	
-	public CheckCommand(String elemement) {
-		super(elemement);
-		super.elementSelector = elemement;
-	}
 
-	@Override
-	protected void doOperationOnElement(WebElement elem) {
-		
-		// no operation, just checking if exists without clicking
+    public CheckCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	}
+    public CheckCommand(String elemement) {
+        super(elemement);
+        super.elementSelector = elemement;
+    }
+
+    @Override
+    protected void doOperationOnElement(WebElement elem) {
+
+        // no operation, just checking if exists without clicking
+
+    }
 
 }

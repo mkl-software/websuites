@@ -10,25 +10,23 @@ import com.mkl.websuites.internal.command.impl.check.CheckSubelementsCountComman
 
 
 @CommandDescriptor(name = "softCheckSubelementsCount", argumentTypes = {String.class, String.class, Integer.class})
-public class SoftCheckSubelementsCountCommand extends
-		CheckSubelementsCountCommand {
+public class SoftCheckSubelementsCountCommand extends CheckSubelementsCountCommand {
 
-	public SoftCheckSubelementsCountCommand(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public SoftCheckSubelementsCountCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public SoftCheckSubelementsCountCommand(String selector,
-			String subElementSelector, Integer expectedNumberOfElements) {
-		super(selector, subElementSelector, expectedNumberOfElements);
-	}
+    public SoftCheckSubelementsCountCommand(String selector, String subElementSelector, Integer expectedNumberOfElements) {
+        super(selector, subElementSelector, expectedNumberOfElements);
+    }
 
-	
-	protected AbstractCheck defineCheckLogic() {
-		return new CheckSubelementsCount() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+
+    protected AbstractCheck defineCheckLogic() {
+        return new CheckSubelementsCount() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 }

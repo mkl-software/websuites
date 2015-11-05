@@ -7,19 +7,17 @@ import com.mkl.websuites.internal.command.impl.check.CheckLinkHrefContainingComm
 
 
 @CommandDescriptor(name = "clickLinkHrefContaining", argumentTypes = String.class)
-public class ClickLinkHrefContainingCommand extends
-		CheckLinkHrefContainingCommand {
+public class ClickLinkHrefContainingCommand extends CheckLinkHrefContainingCommand {
 
-	public ClickLinkHrefContainingCommand(String expectedLinkText) {
-		super(expectedLinkText);
-	}
+    public ClickLinkHrefContainingCommand(String expectedLinkText) {
+        super(expectedLinkText);
+    }
 
-	
-	@Override
-	protected void runSingleStringAssertion(StringAssert assertion,
-			String string) {
-		super.runSingleStringAssertion(assertion, string);
-		
-		actualElement.click();
-	}
+
+    @Override
+    protected void runSingleStringAssertion(StringAssert assertion, String string) {
+        super.runSingleStringAssertion(assertion, string);
+
+        actualElement.click();
+    }
 }

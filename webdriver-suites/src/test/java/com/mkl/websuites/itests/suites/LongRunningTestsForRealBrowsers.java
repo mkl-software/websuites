@@ -12,13 +12,8 @@ import com.mkl.websuites.itests.web.command.TypeCommandTest;
 
 
 @RunWith(Suite.class)
-@SuiteClasses({
-	AllCheckCommandsPassingTest.class,
-	AllCheckCommandsFailingTest.class,
-	TypeCommandTest.class,
-	CheckCommandTest.class,
-	ClickCommandTest.class
-})
+@SuiteClasses({AllCheckCommandsPassingTest.class, AllCheckCommandsFailingTest.class, TypeCommandTest.class,
+        CheckCommandTest.class, ClickCommandTest.class})
 public class LongRunningTestsForRealBrowsers {
 
 }

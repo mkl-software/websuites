@@ -6,20 +6,20 @@ import com.mkl.websuites.WebSuites;
 
 public interface BrowserController {
 
-	public abstract void initializeBrowsersEnvironment(WebSuites config);
+    public abstract void initializeBrowsersEnvironment(WebSuites config);
 
-	public abstract void addBrowser(String browser);
+    public abstract void addBrowser(String browser);
 
-	public abstract String currentBrowser();
+    public abstract String currentBrowser();
 
-	public abstract String removeCurrentBrowser();
+    public abstract String removeCurrentBrowser();
 
-	public abstract WebDriver getWebDriver();
+    public abstract WebDriver getWebDriver();
 
-	public abstract void setNextWebDriver();
+    public abstract void setNextWebDriver();
 
-	public abstract String getLocalBrowserNameForTestInit();
+    public abstract String getLocalBrowserNameForTestInit();
 
-	public abstract String getBrowserDisplayName(String currentBrowser);
+    public abstract String getBrowserDisplayName(String currentBrowser);
 
 }

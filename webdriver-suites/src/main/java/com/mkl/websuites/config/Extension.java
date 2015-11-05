@@ -9,7 +9,7 @@ import com.mkl.websuites.internal.services.ServiceDefinition.Service;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Extension {
 
-	String[] commandExtensionPackages() default {};
-	
-	Service[] serviceOverrides() default {};
+    String[] commandExtensionPackages() default {};
+
+    Service[] serviceOverrides() default {};
 }

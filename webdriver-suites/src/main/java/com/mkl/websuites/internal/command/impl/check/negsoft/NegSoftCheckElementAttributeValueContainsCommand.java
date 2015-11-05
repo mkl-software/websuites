@@ -9,28 +9,27 @@ import com.mkl.websuites.internal.command.impl.check.AbstractCheck;
 import com.mkl.websuites.internal.command.impl.check.neg.NegCheckElementAttributeValueContainsCommand;
 
 
-@CommandDescriptor(name = "~softCheckElementAttrValueContains", argumentTypes = {String.class, String.class, String.class})
-public class NegSoftCheckElementAttributeValueContainsCommand extends
-		NegCheckElementAttributeValueContainsCommand {
+@CommandDescriptor(name = "~softCheckElementAttrValueContains", argumentTypes = {String.class, String.class,
+        String.class})
+public class NegSoftCheckElementAttributeValueContainsCommand extends NegCheckElementAttributeValueContainsCommand {
 
-	public NegSoftCheckElementAttributeValueContainsCommand(
-			Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public NegSoftCheckElementAttributeValueContainsCommand(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public NegSoftCheckElementAttributeValueContainsCommand(String selector,
-			String attributeName, String expectedAttributeValue) {
-		super(selector, attributeName, expectedAttributeValue);
-	}
+    public NegSoftCheckElementAttributeValueContainsCommand(String selector, String attributeName,
+            String expectedAttributeValue) {
+        super(selector, attributeName, expectedAttributeValue);
+    }
 
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckElementAttrValueContains() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new NegCheckElementAttrValueContains() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 }

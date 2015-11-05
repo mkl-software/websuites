@@ -12,22 +12,22 @@ import com.mkl.websuites.internal.command.impl.check.neg.NegCheckElementTextCont
 @CommandDescriptor(name = "~softCheckElementTextContains", argumentTypes = {String.class, String.class})
 public class NegSoftCheckElementTextContains extends NegCheckElementTextContainsCommand {
 
-	public NegSoftCheckElementTextContains(Map<String, String> parameterMap) {
-		super(parameterMap);
-	}
+    public NegSoftCheckElementTextContains(Map<String, String> parameterMap) {
+        super(parameterMap);
+    }
 
-	public NegSoftCheckElementTextContains(String selector, String expectedText) {
-		super(selector, expectedText);
-	}
+    public NegSoftCheckElementTextContains(String selector, String expectedText) {
+        super(selector, expectedText);
+    }
 
-	
-	@Override
-	protected AbstractCheck defineCheckLogic() {
-		return new NegCheckElementTextContains() {
-			@Override
-			protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-				return soft(args);
-			}
-		};
-	}
+
+    @Override
+    protected AbstractCheck defineCheckLogic() {
+        return new NegCheckElementTextContains() {
+            @Override
+            protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+                return soft(args);
+            }
+        };
+    }
 }

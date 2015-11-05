@@ -9,15 +9,15 @@ import com.mkl.websuites.internal.command.impl.check.CheckHeaderContainsCommand;
 @CommandDescriptor(name = "softCheckHeaderContains", argumentTypes = {String.class})
 public class SoftCheckHeaderContainsCommand extends CheckHeaderContainsCommand {
 
-	public SoftCheckHeaderContainsCommand(String expectedHeader) {
-		super(expectedHeader);
-	}
+    public SoftCheckHeaderContainsCommand(String expectedHeader) {
+        super(expectedHeader);
+    }
 
-	
-	
-	@Override
-	protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-		return soft(args);
-	}
+
+
+    @Override
+    protected AbstractAssert<?, ?> buildAssertion(Object... args) {
+        return soft(args);
+    }
 
 }

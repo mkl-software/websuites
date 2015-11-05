@@ -6,22 +6,22 @@ import com.mkl.websuites.internal.command.CommandDescriptor;
 @CommandDescriptor(name = "echo", argumentTypes = String.class)
 public class EchoCommand extends BaseCommand {
 
-	private String message;
-	
-	public EchoCommand(String message) {
-		super();
-		this.message = message;
-	}
+    private String message;
 
-	@Override
-	protected void runStandardCommand() {
+    public EchoCommand(String message) {
+        super();
+        this.message = message;
+    }
 
-		System.out.println(populateStringWithProperties(message));
-	}
-	
-	@Override
-	public String toString() {
-		return "echo";
-	}
+    @Override
+    protected void runStandardCommand() {
+
+        System.out.println(populateStringWithProperties(message));
+    }
+
+    @Override
+    public String toString() {
+        return "echo";
+    }
 
 }
