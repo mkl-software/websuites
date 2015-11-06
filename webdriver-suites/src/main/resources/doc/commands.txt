@@ -126,13 +126,12 @@ basicAuthentication		username	password 	- will type credentials using Java Robot
 
 +goto
 +back
-forward
-refresh
++forward
++refresh
 switchToWindow			switch to window with name
 switchToFrame			switch to frame with name
 closeAlert
 acceptConfirm
 dismissConfirm
 readPopup				reads alert, confirm or prompt content
-closeCurrent
-quit
++closeCurrent
