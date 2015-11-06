@@ -1,0 +1,10 @@
+
+goto	http://localhost:90/integration/commands/check/allChecks.html
+
+clickText	open local page
+checkTitle	Goto test local web
+
+press		ALT-LEFT
+
+checkTitle	Test title full text
+

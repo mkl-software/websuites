@@ -1,7 +1,0 @@
-
-goto	http://localhost:90/integration/commands/check/allChecks.html
-
-
-clickText	bolded
-
-checkElementText	#verificationText	bolded text

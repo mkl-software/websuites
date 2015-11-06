@@ -102,19 +102,16 @@ setScriptTimeout
 
 +click
 // all clicks from "check..." commands with "c" marker
-doubleClick				(like clicks above)
-ctrlClick		maybe just add "modifier" param
-shiftClick
-altClick
-ctrlShiftClick
-ctrlAltClick
-shiftAltClick
++doubleClick				(like clicks above)
++contextClick
+ctrl(shift,alt)Click		add "modifiers" param
 
+mouseOver
 dragAndDrop				from=source, to=target
 
 +type
 clearInput
-press					press given key or key combination separated by "+" (use literals for characters)
++press					press given key or key combination separated by "+" (use literals for characters)
 keyDown
 keyUp
 
