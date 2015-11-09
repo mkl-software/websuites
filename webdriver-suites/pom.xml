@@ -227,6 +227,21 @@
 					</licenseMapping>
 				</configuration>
 			</plugin>
+			<plugin>
+				<!-- prefix is "license", goals: "check" or "format" -->
+				<groupId>com.mycila</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>2.11</version>
+				<configuration>
+					<header>src/main/resources/license/header.txt</header>
+					<excludes>
+						<exclude>LICENSE</exclude>
+						<exclude>NOTICE</exclude>
+						<exclude>src/main/resources/**</exclude>
+						<exclude>src/test/resources/**</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
