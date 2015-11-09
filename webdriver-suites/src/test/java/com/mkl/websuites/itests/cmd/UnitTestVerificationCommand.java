@@ -1,7 +1,7 @@
 package com.mkl.websuites.itests.cmd;
 
-import com.mkl.websuites.internal.command.BaseCommand;
-import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.command.BaseCommand;
+import com.mkl.websuites.command.CommandDescriptor;
 import com.mkl.websuites.itests.web.core.CommandInvocationVerifier;
 
 

@@ -10,8 +10,8 @@ import mockit.Deencapsulation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.mkl.websuites.command.Command;
 import com.mkl.websuites.internal.WebSuitesException;
-import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.CommandPostProcessor;
 import com.mkl.websuites.internal.command.impl.flow.EndControlFlowHandler;
 import com.mkl.websuites.internal.command.impl.flow.RepeatControlFlowHandler;

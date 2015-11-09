@@ -19,7 +19,7 @@ public class TestIEPort80 extends WebSuiteStandaloneTest {
 
 
     @Override
-    protected void runLocally() {
+    protected void runWebTest() {
 
         // test default behaior - if no http:// prefix then IE doesn regoznize the URL
         goTo("google.com:80");
@@ -33,8 +33,8 @@ public class TestIEPort80 extends WebSuiteStandaloneTest {
         }
 
         // test if basePath propagation is fixing this automatically:
-        System.out.println(basePath);
-        goTo(basePath);
+        System.out.println(site);
+        goTo(site);
         Assert.assertTrue(browser.getTitle().contains("Google"));
     }
 

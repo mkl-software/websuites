@@ -20,7 +20,7 @@ public class RepeatTimesCommandTest extends WebSuitesResultCheck {
     public static class RepeatCheckTest extends WebSuiteStandaloneTest {
 
         @Override
-        protected void runLocally() {
+        protected void runWebTest() {
 
             String spanText = browser.findElement(By.id("calculationResult")).getText();
             assertEquals("5", spanText);
@@ -39,7 +39,7 @@ public class RepeatTimesCommandTest extends WebSuitesResultCheck {
 
     @WebSuites(browsers = "${env.testBrowser}",
             scenarios = @ScenarioFile("src/test/resources/integration/command/repeatTimes.scn"),
-            classes = @TestClass(RepeatCheckTest.class), browserResusableConfiguration = BrowsersConfig.class)
+            tests = @TestClass(RepeatCheckTest.class), browserResusableConfiguration = BrowsersConfig.class)
     public static class LocalRunner extends WebSuitesRunner {
     }
 

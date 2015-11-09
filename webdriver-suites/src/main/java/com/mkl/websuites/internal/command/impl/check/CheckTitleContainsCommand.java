@@ -2,7 +2,7 @@ package com.mkl.websuites.internal.command.impl.check;
 
 import org.assertj.core.api.StringAssert;
 
-import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.command.CommandDescriptor;
 
 
 @CommandDescriptor(name = "checkTitleContains", argumentTypes = {String.class})

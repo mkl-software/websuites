@@ -2,7 +2,7 @@ package com.mkl.websuites.internal.command.impl.check.negsoft;
 
 import java.util.Map;
 
-import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.CommandUtils;
 import com.mkl.websuites.internal.command.impl.check.neg.NegCheckCommand;
 

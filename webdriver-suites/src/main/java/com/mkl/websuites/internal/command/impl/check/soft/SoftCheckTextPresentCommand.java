@@ -5,7 +5,7 @@ import java.util.List;
 import org.assertj.core.api.AbstractAssert;
 import org.openqa.selenium.WebElement;
 
-import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.CheckTextPresentCommand;
 
 @CommandDescriptor(name = "softCheckText", argumentTypes = {String.class})

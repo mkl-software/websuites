@@ -1,4 +1,4 @@
-package com.mkl.websuites.internal.command;
+package com.mkl.websuites.command;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,10 +9,18 @@ import org.openqa.selenium.WebDriver;
 import com.mkl.websuites.config.WebSuitesConfig;
 import com.mkl.websuites.internal.CommonUtils;
 import com.mkl.websuites.internal.browser.BrowserController;
+import com.mkl.websuites.internal.command.SourceInfoHolder;
 import com.mkl.websuites.internal.scenario.SourceLine;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
 
+/**
+ * Extend this class to write your own commands. It provides useful logic, such
+ * as source file information for detailed error messages and browser configuration.
+ * 
+ * @author Marcin Klosinski
+ *
+ */
 @Slf4j
 public abstract class BaseCommand implements Command, SourceInfoHolder {
 
@@ -50,6 +58,10 @@ public abstract class BaseCommand implements Command, SourceInfoHolder {
 
 
 
+    /**
+     * Used internally to inject source file information in the command error messages.
+     * @param e
+     */
     protected void augmentErrorMessageWithCommandSourceFileInfo(Throwable e) {
         try {
             String newMessage = e.getMessage() + "\n" + getCommandSourceLine().printSourceInfo();
@@ -61,21 +73,39 @@ public abstract class BaseCommand implements Command, SourceInfoHolder {
 
 
 
+    /**
+     * Implement this method to provide command logic.
+     * <p>Standard command means that the command is instantiated using constructor parameters.</p>
+     */
     protected abstract void runStandardCommand();
 
 
 
+    /**
+     * Use this method to clobber properties in the command source (like <code>${property}</code>).
+     * @param origValue
+     * @return
+     */
     protected String populateStringWithProperties(String origValue) {
 
         return CommonUtils.populateStringWithProperties(origValue);
     }
 
 
+    
+    /**
+     * Used to format detailed messages about where this command come from (scenario file name,
+     * line number etc.)
+     */
     @Override
     public SourceLine getCommandSourceLine() {
         return sourceLine;
     }
 
+    
+    /**
+     * Used internally to inject command source file info.
+     */
     @Override
     public void setCommandSourceLine(SourceLine sourceLine) {
         this.sourceLine = sourceLine;

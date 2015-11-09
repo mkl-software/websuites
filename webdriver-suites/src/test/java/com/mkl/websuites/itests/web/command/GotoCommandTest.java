@@ -20,7 +20,7 @@ public class GotoCommandTest extends WebSuitesResultCheck {
     public static class GotoCheckTest extends WebSuiteStandaloneTest {
 
         @Override
-        protected void runLocally() {
+        protected void runWebTest() {
             assertEquals("Goto test local web", browser.getTitle());
 
         }
@@ -34,7 +34,7 @@ public class GotoCommandTest extends WebSuitesResultCheck {
 
     @WebSuites(browsers = "${env.testBrowser}",
             scenarios = @ScenarioFile("src/test/resources/integration/command/gotoLocalAddress.scn"),
-            classes = @TestClass(GotoCheckTest.class), browserResusableConfiguration = BrowsersConfig.class)
+            tests = @TestClass(GotoCheckTest.class), browserResusableConfiguration = BrowsersConfig.class)
     public static class LocalRunner extends WebSuitesRunner {
     }
 

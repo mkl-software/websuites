@@ -2,9 +2,9 @@ package com.mkl.websuites.internal.command.impl.wait;
 
 import java.util.concurrent.TimeUnit;
 
+import com.mkl.websuites.command.BaseCommand;
+import com.mkl.websuites.command.CommandDescriptor;
 import com.mkl.websuites.config.WebSuitesConfig;
-import com.mkl.websuites.internal.command.BaseCommand;
-import com.mkl.websuites.internal.command.CommandDescriptor;
 
 
 @CommandDescriptor(name = "restoreImplicitWaitTimeout")

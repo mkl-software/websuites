@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
-import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.command.CommandDescriptor;
 
 
 @CommandDescriptor(name = "checkAttributeName", argumentTypes = {String.class})

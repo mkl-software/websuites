@@ -21,7 +21,7 @@ public class TypeCommandTest extends WebSuitesResultCheck {
     public static class TypeTextCheckTest extends WebSuiteStandaloneTest {
 
         @Override
-        protected void runLocally() {
+        protected void runWebTest() {
 
             Alert alert = browser.switchTo().alert();
             String text = alert.getText();
@@ -38,7 +38,7 @@ public class TypeCommandTest extends WebSuitesResultCheck {
 
     @WebSuites(browsers = "${env.testBrowser}",
             scenarios = @ScenarioFile("src/test/resources/integration/command/typeTextTest1.scn"),
-            classes = @TestClass(TypeTextCheckTest.class), browserResusableConfiguration = BrowsersConfig.class)
+            tests = @TestClass(TypeTextCheckTest.class), browserResusableConfiguration = BrowsersConfig.class)
     public static class LocalRunner extends WebSuitesRunner {
     }
 

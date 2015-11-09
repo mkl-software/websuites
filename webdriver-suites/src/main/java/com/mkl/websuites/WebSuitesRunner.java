@@ -8,6 +8,7 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 import lombok.extern.slf4j.Slf4j;
 
+import org.assertj.core.util.VisibleForTesting;
 import org.junit.runner.RunWith;
 
 import com.mkl.websuites.config.Folder;
@@ -29,6 +30,19 @@ import com.mkl.websuites.internal.tests.TearDownAllTest;
 
 
 
+/**
+ * Extend this class to create a WebSuites runner and run your sophisticated test suites against multiple browsers.
+ * <p>To define test suites as well as configuration for tests, use {@link com.mkl.websuites.WebSuites} annotation.</p>
+ * <p>To specify custom behavior for test preparation and tear-down, you can override following methods:</p>
+ * <ul>
+ *      <li><code>setUp()</code></li>
+ *      <li><code>tearDown()</code></li>
+ *      <li><code>setUpBeforeBrowser(String browserId)</code></li>
+ *      <li><code>tearDownAfterBrowser(String browserId)</code></li>
+ * </ul>
+ * @author Marcin Klosinski
+ *
+ */
 @Slf4j
 @RunWith(InternalWebSuitesRunner.class)
 public class WebSuitesRunner {
@@ -41,6 +55,7 @@ public class WebSuitesRunner {
 
     private static String currentlyDefiningBrowser;
 
+    @VisibleForTesting
     public WebSuitesRunner() {}
 
     public WebSuitesRunner(Class<? extends WebSuitesRunner> runningClass) {
@@ -60,7 +75,7 @@ public class WebSuitesRunner {
 
 
     /**
-     * Runs before all tests are started.
+     * Runs before all tests are started. Can be used to prepare a global test environment.
      */
     protected void setUp() {
         log.debug("set up all tests (default impl");
@@ -75,6 +90,7 @@ public class WebSuitesRunner {
 
     /**
      * Runs before all tests for given browser are started.
+     * @param currentBrowser       browser ID that is about to be opened
      */
     protected void setUpBeforeBrowser(String currentBrowser) {
         log.debug("set up before browser '{}' (default impl)", currentBrowser);
@@ -82,22 +98,36 @@ public class WebSuitesRunner {
 
     /**
      * Runs after all tests for given browser are finished.
+     * @param currentBrowser       browser ID that is about to be opened
      */
     protected void tearDownAfterBrowser(String currentBrowser) {
         log.debug("tear down after browser '{}' (default impl)", currentBrowser);
     }
 
 
+    /**
+     * Override to provide custom name for master suite.
+     * @return
+     */
+    protected String getMasterSuiteName() {
+        return "Multi-browser test suite";
+    }
 
-    public TestSuite defineMasterSuite() throws InstantiationException, IllegalAccessException, NoSuchMethodException,
-            SecurityException, IllegalArgumentException, InvocationTargetException {
+    
+    
+    /**
+     * Used internally by the custom JUnit runner to define master test suite.
+     * @return
+     */
+    public final TestSuite defineMasterSuite() throws InstantiationException, IllegalAccessException,
+        NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
 
         log.debug("master suite method");
 
         WebSuites config = WebSuitesConfig.get();
 
         TestSuite suite = new TestSuite();
-        suite.setName("Multi-browser test suite");
+        suite.setName(getMasterSuiteName());
 
 
         ServiceFactory.get(BrowserController.class).initializeBrowsersEnvironment(config);
@@ -137,6 +167,9 @@ public class WebSuitesRunner {
         return suite;
     }
 
+    
+    
+    
     private String[] clobberPropertiesInBrowserIds(WebSuites config) {
         String[] origBrowserIds = config.browsers();
         String[] processedIds = new String[origBrowserIds.length];
@@ -144,7 +177,8 @@ public class WebSuitesRunner {
             String id = origBrowserIds[i];
             id = CommonUtils.populateStringWithProperties(id);
             if (id.startsWith("$")) {
-                id = "chrome"; // TODO: default, TEMP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                id = "chrome"; // TODO: default, TEMP !!!!, ucomment line below before release
+//                throw new WebSuitesException("Please specify property for browser: " + id);
             }
             processedIds[i] = id;
         }
@@ -155,8 +189,7 @@ public class WebSuitesRunner {
 
     private List<Test> buildAllTests(WebSuites config) {
 
-        // TODO: with new apprach there's a a big concern - how to
-        // retain the order from test declaration in the annotation???
+        // TODO: implement the order from ordinal= parameters.
 
         List<Test> result = new ArrayList<>();
 
@@ -173,7 +206,7 @@ public class WebSuitesRunner {
             result.add(new ScenarioFolderTest(folder.path(), folder.ignoreSubfolders(), folder.sortingStrategy()));
         }
 
-        TestClass[] testClasses = config.classes();
+        TestClass[] testClasses = config.tests();
         for (int i = 0; i < testClasses.length; i++) {
             TestClass testDefinition = testClasses[i];
             Class<? extends Test> test = testDefinition.value();

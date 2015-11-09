@@ -7,8 +7,8 @@ import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 
 import com.mkl.websuites.WebSuitesUserProperties;
-import com.mkl.websuites.internal.command.CommandDescriptor;
-import com.mkl.websuites.internal.command.impl.ParameterizedCommand;
+import com.mkl.websuites.command.CommandDescriptor;
+import com.mkl.websuites.command.ParameterizedCommand;
 import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 

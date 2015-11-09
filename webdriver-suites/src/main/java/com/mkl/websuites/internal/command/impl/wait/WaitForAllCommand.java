@@ -9,9 +9,9 @@ import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 
+import com.mkl.websuites.command.Command;
+import com.mkl.websuites.command.CommandDescriptor;
 import com.mkl.websuites.config.WebSuitesConfig;
-import com.mkl.websuites.internal.command.Command;
-import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.flow.ControlFlowHandler;
 import com.mkl.websuites.internal.command.impl.validator.IntegerNumberParamValidator;
 import com.mkl.websuites.internal.command.impl.validator.ParameterValueValidator;

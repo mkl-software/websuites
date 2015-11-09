@@ -2,7 +2,7 @@ package com.mkl.websuites.internal.command.impl.check.neg;
 
 import org.assertj.core.api.StringAssert;
 
-import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.CheckLinkTextCommand;
 
 

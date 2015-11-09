@@ -1,7 +1,7 @@
 package com.mkl.websuites.internal.command.impl.misc;
 
-import com.mkl.websuites.internal.command.BaseCommand;
-import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.command.BaseCommand;
+import com.mkl.websuites.command.CommandDescriptor;
 
 @CommandDescriptor(name = "echo", argumentTypes = String.class)
 public class EchoCommand extends BaseCommand {

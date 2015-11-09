@@ -19,9 +19,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.mkl.websuites.command.Command;
 import com.mkl.websuites.config.WebSuitesConfig;
 import com.mkl.websuites.internal.CommonUtils;
-import com.mkl.websuites.internal.command.Command;
 import com.mkl.websuites.internal.command.impl.misc.SetPropCommand;
 import com.mkl.websuites.internal.services.ServiceFactory;
 

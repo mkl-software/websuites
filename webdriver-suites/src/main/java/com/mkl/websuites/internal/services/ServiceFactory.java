@@ -7,9 +7,9 @@ import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 
+import com.mkl.websuites.config.Service;
 import com.mkl.websuites.config.WebSuitesConfig;
 import com.mkl.websuites.internal.WebSuitesException;
-import com.mkl.websuites.internal.services.ServiceDefinition.Service;
 
 
 

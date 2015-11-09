@@ -7,7 +7,7 @@ import org.assertj.core.api.StringAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.command.CommandDescriptor;
 
 
 @CommandDescriptor(name = "checkElementSiblingCount", argumentTypes = {String.class, Integer.class})

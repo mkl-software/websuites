@@ -2,8 +2,8 @@ package com.mkl.websuites.internal.command.impl.check.soft;
 
 import org.assertj.core.api.SoftAssertions;
 
-import com.mkl.websuites.internal.command.BaseCommand;
-import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.command.BaseCommand;
+import com.mkl.websuites.command.CommandDescriptor;
 
 
 @CommandDescriptor(name = "checkAllSoft")

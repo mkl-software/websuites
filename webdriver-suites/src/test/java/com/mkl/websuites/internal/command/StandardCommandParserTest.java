@@ -14,7 +14,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.mkl.websuites.internal.command.Command;
+import com.mkl.websuites.command.Command;
 import com.mkl.websuites.internal.command.CommandParser;
 import com.mkl.websuites.internal.scenario.SourceLine;
 import com.mkl.websuites.internal.services.ServiceFactory;

@@ -4,9 +4,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.mkl.websuites.MultiBrowserTestCaseTest;
 import com.mkl.websuites.WebSuitesRunnerTest;
 import com.mkl.websuites.WebSuitesUserPropertiesTest;
-import com.mkl.websuites.internal.command.OperationOnWebElementTest;
+import com.mkl.websuites.command.OperationOnWebElementTest;
 import com.mkl.websuites.internal.command.StandardCommandBuilderTest;
 import com.mkl.websuites.internal.command.StandardCommandParserTest;
 import com.mkl.websuites.internal.command.StandardCommandPostProcessorTest;
@@ -20,7 +21,6 @@ import com.mkl.websuites.internal.command.impl.validator.CommandSchemaValidatorT
 import com.mkl.websuites.internal.command.impl.validator.DataProviderParamValidatorTest;
 import com.mkl.websuites.internal.scenario.StandardScenarioFilePreprocessorTest;
 import com.mkl.websuites.internal.services.ServiceFactoryTest;
-import com.mkl.websuites.internal.tests.MultiBrowserTestCaseTest;
 import com.mkl.websuites.internal.tests.ScenarioFolderTestTest;
 
 

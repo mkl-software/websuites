@@ -5,7 +5,7 @@ import java.util.Map;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.command.CommandDescriptor;
 
 
 @CommandDescriptor(name = "contextClick", argumentTypes = String.class)

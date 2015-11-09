@@ -18,6 +18,7 @@ import mockit.Deencapsulation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.mkl.websuites.command.Command;
 import com.mkl.websuites.internal.command.impl.flow.RepeatControlFlowHandler;
 import com.mkl.websuites.itests.cmd.SampleCommand;
 

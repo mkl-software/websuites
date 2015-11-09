@@ -2,8 +2,8 @@ package com.mkl.websuites.itests.cmd;
 
 import lombok.extern.slf4j.Slf4j;
 
-import com.mkl.websuites.internal.command.Command;
-import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.command.Command;
+import com.mkl.websuites.command.CommandDescriptor;
 
 
 

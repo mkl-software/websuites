@@ -7,8 +7,8 @@ import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 
-import com.mkl.websuites.internal.command.Command;
-import com.mkl.websuites.internal.command.impl.ParameterizedCommand;
+import com.mkl.websuites.command.Command;
+import com.mkl.websuites.command.ParameterizedCommand;
 
 @Slf4j
 public abstract class ControlFlowHandler extends ParameterizedCommand {

@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.openqa.selenium.support.ui.Select;
 
-import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.command.CommandDescriptor;
 
 
 @CommandDescriptor(name = "deselectByText", argumentTypes = {String.class, String.class})

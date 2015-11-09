@@ -1,5 +1,6 @@
 package com.mkl.websuites.internal.services;
 
+import com.mkl.websuites.config.Service;
 import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.browser.StandardBrowserController;
 import com.mkl.websuites.internal.command.CommandBuilder;
@@ -14,7 +15,6 @@ import com.mkl.websuites.internal.scenario.ScenarioFilePreprocessor;
 import com.mkl.websuites.internal.scenario.ScenarioFileProcessor;
 import com.mkl.websuites.internal.scenario.StandardScenarioFilePreprocessor;
 import com.mkl.websuites.internal.scenario.StandardScenarioFileProcessor;
-import com.mkl.websuites.internal.services.ServiceDefinition.Service;
 
 
 

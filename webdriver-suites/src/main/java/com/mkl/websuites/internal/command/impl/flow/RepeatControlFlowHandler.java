@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.mkl.websuites.WebSuitesUserProperties;
+import com.mkl.websuites.command.Command;
+import com.mkl.websuites.command.CommandDescriptor;
 import com.mkl.websuites.internal.WebSuitesException;
-import com.mkl.websuites.internal.command.Command;
-import com.mkl.websuites.internal.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.flow.repeat.InlineDataProvider;
 import com.mkl.websuites.internal.command.impl.flow.repeat.RepeatDataProvider;
 import com.mkl.websuites.internal.command.impl.flow.repeat.RepeatHandler;

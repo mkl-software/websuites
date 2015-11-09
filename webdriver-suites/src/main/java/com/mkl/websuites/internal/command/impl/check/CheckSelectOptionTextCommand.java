@@ -11,8 +11,8 @@ import org.assertj.core.api.ObjectArrayAssert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mkl.websuites.internal.command.CommandDescriptor;
-import com.mkl.websuites.internal.command.OperationOnWebElement;
+import com.mkl.websuites.command.CommandDescriptor;
+import com.mkl.websuites.command.OperationOnWebElement;
 import com.mkl.websuites.internal.command.impl.CommandUtils;
 import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 

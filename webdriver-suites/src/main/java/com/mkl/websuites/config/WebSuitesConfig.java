@@ -7,7 +7,7 @@ import com.mkl.websuites.WebSuitesRunner;
 
 
 /**
- * Main configuration storage. Using this class you can access system configuration
+ * Global configuration access. Use <code>WebSuitesConfig.get()</code> to access system configuration.
  * 
  * @author Marcin Klosinski
  *
@@ -23,6 +23,10 @@ public class WebSuitesConfig {
 
     }
 
+    /**
+     * Retrieves global configuration.
+     * @return  {@link com.mkl.websuites.WebSuites} root configuration.
+     */
     public static WebSuites get() {
         return config;
     }

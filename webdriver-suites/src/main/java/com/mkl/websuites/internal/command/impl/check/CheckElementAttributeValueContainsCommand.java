@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.assertj.core.api.StringAssert;
 
-import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.command.CommandDescriptor;
 
 
 @CommandDescriptor(name = "checkElementAttrValueContains", argumentTypes = {String.class, String.class, String.class})

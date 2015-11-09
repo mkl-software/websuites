@@ -1,5 +1,7 @@
 package com.mkl.websuites.internal.tests;
 
+import com.mkl.websuites.MultiBrowserTestCase;
+
 
 
 /**

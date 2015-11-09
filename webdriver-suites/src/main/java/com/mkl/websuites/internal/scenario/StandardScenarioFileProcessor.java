@@ -7,7 +7,7 @@ import java.util.List;
 import junit.framework.Test;
 import junit.framework.TestCase;
 
-import com.mkl.websuites.internal.command.Command;
+import com.mkl.websuites.command.Command;
 import com.mkl.websuites.internal.command.CommandParser;
 import com.mkl.websuites.internal.command.CommandPostProcessor;
 import com.mkl.websuites.internal.command.CommandTestConverter;

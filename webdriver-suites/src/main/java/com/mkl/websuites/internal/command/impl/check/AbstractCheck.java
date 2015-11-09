@@ -2,7 +2,7 @@ package com.mkl.websuites.internal.command.impl.check;
 
 import org.assertj.core.api.AbstractAssert;
 
-import com.mkl.websuites.internal.command.BaseCommand;
+import com.mkl.websuites.command.BaseCommand;
 
 public abstract class AbstractCheck extends BaseCommand {
 

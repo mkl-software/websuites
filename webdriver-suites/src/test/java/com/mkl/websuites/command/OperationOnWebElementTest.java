@@ -1,4 +1,4 @@
-package com.mkl.websuites.internal.command;
+package com.mkl.websuites.command;
 
 
 import java.util.HashMap;
@@ -16,8 +16,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mkl.websuites.internal.command.OperationOnWebElement;
-import com.mkl.websuites.internal.command.impl.ParameterizedCommand;
+
+import com.mkl.websuites.command.ParameterizedCommand;
 
 
 public class OperationOnWebElementTest {

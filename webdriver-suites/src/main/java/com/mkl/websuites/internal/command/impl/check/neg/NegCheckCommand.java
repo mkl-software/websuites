@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.junit.Assert;
 
-import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.command.CommandDescriptor;
 import com.mkl.websuites.internal.command.impl.check.CheckCommand;
 
 

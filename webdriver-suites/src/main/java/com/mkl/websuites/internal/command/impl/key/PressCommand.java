@@ -5,9 +5,9 @@ import java.util.Arrays;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
+import com.mkl.websuites.command.BaseCommand;
+import com.mkl.websuites.command.CommandDescriptor;
 import com.mkl.websuites.internal.WebSuitesException;
-import com.mkl.websuites.internal.command.BaseCommand;
-import com.mkl.websuites.internal.command.CommandDescriptor;
 
 
 @CommandDescriptor(name = "press", argumentTypes = {String.class})

@@ -13,6 +13,7 @@ import mockit.Deencapsulation;
 
 import org.junit.Test;
 
+import com.mkl.websuites.command.Command;
 import com.mkl.websuites.internal.WebSuitesException;
 import com.mkl.websuites.internal.scenario.SourceLine;
 import com.mkl.websuites.itests.cmd.MultiArgCommand;

@@ -1,5 +1,6 @@
 package com.mkl.websuites.internal.command;
 
+import com.mkl.websuites.command.Command;
 import com.mkl.websuites.internal.scenario.SourceLine;
 
 public interface CommandBuilder {

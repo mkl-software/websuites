@@ -26,9 +26,9 @@ import org.junit.runner.RunWith;
 import pl.wkr.fluentrule.api.FluentExpectedException;
 
 import com.mkl.websuites.WebSuitesUserProperties;
+import com.mkl.websuites.command.Command;
+import com.mkl.websuites.command.ParameterizedCommand;
 import com.mkl.websuites.internal.WebSuitesException;
-import com.mkl.websuites.internal.command.Command;
-import com.mkl.websuites.internal.command.impl.ParameterizedCommand;
 import com.mkl.websuites.internal.command.impl.flow.repeat.RepeatHandler;
 import com.mkl.websuites.internal.command.impl.validator.SampleDataProvider;
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.mkl.websuites.command.Command;
 import com.mkl.websuites.internal.scenario.SourceLine;
 import com.mkl.websuites.internal.services.ServiceFactory;
 

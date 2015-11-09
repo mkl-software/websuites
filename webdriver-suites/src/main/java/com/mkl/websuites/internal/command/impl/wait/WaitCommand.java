@@ -4,8 +4,8 @@ import org.junit.Assert;
 
 import lombok.extern.slf4j.Slf4j;
 
-import com.mkl.websuites.internal.command.BaseCommand;
-import com.mkl.websuites.internal.command.CommandDescriptor;
+import com.mkl.websuites.command.BaseCommand;
+import com.mkl.websuites.command.CommandDescriptor;
 
 
 @Slf4j

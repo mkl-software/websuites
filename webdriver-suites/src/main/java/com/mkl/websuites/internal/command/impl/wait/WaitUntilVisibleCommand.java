@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mkl.websuites.internal.command.CommandDescriptor;
-import com.mkl.websuites.internal.command.OperationOnWebElement;
+import com.mkl.websuites.command.CommandDescriptor;
+import com.mkl.websuites.command.OperationOnWebElement;
 
 
 @CommandDescriptor(name = "waitUntilVisible", argumentTypes = {String.class})
