@@ -37,4 +37,18 @@ public class CommonUtils {
         }
         return populated;
     }
+    
+    
+    public static String normalizeUrlPath(String protocol, String host, int portNumber, String basePath) {
+
+//      host = host.matches("[a-z]+:///?.*") ? host : "http://" + host;
+      host = protocol + "://" + host;
+      String port = portNumber == 80 ? "" : ":" + portNumber;
+      String path = basePath;
+      path = path.startsWith("/") || path.isEmpty() ? path : "/" + path;
+      String url = host + port + path;
+      // normalize "/" but after http:// section:
+      url = url.substring(0, 7) + url.substring(7).replaceAll("//", "/");
+      return url;
+  }
 }

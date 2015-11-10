@@ -23,7 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import com.mkl.websuites.config.SiteConfig;
 import com.mkl.websuites.config.WebSuitesConfig;
+import com.mkl.websuites.internal.CommonUtils;
 import com.mkl.websuites.internal.WebSuitesException;
 
 
@@ -75,6 +77,18 @@ public class WebSuitesUserProperties {
     private void prepareProperties() {
         populateSystemProperties();
         populateUserFileProperties();
+        populateSiteInfo();
+    }
+
+
+    private void populateSiteInfo() {
+        SiteConfig siteConfig = WebSuitesConfig.get().site();
+        setProperty("site.protocol", siteConfig.protocol());
+        setProperty("site.host", siteConfig.host());
+        setProperty("site.port", siteConfig.port() + "");
+        setProperty("site.basePath", siteConfig.basePath());
+        setProperty("site", CommonUtils.normalizeUrlPath(siteConfig.protocol(),
+                siteConfig.host(), siteConfig.port(), siteConfig.basePath()));
     }
 
 

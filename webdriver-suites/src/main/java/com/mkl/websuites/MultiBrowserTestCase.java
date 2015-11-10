@@ -23,6 +23,7 @@ import org.openqa.selenium.WebDriver;
 import com.mkl.websuites.config.BrowserConifg;
 import com.mkl.websuites.config.SiteConfig;
 import com.mkl.websuites.config.WebSuitesConfig;
+import com.mkl.websuites.internal.CommonUtils;
 import com.mkl.websuites.internal.browser.BrowserController;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
@@ -70,25 +71,14 @@ public abstract class MultiBrowserTestCase extends TestCase {
     public MultiBrowserTestCase() {
         super();
         SiteConfig siteConfig = configuration.site();
-        this.site =
-                normalizeUrlPath(siteConfig.protocol(), siteConfig.host(), siteConfig.port(), siteConfig
-                        .basePath());
+        
+        this.site = CommonUtils.normalizeUrlPath(
+                siteConfig.protocol(), siteConfig.host(), siteConfig.port(), siteConfig.basePath());
+        
         this.currentBrowserId = browserController.getLocalBrowserNameForTestInit();
     }
 
 
-    private String normalizeUrlPath(String protocol, String host, int portNumber, String basePath) {
-
-//        host = host.matches("[a-z]+:///?.*") ? host : "http://" + host;
-        host = protocol + "://" + host;
-        String port = portNumber == 80 ? "" : ":" + portNumber;
-        String path = basePath;
-        path = path.startsWith("/") || path.isEmpty() ? path : "/" + path;
-        String url = host + port + path;
-        // normalize "/" but after http:// section:
-        url = url.substring(0, 7) + url.substring(7).replaceAll("//", "/");
-        return url;
-    }
 
 
     @Override

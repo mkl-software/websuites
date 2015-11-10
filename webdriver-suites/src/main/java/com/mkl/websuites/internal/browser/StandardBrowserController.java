@@ -31,6 +31,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.WebSuitesUserProperties;
 import com.mkl.websuites.config.BrowserConifg;
 import com.mkl.websuites.config.BrowsersDefinition;
 import com.mkl.websuites.internal.WebSuitesException;
@@ -186,6 +187,8 @@ public class StandardBrowserController implements BrowserController {
 
         String currentBrowser = currentBrowser();
 
+        WebSuitesUserProperties.get().setProperty("currentBrowser", currentBrowser);
+        
         if (!driverClassMap.containsKey(currentBrowser)) {
 
             log.error("no browser configured for ID: " + currentBrowser);

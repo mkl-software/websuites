@@ -16,7 +16,7 @@
 package com.mkl.websuites;
 
 import static junitparams.JUnitParamsRunner.$;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -39,6 +39,7 @@ import org.junit.runner.RunWith;
 import pl.wkr.fluentrule.api.FluentExpectedException;
 
 import com.mkl.websuites.command.Command;
+import com.mkl.websuites.config.SiteConfig;
 import com.mkl.websuites.config.WebSuitesConfig;
 import com.mkl.websuites.internal.CommonUtils;
 import com.mkl.websuites.internal.WebSuitesException;
@@ -213,9 +214,31 @@ public class WebSuitesUserPropertiesTest {
         expectedException
             .expect(WebSuitesException.class)
             .hasMessageContaining("Cannot load user properties");
-        WebSuitesUserProperties.get();
-        //when
         //then
-        
+        WebSuitesUserProperties.get();
+    }
+    
+    
+    @WebSuites(site = @SiteConfig(
+            host = "myhost.com",
+            port = 7070,
+            protocol = "https",
+            basePath = "/myApp"
+    ))
+    public static class ConfigWithSiteInfo extends WebSuitesRunner {}
+    
+    @Test
+    public void shouldPopulateSiteInfo() {
+        //given
+        reset();
+        WebSuitesConfig.initializeWebsuitesConfig(ConfigWithSiteInfo.class);
+        //when
+        WebSuitesUserProperties sut = WebSuitesUserProperties.get();
+        //then
+        assertThat(sut.getProperty("site.host")).isEqualTo("myhost.com");
+        assertThat(sut.getProperty("site.port")).isEqualTo("7070");
+        assertThat(sut.getProperty("site.protocol")).isEqualTo("https");
+        assertThat(sut.getProperty("site.basePath")).isEqualTo("/myApp");
+        assertThat(sut.getProperty("site")).isEqualTo("https://myhost.com:7070/myApp");
     }
 }

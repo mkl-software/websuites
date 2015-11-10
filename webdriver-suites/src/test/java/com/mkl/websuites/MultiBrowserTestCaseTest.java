@@ -15,11 +15,10 @@
  */
 package com.mkl.websuites;
 
+import static junitparams.JUnitParamsRunner.$;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import static junitparams.JUnitParamsRunner.$;
 import lombok.extern.slf4j.Slf4j;
-import mockit.Deencapsulation;
 import mockit.MockUp;
 
 import org.junit.Assert;
@@ -27,7 +26,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.mkl.websuites.MultiBrowserTestCase;
+import com.mkl.websuites.internal.CommonUtils;
 
 
 
@@ -69,7 +68,7 @@ public class MultiBrowserTestCaseTest {
     @Parameters
     public void testNormalizedPath(String protocol, String host, int port, String path, String expected) {
 
-        String normalized = Deencapsulation.invoke(logic, "normalizeUrlPath", protocol, host, port, path);
+        String normalized = CommonUtils.normalizeUrlPath(protocol, host, port, path);
 
         Assert.assertEquals(expected, normalized);
     }
