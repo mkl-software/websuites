@@ -30,13 +30,18 @@ import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import mockit.Deencapsulation;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import pl.wkr.fluentrule.api.FluentExpectedException;
 
 import com.mkl.websuites.command.Command;
 import com.mkl.websuites.config.WebSuitesConfig;
 import com.mkl.websuites.internal.CommonUtils;
+import com.mkl.websuites.internal.WebSuitesException;
 import com.mkl.websuites.internal.command.impl.misc.SetPropCommand;
 import com.mkl.websuites.internal.services.ServiceFactory;
 
@@ -45,6 +50,10 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 @RunWith(JUnitParamsRunner.class)
 public class WebSuitesUserPropertiesTest {
 
+    
+    @Rule
+    public FluentExpectedException expectedException = FluentExpectedException.none();
+    
 
     @WebSuites
     public static class MockRunner extends WebSuitesRunner {
@@ -55,6 +64,13 @@ public class WebSuitesUserPropertiesTest {
         Deencapsulation.setField(ServiceFactory.class, "isInitialized", false);
         WebSuitesConfig.initializeWebsuitesConfig(MockRunner.class);
         ServiceFactory.init();
+    }
+    
+    
+    @Before
+    public void reset() {
+        Deencapsulation.setField(WebSuitesUserProperties.class, "instance", null);
+        WebSuitesConfig.initializeWebsuitesConfig(MockRunner.class);
     }
 
 
@@ -88,6 +104,7 @@ public class WebSuitesUserPropertiesTest {
         assertEquals(30, props.getNumberProperty("age"));
         assertEquals(true, props.getBooleanProperty("active"));
         assertEquals(false, props.getBooleanProperty("banned"));
+        assertThat(props.getBooleanProperty("non-existing", false)).isFalse();
     }
 
 
@@ -158,5 +175,47 @@ public class WebSuitesUserPropertiesTest {
                         put("another", "value");
                     }
                 }, "missing property value ${prop}"));
+    }
+    
+    
+    
+    
+    @WebSuites(propertiesFileName = "src/test/resources/unit/props/userProps.properties")
+    public static class ConfigWithUserProps extends WebSuitesRunner {}
+    
+    @Test
+    public void shouldPopulateWithUserProperties() {
+        //given
+        reset();
+        WebSuitesConfig.initializeWebsuitesConfig(ConfigWithUserProps.class);
+        WebSuitesUserProperties sut = WebSuitesUserProperties.get();
+        //when
+        String val = sut.getProperty("browser");
+        boolean bool = sut.getBooleanProperty("devEnv", false);
+        int num = sut.getNumberProperty("numericProp");
+        //then
+        assertThat(val).isEqualTo("FF");
+        assertThat(num).isEqualTo(7);
+        assertThat(bool).isTrue();
+    }
+    
+    
+    @WebSuites(propertiesFileName = "src/test/resources/unit/props/missing.properties")
+    public static class ConfigWithMissingUserProps extends WebSuitesRunner {}
+    
+    
+    
+    @Test
+    public void shouldThrowErrorOnInvalidUserProperties() {
+        //given
+        reset();
+        WebSuitesConfig.initializeWebsuitesConfig(ConfigWithMissingUserProps.class);
+        expectedException
+            .expect(WebSuitesException.class)
+            .hasMessageContaining("Cannot load user properties");
+        WebSuitesUserProperties.get();
+        //when
+        //then
+        
     }
 }

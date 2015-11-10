@@ -15,12 +15,15 @@
  */
 package com.mkl.websuites;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import com.mkl.websuites.config.WebSuitesConfig;
 import com.mkl.websuites.internal.WebSuitesException;
 
 
@@ -65,7 +68,30 @@ public class WebSuitesUserProperties {
 
 
     private WebSuitesUserProperties() {
-        // populate system properties:
+        prepareProperties();
+    }
+
+
+    private void prepareProperties() {
+        populateSystemProperties();
+        populateUserFileProperties();
+    }
+
+
+    private void populateUserFileProperties() {
+        String file = WebSuitesConfig.get().propertiesFileName();
+        if (!file.isEmpty()) {
+            try {
+                load(new FileInputStream(file));
+            } catch (FileNotFoundException e) {
+                throw new WebSuitesException("Cannot load user properties from specified file name "
+                        + "propertiesFileName=" + file , e);
+            }
+        }
+    }
+
+
+    private void populateSystemProperties() {
         Properties properties = System.getProperties();
         for (Object key : properties.keySet()) {
             globalProperties.put("env." + key, properties.getProperty(key.toString()));
@@ -209,16 +235,19 @@ public class WebSuitesUserProperties {
 
         String value = getProperty(name);
 
-        boolean boolValue;
-        try {
-            boolValue = Boolean.valueOf(value);
-        } catch (NumberFormatException e) {
-
-            String msg = "Error while converting numeric value for property: \"" + name + "\" with value: " + value;
-
-            throw new WebSuitesException(msg, e);
+        if (value == null) {
+            throw new WebSuitesException("Null value for boolean property '" + name + "'");
         }
-        return boolValue;
+        
+        if (value.equalsIgnoreCase("true")) {
+            return true;
+        }
+        
+        if (value.equalsIgnoreCase("false")) {
+            return false;
+        }
+        
+        throw new WebSuitesException("Invalid boolean value for property '" + name + "'");
     }
 
 
@@ -234,7 +263,7 @@ public class WebSuitesUserProperties {
      */
     public boolean getBooleanProperty(String name, boolean defaultValue) {
 
-        return getBooleanProperty(getProperty(name, defaultValue + ""));
+        return getProperty(name) != null ? getBooleanProperty(name) : defaultValue;
     }
 
 
