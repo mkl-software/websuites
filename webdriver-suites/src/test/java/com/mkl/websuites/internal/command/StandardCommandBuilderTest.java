@@ -15,6 +15,7 @@
  */
 package com.mkl.websuites.internal.command;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -26,14 +27,20 @@ import java.util.Map;
 
 import mockit.Deencapsulation;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.command.Command;
+import com.mkl.websuites.config.Extension;
+import com.mkl.websuites.config.WebSuitesConfig;
 import com.mkl.websuites.internal.WebSuitesException;
 import com.mkl.websuites.internal.scenario.SourceLine;
 import com.mkl.websuites.itests.cmd.MultiArgCommand;
 import com.mkl.websuites.itests.cmd.NoArgCommand;
 import com.mkl.websuites.itests.cmd.SampleCommand;
+import com.mkl.websuites.itests.custom.CustomCommandInClasspath;
 
 
 
@@ -41,35 +48,33 @@ import com.mkl.websuites.itests.cmd.SampleCommand;
 public class StandardCommandBuilderTest {
 
 
-    private StandardCommandBuilder sut;
+    private StandardCommandBuilder sut = new StandardCommandBuilder();
 
 
 
     private List<Object> convertArguments(String[] args, List types) {
-        CommandBuilder logic = getLogic();
-        List<Object> values = Deencapsulation.invoke(logic, "convertArgumentsToProperTypes", args, types);
+        List<Object> values = Deencapsulation.invoke(sut, "convertArgumentsToProperTypes", args, types);
         return values;
     }
 
 
-
-    private CommandBuilder getLogic() {
-        // CommandBuilder logic = ServiceFactory.get(CommandBuilder.class);
-        // Deencapsulation.setField(StandardCommandBuilder.class, "customScanPathPackages",
-        // new String[] {});
-        sut = new StandardCommandBuilder();
-        return sut;
+    @WebSuites
+    public static class DefaultConfig extends WebSuitesRunner {}
+    
+    
+    
+    @BeforeClass
+    public static void initWebSuitesConfig() {
+        WebSuitesConfig.initializeWebsuitesConfig(DefaultConfig.class);
     }
-
 
 
     @Test
     public void testSampleCommandArgTypes() {
 
-        CommandBuilder logic = getLogic();
 
-        Deencapsulation.invoke(logic, "scanClasspathForCommands");
-        Map commandArgTypes = Deencapsulation.getField(logic, "commandTypesMap");
+        Deencapsulation.invoke(sut, "scanClasspathForCommands");
+        Map commandArgTypes = Deencapsulation.getField(sut, "commandTypesMap");
 
         assertTrue(commandArgTypes.size() > 0);
 
@@ -148,9 +153,7 @@ public class StandardCommandBuilderTest {
     @Test
     public void testSimpleCommand() {
 
-        CommandBuilder logic = getLogic();
-
-        Command command = logic.instantiateCommand("sample", new String[] {"command argument"}, source());
+        Command command = sut.instantiateCommand("sample", new String[] {"command argument"}, source());
 
         assertNotNull(command);
 
@@ -164,9 +167,7 @@ public class StandardCommandBuilderTest {
     @Test
     public void testNoArgCommand() {
 
-        CommandBuilder logic = getLogic();
-
-        Command command = logic.instantiateCommand("noArg", new String[] {}, source());
+        Command command = sut.instantiateCommand("noArg", new String[] {}, source());
 
         assertNotNull(command);
 
@@ -184,10 +185,8 @@ public class StandardCommandBuilderTest {
     @Test
     public void testMultiArgCommand() {
 
-        CommandBuilder logic = getLogic();
-
         Command command =
-                logic.instantiateCommand("multiArg", new String[] {"string value", "5687", "true", "23"}, source());
+                sut.instantiateCommand("multiArg", new String[] {"string value", "5687", "true", "23"}, source());
 
         assertNotNull(command);
 
@@ -203,8 +202,7 @@ public class StandardCommandBuilderTest {
 
     @Test(expected = WebSuitesException.class)
     public void testArgumentErrorWrongArgumentCount() {
-        CommandBuilder logic = getLogic();
-        logic.instantiateCommand("sample simple value", // without tabs
+        sut.instantiateCommand("sample simple value", // without tabs
                 new String[] {}, source());
         fail("command should not be craeted");
     }
@@ -213,8 +211,7 @@ public class StandardCommandBuilderTest {
 
     @Test(expected = WebSuitesException.class)
     public void testArgumentErrorToManyArguments() {
-        CommandBuilder logic = getLogic();
-        logic.instantiateCommand("sample", new String[] {"param", "another not expected"}, source());
+        sut.instantiateCommand("sample", new String[] {"param", "another not expected"}, source());
         fail("command should not be craeted");
     }
 
@@ -222,9 +219,8 @@ public class StandardCommandBuilderTest {
 
     @Test
     public void testParameterizedCommandMapParsing1() {
-        CommandBuilder logic = getLogic();
         String[] valueLine = new String[] {"param=value", "param2=value2", "param3=value3"};
-        List result = convertParams(logic, valueLine);
+        List result = convertParams(sut, valueLine);
         assertNotNull(result);
         assertEquals(1, result.size());
         Map paramMap = (Map) result.get(0);
@@ -243,10 +239,9 @@ public class StandardCommandBuilderTest {
 
     @Test
     public void testParameterizedCommandMapParsing2() {
-        CommandBuilder logic = getLogic();
         String[] valueLine =
                 new String[] {"param=value anotherThing space", "param2=value2=next=next=next=next=end", "param3"};
-        List result = convertParams(logic, valueLine);
+        List result = convertParams(sut, valueLine);
         assertNotNull(result);
         assertEquals(1, result.size());
         Map paramMap = (Map) result.get(0);
@@ -254,5 +249,21 @@ public class StandardCommandBuilderTest {
         assertEquals("value anotherThing space", paramMap.get("param"));
         assertEquals("value2=next=next=next=next=end", paramMap.get("param2"));
         assertEquals("", paramMap.get("param3"));
+    }
+    
+    
+    
+    @WebSuites(extension = @Extension(commandExtensionPackages = "com.mkl.websuites.itests.custom"))
+    public static class CustomPackageRunner extends WebSuitesRunner {}
+    
+    @Test
+    public void shouldDetectCustomScanPathPackage() {
+        //given
+        WebSuitesConfig.initializeWebsuitesConfig(CustomPackageRunner.class);
+        sut = new StandardCommandBuilder();
+        //when
+        Command command = sut.instantiateCommand("customUserCommand", new String[] {}, new SourceLine("", "", 0));
+        //then
+        assertThat(command).isInstanceOf(CustomCommandInClasspath.class);
     }
 }

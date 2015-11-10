@@ -30,6 +30,7 @@ import org.reflections.Reflections;
 import com.mkl.websuites.command.Command;
 import com.mkl.websuites.command.CommandDescriptor;
 import com.mkl.websuites.command.ParameterizedCommand;
+import com.mkl.websuites.config.WebSuitesConfig;
 import com.mkl.websuites.internal.WebSuitesException;
 import com.mkl.websuites.internal.scenario.SourceLine;
 
@@ -49,7 +50,9 @@ public class StandardCommandBuilder implements CommandBuilder {
     private Map<String, List<Class>> commandTypesMap;
 
     // exposed (via deencapsulation) to unit tests
-    private static String[] customScanPathPackages = {"com.mkl.websuites.itests.cmd"};
+    private static String[] unitTestScanPathPackages = {"com.mkl.websuites.itests.cmd"};
+
+    private static final String DEFAULT_COMMAND_PACKAGE = "com.mkl.websuites.internal.command.impl";
 
     public static StandardCommandBuilder getInstance() {
         if (instance == null) {
@@ -158,15 +161,17 @@ public class StandardCommandBuilder implements CommandBuilder {
 
     protected Set<Class<?>> scanClasspathForCommands() {
 
-        String defaultScanPackage = "com.mkl.websuites.internal.command.impl";
-
         List<Object> scanPathElements = new ArrayList<>();
 
-        scanPathElements.add(defaultScanPackage);
+        scanPathElements.add(DEFAULT_COMMAND_PACKAGE);
+        
+        // custom commands packages:
+        scanPathElements.addAll(Arrays.asList(WebSuitesConfig.get().extension().commandExtensionPackages()));
 
-        for (Object packageElement : customScanPathPackages) {
+        for (Object packageElement : unitTestScanPathPackages) {
             scanPathElements.add(packageElement);
         }
+        
         Reflections reflections = new Reflections(scanPathElements.toArray());
 
         // honorInherited=true to skip inherited but not annotated classes
