@@ -27,7 +27,7 @@ public class SourceLine {
 
     private int lineNumber;
 
-    private SourceLine parent;
+//    private SourceLine parent; // use for included macros
 
     
     public String printSourceInfo() {

@@ -32,7 +32,8 @@ public class EndControlFlowHandler extends ControlFlowHandler {
     public EndControlFlowHandler() {}
 
     public EndControlFlowHandler(Map<String, String> parameterMap) {
-        log.warn("\"end\" statement doesn't take any parameters, any existign will be ignored.");
+        log.warn("\"end\" statement doesn't take any parameters, provided parameters {} will be ignored.",
+                parameterMap);
     }
 
 

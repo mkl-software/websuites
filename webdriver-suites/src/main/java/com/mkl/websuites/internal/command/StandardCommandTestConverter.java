@@ -212,11 +212,9 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 
         for (Command command : commands) {
 
-            if (command instanceof Subtestable) {
-                if (((Subtestable) command).isSubtest()) {
-                    hasSubtests = true;
-                    break;
-                }
+            if (command instanceof Subtestable && ((Subtestable) command).isSubtest()) {
+                hasSubtests = true;
+                break;
             }
 
             if (command instanceof ControlFlowHandler) {

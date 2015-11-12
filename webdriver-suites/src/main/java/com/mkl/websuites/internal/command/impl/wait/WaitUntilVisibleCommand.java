@@ -43,7 +43,7 @@ public class WaitUntilVisibleCommand extends OperationOnWebElement {
     @Override
     protected void doOperationOnElement(WebElement elem) {
         WebDriverWait wait = new WebDriverWait(browser, getWebElementWaitTimeout());
-        wait.until(ExpectedConditions.visibilityOf((elem)));
+        wait.until(ExpectedConditions.visibilityOf(elem));
     }
 
 }

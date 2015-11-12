@@ -164,7 +164,7 @@
 								</goals>
 								<configuration>
 									<printFailingErrors>true</printFailingErrors>
-									<failOnViolation>false</failOnViolation>
+									<failOnViolation>true</failOnViolation>
 									<verbose>true</verbose>
 								</configuration>
 							</execution>
