@@ -32,14 +32,20 @@ import com.mkl.websuites.internal.WebSuitesException;
 /**
  * Global properties access class. This class holds following properties:
  * <ul>
- *      <li>system properties populated from System.getProperties(), accessible under <code>
+ * <li>system properties populated from System.getProperties(), accessible under <code>
  *      env.[propertyName]</code>, for example <code>env.java.version</code></li>
- *      <li>properties loaded from a file defined in WebSuites.properties setting</li>
+ * <li>properties loaded from a file defined in WebSuites.properties setting</li>
  * </ul>
- * <p>To use this properties inside your scenario files, just use <code>${propertyName}</code> syntax.<p>
- * <p>To set properties inside your scenario files, use <code>setProps</code> command.
- * <p>To use this properties in you test classes, use <code>WebSuiteProperties.get().getProperty()</code>
- * or <code>setProperty</code> methods.</p>
+ * <p>
+ * To use this properties inside your scenario files, just use <code>${propertyName}</code> syntax.
+ * <p>
+ * <p>
+ * To set properties inside your scenario files, use <code>setProps</code> command.
+ * <p>
+ * To use this properties in you test classes, use
+ * <code>WebSuiteProperties.get().getProperty()</code> or <code>setProperty</code> methods.
+ * </p>
+ * 
  * @author Marcin Klosinski
  *
  */
@@ -49,13 +55,14 @@ public class WebSuitesUserProperties {
 
     private static WebSuitesUserProperties instance;
 
-    
+
     private Map<String, String> globalProperties = new HashMap<String, String>();
 
 
     /**
      * Retrieves global properties.
-     * @return  global properties.
+     * 
+     * @return global properties.
      */
     public static synchronized WebSuitesUserProperties get() {
         // late initialization + must be able to be rest for unit tests
@@ -86,19 +93,21 @@ public class WebSuitesUserProperties {
         setProperty("site.host", siteConfig.host());
         setProperty("site.port", siteConfig.port() + "");
         setProperty("site.basePath", siteConfig.basePath());
-        setProperty("site", CommonUtils.normalizeUrlPath(siteConfig.protocol(),
-                siteConfig.host(), siteConfig.port(), siteConfig.basePath()));
+        setProperty(
+                "site",
+                CommonUtils.normalizeUrlPath(siteConfig.protocol(), siteConfig.host(), siteConfig.port(),
+                        siteConfig.basePath()));
     }
 
 
     private void populateUserFileProperties() {
         String fileName = WebSuitesConfig.get().propertiesFileName();
         if (!fileName.isEmpty()) {
-            try(FileInputStream source = new FileInputStream(fileName)) {
+            try (FileInputStream source = new FileInputStream(fileName)) {
                 load(source);
             } catch (IOException e) {
                 throw new WebSuitesException("Cannot load user properties from specified file name "
-                        + "propertiesFileName=" + fileName , e);
+                        + "propertiesFileName=" + fileName, e);
             }
         }
     }
@@ -114,6 +123,7 @@ public class WebSuitesUserProperties {
 
     /**
      * Loads properties from a given input stream.
+     * 
      * @param source source input stream.
      */
     public void load(InputStream source) {
@@ -121,9 +131,9 @@ public class WebSuitesUserProperties {
         try {
             props.load(source);
 
-            for (Object key : props.keySet()) {
-                String s = key.toString();
-                globalProperties.put(s, props.getProperty(s));
+            for (Object objectKey : props.keySet()) {
+                String key = objectKey.toString();
+                globalProperties.put(key, props.getProperty(key));
             }
 
         } catch (IOException e) {
@@ -132,10 +142,11 @@ public class WebSuitesUserProperties {
     }
 
 
-    
+
     /**
      * Populates properties from a given string map.
-     * @param properties    string map
+     * 
+     * @param properties string map
      */
     public void populateFrom(Map<String, String> properties) {
 
@@ -147,36 +158,41 @@ public class WebSuitesUserProperties {
 
     /**
      * Checks if a given property is set (not null).
-     * @param name  property name
-     * @return  <code>true</code> if set
+     * 
+     * @param name property name
+     * @return <code>true</code> if set
      */
     public boolean isSet(String name) {
         return globalProperties.get(name) != null;
     }
 
 
-    
+
     /**
      * Reset (sets to null) the given property.
-     * @param name  property name
+     * 
+     * @param name property name
      */
     public void unset(String name) {
         globalProperties.put(name, null);
     }
 
     /**
-     * Clears all properties in <code>the WebSuiteUserProperties</code>
-     * <p><b>Use with care!</b></p>
+     * Clears all properties in <code>the WebSuiteUserProperties</code>.
+     * <p>
+     * <b>Use with care!</b>
+     * </p>
      */
     public void clear() {
         globalProperties.clear();
     }
 
 
-    
+
     /**
      * Sets string property.
-     * @param name  property name
+     * 
+     * @param name property name
      * @param value property value
      */
     public void setProperty(String name, String value) {
@@ -186,8 +202,9 @@ public class WebSuitesUserProperties {
 
     /**
      * Gets string property.
-     * @param name  property name
-     * @return  property value
+     * 
+     * @param name property name
+     * @return property value
      */
     public String getProperty(String name) {
         return globalProperties.get(name);
@@ -200,12 +217,12 @@ public class WebSuitesUserProperties {
 
 
 
-    
     /**
      * Get number (integer) property. If number value can't be parsed, will throw an exception.
-     * @param name  property name
-     * @return  number value
-     * @throws  WebSuitesException  error when numeric conversion is impossible
+     * 
+     * @param name property name
+     * @return number value
+     * @throws WebSuitesException error when numeric conversion is impossible
      */
     public int getNumberProperty(String name) {
         String value = getProperty(name);
@@ -226,9 +243,10 @@ public class WebSuitesUserProperties {
 
     /**
      * Gets number value for a given property. If no value is set return default value.
-     * @param name  propety name
-     * @param defaultValue  default numeric value to return when property is not set
-     * @return  numeric value
+     * 
+     * @param name propety name
+     * @param defaultValue default numeric value to return when property is not set
+     * @return numeric value
      */
     public int getNumberProperty(String name, int defaultValue) {
 
@@ -239,10 +257,13 @@ public class WebSuitesUserProperties {
 
     /**
      * Gets boolean property. If boolean value can't be parsed, will throw an exception.
-     * <p>Valid values is <code>true</code> and <code>false</code>, case insensitive.</p>
-     * @param name  property name
-     * @return  boolean value
-     * @throws  WebSuitesException  error when numeric conversion is impossible
+     * <p>
+     * Valid values is <code>true</code> and <code>false</code>, case insensitive.
+     * </p>
+     * 
+     * @param name property name
+     * @return boolean value
+     * @throws WebSuitesException error when numeric conversion is impossible
      */
     public boolean getBooleanProperty(String name) {
 
@@ -251,28 +272,31 @@ public class WebSuitesUserProperties {
         if (value == null) {
             throw new WebSuitesException("Null value for boolean property '" + name + "'");
         }
-        
+
         if (value.equalsIgnoreCase("true")) {
             return true;
         }
-        
+
         if (value.equalsIgnoreCase("false")) {
             return false;
         }
-        
+
         throw new WebSuitesException("Invalid boolean value for property '" + name + "'");
     }
 
 
 
     /**
-     * Gets boolean property. If boolean value can't be parsed, will throw an exception.
-     * If no value is specified, will return given default value.
-     * <p>Valid values is <code>true</code> and <code>false</code>, case insensitive.</p>
-     * @param name  property name
-     * @param defaultValue  default boolean value when not set
-     * @return  boolean value
-     * @throws  WebSuitesException  error when numeric conversion is impossible
+     * Gets boolean property. If boolean value can't be parsed, will throw an exception. If no value
+     * is specified, will return given default value.
+     * <p>
+     * Valid values is <code>true</code> and <code>false</code>, case insensitive.
+     * </p>
+     * 
+     * @param name property name
+     * @param defaultValue default boolean value when not set
+     * @return boolean value
+     * @throws WebSuitesException error when numeric conversion is impossible
      */
     public boolean getBooleanProperty(String name, boolean defaultValue) {
 

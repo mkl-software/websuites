@@ -25,7 +25,7 @@ public abstract class MultiBrowserSuite extends TestSuite {
 
     Object[] genericParams;
 
-    
+
     /**
      * Ugly constructor needed due to JUnit architecture that demands to call suite builder in the
      * very early object construction phase. Othwerwise it wouldn't be possible to pass parameters

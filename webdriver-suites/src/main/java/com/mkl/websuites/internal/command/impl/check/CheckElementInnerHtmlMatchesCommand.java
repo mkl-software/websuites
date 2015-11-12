@@ -35,15 +35,15 @@ public class CheckElementInnerHtmlMatchesCommand extends CheckElementInnerHtmlCo
     }
 
 
-    protected class CheckElementInnerHtmlMatches extends CheckElementInnerHTML {
+    protected class CheckElementInnerHtmlMatches extends CheckElementInnerHtml {
 
         @Override
         protected void runSingleStringAssertion(StringAssert assertion, String elementText) {
 
             assertion.overridingErrorMessage(
                     "Expecting inner HTML in the web page element with selector '%s'"
-                            + " to match regexp '%s', but it was\n%s", by, expectedInnerHTML, elementText).matches(
-                    CommandUtils.patternOf(expectedInnerHTML));
+                            + " to match regexp '%s', but it was\n%s", by, expectedInnerHtml, elementText).matches(
+                    CommandUtils.patternOf(expectedInnerHtml));
         }
     }
 

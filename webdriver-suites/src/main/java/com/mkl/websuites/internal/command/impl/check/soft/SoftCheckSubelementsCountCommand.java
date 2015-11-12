@@ -31,7 +31,8 @@ public class SoftCheckSubelementsCountCommand extends CheckSubelementsCountComma
         super(parameterMap);
     }
 
-    public SoftCheckSubelementsCountCommand(String selector, String subElementSelector, Integer expectedNumberOfElements) {
+    public SoftCheckSubelementsCountCommand(String selector, String subElementSelector,
+            Integer expectedNumberOfElements) {
         super(selector, subElementSelector, expectedNumberOfElements);
     }
 

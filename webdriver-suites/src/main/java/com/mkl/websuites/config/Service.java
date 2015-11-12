@@ -26,14 +26,14 @@ import java.lang.annotation.RetentionPolicy;
  *
  */
 @Retention(RetentionPolicy.RUNTIME)
-public  @interface Service {
+public @interface Service {
 
     /**
      * Service class.
      */
     Class<?> service();
 
-    
+
     /**
      * Implementation for given service class.
      */

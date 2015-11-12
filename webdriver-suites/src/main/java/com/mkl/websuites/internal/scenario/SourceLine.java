@@ -27,9 +27,9 @@ public class SourceLine {
 
     private int lineNumber;
 
-//    private SourceLine parent; // use for included macros
+    // private SourceLine parent; // use for included macros
 
-    
+
     public String printSourceInfo() {
         return String.format("Scenario file: %s%nLine number: %s%nLine: %s", file, lineNumber, line);
     }

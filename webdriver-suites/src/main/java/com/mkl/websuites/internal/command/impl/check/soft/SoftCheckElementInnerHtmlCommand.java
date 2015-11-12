@@ -38,7 +38,7 @@ public class SoftCheckElementInnerHtmlCommand extends CheckElementInnerHtmlComma
 
     @Override
     protected AbstractCheck defineCheckLogic() {
-        return new CheckElementInnerHTML() {
+        return new CheckElementInnerHtml() {
             @Override
             protected AbstractAssert<?, ?> buildAssertion(Object... args) {
                 return soft(args);

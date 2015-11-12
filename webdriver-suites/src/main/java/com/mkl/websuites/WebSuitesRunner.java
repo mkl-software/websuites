@@ -46,15 +46,23 @@ import com.mkl.websuites.internal.tests.TearDownAllTest;
 
 
 /**
- * Extend this class to create a WebSuites runner and run your sophisticated test suites against multiple browsers.
- * <p>To define test suites as well as configuration for tests, use {@link com.mkl.websuites.WebSuites} annotation.</p>
- * <p>To specify custom behavior for test preparation and tear-down, you can override following methods:</p>
+ * Extend this class to create a WebSuites runner and run your sophisticated test suites against
+ * multiple browsers.
+ * <p>
+ * To define test suites as well as configuration for tests, use {@link com.mkl.websuites.WebSuites}
+ * annotation.
+ * </p>
+ * <p>
+ * To specify custom behavior for test preparation and tear-down, you can override following
+ * methods:
+ * </p>
  * <ul>
- *      <li><code>setUp()</code></li>
- *      <li><code>tearDown()</code></li>
- *      <li><code>setUpBeforeBrowser(String browserId)</code></li>
- *      <li><code>tearDownAfterBrowser(String browserId)</code></li>
+ * <li><code>setUp()</code></li>
+ * <li><code>tearDown()</code></li>
+ * <li><code>setUpBeforeBrowser(String browserId)</code></li>
+ * <li><code>tearDownAfterBrowser(String browserId)</code></li>
  * </ul>
+ * 
  * @author Marcin Klosinski
  *
  */
@@ -105,7 +113,8 @@ public class WebSuitesRunner {
 
     /**
      * Runs before all tests for given browser are started.
-     * @param currentBrowser       browser ID that is about to be opened
+     * 
+     * @param currentBrowser browser ID that is about to be opened
      */
     protected void setUpBeforeBrowser(String currentBrowser) {
         log.debug("set up before browser '{}' (default impl)", currentBrowser);
@@ -113,7 +122,8 @@ public class WebSuitesRunner {
 
     /**
      * Runs after all tests for given browser are finished.
-     * @param currentBrowser       browser ID that is about to be opened
+     * 
+     * @param currentBrowser browser ID that is about to be opened
      */
     protected void tearDownAfterBrowser(String currentBrowser) {
         log.debug("tear down after browser '{}' (default impl)", currentBrowser);
@@ -122,20 +132,22 @@ public class WebSuitesRunner {
 
     /**
      * Override to provide custom name for master suite.
+     * 
      * @return
      */
     protected String getMasterSuiteName() {
         return "Multi-browser test suite";
     }
 
-    
-    
+
+
     /**
      * Used internally by the custom JUnit runner to define master test suite.
+     * 
      * @return
      */
     public final TestSuite defineMasterSuite() throws InstantiationException, IllegalAccessException,
-        NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
+            NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
 
         log.debug("master suite method");
 
@@ -182,9 +194,8 @@ public class WebSuitesRunner {
         return suite;
     }
 
-    
-    
-    
+
+
     private String[] clobberPropertiesInBrowserIds(WebSuites config) {
         String[] origBrowserIds = config.browsers();
         String[] processedIds = new String[origBrowserIds.length];
@@ -193,7 +204,7 @@ public class WebSuitesRunner {
             id = CommonUtils.populateStringWithProperties(id);
             if (id.startsWith("$")) {
                 id = "chrome"; // TODO: default, TEMP !!!!, ucomment line below before release
-//                throw new WebSuitesException("Please specify property for browser: " + id);
+                // throw new WebSuitesException("Please specify property for browser: " + id);
             }
             processedIds[i] = id;
         }
@@ -312,7 +323,8 @@ public class WebSuitesRunner {
 
 
     /**
-     * To allow quickly identification in the code for which browser are tests currently defined for.
+     * To allow quickly identification in the code for which browser are tests currently defined
+     * for.
      * 
      * @return
      */

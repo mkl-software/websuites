@@ -44,8 +44,8 @@ public class NegCheckElementInnerHtmlContainsCommand extends CheckElementInnerHt
 
             assertion.overridingErrorMessage(
                     "Expecting inner HTML in the web page element with selector '%s'"
-                            + " NOT to contain '%s', but it was '%s'", by, expectedInnerHTML, elementText)
-                    .doesNotContain(expectedInnerHTML);
+                            + " NOT to contain '%s', but it was '%s'", by, expectedInnerHtml, elementText)
+                    .doesNotContain(expectedInnerHtml);
         }
     }
 

@@ -31,7 +31,8 @@ public class NegCheckSubelementsCountCommand extends CheckSubelementsCountComman
         super(parameterMap);
     }
 
-    public NegCheckSubelementsCountCommand(String selector, String subElementSelector, Integer expectedNumberOfElements) {
+    public NegCheckSubelementsCountCommand(String selector, String subElementSelector,
+            Integer expectedNumberOfElements) {
         super(selector, subElementSelector, expectedNumberOfElements);
     }
 

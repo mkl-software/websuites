@@ -37,7 +37,7 @@ import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 @CommandDescriptor(name = "checkSelectOptionText", argumentTypes = {String.class, String.class})
 public class CheckSelectOptionTextCommand extends OperationOnWebElement {
 
-    protected String SELECTED_TEXT_PARAM;
+    protected String selectedTextParam;
 
     protected String expectedSelectText;
 
@@ -60,7 +60,7 @@ public class CheckSelectOptionTextCommand extends OperationOnWebElement {
                 put("text", expectedText);
             }
         });
-        SELECTED_TEXT_PARAM = "text";
+        selectedTextParam = "text";
     }
 
     protected String extracted() {
@@ -109,7 +109,7 @@ public class CheckSelectOptionTextCommand extends OperationOnWebElement {
 
         AbstractCheck checkLogic = defineCheckLogic();
 
-        expectedSelectText = parameterMap.get(SELECTED_TEXT_PARAM);
+        expectedSelectText = parameterMap.get(selectedTextParam);
 
         checkLogic.runStandardCommand();
 
@@ -128,7 +128,7 @@ public class CheckSelectOptionTextCommand extends OperationOnWebElement {
         List<SchemaValidationRule> parentValidationRules = super.defineValidationRules();
 
         for (SchemaValidationRule schemaValidationRule : parentValidationRules) {
-            schemaValidationRule.addMandatoryElements(SELECTED_TEXT_PARAM);
+            schemaValidationRule.addMandatoryElements(selectedTextParam);
         }
 
         return parentValidationRules;

@@ -65,16 +65,20 @@ public class PressCommand extends BaseCommand {
 
     private Keys keyFromModifier(String key) {
         switch (key) {
-            case "CTRL" : return Keys.CONTROL;
-            case "ALT" : return Keys.ALT;
-            case "SHIFT" : return Keys.SHIFT;
+            case "CTRL":
+                return Keys.CONTROL;
+            case "ALT":
+                return Keys.ALT;
+            case "SHIFT":
+                return Keys.SHIFT;
+            default :
+                return null;
         }
-        return null;
     }
 
     private boolean isModifier(String key) {
         return Arrays.asList("CTRL", "SHIFT", "ALT").contains(key);
     }
-    
+
 
 }

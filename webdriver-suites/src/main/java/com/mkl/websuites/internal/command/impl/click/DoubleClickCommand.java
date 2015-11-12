@@ -33,11 +33,11 @@ public class DoubleClickCommand extends ClickCommand {
     public DoubleClickCommand(String elemement) {
         super(elemement);
     }
-    
-    
+
+
     @Override
     protected void doOperationOnElement(WebElement elem) {
         Actions actions = new Actions(browser);
         actions.doubleClick(elem).perform();
-    }    
+    }
 }

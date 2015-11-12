@@ -32,7 +32,8 @@ public class SoftCheckElementAttributeMatchesCommand extends CheckElementAttribu
         super(parameterMap);
     }
 
-    public SoftCheckElementAttributeMatchesCommand(String selector, String attributeName, String expectedAttributeValue) {
+    public SoftCheckElementAttributeMatchesCommand(String selector, String attributeName,
+            String expectedAttributeValue) {
         super(selector, attributeName, expectedAttributeValue);
     }
 

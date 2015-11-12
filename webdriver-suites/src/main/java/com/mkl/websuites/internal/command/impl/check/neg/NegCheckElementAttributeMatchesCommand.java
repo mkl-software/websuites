@@ -32,7 +32,8 @@ public class NegCheckElementAttributeMatchesCommand extends CheckElementAttribut
         super(parameterMap);
     }
 
-    public NegCheckElementAttributeMatchesCommand(String selector, String attributeName, String expectedAttributeValue) {
+    public NegCheckElementAttributeMatchesCommand(String selector, String attributeName,
+            String expectedAttributeValue) {
         super(selector, attributeName, expectedAttributeValue);
     }
 

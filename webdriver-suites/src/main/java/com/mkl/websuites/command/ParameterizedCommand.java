@@ -32,9 +32,13 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 
 /**
  * Class to be extended by all commands that need to have a parameterized version.
- * <p>A parameterized version is used as folows:</p>
+ * <p>
+ * A parameterized version is used as folows:
+ * </p>
  * <code>myCommand  param1=value1  param2=value2</code>
- * <p>To define a schema for the parameters, override <code>defineValidationRules</code> method.
+ * <p>
+ * To define a schema for the parameters, override <code>defineValidationRules</code> method.
+ * 
  * @author klosinskim
  *
  */
@@ -135,11 +139,12 @@ public abstract class ParameterizedCommand extends BaseCommand {
 
     /**
      * Implement to define which parameters are acceptable for this command.
+     * 
      * @return
      */
     protected abstract List<SchemaValidationRule> defineValidationRules();
 
-    
+
     /**
      * Implement to define parameter value validators, e.g. to allow only numeric parameters.
      */

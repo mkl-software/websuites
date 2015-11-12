@@ -47,7 +47,7 @@ public class SelectByTextContainingCommand extends SelectByTextCommand {
         }
     }
 
-    protected void select(Select select, int i) {
-        select.selectByIndex(i);
+    protected void select(Select select, int index) {
+        select.selectByIndex(index);
     }
 }

@@ -22,13 +22,13 @@ import com.mkl.websuites.internal.tests.SortingStrategy;
 
 
 /**
- * Defines a folder test suite. All tests within the folder structure will be lauched and
- * rendered in a JUnit test tree reflecting folder structure.
- * </p>To run tests just from given folder path without nested folder, please specify
- * <code>ignoreSubfolders=true</code></p>
- * <p>To specify order of processing scenario files and folder you can use different
- * <code>sortinStrategy</code>. However, as of 0.9.x version, only <code>SortingStrategy.APLHABETICAL</code>
- * is supported.
+ * Defines a folder test suite. All tests within the folder structure will be lauched and rendered
+ * in a JUnit test tree reflecting folder structure. </p>To run tests just from given folder path
+ * without nested folder, please specify <code>ignoreSubfolders=true</code></p>
+ * <p>
+ * To specify order of processing scenario files and folder you can use different
+ * <code>sortinStrategy</code>. However, as of 0.9.x version, only
+ * <code>SortingStrategy.APLHABETICAL</code> is supported.
  * 
  * @author Marcin Klosinski
  *
@@ -46,9 +46,11 @@ public @interface Folder {
      */
     SortingStrategy sortingStrategy() default SortingStrategy.APLHABETICAL;
 
-    
+
     /**
-     * If set to <code>true</code>, the nested folders will ignored while scanning for scenario files.
+     * If set to <code>true</code>, the nested folders will ignored while scanning for scenario
+     * files.
+     * 
      * @return
      */
     boolean ignoreSubfolders() default false;

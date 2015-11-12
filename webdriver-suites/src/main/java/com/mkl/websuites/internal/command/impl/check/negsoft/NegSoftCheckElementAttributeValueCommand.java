@@ -31,7 +31,8 @@ public class NegSoftCheckElementAttributeValueCommand extends NegCheckElementAtt
         super(parameterMap);
     }
 
-    public NegSoftCheckElementAttributeValueCommand(String selector, String attributeName, String expectedAttributeValue) {
+    public NegSoftCheckElementAttributeValueCommand(String selector, String attributeName,
+            String expectedAttributeValue) {
         super(selector, attributeName, expectedAttributeValue);
     }
 

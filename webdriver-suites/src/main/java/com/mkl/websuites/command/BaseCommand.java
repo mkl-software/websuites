@@ -30,8 +30,8 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 
 
 /**
- * Extend this class to write your own commands. It provides useful logic, such
- * as source file information for detailed error messages and browser configuration.
+ * Extend this class to write your own commands. It provides useful logic, such as source file
+ * information for detailed error messages and browser configuration.
  * 
  * @author Marcin Klosinski
  *
@@ -75,12 +75,13 @@ public abstract class BaseCommand implements Command, SourceInfoHolder {
 
     /**
      * Used internally to inject source file information in the command error messages.
-     * @param e
+     * 
+     * @param exception
      */
-    protected void augmentErrorMessageWithCommandSourceFileInfo(Throwable e) {
+    protected void augmentErrorMessageWithCommandSourceFileInfo(Throwable exception) {
         try {
-            String newMessage = e.getMessage() + "\n" + getCommandSourceLine().printSourceInfo();
-            FieldUtils.writeField(e, "detailMessage", newMessage, true);
+            String newMessage = exception.getMessage() + "\n" + getCommandSourceLine().printSourceInfo();
+            FieldUtils.writeField(exception, "detailMessage", newMessage, true);
         } catch (IllegalArgumentException | IllegalAccessException | SecurityException e1) {
             e1.printStackTrace();
         }
@@ -90,7 +91,9 @@ public abstract class BaseCommand implements Command, SourceInfoHolder {
 
     /**
      * Implement this method to provide command logic.
-     * <p>Standard command means that the command is instantiated using constructor parameters.</p>
+     * <p>
+     * Standard command means that the command is instantiated using constructor parameters.
+     * </p>
      */
     protected abstract void runStandardCommand();
 
@@ -98,6 +101,7 @@ public abstract class BaseCommand implements Command, SourceInfoHolder {
 
     /**
      * Use this method to clobber properties in the command source (like <code>${property}</code>).
+     * 
      * @param origValue
      * @return
      */
@@ -107,17 +111,17 @@ public abstract class BaseCommand implements Command, SourceInfoHolder {
     }
 
 
-    
+
     /**
-     * Used to format detailed messages about where this command come from (scenario file name,
-     * line number etc.)
+     * Used to format detailed messages about where this command come from (scenario file name, line
+     * number etc.)
      */
     @Override
     public SourceLine getCommandSourceLine() {
         return sourceLine;
     }
 
-    
+
     /**
      * Used internally to inject command source file info.
      */

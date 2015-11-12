@@ -41,7 +41,7 @@ public class CheckSelectSelectedValueCommand extends CheckSelectSelectedTextComm
                 put("value", expectedText);
             }
         });
-        SELECTED_TEXT_PARAM = "value";
+        selectedTextParam = "value";
     }
 
 

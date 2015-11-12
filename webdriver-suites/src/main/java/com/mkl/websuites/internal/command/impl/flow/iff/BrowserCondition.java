@@ -44,9 +44,9 @@ public class BrowserCondition implements IfCondition {
 
         String curentBrowser = currentBrowser();
 
-        boolean browsersOK = requiredBrowser.equals(curentBrowser);
+        boolean browsersOk = requiredBrowser.equals(curentBrowser);
 
-        return negate ? !browsersOK : browsersOK;
+        return negate ? !browsersOk : browsersOk;
 
     }
 

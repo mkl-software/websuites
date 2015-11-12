@@ -33,11 +33,11 @@ public class ContextClickCommand extends ClickCommand {
     public ContextClickCommand(String elemement) {
         super(elemement);
     }
-    
-    
+
+
     @Override
     protected void doOperationOnElement(WebElement elem) {
         Actions actions = new Actions(browser);
         actions.contextClick(elem).perform();
-    }    
+    }
 }

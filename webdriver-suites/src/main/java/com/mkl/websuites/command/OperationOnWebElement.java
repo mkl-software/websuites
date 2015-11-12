@@ -30,8 +30,13 @@ import com.mkl.websuites.internal.command.impl.validator.SchemaValidationRule;
 
 /**
  * Convienience class to be extended by commands that directly operate on a web element.
- * <p>It has parameterized configuration for {@link org.openqa.selenium.By} selector</p>
- * <p>The default selector is <code>css</code>.</p>
+ * <p>
+ * It has parameterized configuration for {@link org.openqa.selenium.By} selector
+ * </p>
+ * <p>
+ * The default selector is <code>css</code>.
+ * </p>
+ * 
  * @author klosinskim
  *
  */
@@ -150,7 +155,8 @@ public abstract class OperationOnWebElement extends ParameterizedCommand {
 
     /**
      * Implement this to define the logic operating on the given web element.
-     * @param elem  web element
+     * 
+     * @param elem web element
      */
     protected abstract void doOperationOnElement(WebElement elem);
 

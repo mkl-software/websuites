@@ -175,10 +175,10 @@ public class IfControlFlowHandler extends ControlFlowHandler {
     }
 
     protected IfCondition buildCustomCondition() {
-        
+
         IfCondition ifStatement;
         String conditionClass = parameterMap.get("condition");
-        
+
         try {
             Class<?> klass = Class.forName(conditionClass);
             if (parameterMap.containsKey("params")) {
@@ -188,10 +188,10 @@ public class IfControlFlowHandler extends ControlFlowHandler {
             } else {
                 ifStatement = (IfCondition) klass.newInstance();
             }
-            
-        } catch (RuntimeException | ClassNotFoundException | NoSuchMethodException
-                | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            
+
+        } catch (RuntimeException | ClassNotFoundException | NoSuchMethodException | InstantiationException
+                | IllegalAccessException | InvocationTargetException e) {
+
             log.error(e.getLocalizedMessage());
             throw new WebSuitesException("Cannot instantiate 'if' condition class " + conditionClass
                     + " from parameters: " + parameterMap + ".\nMake sure that the class "

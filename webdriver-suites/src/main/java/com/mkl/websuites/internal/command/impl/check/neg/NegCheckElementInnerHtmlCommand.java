@@ -36,21 +36,21 @@ public class NegCheckElementInnerHtmlCommand extends CheckElementInnerHtmlComman
     }
 
 
-    protected class NegCheckElementInnerHTML extends CheckElementInnerHTML {
+    protected class NegCheckElementInnerHtml extends CheckElementInnerHtml {
 
         @Override
         protected void runSingleStringAssertion(StringAssert assertion, String elementText) {
 
             assertion.overridingErrorMessage(
                     "Expecting inner HTML in the web page element with selector '%s'" + " NOT to be '%s'", by,
-                    expectedInnerHTML).isNotEqualTo(expectedInnerHTML);
+                    expectedInnerHtml).isNotEqualTo(expectedInnerHtml);
         }
     }
 
 
     @Override
     protected AbstractCheck defineCheckLogic() {
-        return new NegCheckElementInnerHTML();
+        return new NegCheckElementInnerHtml();
     }
 
 }

@@ -34,8 +34,8 @@ public class DeselectByTextContainingCommand extends SelectByTextContainingComma
     }
 
     @Override
-    protected void select(Select select, int i) {
-        select.deselectByIndex(i);
+    protected void select(Select select, int index) {
+        select.deselectByIndex(index);
     }
 
 }

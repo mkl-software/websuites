@@ -46,28 +46,29 @@ public class StandardScenarioFilePreprocessor implements ScenarioFilePreprocesso
     public List<SourceLine> preprocessScenarioFile(File scenarioFile) {
 
         try {
-            
-            List<String> fileLines = Files.readAllLines(Paths.get(scenarioFile.getAbsolutePath()), StandardCharsets.UTF_8);
-            
+
+            List<String> fileLines =
+                    Files.readAllLines(Paths.get(scenarioFile.getAbsolutePath()), StandardCharsets.UTF_8);
+
             List<SourceLine> lines = new ArrayList<SourceLine>();
-            
+
             int lineNumber = 0;
-            
+
             for (String line : fileLines) {
-    
+
                 lineNumber++;
                 line = line.trim();
                 if (!line.isEmpty() && !line.startsWith("#")) {
 
                     lines.add(new SourceLine(line, scenarioFile.getAbsolutePath(), lineNumber));
                 }
-            
+
             }
 
             return lines;
-            
+
         } catch (IOException e) {
-            
+
             String msg =
                     "Error while reading scenario file: " + scenarioFile.getAbsolutePath() + ", message: "
                             + e.getLocalizedMessage();

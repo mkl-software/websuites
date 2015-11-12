@@ -44,8 +44,8 @@ public class NegCheckElementInnerHtmlMatchesCommand extends CheckElementInnerHtm
 
             assertion.overridingErrorMessage(
                     "Expecting inner HTML in the web page element with selector '%s'"
-                            + " NOT to match regexp '%s', but it was '%s'", by, expectedInnerHTML, elementText)
-                    .doesNotMatch(CommandUtils.patternOf(expectedInnerHTML));
+                            + " NOT to match regexp '%s', but it was '%s'", by, expectedInnerHtml, elementText)
+                    .doesNotMatch(CommandUtils.patternOf(expectedInnerHtml));
         }
     }
 

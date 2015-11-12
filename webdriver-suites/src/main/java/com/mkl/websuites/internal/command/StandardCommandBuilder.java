@@ -66,11 +66,11 @@ public class StandardCommandBuilder implements CommandBuilder {
 
     public StandardCommandBuilder() {
 
-        Set<Class<?>> allCommandsInClasspath = scanClasspathForCommands();
-
         commandTypesMap = new HashMap<>();
         commandConstructorMap = new HashMap<>();
         parameterizedCommandConstructorMap = new HashMap<>();
+        
+        Set<Class<?>> allCommandsInClasspath = scanClasspathForCommands();
 
         for (Class<?> commandClass : allCommandsInClasspath) {
 
@@ -165,14 +165,14 @@ public class StandardCommandBuilder implements CommandBuilder {
         List<Object> scanPathElements = new ArrayList<>();
 
         scanPathElements.add(DEFAULT_COMMAND_PACKAGE);
-        
+
         // custom commands packages:
         scanPathElements.addAll(Arrays.asList(WebSuitesConfig.get().extension().commandExtensionPackages()));
 
         for (Object packageElement : unitTestScanPathPackages) {
             scanPathElements.add(packageElement);
         }
-        
+
         Reflections reflections = new Reflections(scanPathElements.toArray());
 
         // honorInherited=true to skip inherited but not annotated classes
@@ -286,12 +286,12 @@ public class StandardCommandBuilder implements CommandBuilder {
 
             if (resolvableWithValueOf.contains(argType)) {
                 try {
-                    
+
                     argumentValues.add(argType.getMethod("valueOf", String.class).invoke(null, argument));
-                    
+
                 } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
                         | NoSuchMethodException | SecurityException e) {
-                    
+
                     throw new WebSuitesException("Error while converting command parameter: cannot cast value "
                             + "of argument '" + argument + "' to type " + argType + " with standard valueOf() call");
                 }

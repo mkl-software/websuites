@@ -93,7 +93,7 @@ public class ServiceFactory {
 
         try {
             Method factoryMethod = instanceMap.get(serviceClass).getDeclaredMethod("getInstance");
-            
+
             return (T) factoryMethod.invoke(null);
 
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException

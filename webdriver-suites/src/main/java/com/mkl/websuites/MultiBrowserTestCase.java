@@ -30,10 +30,11 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 
 /**
  * Base class for web tests to be run by WebSuiteRunner.
- * <p>Just extend this class and implement <code>runWebTest</code> 
- * method to define a test.</p>
- * Inside the test you have a WebDriver <code>browser</code> field and a bunch of useful
- * convenience methods to create your web logic.</p>
+ * <p>
+ * Just extend this class and implement <code>runWebTest</code> method to define a test.
+ * </p>
+ * Inside the test you have a WebDriver <code>browser</code> field and a bunch of useful convenience
+ * methods to create your web logic.</p>
  * 
  * @author Marcin Klosinski
  *
@@ -44,12 +45,15 @@ public abstract class MultiBrowserTestCase extends TestCase {
 
     /**
      * Global configuration.
+     * 
      * @see WebSuites
      */
     protected WebSuites configuration = WebSuitesConfig.get();
 
     /**
-     * Currently running browser. The ID corresponds to the ones defined in <code>WebSuites.browserConfiguration</code>.
+     * Currently running browser. The ID corresponds to the ones defined in
+     * <code>WebSuites.browserConfiguration</code>.
+     * 
      * @see BrowserConifg
      */
     protected String currentBrowserId;
@@ -61,6 +65,7 @@ public abstract class MultiBrowserTestCase extends TestCase {
 
     /**
      * Concatenated URL from <code>WebSuites.site</code> configuration.
+     * 
      * @see SiteConfig
      */
     protected String site;
@@ -71,13 +76,13 @@ public abstract class MultiBrowserTestCase extends TestCase {
     public MultiBrowserTestCase() {
         super();
         SiteConfig siteConfig = configuration.site();
-        
-        this.site = CommonUtils.normalizeUrlPath(
-                siteConfig.protocol(), siteConfig.host(), siteConfig.port(), siteConfig.basePath());
-        
+
+        this.site =
+                CommonUtils.normalizeUrlPath(siteConfig.protocol(), siteConfig.host(), siteConfig.port(),
+                        siteConfig.basePath());
+
         this.currentBrowserId = browserController.getLocalBrowserNameForTestInit();
     }
-
 
 
 
@@ -97,7 +102,7 @@ public abstract class MultiBrowserTestCase extends TestCase {
         runWebTest();
     }
 
-    
+
     /**
      * Define web test logic here.
      */
@@ -106,7 +111,8 @@ public abstract class MultiBrowserTestCase extends TestCase {
 
     /**
      * Override to provide a custom test name.
-     * @return  custom test name
+     * 
+     * @return custom test name
      */
     protected String getTestName() {
         return this.getClass().getName();

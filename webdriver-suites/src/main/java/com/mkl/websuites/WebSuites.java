@@ -62,7 +62,7 @@ import com.mkl.websuites.config.TestClass;
 public @interface WebSuites {
 
     /**
-     * List of browsers to run all tests suites against. By default it's an empty list.
+     * List of browsers to run all tests suites against. By default it is an empty list.
      * <p>
      * The elements of this list are string identifiers of browsers, like "<b>ff</b>" or
      * "<b>chrome</b>".
@@ -197,7 +197,7 @@ public @interface WebSuites {
 
 
     /**
-     * Specifies extensions and customization of the framework:
+     * Specifies extensions and customization of the framework.
      * <ol>
      * <li>package paths for custom commands</li>
      * <li>service overrides to deeply modify framework behaviour</li>

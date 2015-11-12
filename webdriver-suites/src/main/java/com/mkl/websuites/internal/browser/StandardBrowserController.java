@@ -93,10 +93,9 @@ public class StandardBrowserController implements BrowserController {
         BrowserConifg[] userBrowsers = config.browserConfiguration();
 
         /*
-         * Browser configuration order (each next overwrites previous one):
-         * 1. Default configuration
-         * 2. Configuration from browserReusableConifugration class
-         * 3. Explicit configuration on browserConfiguration annotation
+         * Browser configuration order (each next overwrites previous one): 1. Default configuration
+         * 2. Configuration from browserReusableConifugration class 3. Explicit configuration on
+         * browserConfiguration annotation
          */
 
         BrowserConifg[] browsers = ArrayUtils.addAll(defaultBrowsers, reusableBrowsers);
@@ -189,12 +188,12 @@ public class StandardBrowserController implements BrowserController {
         String currentBrowser = currentBrowser();
 
         WebSuitesUserProperties.get().setProperty("currentBrowser", currentBrowser);
-        
+
         if (!driverClassMap.containsKey(currentBrowser)) {
 
             log.error("no browser configured for ID: " + currentBrowser);
             throw new WebSuitesException("No browser configured for the ID: '" + currentBrowser
-                    + "', Please correct your BrowserConfiguration element and fill information for " + "this browser.");
+                    + "', Please correct your BrowserConfiguration element and fill information for this browser.");
         }
 
         Class<?> driverClass = driverClassMap.get(currentBrowser);

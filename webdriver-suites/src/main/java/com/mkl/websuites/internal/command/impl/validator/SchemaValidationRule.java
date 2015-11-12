@@ -26,13 +26,13 @@ import lombok.Setter;
 public class SchemaValidationRule {
 
 
-    private @Getter String topLevelRequiredElement;
+    @Getter private String topLevelRequiredElement;
 
-    private @Getter List<String> mandatoryElements;
+    @Getter private List<String> mandatoryElements;
 
-    private @Getter List<String> optionalElements;
+    @Getter private List<String> optionalElements;
 
-    private @Getter @Setter String miniDocumentation;
+    @Getter @Setter private String miniDocumentation;
 
 
 

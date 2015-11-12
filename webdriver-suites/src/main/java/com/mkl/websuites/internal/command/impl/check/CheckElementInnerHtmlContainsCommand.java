@@ -35,15 +35,15 @@ public class CheckElementInnerHtmlContainsCommand extends CheckElementInnerHtmlC
     }
 
 
-    protected class CheckElementInnerHtmlContains extends CheckElementInnerHTML {
+    protected class CheckElementInnerHtmlContains extends CheckElementInnerHtml {
 
         @Override
         protected void runSingleStringAssertion(StringAssert assertion, String elementText) {
 
             assertion.overridingErrorMessage(
                     "Expecting inner HTML in the web page element with selector '%s'"
-                            + " to contain '%s', but it was '%s'", by, expectedInnerHTML, elementText).contains(
-                    expectedInnerHTML);
+                            + " to contain '%s', but it was '%s'", by, expectedInnerHtml, elementText).contains(
+                    expectedInnerHtml);
         }
     }
 

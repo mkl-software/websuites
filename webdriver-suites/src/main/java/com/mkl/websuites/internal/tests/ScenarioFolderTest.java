@@ -93,10 +93,10 @@ public class ScenarioFolderTest extends MultiBrowserSuite {
 
         if (nestedFolders == null) {
             throw new WebServiceException(String.format("Error while traversing through folder "
-                    + "structure starting from path '%s'. Probably there is something wrong "
-                    + "in the path string.", folderPath));
+                    + "structure starting from path '%s'. Probably there is something wrong " + "in the path string.",
+                    folderPath));
         }
-        
+
         sort(nestedFolders);
 
         for (File nested : nestedFolders) {
@@ -137,7 +137,7 @@ public class ScenarioFolderTest extends MultiBrowserSuite {
                 return file.getName().toLowerCase(Locale.getDefault()).endsWith(".scn");
             }
         });
-        
+
         if (scenarioFiles == null) {
             throw new WebServiceException(String.format("Error while reading scenario files in "
                     + "the folder path '%s'. Probably there is something wrong in the path string.", folderPath));

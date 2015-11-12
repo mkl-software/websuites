@@ -34,7 +34,7 @@ public class PropertyValueCondition implements IfCondition {
 
     @Override
     public boolean isConditionMet() {
-        
+
         if (valueAcceptor == null) {
             throw new WebSuitesException("Value acceptor must be set before checking a condition");
         }

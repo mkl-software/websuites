@@ -38,7 +38,7 @@ public class NegSoftCheckElementInnerHtmlCommand extends NegCheckElementInnerHtm
 
     @Override
     protected AbstractCheck defineCheckLogic() {
-        return new NegCheckElementInnerHTML() {
+        return new NegCheckElementInnerHtml() {
             @Override
             protected AbstractAssert<?, ?> buildAssertion(Object... args) {
                 return soft(args);

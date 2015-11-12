@@ -43,7 +43,7 @@ public class CheckSelectSelectedIndexCommand extends CheckSelectSelectedValueCom
                 put("index", expectedText);
             }
         });
-        SELECTED_TEXT_PARAM = "index";
+        selectedTextParam = "index";
     }
 
     protected class CheckSelectSelectedIndex extends CheckSelectSelectedValue {

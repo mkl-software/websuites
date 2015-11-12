@@ -31,7 +31,7 @@ public class CheckCheckboxCommand extends OperationOnWebElement {
 
 
     protected String actualCheckedValue;
-    private String CHECKED_ATTRIBUTE = "checked";
+    private String checkedAttributeValue = "checked";
 
 
 
@@ -76,7 +76,7 @@ public class CheckCheckboxCommand extends OperationOnWebElement {
             fail("Element expected to be a checkbox");
         }
 
-        actualCheckedValue = elem.getAttribute(CHECKED_ATTRIBUTE);
+        actualCheckedValue = elem.getAttribute(checkedAttributeValue);
 
         actualCheckedValue = actualCheckedValue == null ? "false" : actualCheckedValue;
 

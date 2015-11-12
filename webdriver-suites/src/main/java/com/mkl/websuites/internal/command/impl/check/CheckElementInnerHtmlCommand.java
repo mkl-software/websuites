@@ -33,9 +33,9 @@ public class CheckElementInnerHtmlCommand extends OperationOnWebElement {
 
     private static final String INNER_HTML_PARAM = "innerHTML";
 
-    protected String expectedInnerHTML;
+    protected String expectedInnerHtml;
 
-    protected String actualInnerHTML;
+    protected String actualInnerHtml;
 
 
     public CheckElementInnerHtmlCommand(Map<String, String> parameterMap) {
@@ -55,20 +55,20 @@ public class CheckElementInnerHtmlCommand extends OperationOnWebElement {
 
 
 
-    protected class CheckElementInnerHTML extends AbstractSingleStringCheck {
+    protected class CheckElementInnerHtml extends AbstractSingleStringCheck {
 
         @Override
         protected void runSingleStringAssertion(StringAssert assertion, String elementText) {
 
             assertion.overridingErrorMessage(
                     "Expecting inner HTML in the web page element with selector '%s'"
-                            + " to be exactly '%s', but was '%s'", by, expectedInnerHTML, elementText).isEqualTo(
-                    expectedInnerHTML);
+                            + " to be exactly '%s', but was '%s'", by, expectedInnerHtml, elementText).isEqualTo(
+                    expectedInnerHtml);
         }
 
         @Override
         protected String getStringParam() {
-            return actualInnerHTML;
+            return actualInnerHtml;
         }
     }
 
@@ -77,19 +77,19 @@ public class CheckElementInnerHtmlCommand extends OperationOnWebElement {
     @Override
     protected void doOperationOnElement(WebElement elem) {
 
-        actualInnerHTML = elem.getAttribute(INNER_HTML_PARAM);
+        actualInnerHtml = elem.getAttribute(INNER_HTML_PARAM);
 
         // not all browsers may support innerHTML attribute on WebElement level, so
         // use Javascript invocation then instead:
-        if (actualInnerHTML == null) {
+        if (actualInnerHtml == null) {
 
-            actualInnerHTML =
+            actualInnerHtml =
                     (String) ((JavascriptExecutor) browser).executeScript("return arguments[0].innerHTML;", elem);
         }
 
         AbstractCheck checkLogic = defineCheckLogic();
 
-        expectedInnerHTML = parameterMap.get(INNER_HTML_PARAM);
+        expectedInnerHtml = parameterMap.get(INNER_HTML_PARAM);
 
         checkLogic.runStandardCommand();
 
@@ -98,7 +98,7 @@ public class CheckElementInnerHtmlCommand extends OperationOnWebElement {
 
 
     protected AbstractCheck defineCheckLogic() {
-        return new CheckElementInnerHTML();
+        return new CheckElementInnerHtml();
     }
 
 
