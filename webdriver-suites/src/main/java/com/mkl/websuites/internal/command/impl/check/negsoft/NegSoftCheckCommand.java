@@ -38,7 +38,7 @@ public class NegSoftCheckCommand extends NegCheckCommand {
     // fail would be called from here and it can't be soft.
     @Override
     protected void localFail(String message) {
-        CommandUtils.softFail(softly, message);
+        CommandUtils.softFail(getSoftAssertion(), message);
     }
 
 

@@ -40,7 +40,7 @@ public class NegSoftCheckSelectedOptionTextCommand extends NegCheckSelectOptionT
         return new NegCheckSelectOptionText() {
             @Override
             protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-                return softly.assertThat(args);
+                return getSoftAssertion().assertThat(args);
             }
         };
     }

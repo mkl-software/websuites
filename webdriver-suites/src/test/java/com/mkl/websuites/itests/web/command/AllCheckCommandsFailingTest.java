@@ -45,7 +45,7 @@ public class AllCheckCommandsFailingTest extends WebSuitesResultCheck {
 
     @WebSuites(browsers = "${env.testBrowser}", scenarios = @ScenarioFile(FAILING_SOFT_COMMANDS_SCENARIO_FILE),
             browserResusableConfiguration = BrowsersConfig.class)
-    public static class LocalRunnerAllCheckCommandsPassing extends WebSuitesRunner {
+    public static class LocalRunnerAllCheckCommandsFailing extends WebSuitesRunner {
     }
 
 
@@ -66,7 +66,7 @@ public class AllCheckCommandsFailingTest extends WebSuitesResultCheck {
 
         log.debug("number of soft check commands in scenario file: {}", expectedNumberOfSoftChecks);
 
-        Result testResult = super.checkWebTestResult(LocalRunnerAllCheckCommandsPassing.class);
+        Result testResult = super.checkWebTestResult(LocalRunnerAllCheckCommandsFailing.class);
 
         checkRunCount(BASE_RUN_COUNT_FOR_BROWSER_TEST, testResult);
 

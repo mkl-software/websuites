@@ -41,7 +41,7 @@ public class SoftCheckSelectOptionTextCommand extends CheckSelectOptionTextComma
         return new CheckSelectOptionText() {
             @Override
             protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-                return softly.assertThat(args);
+                return getSoftAssertion().assertThat(args);
             }
         };
     }

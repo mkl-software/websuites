@@ -31,7 +31,7 @@ public class NegSoftCheckTextMatchingCommand extends NegCheckTextMatchingCommand
 
     @Override
     protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-        return softly.assertThat((Boolean) args[0]);
+        return getSoftAssertion().assertThat((Boolean) args[0]);
     }
 
 }

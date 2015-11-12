@@ -31,6 +31,6 @@ public class SoftCheckTextMatchingCommand extends CheckTextMatchingCommand {
 
     @Override
     protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-        return softly.assertThat((Boolean) args[0]);
+        return getSoftAssertion().assertThat((Boolean) args[0]);
     }
 }

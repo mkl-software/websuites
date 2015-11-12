@@ -67,7 +67,7 @@ public @interface WebSuites {
      * The elements of this list are string identifiers of browsers, like "<b>ff</b>" or
      * "<b>chrome</b>".
      * </p>
-     * that come from {@link com.mkl.websuites.config.BrowserConfig annotation.
+     * that come from {@link com.mkl.websuites.config.BrowserConfig} annotation.
      * <p>
      * By default three identifiers are available:
      * </p>

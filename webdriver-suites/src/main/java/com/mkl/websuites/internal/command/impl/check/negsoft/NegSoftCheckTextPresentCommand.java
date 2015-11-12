@@ -35,7 +35,7 @@ public class NegSoftCheckTextPresentCommand extends NegCheckTextPresentCommand {
     @SuppressWarnings("unchecked")
     @Override
     protected AbstractAssert<?, ?> buildAssertion(Object... args) {
-        return softly.assertThat((List<WebElement>) args[0]);
+        return getSoftAssertion().assertThat((List<WebElement>) args[0]);
     }
 
 }

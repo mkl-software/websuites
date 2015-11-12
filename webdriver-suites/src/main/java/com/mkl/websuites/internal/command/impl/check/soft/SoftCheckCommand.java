@@ -37,7 +37,7 @@ public class SoftCheckCommand extends CheckCommand {
 
     @Override
     protected void fail(String message) {
-        CommandUtils.softFail(softly, message);
+        CommandUtils.softFail(getSoftAssertion(), message);
     }
 
 }

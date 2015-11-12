@@ -46,7 +46,7 @@ public abstract class BaseCommand implements Command, SourceInfoHolder {
 
     private static int webElementWaitTimeout = Integer.MIN_VALUE;
 
-    protected SoftAssertions softly = new SoftAssertions();
+    private static SoftAssertions softly = new SoftAssertions();
 
 
     @Override
@@ -140,5 +140,15 @@ public abstract class BaseCommand implements Command, SourceInfoHolder {
 
     public static synchronized void setWebElementWaitTimeout(int webElementWaitTimeout) {
         BaseCommand.webElementWaitTimeout = webElementWaitTimeout;
+    }
+
+
+
+    protected static synchronized SoftAssertions getSoftAssertion() {
+        return softly;
+    }
+    
+    protected static synchronized void resetSoftAssertion() {
+        softly = new SoftAssertions();
     }
 }

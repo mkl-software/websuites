@@ -58,7 +58,7 @@ public abstract class AbstractCheck extends BaseCommand {
      * @return
      */
     protected AbstractAssert<?, ?> soft(Object... args) {
-        return softly.assertThat((String) args[0]);
+        return getSoftAssertion().assertThat((String) args[0]);
     }
 
 }
