@@ -16,6 +16,7 @@
 package com.mkl.websuites.internal.command.impl.key;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
@@ -38,7 +39,7 @@ public class PressCommand extends BaseCommand {
     @Override
     protected void runStandardCommand() {
         Actions action = new Actions(browser);
-        String[] keyTokens = keyCombination.trim().toUpperCase().split("-");
+        String[] keyTokens = keyCombination.trim().toUpperCase(Locale.getDefault()).split("-");
         for (String key : keyTokens) {
             if (isModifier(key)) {
                 action = action.keyUp(keyFromModifier(key));
@@ -51,7 +52,7 @@ public class PressCommand extends BaseCommand {
 
     private CharSequence keyFromString(String key) {
         if (key.length() == 1) {
-            return key.toLowerCase();
+            return key.toLowerCase(Locale.getDefault());
         } else {
             try {
                 return Keys.valueOf(key);

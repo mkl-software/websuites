@@ -42,7 +42,7 @@ public class IntegerNumberParamValidator extends SingleValueValidator {
     public void validateParam(String paramValue) {
 
         try {
-            Integer value = Integer.valueOf(paramValue);
+            Integer value = Integer.parseInt(paramValue);
             if (value < lowerRange || value > upperRange) {
                 throw new WebSuitesException("Integer value for param " + paramName + " must be between " + lowerRange
                         + " and " + upperRange);

@@ -46,6 +46,7 @@ import com.mkl.websuites.command.ParameterizedCommand;
 import com.mkl.websuites.internal.WebSuitesException;
 import com.mkl.websuites.internal.command.impl.flow.repeat.RepeatHandler;
 import com.mkl.websuites.internal.command.impl.validator.SampleDataProvider;
+import com.mkl.websuites.itests.web.core.TestUtils;
 
 
 
@@ -66,6 +67,7 @@ public class RepeatControlFlowHandlerTest {
             @Mock
             void populateBrowser() {}
         };
+        TestUtils.resetWebSuitesConfig();
     }
 
 

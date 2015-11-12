@@ -16,6 +16,7 @@
 package com.mkl.websuites.internal.command.impl.flow.iff;
 
 import com.mkl.websuites.WebSuitesUserProperties;
+import com.mkl.websuites.internal.WebSuitesException;
 
 public class PropertyValueCondition implements IfCondition {
 
@@ -33,6 +34,10 @@ public class PropertyValueCondition implements IfCondition {
 
     @Override
     public boolean isConditionMet() {
+        
+        if (valueAcceptor == null) {
+            throw new WebSuitesException("Value acceptor must be set before checking a condition");
+        }
 
         WebSuitesUserProperties props = WebSuitesUserProperties.get();
         String actualValue = props.getProperty(propertyName);

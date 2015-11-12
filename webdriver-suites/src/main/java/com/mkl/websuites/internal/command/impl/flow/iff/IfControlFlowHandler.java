@@ -16,6 +16,7 @@
 package com.mkl.websuites.internal.command.impl.flow.iff;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -174,8 +175,10 @@ public class IfControlFlowHandler extends ControlFlowHandler {
     }
 
     protected IfCondition buildCustomCondition() {
+        
         IfCondition ifStatement;
         String conditionClass = parameterMap.get("condition");
+        
         try {
             Class<?> klass = Class.forName(conditionClass);
             if (parameterMap.containsKey("params")) {
@@ -185,7 +188,10 @@ public class IfControlFlowHandler extends ControlFlowHandler {
             } else {
                 ifStatement = (IfCondition) klass.newInstance();
             }
-        } catch (Exception e) {
+            
+        } catch (RuntimeException | ClassNotFoundException | NoSuchMethodException
+                | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            
             log.error(e.getLocalizedMessage());
             throw new WebSuitesException("Cannot instantiate 'if' condition class " + conditionClass
                     + " from parameters: " + parameterMap + ".\nMake sure that the class "

@@ -30,7 +30,7 @@ public class WaitForAlertCommand extends BaseCommand {
     @Override
     protected void runStandardCommand() {
 
-        WebDriverWait wait = new WebDriverWait(browser, webElementWaitTimeout);
+        WebDriverWait wait = new WebDriverWait(browser, getWebElementWaitTimeout());
 
         wait.until(ExpectedConditions.alertIsPresent());
     }

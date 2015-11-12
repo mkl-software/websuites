@@ -56,7 +56,7 @@ public class SelectByIndexCommand extends OperationOnWebElement {
             fail(String.format("Element picked by selector '%s' must be a SELECT, but is '%s'", by, elem.getTagName()));
         }
 
-        int index = Integer.valueOf(parameterMap.get(INDEX_PARAM));
+        int index = Integer.parseInt(parameterMap.get(INDEX_PARAM));
 
         Select select = new Select(elem);
 

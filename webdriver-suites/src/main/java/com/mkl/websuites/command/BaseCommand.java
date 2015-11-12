@@ -44,16 +44,16 @@ public abstract class BaseCommand implements Command, SourceInfoHolder {
 
     private SourceLine sourceLine;
 
-    protected static int webElementWaitTimeout = Integer.MIN_VALUE;
+    private static int webElementWaitTimeout = Integer.MIN_VALUE;
 
-    protected static SoftAssertions softly = new SoftAssertions();
+    protected SoftAssertions softly = new SoftAssertions();
 
 
     @Override
     public void run() {
 
         if (webElementWaitTimeout == Integer.MIN_VALUE) {
-            webElementWaitTimeout = WebSuitesConfig.get().site().waitTimeout();
+            setWebElementWaitTimeout(WebSuitesConfig.get().site().waitTimeout());
         }
 
         browser = ServiceFactory.get(BrowserController.class).getWebDriver();
@@ -124,5 +124,17 @@ public abstract class BaseCommand implements Command, SourceInfoHolder {
     @Override
     public void setCommandSourceLine(SourceLine sourceLine) {
         this.sourceLine = sourceLine;
+    }
+
+
+
+    public static int getWebElementWaitTimeout() {
+        return webElementWaitTimeout;
+    }
+
+
+
+    public static synchronized void setWebElementWaitTimeout(int webElementWaitTimeout) {
+        BaseCommand.webElementWaitTimeout = webElementWaitTimeout;
     }
 }

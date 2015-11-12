@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -114,11 +115,11 @@ public abstract class ParameterizedCommand extends BaseCommand {
         }
 
         Map<String, String> populatedMap = new HashMap<String, String>();
-        for (String key : parameterMap.keySet()) {
+        for (Entry<String, String> entry : parameterMap.entrySet()) {
 
-            String origValue = parameterMap.get(key);
+            String origValue = entry.getValue();
             String withPopulatedProperties = populateStringWithProperties(origValue);
-            populatedMap.put(key, withPopulatedProperties);
+            populatedMap.put(entry.getKey(), withPopulatedProperties);
 
         }
         parameterMap = populatedMap;

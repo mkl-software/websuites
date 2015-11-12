@@ -27,11 +27,11 @@ public class SourceLine {
 
     private int lineNumber;
 
-
     private SourceLine parent;
 
+    
     public String printSourceInfo() {
-        return String.format("Scenario file: %s\nLine number: %s\nLine: %s", file, lineNumber, line);
+        return String.format("Scenario file: %s%nLine number: %s%nLine: %s", file, lineNumber, line);
     }
 
     public SourceLine(String line, String file, int lineNumber) {

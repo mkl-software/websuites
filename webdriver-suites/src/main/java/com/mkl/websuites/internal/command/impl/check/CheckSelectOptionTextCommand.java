@@ -23,6 +23,7 @@ import java.util.Map;
 
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.ObjectArrayAssert;
+import org.assertj.core.util.Lists;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -40,7 +41,7 @@ public class CheckSelectOptionTextCommand extends OperationOnWebElement {
 
     protected String expectedSelectText;
 
-    protected List<WebElement> selectOptions;
+    protected List<WebElement> selectOptions = Lists.emptyList();
 
     protected List<WebElement> allSelectedOptions;
 

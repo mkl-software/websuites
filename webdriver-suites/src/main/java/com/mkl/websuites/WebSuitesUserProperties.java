@@ -16,11 +16,11 @@
 package com.mkl.websuites;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import com.mkl.websuites.config.SiteConfig;
@@ -50,11 +50,14 @@ public class WebSuitesUserProperties {
     private static WebSuitesUserProperties instance;
 
     
+    private Map<String, String> globalProperties = new HashMap<String, String>();
+
+
     /**
      * Retrieves global properties.
      * @return  global properties.
      */
-    public static WebSuitesUserProperties get() {
+    public static synchronized WebSuitesUserProperties get() {
         // late initialization + must be able to be rest for unit tests
         if (instance == null) {
             instance = new WebSuitesUserProperties();
@@ -62,10 +65,6 @@ public class WebSuitesUserProperties {
         return instance;
 
     }
-
-
-
-    private Map<String, String> globalProperties = new HashMap<String, String>();
 
 
 
@@ -93,13 +92,13 @@ public class WebSuitesUserProperties {
 
 
     private void populateUserFileProperties() {
-        String file = WebSuitesConfig.get().propertiesFileName();
-        if (!file.isEmpty()) {
-            try {
-                load(new FileInputStream(file));
-            } catch (FileNotFoundException e) {
+        String fileName = WebSuitesConfig.get().propertiesFileName();
+        if (!fileName.isEmpty()) {
+            try(FileInputStream source = new FileInputStream(fileName)) {
+                load(source);
+            } catch (IOException e) {
                 throw new WebSuitesException("Cannot load user properties from specified file name "
-                        + "propertiesFileName=" + file , e);
+                        + "propertiesFileName=" + fileName , e);
             }
         }
     }
@@ -140,8 +139,8 @@ public class WebSuitesUserProperties {
      */
     public void populateFrom(Map<String, String> properties) {
 
-        for (String key : properties.keySet()) {
-            globalProperties.put(key, properties.get(key));
+        for (Entry<String, String> entry : properties.entrySet()) {
+            globalProperties.put(entry.getKey(), entry.getValue());
         }
     }
 
@@ -213,7 +212,7 @@ public class WebSuitesUserProperties {
 
         int numericValue;
         try {
-            numericValue = Integer.valueOf(value);
+            numericValue = Integer.parseInt(value);
         } catch (NumberFormatException e) {
 
             String msg = "Error while converting numeric value for property: \"" + name + "\" with value: " + value;

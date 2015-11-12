@@ -24,10 +24,10 @@ public class CommonUtils {
 
 
     public static String populateStringWithProperties(String origValue) {
-        String populated = new String(origValue);
         String regex = "\\$\\{(.*?)\\}";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(origValue);
+        String populated = origValue;
         while (matcher.find()) {
             String propName = matcher.group(1);
             String value = WebSuitesUserProperties.get().getProperty(propName);

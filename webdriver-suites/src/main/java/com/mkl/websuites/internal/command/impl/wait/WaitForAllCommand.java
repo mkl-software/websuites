@@ -79,19 +79,19 @@ public class WaitForAllCommand extends ControlFlowHandler {
 
         int retryMaxCount;
         try {
-            retryMaxCount = Integer.valueOf(parameterMap.get(RETRY_COUNT));
+            retryMaxCount = Integer.parseInt(parameterMap.get(RETRY_COUNT));
         } catch (NumberFormatException e2) {
             retryMaxCount = DEFAUL_RETRY_COUNT;
         }
 
         int retryPause;
         try {
-            retryPause = Integer.valueOf(parameterMap.get(RETRY_PAUSE));
+            retryPause = Integer.parseInt(parameterMap.get(RETRY_PAUSE));
         } catch (NumberFormatException e2) {
             retryPause = DEFAUL_RETRY_PAUSE;
         }
 
-        int retryTimeout = Integer.valueOf(parameterMap.get(RETRY_TIMEOUT));
+        int retryTimeout = Integer.parseInt(parameterMap.get(RETRY_TIMEOUT));
 
         int retryCount = 0;
         long elapsedTime;

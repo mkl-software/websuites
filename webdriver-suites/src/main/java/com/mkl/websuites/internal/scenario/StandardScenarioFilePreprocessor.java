@@ -15,10 +15,11 @@
  */
 package com.mkl.websuites.internal.scenario;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,29 +45,29 @@ public class StandardScenarioFilePreprocessor implements ScenarioFilePreprocesso
     @Override
     public List<SourceLine> preprocessScenarioFile(File scenarioFile) {
 
-
-        try (BufferedReader br = new BufferedReader(new FileReader(scenarioFile))) {
-
-            String line;
-
+        try {
+            
+            List<String> fileLines = Files.readAllLines(Paths.get(scenarioFile.getAbsolutePath()), StandardCharsets.UTF_8);
+            
             List<SourceLine> lines = new ArrayList<SourceLine>();
-
+            
             int lineNumber = 0;
-
-            while ((line = br.readLine()) != null) {
-
+            
+            for (String line : fileLines) {
+    
                 lineNumber++;
                 line = line.trim();
                 if (!line.isEmpty() && !line.startsWith("#")) {
 
                     lines.add(new SourceLine(line, scenarioFile.getAbsolutePath(), lineNumber));
                 }
+            
             }
 
             return lines;
-
+            
         } catch (IOException e) {
-
+            
             String msg =
                     "Error while reading scenario file: " + scenarioFile.getAbsolutePath() + ", message: "
                             + e.getLocalizedMessage();

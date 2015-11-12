@@ -93,10 +93,7 @@ public class ServiceFactory {
 
         try {
             Method factoryMethod = instanceMap.get(serviceClass).getDeclaredMethod("getInstance");
-            if (factoryMethod == null) {
-                throw new WebSuitesException("Service " + serviceClass + " must implement public "
-                        + "static getInstance() factory method to provide service instances.");
-            }
+            
             return (T) factoryMethod.invoke(null);
 
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException

@@ -72,7 +72,7 @@ public class RepeatControlFlowHandler extends ControlFlowHandler implements Subt
 
     private void doRepeatNTimes() {
         WebSuitesUserProperties props = WebSuitesUserProperties.get();
-        int n = Integer.valueOf(parameterMap.get("times"));
+        int n = Integer.parseInt(parameterMap.get("times"));
         String counterProperty = "1";
         if (parameterMap.containsKey("counter")) {
             counterProperty = parameterMap.get("counter");

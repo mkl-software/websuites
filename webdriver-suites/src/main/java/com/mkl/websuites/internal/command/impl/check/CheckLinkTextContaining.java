@@ -18,7 +18,6 @@ package com.mkl.websuites.internal.command.impl.check;
 import org.assertj.core.api.StringAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
 
 import com.mkl.websuites.command.CommandDescriptor;
 
@@ -33,7 +32,6 @@ public class CheckLinkTextContaining extends CheckLinkTextCommand {
 
 
     protected String actualLinkText;
-    protected WebElement foundElem;
 
 
     @Override

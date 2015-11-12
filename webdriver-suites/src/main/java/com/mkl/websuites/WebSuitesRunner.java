@@ -250,7 +250,7 @@ public class WebSuitesRunner {
 
     private void configureSingleNonBrowserSuite(TestSuite suite, List<Test> tests) {
 
-        currentlyDefiningBrowser = "none"; // TODO: move it to a TestContext
+        setCurrentlyDefiningBrowser("none"); // TODO: move it to a TestContext
         TestSuite browserSuite = new TestSuite("Running without any browser");
         addTestsToBrowserSuite(tests, browserSuite);
         suite.addTest(browserSuite);
@@ -260,7 +260,7 @@ public class WebSuitesRunner {
 
     private TestSuite buildBrowserSuite(String browser) {
 
-        currentlyDefiningBrowser = browser;
+        setCurrentlyDefiningBrowser(browser);
 
         ServiceFactory.get(BrowserController.class).addBrowser(browser);
 
@@ -312,11 +312,15 @@ public class WebSuitesRunner {
 
 
     /**
-     * To allow quickly identify in the code for which browser are tests currently defined for.
+     * To allow quickly identification in the code for which browser are tests currently defined for.
      * 
      * @return
      */
     public static String getCurrentlyDefiningBrowser() {
         return currentlyDefiningBrowser;
+    }
+
+    private static synchronized void setCurrentlyDefiningBrowser(String currentlyDefiningBrowser) {
+        WebSuitesRunner.currentlyDefiningBrowser = currentlyDefiningBrowser;
     }
 }

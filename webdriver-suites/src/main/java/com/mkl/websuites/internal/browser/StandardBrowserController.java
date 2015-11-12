@@ -78,8 +78,6 @@ public class StandardBrowserController implements BrowserController {
 
         globalTimeout = config.site().waitTimeout();
 
-
-
         // populate default browsers config:
         BrowsersDefinition defaultDefinition = DefaultBrowserConfig.class.getAnnotation(BrowsersDefinition.class);
 
@@ -152,7 +150,10 @@ public class StandardBrowserController implements BrowserController {
 
     @Override
     public void addBrowser(String browser) {
-        browsersToRun.offer(browser);
+        if (!browsersToRun.offer(browser)) {
+            // won't happen, but findbugs complains to check it...
+            throw new WebSuitesException("Cannot add browser to the queue, please rerun the test");
+        }
         localBrowserNameForTestInit = browser;
     }
 

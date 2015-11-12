@@ -122,7 +122,7 @@
 
 	<profiles>
 		<profile>
-			<id>checkstyle</id>
+			<id>quality.check</id>
 			<activation>
 				<!-- to suppress Eclipse checkstyle builder errors for Luna -->
 				<activeByDefault>false</activeByDefault>
@@ -182,7 +182,7 @@
 									<goal>check</goal>
 								</goals>
 								<configuration>
-									<failOnError>false</failOnError>
+									<failOnError>true</failOnError>
 								</configuration>
 							</execution>
 						</executions>

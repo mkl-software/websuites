@@ -45,6 +45,7 @@ import com.mkl.websuites.internal.CommonUtils;
 import com.mkl.websuites.internal.WebSuitesException;
 import com.mkl.websuites.internal.command.impl.misc.SetPropCommand;
 import com.mkl.websuites.internal.services.ServiceFactory;
+import com.mkl.websuites.itests.web.core.TestUtils;
 
 
 
@@ -56,14 +57,11 @@ public class WebSuitesUserPropertiesTest {
     public FluentExpectedException expectedException = FluentExpectedException.none();
     
 
-    @WebSuites
-    public static class MockRunner extends WebSuitesRunner {
-    }
 
     @BeforeClass
     public static void init() {
+        TestUtils.resetWebSuitesConfig();
         Deencapsulation.setField(ServiceFactory.class, "isInitialized", false);
-        WebSuitesConfig.initializeWebsuitesConfig(MockRunner.class);
         ServiceFactory.init();
     }
     
@@ -71,7 +69,7 @@ public class WebSuitesUserPropertiesTest {
     @Before
     public void reset() {
         Deencapsulation.setField(WebSuitesUserProperties.class, "instance", null);
-        WebSuitesConfig.initializeWebsuitesConfig(MockRunner.class);
+        TestUtils.resetWebSuitesConfig();
     }
 
 

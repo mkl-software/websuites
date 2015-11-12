@@ -16,6 +16,7 @@
 package com.mkl.websuites.internal.command;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -54,7 +55,7 @@ public class StandardCommandBuilder implements CommandBuilder {
 
     private static final String DEFAULT_COMMAND_PACKAGE = "com.mkl.websuites.internal.command.impl";
 
-    public static StandardCommandBuilder getInstance() {
+    public static synchronized StandardCommandBuilder getInstance() {
         if (instance == null) {
             instance = new StandardCommandBuilder();
         }
@@ -85,7 +86,7 @@ public class StandardCommandBuilder implements CommandBuilder {
         if (!commandTypesMap.containsKey(commandName)) {
             throw new WebSuitesException(String.format("Command named '%s' doesn't have corresponding implementation, "
                     + "please make sure there is a class annotated with @CommandDescriptor and located in the "
-                    + "command scan path.\nProblem found in source file:\n%s", commandName,
+                    + "command scan path.%nProblem found in source file:%n%s", commandName,
                     sourceLine.printSourceInfo()));
         }
 
@@ -285,8 +286,12 @@ public class StandardCommandBuilder implements CommandBuilder {
 
             if (resolvableWithValueOf.contains(argType)) {
                 try {
+                    
                     argumentValues.add(argType.getMethod("valueOf", String.class).invoke(null, argument));
-                } catch (Exception e) {
+                    
+                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+                        | NoSuchMethodException | SecurityException e) {
+                    
                     throw new WebSuitesException("Error while converting command parameter: cannot cast value "
                             + "of argument '" + argument + "' to type " + argType + " with standard valueOf() call");
                 }

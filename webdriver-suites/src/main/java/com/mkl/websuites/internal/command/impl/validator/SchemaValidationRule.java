@@ -69,7 +69,7 @@ public class SchemaValidationRule {
             return miniDocumentation;
         }
 
-        return String.format("\nparameter \"%s\" with mandatory params %s " + "and optional params %s",
+        return String.format("%nparameter \"%s\" with mandatory params %s " + "and optional params %s",
                 topLevelRequiredElement, mandatoryElements.toString(), optionalElements.toString());
     }
 }

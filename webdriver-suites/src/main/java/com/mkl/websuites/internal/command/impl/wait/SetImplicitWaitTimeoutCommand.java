@@ -35,6 +35,7 @@ public class SetImplicitWaitTimeoutCommand extends BaseCommand {
     @Override
     protected void runStandardCommand() {
         browser.manage().timeouts().implicitlyWait(newTimeout, TimeUnit.SECONDS);
+        setWebElementWaitTimeout(newTimeout);
     }
 
 }

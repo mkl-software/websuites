@@ -31,6 +31,9 @@ import mockit.MockUp;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
+import com.mkl.websuites.WebSuites;
+import com.mkl.websuites.WebSuitesRunner;
+import com.mkl.websuites.config.WebSuitesConfig;
 import com.mkl.websuites.internal.tests.ScenarioFileTest;
 
 public class TestUtils {
@@ -114,5 +117,15 @@ public class TestUtils {
                 return invocation.proceed();
             }
         };
+    }
+    
+    
+    @WebSuites
+    public static class RunnerWithDefaultWebSuitesConfig extends WebSuitesRunner {
+    }
+    
+    public static void resetWebSuitesConfig() {
+        WebSuitesConfig.initializeWebsuitesConfig(RunnerWithDefaultWebSuitesConfig.class);
+        
     }
 }
