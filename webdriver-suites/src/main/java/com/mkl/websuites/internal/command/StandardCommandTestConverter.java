@@ -15,6 +15,8 @@
  */
 package com.mkl.websuites.internal.command;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -240,7 +242,7 @@ public class StandardCommandTestConverter implements CommandTestConverter {
 
         final String currentlyDefiningBrowser = WebSuitesRunner.getCurrentlyDefiningBrowser();
 
-        final String testName = masterScenarioFileName + " [" + currentlyDefiningBrowser + "]";
+        final String testName = buildTestName() + " [" + currentlyDefiningBrowser + "]";
 
         final List<Command> localCommandsToRunList = new ArrayList<Command>();
         localCommandsToRunList.addAll(inputCommandList);
@@ -268,6 +270,14 @@ public class StandardCommandTestConverter implements CommandTestConverter {
         tests.add(test);
 
         return tests;
+    }
+
+
+
+    protected String buildTestName() {
+        // TODO: make it configurable how paths are displayed
+        Path path = Paths.get(masterScenarioFileName);
+        return path.isAbsolute() ? path.getName(path.getNameCount() - 1).toString() : masterScenarioFileName;
     }
 
 }
