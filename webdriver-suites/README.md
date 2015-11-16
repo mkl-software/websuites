@@ -22,34 +22,54 @@
 
 # Websuites in one picture
 
-![](http://mkl-software.com/static/websuites-img/1.PNG "Websuite overview")
+![](http://mkl-software.com/static/websuites-img/websuites-overview-large.png "Websuite overview")
 
-
+Click [here](http://mkl-software.com/static/websuites-img/websuites-overview-large.png "Large image") to see large image. 
 
 # Quick tutorial
 
 ## Simplest runner
 Let's start witn an empty Java project. To create a runner class you just need to extends WebSuiteRunner.
+*SimplestRunner.java*
 ```java
-import com.mkl.websuites.WebSuiteRunner;
+import com.mkl.websuites.WebSuitesRunner;
 
 public class SimplestRunner extends WebSuitesRunner {}
 ```
 
-Now this class can be launched as a JUnit test. It defines an empty test suite, but if you have FireFox installed, it will open the browser as FireFox is preconfigured:
+Now this class can be launched as a JUnit test. It defines an empty test suite, so it won't open any browser:
+
+![](http://mkl-software.com/static/websuites-img/1.png "Simplest runner")
+
+## Default Firefox test
+
+Firefox driver is available OOTB, so if you have Firefox installed you can run an actual web test with as little configuration as this:
+
+*WebRunner.java*
+```java
+import com.mkl.websuites.WebSuitesRunner;
+
+@WebSuites(browsers = "ff")
+public class WebRunner extends WebSuitesRunner {}
+```
+
+Again, the test suite is empty, but now this test will open Firefox and then close it:
+
+![](http://mkl-software.com/static/websuites-img/2.png "Empty suite in a browser")
 
 ## Sample Java test case
 
-Let's define simple test case in Java:
+Let's define a simple test case in Java to run in a browser:
 
+*RunnerWithTest.java*:
 ```java
 import com.mkl.websuites.WebSuiteRunner;
 import com.mkl.websuites.config.TestClass;
 
-@WebSuites(tests = @TestClass(SampleWebTest.class))
+@WebSuites(tests = @TestClass(SampleWebTest.class), browsers = "ff")
 public class RunnerWithTest extends WebSuitesRunner {}
 ```
-
+*SampleWebTest.java*:
 ```java
 import com.mkl.websuites.MultiBrowserTestCase;
 import org.junit.Assert;
@@ -57,39 +77,46 @@ import org.junit.Assert;
 public class SampleWebTest extends MultiBrowserTestCase {
     protected void runWebTest() {
         // "browser" fields holds WebDriver, lots of userful API available here 
-        browser.get("myhost.com/myApp");
+        browser.get("http://google.com");
         Assert.assertEquals("Google", browser.getTitle());
     }
 }
 ```
 
-## Run for more browsers
-Now let's run this test for both Firefox and Chrome. To do this we need define a Chrome browser by specifying a path to the web driver:
+The test is automatically detected and run in Firefox:
 
+![](http://mkl-software.com/static/websuites-img/3.png "Simplest runner")
+
+## Run in many browsers
+Now let's run the same test for both Firefox and Chrome. To do this we need to define a Chrome browser by specifying a path to its web driver:
+
+*RunnerForManyBrowsers.java*:
 ```java
 import com.mkl.websuites.WebSuiteRunner;
 import com.mkl.websuites.config.TestClass;
 import com.mkl.websuites.config.BrowserConfig;
 
 @WebSuites(
-    // "ff" is an ID of Firefox browser which is availably by default:
-    browsers = {"ff", "chrome"}
+    // "ff" is an ID of Firefox browser which is available by default:
+    browsers = {"ff", "chrome"},
     tests = @TestClass(SampleWebTest.class),
     browserConfiguration = @BrowserConfig(
         id = "chrome",
         displayName = "Chrome",
         browserType = BrowserConifg.BrowserType.CHROME,
-        webDriverPath = "src/test/resources/ChromeDriver.exe"<
+        webDriverPath = "src/test/resources/ChromeDriver.exe"
     )
 )
 public class RunnerForManyBrowsers extends WebSuitesRunner {}
 ```
 When we launch this suite, we will see a SampleWebTest being run twice:
  
+![](http://mkl-software.com/static/websuites-img/4.png "Same test in two browsers")
+
  You can define as many browser as you want and then easily set browers list to run tests against! For example you can define different runner for you dev, test, prod or CI environments.
  
 ## Sample scenario test case
-The actual power of *websuites* comes when using scenario files. You can write text commands that wrap WebDriver logic. This allows to engage non-programming people in the development, like QA folks.
+The actual power of *Websuites* comes when using scenario files. You can write text commands that wrap WebDriver logic. This allows to engage non-programming people (like QA folks) in the development of UI tests.
 The scenario files are plain text files with TAB-seperated syntax. First token is always a command name and then there are parameters. This is a sample scenario file:
 
 *sampleScenario.scn*:
@@ -110,7 +137,7 @@ press                       ENTER
 checkText                   Web Browser Automation
 checkLinkHrefContaining     wikipedia
 ```
-Detailed command reference is avaiable here (commnd guide will appear soon).
+Detailed command reference will be avaiable soon.
 Now just create a runner:
 
 *RunnerWithScenarioFile.java*:
