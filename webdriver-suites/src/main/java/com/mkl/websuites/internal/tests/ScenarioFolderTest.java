@@ -17,6 +17,8 @@ package com.mkl.websuites.internal.tests;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -24,6 +26,8 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.xml.ws.WebServiceException;
+
+import org.apache.commons.collections.EnumerationUtils;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -40,36 +44,43 @@ public class ScenarioFolderTest extends MultiBrowserSuite {
 
     public ScenarioFolderTest(String path, boolean ignoreSubfolders, SortingStrategy sortingStrategy) {
 
+        // "smuggling" parameters from JUnit constructor invocation
         super(path, ignoreSubfolders, sortingStrategy);
     }
 
 
 
+    @SuppressWarnings("unchecked")
     @Override
     protected List<Test> defineTests() {
 
-        String path = (String) genericParams[0];
+        // extracted "smuggled" parameters
+        String stringPath = (String) genericParams[0];
         ignoreSubfolders = (boolean) genericParams[1];
         // SortingStrategy sortingStrategy = (SortingStrategy) genericParams[2];
 
-        List<Test> topLevelFolderSuites = new ArrayList<Test>();
+        Path path = Paths.get(stringPath);
+        
+        List<Test> topLevelFolderTests = new ArrayList<Test>();
 
-        TestSuite topLeveLFolderSuite = new TestSuite(path);
+        TestSuite topLeveLFolderSuite = new TestSuite(stringPath);
 
         processRecursivelyFolder(path, topLeveLFolderSuite);
 
-        topLevelFolderSuites.add(topLeveLFolderSuite);
+        topLevelFolderTests.addAll(EnumerationUtils.toList(topLeveLFolderSuite.tests()));
 
-        return topLevelFolderSuites;
+        return topLevelFolderTests;
     }
 
 
 
-    private void processRecursivelyFolder(String folderPath, TestSuite parentSuite) {
+    private void processRecursivelyFolder(Path folderPath, TestSuite parentSuite) {
 
-        TestSuite currentFolderSuite = new TestSuite(folderPath);
+        TestSuite currentFolderSuite = new TestSuite(folderPath.subpath(folderPath.getNameCount() - 1,
+                folderPath.getNameCount()).toString());
+//        TestSuite currentFolderSuite = new TestSuite(folderPath.toString());
 
-        List<Test> testsInCurrentFolder = processScenarioFilesInFolder(folderPath);
+        List<Test> testsInCurrentFolder = processScenarioFilesInFolder(folderPath.toString());
 
         for (Test test : testsInCurrentFolder) {
             currentFolderSuite.addTest(test);
@@ -81,7 +92,7 @@ public class ScenarioFolderTest extends MultiBrowserSuite {
             return;
         }
 
-        File folder = new File(folderPath);
+        File folder = new File(folderPath.toString());
 
         File[] nestedFolders = folder.listFiles(new FileFilter() {
 
@@ -101,7 +112,7 @@ public class ScenarioFolderTest extends MultiBrowserSuite {
 
         for (File nested : nestedFolders) {
 
-            processRecursivelyFolder(nested.getAbsolutePath(), currentFolderSuite);
+            processRecursivelyFolder(Paths.get(nested.toURI()), currentFolderSuite);
         }
 
     }
@@ -127,6 +138,11 @@ public class ScenarioFolderTest extends MultiBrowserSuite {
 
 
         File folder = new File(folderPath);
+        
+        if (!folder.exists()) {
+            throw new WebServiceException(String.format("Specified root folder in @Folder(path='%s') does not exist "
+                    + "(actual path is '%s')", folderPath, folder.getAbsolutePath()));
+        }
 
         ScenarioFileProcessor scenarioFileProcessor = ServiceFactory.get(ScenarioFileProcessor.class);
 

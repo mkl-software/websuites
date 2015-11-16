@@ -20,11 +20,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
+import junit.framework.TestSuite;
 import mockit.Deencapsulation;
 import mockit.Invocation;
 import mockit.Mock;
 import mockit.MockUp;
 
+import org.apache.commons.collections.EnumerationUtils;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
@@ -33,8 +35,6 @@ import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesRunner;
 import com.mkl.websuites.config.Folder;
 import com.mkl.websuites.internal.runner.InternalWebSuitesRunner;
-import com.mkl.websuites.internal.tests.ScenarioFolderTest;
-import com.mkl.websuites.internal.tests.SortingStrategy;
 import com.mkl.websuites.itests.web.core.CommandInvocationVerifier;
 import com.mkl.websuites.itests.web.core.TestUtils;
 
@@ -149,6 +149,22 @@ public class ScenarioFolderTestTest {
         // then
         TestUtils.checkCorrectResultRunsCount(result, BASE_RUN_COUNT_FOR_NONE_BROWSER_TEST);
         commandVerifier.checkRemaining();
+    }
+    
+    
+    @Test
+    public void shouldFixRunOnlyOneRootFolderSuite() throws Throwable {
+        //given
+        ScenarioFolderTest sut = new ScenarioFolderTest(FOLDERS_BASE + "1", true, SortingStrategy.APLHABETICAL);
+        //when
+        List<junit.framework.Test> definedTests = sut.defineTests();
+        //then
+        assertThat(definedTests).hasSize(1);
+        assertThat(definedTests.get(0)).isInstanceOf(TestSuite.class);
+        TestSuite root = (TestSuite) definedTests.get(0);
+        assertThat(root.getName()).endsWith("1");
+        List<?> tests = EnumerationUtils.toList(root.tests());
+        assertThat(tests).hasSize(4);
     }
 
 
