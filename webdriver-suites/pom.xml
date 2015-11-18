@@ -1,31 +1,44 @@
-<!--
-
-    Copyright 2015 MKL Software
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
--->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.mkl</groupId>
-	<artifactId>webdriver-suites</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>com.mklsoftware</groupId>
+	<artifactId>websuites</artifactId>
+	<version>0.9.0-SNAPSHOT</version>
+
 	<packaging>jar</packaging>
 
-	<name>webdriver-suites</name>
-	<url>http://maven.apache.org</url>
+	<name>websuites</name>
+	<description>
+		Open-source library for a convenient JUnit and Selenium WebDriver integration. It provides a custom 
+		JUnit runner to flexibly define complex test suites and then run them against multiple browsers. 
+	</description>
+
+	<url>http://[github]</url>
+
+	<scm>
+		<url>[github git]</url>
+	</scm>
+
+	<contributors>
+		<contributor>
+			<name>Marcin Klosinski</name>
+			<email>m.klosinski@mkl-software.com</email>
+			<organization>MKL Software</organization>
+		</contributor>
+	</contributors>
+
+	<organization>
+		<name>MKL Software</name>
+	</organization>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -201,6 +214,34 @@
 								<configuration>
 									<failOnError>true</failOnError>
 								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>build-jar</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<configuration>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						</configuration>
+						<executions>
+							<execution>
+								<id>make-assembly</id> <!-- this is used for inheritance merges -->
+								<phase>package</phase> <!-- bind to the packaging phase -->
+								<goals>
+									<goal>single</goal>
+								</goals>
 							</execution>
 						</executions>
 					</plugin>
