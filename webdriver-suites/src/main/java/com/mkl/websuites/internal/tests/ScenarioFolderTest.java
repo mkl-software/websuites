@@ -40,7 +40,7 @@ public class ScenarioFolderTest extends MultiBrowserSuite {
 
     private boolean ignoreSubfolders;
 
-
+    private boolean isTopTest = true;
 
     public ScenarioFolderTest(String path, boolean ignoreSubfolders, SortingStrategy sortingStrategy) {
 
@@ -63,11 +63,13 @@ public class ScenarioFolderTest extends MultiBrowserSuite {
         
         List<Test> topLevelFolderTests = new ArrayList<Test>();
 
-        TestSuite topLeveLFolderSuite = new TestSuite(stringPath);
+        TestSuite tempRootSuite = new TestSuite(stringPath);
 
-        processRecursivelyFolder(path, topLeveLFolderSuite);
+        isTopTest = true;
+        processRecursivelyFolder(path, tempRootSuite);
 
-        topLevelFolderTests.addAll(EnumerationUtils.toList(topLeveLFolderSuite.tests()));
+        // fix for duplicated top folder
+        topLevelFolderTests.addAll(EnumerationUtils.toList(tempRootSuite.tests()));
 
         return topLevelFolderTests;
     }
@@ -76,9 +78,14 @@ public class ScenarioFolderTest extends MultiBrowserSuite {
 
     private void processRecursivelyFolder(Path folderPath, TestSuite parentSuite) {
 
-        TestSuite currentFolderSuite = new TestSuite(folderPath.subpath(folderPath.getNameCount() - 1,
+        TestSuite currentFolderSuite;
+        if (isTopTest) {
+            currentFolderSuite = new TestSuite(folderPath.toString());
+            isTopTest = false;
+        } else {
+            currentFolderSuite = new TestSuite(folderPath.subpath(folderPath.getNameCount() - 1,
                 folderPath.getNameCount()).toString());
-//        TestSuite currentFolderSuite = new TestSuite(folderPath.toString());
+        }
 
         List<Test> testsInCurrentFolder = processScenarioFilesInFolder(folderPath.toString());
 

@@ -32,7 +32,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.mkl.websuites.WebSuites;
 import com.mkl.websuites.WebSuitesUserProperties;
-import com.mkl.websuites.config.BrowserConifg;
+import com.mkl.websuites.config.BrowserConfig;
 import com.mkl.websuites.config.BrowsersDefinition;
 import com.mkl.websuites.internal.WebSuitesException;
 
@@ -81,16 +81,16 @@ public class StandardBrowserController implements BrowserController {
         // populate default browsers config:
         BrowsersDefinition defaultDefinition = DefaultBrowserConfig.class.getAnnotation(BrowsersDefinition.class);
 
-        BrowserConifg[] defaultBrowsers = defaultDefinition.browsers();
+        BrowserConfig[] defaultBrowsers = defaultDefinition.browsers();
 
-        BrowserConifg[] reusableBrowsers = new BrowserConifg[] {};
+        BrowserConfig[] reusableBrowsers = new BrowserConfig[] {};
 
         if (config.browserResusableConfiguration().isAnnotationPresent(BrowsersDefinition.class)) {
             reusableBrowsers =
                     config.browserResusableConfiguration().getAnnotation(BrowsersDefinition.class).browsers();
         }
 
-        BrowserConifg[] userBrowsers = config.browserConfiguration();
+        BrowserConfig[] userBrowsers = config.browserConfiguration();
 
         /*
          * Browser configuration order (each next overwrites previous one): 1. Default configuration
@@ -98,12 +98,12 @@ public class StandardBrowserController implements BrowserController {
          * browserConfiguration annotation
          */
 
-        BrowserConifg[] browsers = ArrayUtils.addAll(defaultBrowsers, reusableBrowsers);
+        BrowserConfig[] browsers = ArrayUtils.addAll(defaultBrowsers, reusableBrowsers);
         browsers = ArrayUtils.addAll(browsers, userBrowsers);
 
         // if specified explicitly, the config will get overwritten in this loop:
 
-        for (BrowserConifg browserConfig : browsers) {
+        for (BrowserConfig browserConfig : browsers) {
 
             browserDisplayNameMap.put(browserConfig.id(), browserConfig.displayName());
 
@@ -137,7 +137,7 @@ public class StandardBrowserController implements BrowserController {
 
 
 
-    protected void configureBrowser(String envKey, BrowserConifg browser, Class<?> driverClass) {
+    protected void configureBrowser(String envKey, BrowserConfig browser, Class<?> driverClass) {
 
         if (!envKey.isEmpty()) {
             System.setProperty(envKey, browser.webDriverPath());

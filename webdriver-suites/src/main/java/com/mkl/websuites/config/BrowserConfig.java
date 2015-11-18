@@ -51,7 +51,7 @@ import java.lang.annotation.RetentionPolicy;
  * @author Marcin Klosinski
  */
 @Retention(RetentionPolicy.RUNTIME)
-public @interface BrowserConifg {
+public @interface BrowserConfig {
 
     public enum BrowserType {
 

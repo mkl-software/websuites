@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mkl.websuites.config.BrowserConifg;
+import com.mkl.websuites.config.BrowserConfig;
 import com.mkl.websuites.config.SiteConfig;
 import com.mkl.websuites.config.WebSuitesConfig;
 import com.mkl.websuites.internal.CommonUtils;
@@ -54,7 +54,7 @@ public abstract class MultiBrowserTestCase extends TestCase {
      * Currently running browser. The ID corresponds to the ones defined in
      * <code>WebSuites.browserConfiguration</code>.
      * 
-     * @see BrowserConifg
+     * @see BrowserConfig
      */
     protected String currentBrowserId;
 
@@ -93,7 +93,7 @@ public abstract class MultiBrowserTestCase extends TestCase {
 
 
     @Override
-    protected void runTest() throws Throwable {
+    protected final void runTest() throws Throwable {
 
         log.debug("running: " + this.getClass().getName() + " with test name: " + getName());
 

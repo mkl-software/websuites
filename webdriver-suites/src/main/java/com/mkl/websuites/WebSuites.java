@@ -18,7 +18,7 @@ package com.mkl.websuites;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import com.mkl.websuites.config.BrowserConifg;
+import com.mkl.websuites.config.BrowserConfig;
 import com.mkl.websuites.config.Extension;
 import com.mkl.websuites.config.Folder;
 import com.mkl.websuites.config.ScenarioFile;
@@ -178,7 +178,7 @@ public @interface WebSuites {
      * 
      * @see com.mkl.websuites.config.SiteConfig
      */
-    BrowserConifg[] browserConfiguration() default {};
+    BrowserConfig[] browserConfiguration() default {};
 
 
     /**

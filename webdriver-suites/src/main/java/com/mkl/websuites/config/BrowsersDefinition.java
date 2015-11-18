@@ -18,7 +18,7 @@ package com.mkl.websuites.config;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import com.mkl.websuites.config.BrowserConifg.BrowserType;
+import com.mkl.websuites.config.BrowserConfig.BrowserType;
 
 
 /**
@@ -30,11 +30,11 @@ import com.mkl.websuites.config.BrowserConifg.BrowserType;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface BrowsersDefinition {
 
-    BrowserConifg[] browsers() default {
+    BrowserConfig[] browsers() default {
 
-    @BrowserConifg(browserType = BrowserType.FIREFOX, id = "ff", displayName = "Firefox", webDriverPath = ""),
+    @BrowserConfig(browserType = BrowserType.FIREFOX, id = "ff", displayName = "Firefox", webDriverPath = ""),
 
-    @BrowserConifg(browserType = BrowserType.NONE, id = "none", displayName = "None", webDriverPath = ""),
+    @BrowserConfig(browserType = BrowserType.NONE, id = "none", displayName = "None", webDriverPath = ""),
 
-    @BrowserConifg(browserType = BrowserType.HTML, id = "html", displayName = "HTML Unit", webDriverPath = "")};
+    @BrowserConfig(browserType = BrowserType.HTML, id = "html", displayName = "HTML Unit", webDriverPath = "")};
 }
