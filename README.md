@@ -122,7 +122,7 @@ When we launch this suite, we will see a SampleWebTest being run twice:
 You can define as many browser as you want and then easily set browers list to run tests against! For example you can define different runner for you dev, test, prod or CI environments.
  
 ## Sample scenario file test case
-In addition to Java test classes, in *websuites* you can use text scenario files.write text commands that wrap WebDriver logic. This allows for example to engage non-programming people (like QA folks) in the development of UI tests.
+In addition to Java test classes, in *websuites* you can use text scenario files. Inside you can use commands that wrap WebDriver logic. This allows for example to engage non-programming people (like QA folks) in the development of UI tests.
 The scenario files are plain text files with TAB-seperated syntax. First token is always a command name and then there are parameters. This is a sample scenario file:
 
 *sampleScenario.scn*:
