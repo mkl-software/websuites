@@ -14,10 +14,10 @@
 		JUnit runner to flexibly define complex test suites and then run them against multiple browsers. 
 	</description>
 
-	<url>http://[github]</url>
+	<url>https://github.com/mkl-software/websuites</url>
 
 	<scm>
-		<url>[github git]</url>
+		<url>https://github.com/mkl-software/websuites.git</url>
 	</scm>
 
 	<contributors>
