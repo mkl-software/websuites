@@ -33,6 +33,7 @@ import com.mkl.websuites.internal.services.ServiceFactory;
  * <p>
  * Just extend this class and implement <code>runWebTest</code> method to define a test.
  * </p>
+ * <p>
  * Inside the test you have a WebDriver <code>browser</code> field and a bunch of useful convenience
  * methods to create your web logic.</p>
  * 

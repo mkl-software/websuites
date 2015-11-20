@@ -27,14 +27,14 @@ import java.lang.annotation.RetentionPolicy;
  * <p>
  * Sample browser definition:
  * </p>
- * <code>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;browserConfiguration = <br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@literal @BrowserConfig}(<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id = "chrome"<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;displayName = "Chrome"<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;browserType = BrowserType.CHROME<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;webDriverPath = "src/test/resources/ChromeDriver.exe)<br/>
- * </code>
+ * <pre>
+ *       browserConfiguration =
+ *        {@literal @BrowserConfig}(
+ *            id = "chrome"
+ *            displayName = "Chrome"
+ *            browserType = BrowserType.CHROME
+ *            webDriverPath = "src/test/resources/ChromeDriver.exe)
+ * </pre>
  * <p>
  * You can use the IDs to identify browsers in:
  * </p>
@@ -53,16 +53,34 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface BrowserConfig {
 
-    public enum BrowserType {
+    /**
+     * Browser type (or family). Based on this type the proper WebDriver implementation
+     * will be used (like e.g. {@link org.openqa.selenium.firefox.FirefoxDriver}
+     */
+    enum BrowserType {
 
         INTERNET_EXPLORER, CHROME, FIREFOX, SAFARI, OPERA, HTML, NONE
     }
 
+    /**
+     * Browser family.
+     * @see BrowserType
+     */
     BrowserType browserType();
 
+    /**
+     * Local ID. This ID will be e.g. available as <code>currentBrowser</code> in properties file.
+     */
     String id();
 
+    /**
+     * Browser display name when rendered in test names. It will help identyfing for which browser
+     * the current test is run.
+     */
     String displayName();
 
+    /**
+     * Absolute or relative path to the actual web driver.
+     */
     String webDriverPath() default "";
 }

@@ -34,26 +34,26 @@ import java.lang.annotation.RetentionPolicy;
  * Example usage of <code>SiteConfig</code>:
  * </p>
  * <code>
- * siteConfig = {@literal @}SiteConfig(<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;host = dev-myhost.com,<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port = 8090<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;basePath = /myApp<br/>
+ * siteConfig = {@literal @}SiteConfig(
+ *      host = dev-myhost.com,
+ *      port = 8090
+ *      basePath = /myApp
  * )
  * </code>
  * <p>
  * Now you can access this configuration in scenario files like this:
  * </p>
- * <code>
- * goto ${site}/index.html<br/>
- * checkTitle  Main page<br/>
- * goto ${site}/search/globalSearch.html<br/>
- * checkLinkTextContaining  search<br/>
- * </code>
+ * <pre>
+ * goto ${site}/index.html
+ * checkTitle  Main page
+ * goto ${site}/search/globalSearch.html
+ * checkLinkTextContaining  search
+ * </pre>
  * <p>
  * And in your test classes that extend {@link com.mkl.websuites.MultiBrowserTestCase} you have a
  * String field available <code>site</code>, which can holds concatenated site URL string.
  * </p>
- * <br/>
+ *
  * 
  * @author Marcin Klosinski
  *

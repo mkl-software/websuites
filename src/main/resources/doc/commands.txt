@@ -122,7 +122,12 @@ getCookieValue			name=, target value read into property, e.g. ${cookieValues.#co
 
 evaluateJsExpr			evaluates Javascript expression and writes it to a given target property
 
-basicAuthentication		username	password 	- will type credentials using Java Robot
+basicAuthentication		username	password 	- will type credentials using Java Robot (or inject in URL)
+
+// For debugging:
++echo
+log
+printProperties
 
 +goto
 +back

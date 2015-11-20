@@ -133,7 +133,7 @@ public class WebSuitesRunner {
     /**
      * Override to provide custom name for master suite.
      * 
-     * @return
+     * @return  name of the master suite
      */
     protected String getMasterSuiteName() {
         return "Multi-browser test suite";
@@ -144,7 +144,6 @@ public class WebSuitesRunner {
     /**
      * Used internally by the custom JUnit runner to define master test suite.
      * 
-     * @return
      */
     public final TestSuite defineMasterSuite() throws InstantiationException, IllegalAccessException,
             NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
@@ -325,8 +324,9 @@ public class WebSuitesRunner {
     /**
      * To allow quickly identification in the code for which browser are tests currently defined
      * for.
+     * <p>Used internally by the framework.</p>
      * 
-     * @return
+     * @return  ID of the browser the tests are currently defined for.
      */
     public static String getCurrentlyDefiningBrowser() {
         return currentlyDefiningBrowser;

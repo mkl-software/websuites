@@ -5,3 +5,4 @@
 /.sonar/
 .externalToolBuilders/
 .checkstyle
+.idea

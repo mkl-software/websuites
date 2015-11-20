@@ -38,7 +38,7 @@ import com.mkl.websuites.internal.WebSuitesException;
  * </ul>
  * <p>
  * To use this properties inside your scenario files, just use <code>${propertyName}</code> syntax.
- * <p>
+ * </p>
  * <p>
  * To set properties inside your scenario files, use <code>setProps</code> command.
  * <p>

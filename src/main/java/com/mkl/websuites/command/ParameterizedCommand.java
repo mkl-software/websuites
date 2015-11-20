@@ -140,7 +140,6 @@ public abstract class ParameterizedCommand extends BaseCommand {
     /**
      * Implement to define which parameters are acceptable for this command.
      * 
-     * @return
      */
     protected abstract List<SchemaValidationRule> defineValidationRules();
 

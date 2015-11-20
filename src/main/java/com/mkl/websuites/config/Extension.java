@@ -24,16 +24,16 @@ import java.lang.annotation.RetentionPolicy;
  * It's used to do define scan path to packages with custom commands definitions, which can be used
  * in your scenario files. For example, if you specify this element like below:
  * </p>
- * <code>
- * extension = {@literal @}Extension(<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commandExtensionPackages = "com.mycompany.ext"
+ * <pre>
+ * extension = {@literal @}Extension(
+ *      commandExtensionPackages = "com.mycompany.ext"
  * )
- * </code>
+ * </pre>
  * <p>
  * <b>All</b> classes with a {@link com.mkl.websuites.command.CommandDescriptor} annotation that are
  * located in <b>any</b> package under <code>com.mycompany.ext</code> will be automatically
  * available to be used as commands in your scenario files.
- * <p>
+ * </p>
  * 
  * @author Marcin Klosinski
  *
@@ -49,11 +49,12 @@ public @interface Extension {
     String[] commandExtensionPackages() default {};
 
     /**
-     * List of custom service implementation for deeper framework customization. </p>Example:</p>
+     * List of custom service implementation for deeper framework customization.
+     * <p>Example:</p>
      * <code>
-     * serviceOverrides = {@literal @}Service(<br/>
-     * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;service = com.mkl.websuite.internal.browser.BrowserController,<br/>
-     * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;implementation = com.mycompany.websuites.ext.MyCustomBrowserController<br/>
+     * serviceOverrides = {@literal @}Service(
+     *      service = com.mkl.websuite.internal.browser.BrowserController,
+     *      implementation = com.mycompany.websuites.ext.MyCustomBrowserController
      * )
      * </code>
      */

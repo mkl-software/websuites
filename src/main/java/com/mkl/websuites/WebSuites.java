@@ -33,28 +33,27 @@ import com.mkl.websuites.config.TestClass;
  * <p>
  * Sample configuration might look like:
  * </p>
- * <code>
- * {@literal @}WebSuites(<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;browsers = {"chrome", "ff", "ie"},<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tests = {{@literal @}TestClass({MyTestClass1.class, MyTestClass2,class})<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scenarios = {{@literal @}ScenarioFile(resources/tests/MyWebTestScenario.scn)<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;browserConfiguration = {<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@literal @BrowserConfig}(<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id = "chrome",<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;displayName = "Chrome",<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;browserType = BrowserType.CHROME<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;webDriverPath = "src/test/resources/ChromeDriver.exe"<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@literal @BrowserConfig}(<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id = "ie",<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;displayName = "Internet Explorer",<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;browserType = BrowserType.INTERNET_EXPLORER<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;webDriverPath = "src/test/resources/IEDriver.exe"<br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)}<br/>
- * )<br/>
- * public class MyRunner extends WebSuitesRunner {} <br/><br/>
- * </code>
- * 
+ * <pre>
+ * {@literal @}WebSuites(
+ *       browsers = {"chrome", "ff", "ie"},
+ *       tests = {{@literal @}TestClass({MyTestClass1.class, MyTestClass2,class})
+ *       scenarios = {{@literal @}ScenarioFile(resources/tests/MyWebTestScenario.scn)
+ *       browserConfiguration = {
+ *        {@literal @BrowserConfig}(
+ *          id = "chrome",
+ *          displayName = "Chrome",
+ *          browserType = BrowserType.CHROME
+ *          webDriverPath = "src/test/resources/ChromeDriver.exe"
+ *       ),
+ *        {@literal @BrowserConfig}(
+ *          id = "ie",
+ *          displayName = "Internet Explorer",
+ *          browserType = BrowserType.INTERNET_EXPLORER
+ *          webDriverPath = "src/test/resources/IEDriver.exe"
+ *       )}
+ * )
+ * public class MyRunner extends WebSuitesRunner {} 
+ * </pre>
  * @author Marcin Klosinski
  *
  */
@@ -95,9 +94,9 @@ public @interface WebSuites {
      * <p>
      * Example usage:
      * </p>
-     * <code>
+     * <pre>
      * folders = {@literal @}Folder(path = "/tests/allSearchTests")
-     * </code>
+     * </pre>
      */
     Folder[] folders() default {};
 
@@ -113,11 +112,13 @@ public @interface WebSuites {
      * <p>
      * Example usage:
      * </p>
-     * <code>
-     * scenarios = {{@literal @}ScenarioFile("/tests/navigation/menu1.scn"),
-     * {@literal @}ScenarioFile("/tests/navigation/menu2.scn"),
-     * {@literal @}ScenarioFile("/tests/navigation/menu3.scn")}
-     * </code>
+     * <pre>
+     * scenarios = {
+     *     {@literal @}ScenarioFile("/tests/navigation/menu1.scn"),
+     *     {@literal @}ScenarioFile("/tests/navigation/menu2.scn"),
+     *     {@literal @}ScenarioFile("/tests/navigation/menu3.scn")
+     * }
+     * </pre>
      */
     ScenarioFile[] scenarios() default {};
 
@@ -133,10 +134,15 @@ public @interface WebSuites {
      * <p>
      * Example usage:
      * </p>
-     * <code>
-     * tests = {{@literal @}TestClass(DetailedSavedSearchesTest.class),
-     * {@literal @}TestClass(LoginFailureTest.class)}
-     * </code>
+     * <pre>
+     * tests = {
+     *     {@literal @}TestClass(DetailedSavedSearchesTest.class),
+     *     {@literal @}TestClass(LoginFailureTest.class)
+     * }
+     * </pre>
+     * <p>Each test must be a subclass of {@link junit.framework.TestCase}, however you will mostly
+     * override {@link MultiBrowserTestCase} class, which holds a Web Driver facade and it can be
+     * run against multiple browsers.</p>
      */
     TestClass[] tests() default {};
 
@@ -167,9 +173,10 @@ public @interface WebSuites {
      * Each browser is specified using {@link com.mkl.websuites.config.BrowserConfig} annotation,
      * which determines browser local ID, dipslay name and web driver physical location.
      * </p>
+     * <p>
      * By default the FireFox browser is available so if installedo on the OS it will work
      * out-of-the-box.
-     * <p>
+     * </p>
      * <p>
      * Sample configuration of custom browser:
      * </p>
@@ -184,7 +191,7 @@ public @interface WebSuites {
     /**
      * If there are multiple WebSuites runner classes, you can share browser configuration between
      * them and avoid specifying them in each runner separately. Use this class to point to a class
-     * which holds {@link com.mkl.websuites.config.BrowserDefinition} annotation.
+     * which holds {@link com.mkl.websuites.config.BrowsersDefinition} annotation.
      * <p>
      * If both <code>browserConfiguration</code> and <code>browserResusableConfiguration</code> are
      * specified, then the browser configuration is merged with a priority to

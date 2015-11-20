@@ -130,7 +130,6 @@ public abstract class OperationOnWebElement extends ParameterizedCommand {
     /**
      * Exposed to override for soft assertions. Hard implementation by default:
      * 
-     * @param message
      */
     protected void fail(String message) {
         Assert.fail(message);

@@ -102,8 +102,6 @@ public abstract class BaseCommand implements Command, SourceInfoHolder {
     /**
      * Use this method to clobber properties in the command source (like <code>${property}</code>).
      * 
-     * @param origValue
-     * @return
      */
     protected String populateStringWithProperties(String origValue) {
 

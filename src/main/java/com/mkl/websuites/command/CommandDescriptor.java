@@ -32,7 +32,6 @@ public @interface CommandDescriptor {
     /**
      * Command name to be used in scenario files.
      * 
-     * @return
      */
     String name();
 
@@ -40,7 +39,6 @@ public @interface CommandDescriptor {
      * List of argument types. If specified, then the command has to have a constructor
      * <b>exactly</b> matching this parameter types.
      * 
-     * @return
      */
     @SuppressWarnings("rawtypes")
     Class[] argumentTypes() default {};
