@@ -2,6 +2,16 @@
 
 *Websuites* is a Java library for a convenient JUnit and Selenium WebDriver integration. It provides a custom JUnit runner to flexibly define complex test suites and then run them against multiple browsers. It requires just one JAR/Maven dependency and very little configuration so it very easily integrates inside your IDE for CI container.
 
+## Maven dependency
+```xml
+<dependency>
+	 <groupId>com.mkl-software</groupId>
+	 <artifactId>websuites</artifactId>
+	 <version>0.9.0</version>
+</dependency>
+
+```
+
 ## Feature highlight
 
 * allows to quickly set up Selenium tests
