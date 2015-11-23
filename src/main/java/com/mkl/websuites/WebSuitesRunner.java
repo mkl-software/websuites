@@ -202,8 +202,9 @@ public class WebSuitesRunner {
             String id = origBrowserIds[i];
             id = CommonUtils.populateStringWithProperties(id);
             if (id.startsWith("$")) {
-                id = "chrome"; // TODO: default, TEMP !!!!, ucomment line below before release
-                // throw new WebSuitesException("Please specify property for browser: " + id);
+                //id = "chrome"; // uncomment for dev
+                throw new WebSuitesException(String.format("Please specify property for browser to run '%s', "
+                        + "for example: -D%s=chrome", id, id));
             }
             processedIds[i] = id;
         }
