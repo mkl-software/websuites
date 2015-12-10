@@ -1,2 +1,2 @@
-goto	http://localhost:90/integration/commands/clickTest1.html
+goto	http://localhost:1090/integration/commands/clickTest1.html
 click	#elementWithId

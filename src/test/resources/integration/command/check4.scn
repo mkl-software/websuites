@@ -1,5 +1,5 @@
 # one scenario for both existing and not for ID param
-goto	http://localhost:90/integration/commands/checkWebElements.html
+goto	http://localhost:1090/integration/commands/checkWebElements.html
 
 check	xpath=/html
 check	xpath=/html/body

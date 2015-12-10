@@ -1,5 +1,5 @@
 
-goto	http://localhost:90/integration/commands/check/allChecks.html
+goto	http://localhost:1090/integration/commands/check/allChecks.html
 
 
 click	#textNode
@@ -29,7 +29,7 @@ checkTitle	Goto test local web
 back
 checkTitle	Test title full text
 
-clickLinkHref	http://localhost:90/integration/commands/gotoLocalAddress.html
+clickLinkHref	http://localhost:1090/integration/commands/gotoLocalAddress.html
 checkTitle	Goto test local web
 back
 checkTitle	Test title full text

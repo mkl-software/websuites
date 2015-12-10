@@ -1,4 +1,4 @@
-goto	http://localhost:90/integration/commands/repeatTimesTest.html
+goto	http://localhost:1090/integration/commands/repeatTimesTest.html
 repeat	times=5
 click	#elementWithId
 type	#propTestElement	${1}

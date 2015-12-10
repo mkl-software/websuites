@@ -56,9 +56,9 @@ public class MultiBrowserTestCaseTest {
                 $("http", "google.com", 80, "/", "http://google.com/"),
                 $("http", "google.com", 80, "//", "http://google.com/"),
                 $("http", "google.com", 80, "resource", "http://google.com/resource"),
-                $("http", "google.com", 90, "", "http://google.com:90"),
-                $("http", "google.com", 90, "/", "http://google.com:90/"),
-                $("https", "google.com", 90, "/", "https://google.com:90/"),
+                $("http", "google.com", 1090, "", "http://google.com:1090"),
+                $("http", "google.com", 1090, "/", "http://google.com:1090/"),
+                $("https", "google.com", 1090, "/", "https://google.com:1090/"),
                 $("file", "/home/root/pages/index.html", 80, "", "file:///home/root/pages/index.html"),
                 $("http", "google.com", 80, "some/path//path", "http://google.com/some/path/path"));
     }

@@ -3,7 +3,7 @@
 #  should be passing.
 
 
-goto	http://localhost:90/integration/commands/check/allChecks.html
+goto	http://localhost:1090/integration/commands/check/allChecks.html
 
 
 check	div.header
@@ -64,10 +64,10 @@ softCheckText	custom
 checkAllSoft
 
 
-checkUrl	http://localhost:90/integration/commands/check/allChecks.html
-~checkUrl	https://localhost:90/integration/commands/check/allChecks.html
-softCheckUrl	http://localhost:90/integration/commands/check/allChecks.html
-~softCheckUrl	https://localhost:90/integration/commands/check/allChecks.html
+checkUrl	http://localhost:1090/integration/commands/check/allChecks.html
+~checkUrl	https://localhost:1090/integration/commands/check/allChecks.html
+softCheckUrl	http://localhost:1090/integration/commands/check/allChecks.html
+~softCheckUrl	https://localhost:1090/integration/commands/check/allChecks.html
 checkAllSoft
 
 

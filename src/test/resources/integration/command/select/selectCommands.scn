@@ -1,5 +1,5 @@
 
-goto	http://localhost:90/integration/commands/check/allChecks.html
+goto	http://localhost:1090/integration/commands/check/allChecks.html
 
 # All should be passing:
 

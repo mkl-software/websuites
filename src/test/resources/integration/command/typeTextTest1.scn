@@ -1,3 +1,3 @@
-goto	http://localhost:90/integration/commands/typeTextTest1.html
+goto	http://localhost:1090/integration/commands/typeTextTest1.html
 type	#inputId	typed text from scn file
 click	#activeElement

@@ -4,7 +4,7 @@
 
 
 
-goto	http://localhost:90/integration/commands/check/allChecks.html
+goto	http://localhost:1090/integration/commands/check/allChecks.html
 
 # 417 soft assertions below:
 
@@ -66,10 +66,10 @@ softCheckText	Test title full text
 
 
 
-~softCheckUrl	http://localhost:90/integration/commands/check/allChecks.html
-softCheckUrl	https://localhost:90/integration/commands/check/allChecks.html
-~softCheckUrl	http://localhost:90/integration/commands/check/allChecks.html
-softCheckUrl	https://localhost:90/integration/commands/check/allChecks.html
+~softCheckUrl	http://localhost:1090/integration/commands/check/allChecks.html
+softCheckUrl	https://localhost:1090/integration/commands/check/allChecks.html
+~softCheckUrl	http://localhost:1090/integration/commands/check/allChecks.html
+softCheckUrl	https://localhost:1090/integration/commands/check/allChecks.html
 
 
 

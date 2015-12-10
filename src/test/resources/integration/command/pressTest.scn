@@ -1,5 +1,5 @@
 
-goto	http://localhost:90/integration/commands/check/allChecks.html
+goto	http://localhost:1090/integration/commands/check/allChecks.html
 
 clickText	open local page
 checkTitle	Goto test local web

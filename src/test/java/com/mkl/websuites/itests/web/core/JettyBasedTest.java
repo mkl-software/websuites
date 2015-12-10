@@ -31,7 +31,7 @@ import com.mkl.websuites.internal.services.ServiceFactory;
 public class JettyBasedTest {
 
 
-    public static final int PORT_NUMER = 90;
+    public static final int PORT_NUMER = 1090;
 
     private static Server server;
 
