@@ -152,7 +152,7 @@
 
 	<profiles>
 		<profile>
-			<id>quality.check</id>
+			<id>quality-check</id>
 			<activation>
 				<!-- to suppress Eclipse checkstyle builder errors for Luna -->
 				<activeByDefault>false</activeByDefault>
@@ -227,23 +227,6 @@
 			</activation>
 			<build>
 				<plugins>
-					<plugin>
-						<artifactId>maven-assembly-plugin</artifactId>
-						<configuration>
-							<descriptorRefs>
-								<descriptorRef>jar-with-dependencies</descriptorRef>
-							</descriptorRefs>
-						</configuration>
-						<executions>
-							<execution>
-								<id>make-assembly</id> <!-- this is used for inheritance merges -->
-								<phase>package</phase> <!-- bind to the packaging phase -->
-								<goals>
-									<goal>single</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
@@ -292,7 +275,7 @@
 			</build>
 		</profile>
         <profile>
-            <id>release</id>
+            <id>deploy-release</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -302,6 +285,7 @@
                     <url>https://oss.sonatype.org/content/repositories/snapshots</url>
                 </snapshotRepository>
             </distributionManagement>
+            <!-- to relase run: mvn nexus-staging:release -P deploy-release -->
             <build>
                 <plugins>
                     <plugin>
@@ -318,7 +302,38 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>build-master-jar</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                                <phase>package</phase> <!-- bind to the packaging phase -->
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
 	</profiles>
+
+
+
 
 	<build>
 		<plugins>
