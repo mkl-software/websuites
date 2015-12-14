@@ -23,6 +23,8 @@ import com.mkl.websuites.WebSuitesUserProperties;
 public class CommonUtils {
 
 
+    public static final String NO_BROWSER_ID = "none";
+
     public static String populateStringWithProperties(String origValue) {
         String regex = "\\$\\{(.*?)\\}";
         Pattern pattern = Pattern.compile(regex);

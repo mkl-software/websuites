@@ -17,10 +17,16 @@ package com.mkl.websuites;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.mkl.websuites.config.TestClass;
+import com.mkl.websuites.internal.CommonUtils;
+import com.mkl.websuites.itests.web.core.TestUtils;
 import org.junit.Test;
+import org.junit.runner.Description;
+import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
 import com.mkl.websuites.itests.web.core.WebSuitesResultCheck;
+import org.junit.runner.notification.RunListener;
 
 
 public class WebSuitesRunnerTest extends WebSuitesResultCheck {
@@ -69,5 +75,31 @@ public class WebSuitesRunnerTest extends WebSuitesResultCheck {
         // then
         int numberOfRunForSetupTearDownAndThreeBrowsersSetUpTearDown = 2 + (3 * 2);
         assertThat(testResult.getRunCount()).isEqualTo(numberOfRunForSetupTearDownAndThreeBrowsersSetUpTearDown);
+    }
+
+
+    @WebSuites(browsers = CommonUtils.NO_BROWSER_ID, tests = @TestClass(EmptyTest.class))
+    public static class NoBrowserSuite extends WebSuitesRunner {
+    }
+    public static class EmptyTest extends MultiBrowserTestCase {
+        @Override
+        protected void runWebTest() {
+        }
+    }
+
+    @Test
+    public void shouldRenderCorrectTestNamesForNoneBrowser() throws Throwable {
+        JUnitCore runner = new JUnitCore();
+        runner.addListener(new RunListener() {
+            @Override
+            public void testStarted(Description description) throws Exception {
+                String displayName = description.getDisplayName();
+                if (displayName.contains(EmptyTest.class.getName())) {
+                    assertThat(displayName).doesNotContain("[null]");
+                }
+            }
+        });
+        Result result = runner.run(NoBrowserSuite.class);
+        assertThat(result.getFailureCount()).isZero();
     }
 }

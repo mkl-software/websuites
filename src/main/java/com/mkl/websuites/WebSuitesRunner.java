@@ -164,13 +164,13 @@ public class WebSuitesRunner {
 
 
         // check if run for non-browser mode:
-        if (browsers.length == 1 && browsers[0].equals("none")) {
+        if (browsers.length == 1 && browsers[0].equals(CommonUtils.NO_BROWSER_ID)) {
             configureSingleNonBrowserSuite(suite, buildAllTests(config));
         }
 
         for (String browser : browsers) {
 
-            if (browser.equals("none")) {
+            if (browser.equals(CommonUtils.NO_BROWSER_ID)) {
                 log.warn("No-browser found among browser tests - skipping no-browser. Please use a config"
                         + " with only ONE browser set to 'none' if you want to run tests without any browser");
                 continue;
@@ -260,8 +260,7 @@ public class WebSuitesRunner {
 
 
     private void configureSingleNonBrowserSuite(TestSuite suite, List<Test> tests) {
-
-        setCurrentlyDefiningBrowser("none"); // TODO: move it to a TestContext
+        setCurrentlyDefiningBrowser(CommonUtils.NO_BROWSER_ID); // TODO: move it to a TestContext
         TestSuite browserSuite = new TestSuite("Running without any browser");
         addTestsToBrowserSuite(tests, browserSuite);
         suite.addTest(browserSuite);

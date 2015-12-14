@@ -89,7 +89,7 @@ public abstract class MultiBrowserTestCase extends TestCase {
 
     @Override
     public final String getName() {
-        return getTestName() + " [" + currentBrowserId + "]";
+        return getTestName() + ("none".equals(currentBrowserId) ? " [" + currentBrowserId + "]" : "");
     }
 
 
