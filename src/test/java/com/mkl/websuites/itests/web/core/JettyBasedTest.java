@@ -36,11 +36,7 @@ public class JettyBasedTest {
     private static Server server;
 
 
-    protected int calculateExpectedRunCount(int underlyingTestCount, int browserCount) {
 
-        // each test for every browser, + one browser startup test per browser + one close-up test
-        return (underlyingTestCount + 1) * browserCount + 1;
-    }
 
 
     @BeforeClass
