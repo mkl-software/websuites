@@ -36,9 +36,9 @@
 
 ## Websuites in one picture
 
-Click [here](http://mkl-software.com/static/websuites-img/websuites-overview-large.png "Large image") to see large image. 
+Click [here](https://i.imgur.com/YebWoBs.png "Large image") to see large image. 
 
-![](http://mkl-software.com/static/websuites-img/websuites-overview-small.png "Websuite overview")
+![](https://i.imgur.com/jCTh7EP.png "Websuite overview")
 
 # Quick tutorial
 
@@ -54,7 +54,7 @@ public class SimplestRunner extends WebSuitesRunner {}
 
 Now this class can be launched as a JUnit test. It defines an empty test suite, so it won't open any browser:
 
-![](http://mkl-software.com/static/websuites-img/1.png "Simplest runner")
+![](https://i.imgur.com/IV0Vevn.png "Simplest runner")
 
 ## Default Firefox test
 
@@ -70,7 +70,7 @@ public class WebRunner extends WebSuitesRunner {}
 
 Again, the test suite is empty, but now this test will open Firefox and then close it:
 
-![](http://mkl-software.com/static/websuites-img/2.png "Empty suite in a browser")
+![](https://i.imgur.com/g6kTAd1.png "Empty suite in a browser")
 
 ## Sample Java test case
 
@@ -101,7 +101,7 @@ public class SampleWebTest extends MultiBrowserTestCase {
 
 When run, the test is automatically launched in Firefox:
 
-![](http://mkl-software.com/static/websuites-img/3.png "Simplest runner")
+![](https://i.imgur.com/UMpMrQc.png "Simplest runner")
 
 ## Run in many browsers
 Now let's run the same test for both Firefox and Chrome. To do this, first we need to define a Chrome browser by specifying a path to its web driver:
@@ -127,7 +127,7 @@ public class RunnerForManyBrowsers extends WebSuitesRunner {}
 ```
 When we launch this suite, we will see a SampleWebTest being run twice:
  
-![](http://mkl-software.com/static/websuites-img/4.png "Same test in two browsers")
+![](https://i.imgur.com/HTokfpm.png "Same test in two browsers")
 
 You can define as many browser as you want and then easily set browers list to run tests against! For example you can define different runner for you dev, test, prod or CI environments.
  
@@ -187,11 +187,11 @@ public class RunnerForFolder extends WebSuitesRunner {}
 
 And for **web-test** folder like this:
 
-![](http://mkl-software.com/static/websuites-img/5.png "Folder structure")
+![](https://i.imgur.com/flJRkd2.png "Folder structure")
 
 The resuling JUnit test tree will look like:
 
-![](http://mkl-software.com/static/websuites-img/6.png "Test tree for folder structure")
+![](https://i.imgur.com/TWzASxS.png "Test tree for folder structure")
 
 You can see all scenario files inside all nested folders.
 
